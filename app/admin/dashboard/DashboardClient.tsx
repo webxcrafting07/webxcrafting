@@ -90,7 +90,8 @@ export default function DashboardClient() {
         items: [{ description: '', quantity: 1, price: 0 }],
         discountPercent: 0,
         status: 'draft',
-        notes: ''
+        notes: '',
+        generatedBy: 'Administrator'
       });
     } else {
       setForm({});
@@ -413,12 +414,11 @@ export default function DashboardClient() {
     doc.setTextColor(75, 85, 99)
     doc.text(bill.notes || '1. Please pay within 7 days. \n2. Bank details will be shared on WhatsApp for payment. \n3. Thank you for your business!', 20, footerY + 6, { maxWidth: 100 })
     
-    // Signature Line
     doc.setDrawColor(200, 200, 200)
     doc.line(140, footerY + 15, 195, footerY + 15)
     doc.setFont('helvetica', 'bold')
     doc.setTextColor(charcoal[0], charcoal[1], charcoal[2])
-    doc.text('Authorized Signature', 145, footerY + 22)
+    doc.text(bill.generatedBy || 'Authorized Signature', 145, footerY + 22)
     
     // Bottom Accent
     doc.setFillColor(charcoal[0], charcoal[1], charcoal[2])
@@ -916,13 +916,18 @@ export default function DashboardClient() {
                       <input style={inp} type="number" value={form.discountPercent || 0} onChange={(e) => setF('discountPercent', Number(e.target.value))} />
                     </div>
                     <div>
-                      <label style={lbl}>Status</label>
-                      <select style={inp} value={form.status || 'draft'} onChange={(e) => setF('status', e.target.value)}>
-                        <option value="draft">Draft</option>
-                        <option value="sent">Sent</option>
-                        <option value="paid">Paid</option>
-                      </select>
+                      <label style={lbl}>Authorized Signatory (Name)</label>
+                      <input style={inp} value={form.generatedBy || ''} onChange={(e) => setF('generatedBy', e.target.value)} placeholder="e.g. Nitesh Kumar" />
                     </div>
+                  </div>
+
+                  <div style={{ marginBottom: 18 }}>
+                    <label style={lbl}>Status</label>
+                    <select style={inp} value={form.status || 'draft'} onChange={(e) => setF('status', e.target.value)}>
+                      <option value="draft">Draft</option>
+                      <option value="sent">Sent</option>
+                      <option value="paid">Paid</option>
+                    </select>
                   </div>
 
                   <div style={{ marginBottom: 28 }}>

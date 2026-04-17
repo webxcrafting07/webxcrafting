@@ -18,6 +18,7 @@ export interface IBill extends Document {
   discountAmount: number;
   totalAmount: number;
   notes?: string;
+  generatedBy?: string;
   status: 'draft' | 'sent' | 'paid';
   createdAt: Date;
   updatedAt: Date;
@@ -44,6 +45,7 @@ const BillSchema: Schema = new Schema(
     discountAmount: { type: Number, default: 0 },
     totalAmount: { type: Number, required: true },
     notes: { type: String },
+    generatedBy: { type: String, default: 'WebXCrafting' },
     status: {
       type: String,
       enum: ['draft', 'sent', 'paid'],
