@@ -80,10 +80,33 @@ export default function DashboardClient() {
   }
 
   /* ── modal helpers ── */
-  const openAdd = (type: string) => { setModal({ type, mode: 'add' }); setForm({}) }
+  const openAdd = (type: string) => { 
+    setModal({ type, mode: 'add' }); 
+    if (type === 'bill') {
+      setForm({
+        clientName: '',
+        clientEmail: '',
+        clientPhone: '',
+        items: [{ description: '', quantity: 1, price: 0 }],
+        discountPercent: 0,
+        status: 'draft',
+        notes: ''
+      });
+    } else {
+      setForm({});
+    }
+  }
+
   const openEdit = (type: string, item: any) => { setModal({ type, mode: 'edit', item }); setForm({ ...item }) }
   const closeModal = () => { setModal(null); setForm({}) }
   const setF = (k: string, v: any) => setForm((f: any) => ({ ...f, [k]: v }))
+
+  const updateBillItem = (idx: number, field: string, value: any) => {
+    if (!form.items) return;
+    const newItems = [...form.items];
+    newItems[idx] = { ...newItems[idx], [field]: value };
+    setF('items', newItems);
+  }
 
   /* ── CRUD: Projects ── */
   const saveProject = async () => {
@@ -691,7 +714,7 @@ export default function DashboardClient() {
                     <h2 style={{ fontFamily: 'Syne', fontWeight: 800, fontSize: 28 }}>Billing & Invoices</h2>
                     <p style={{ color: '#7b82a8', fontSize: 14, marginTop: 4 }}>{bills.length} invoices generated</p>
                   </div>
-                  <button className="btn-primary" onClick={() => { openAdd('bill'); setF('items', [{ description: '', quantity: 1, price: 0 }]) }}>+ Create Bill</button>
+                  <button className="btn-primary" onClick={() => openAdd('bill')}>+ Create Bill</button>
                 </div>
 
                 <div style={{ display: 'grid', gap: 14 }}>
@@ -879,15 +902,9 @@ export default function DashboardClient() {
                     </div>
                     {form.items?.map((item: any, idx: number) => (
                       <div key={idx} style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1.5fr 40px', gap: 10, marginBottom: 10 }}>
-                        <input style={inp} value={item.description} onChange={(e) => {
-                          const newItems = [...form.items]; newItems[idx].description = e.target.value; setF('items', newItems);
-                        }} placeholder="Item description" />
-                        <input style={inp} type="number" value={item.quantity} onChange={(e) => {
-                          const newItems = [...form.items]; newItems[idx].quantity = Number(e.target.value); setF('items', newItems);
-                        }} placeholder="1" />
-                        <input style={inp} type="number" value={item.price} onChange={(e) => {
-                          const newItems = [...form.items]; newItems[idx].price = Number(e.target.value); setF('items', newItems);
-                        }} placeholder="8000" />
+                        <input style={inp} value={item.description} onChange={(e) => updateBillItem(idx, 'description', e.target.value)} placeholder="Item description" />
+                        <input style={inp} type="number" value={item.quantity} onChange={(e) => updateBillItem(idx, 'quantity', Number(e.target.value))} placeholder="1" />
+                        <input style={inp} type="number" value={item.price} onChange={(e) => updateBillItem(idx, 'price', Number(e.target.value))} placeholder="8000" />
                         <button type="button" onClick={() => setF('items', form.items.filter((_:any, i:number) => i !== idx))} style={{ background: 'none', border: 'none', color: '#ff5252', cursor: 'pointer' }}>✕</button>
                       </div>
                     ))}
