@@ -107,12 +107,16 @@ export async function sendClientAutoReply(clientEmail: string, clientName: strin
             In the meantime, feel free to check out our recent work on our <a href="${process.env.NEXT_PUBLIC_SITE_URL}/portfolio" style="color: #4f6fff; text-decoration: none; font-weight: 600;">Portfolio</a>.
           </p>
           
-          <div style="text-align: center; border-top: 1px solid rgba(99, 120, 255, 0.1); padding-top: 30px; margin-top: 30px;">
-            <p style="color: #7b82a8; font-size: 13px; margin-bottom: 15px;">Follow us for latest updates</p>
-            <div style="display: flex; justify-content: center; gap: 15px;">
-              <a href="https://www.linkedin.com/in/webx-crafting-a1a875402/" style="background: rgba(255,255,255,0.05); width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; color: #4f6fff; text-decoration: none;">li</a>
-              <a href="https://www.instagram.com/webxcrafting" style="background: rgba(255,255,255,0.05); width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; color: #4f6fff; text-decoration: none;">ig</a>
-              <a href="#" style="background: rgba(255,255,255,0.05); width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; color: #4f6fff; text-decoration: none;">tw</a>
+          <div style="text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 30px; margin-top: 30px;">
+            <p style="color: #64748b; font-size: 13px; margin-bottom: 20px;">Connect with us</p>
+            <div style="display: flex; justify-content: center; gap: 20px;">
+              <a href="https://www.webxcrafting.in" style="color: #4f6fff; text-decoration: none; font-size: 14px; font-weight: 600;">Website</a>
+              <span style="color: rgba(255,255,255,0.1);">|</span>
+              <a href="https://www.linkedin.com/in/webx-crafting-a1a875402/" style="color: #4f6fff; text-decoration: none; font-size: 14px; font-weight: 600;">LinkedIn</a>
+              <span style="color: rgba(255,255,255,0.1);">|</span>
+              <a href="https://www.instagram.com/webxcrafting" style="color: #4f6fff; text-decoration: none; font-size: 14px; font-weight: 600;">Instagram</a>
+              <span style="color: rgba(255,255,255,0.1);">|</span>
+              <a href="https://www.facebook.com/profile.php?id=61570712849063" style="color: #4f6fff; text-decoration: none; font-size: 14px; font-weight: 600;">Facebook</a>
             </div>
           </div>
         </div>
@@ -197,6 +201,21 @@ export async function sendInvoiceEmail(bill: any) {
           </div>
         </div>
         
+        <div style="padding: 20px 35px 40px; text-align: center;">
+          <div style="text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 30px;">
+            <p style="color: #64748b; font-size: 13px; margin-bottom: 20px;">Follow us on</p>
+            <div style="display: flex; justify-content: center; gap: 20px;">
+              <a href="https://www.webxcrafting.in" style="color: #4f6fff; text-decoration: none; font-size: 14px; font-weight: 600;">Website</a>
+              <span style="color: rgba(255,255,255,0.1);">|</span>
+              <a href="https://www.linkedin.com/in/webx-crafting-a1a875402/" style="color: #4f6fff; text-decoration: none; font-size: 14px; font-weight: 600;">LinkedIn</a>
+              <span style="color: rgba(255,255,255,0.1);">|</span>
+              <a href="https://www.instagram.com/webxcrafting" style="color: #4f6fff; text-decoration: none; font-size: 14px; font-weight: 600;">Instagram</a>
+              <span style="color: rgba(255,255,255,0.1);">|</span>
+              <a href="https://www.facebook.com/profile.php?id=61570712849063" style="color: #4f6fff; text-decoration: none; font-size: 14px; font-weight: 600;">Facebook</a>
+            </div>
+          </div>
+        </div>
+
         <div style="padding: 30px; text-align: center; background-color: #111827; border-top: 1px solid rgba(255, 255, 255, 0.05);">
           <p style="color: #64748b; font-size: 12px; margin: 0;">&copy; ${new Date().getFullYear()} WebXCrafting Premium Digital Solutions.</p>
           <p style="color: #4f6fff; font-size: 11px; margin-top: 8px; text-transform: uppercase; letter-spacing: 2px;">Professional • Reliable • Advanced</p>
