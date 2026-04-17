@@ -91,7 +91,7 @@ export default function DashboardClient() {
         discountPercent: 0,
         status: 'draft',
         notes: '',
-        generatedBy: 'Administrator'
+        generatedBy: ''
       });
     } else {
       setForm({});
