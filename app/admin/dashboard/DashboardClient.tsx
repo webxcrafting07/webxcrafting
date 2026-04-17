@@ -939,7 +939,8 @@ export default function DashboardClient() {
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 18 }}>
                     <div>
                       <label style={lbl}>Discount (%)</label>
-                      <input style={inp} type="number" value={form.discountPercent || 0} onChange={(e) => setF('discountPercent', Number(e.target.value))} />
+                      <input style={inp} type="number" value={form.discountPercent === '' ? '' : (form.discountPercent || 0)} 
+                        onChange={(e) => setF('discountPercent', e.target.value === '' ? '' : Number(e.target.value))} />
                     </div>
                     <div>
                       <label style={lbl}>Authorized Signatory (Name)</label>
