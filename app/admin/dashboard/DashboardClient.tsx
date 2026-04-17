@@ -91,7 +91,8 @@ export default function DashboardClient() {
         discountPercent: 0,
         status: 'draft',
         notes: '',
-        generatedBy: ''
+        generatedBy: '',
+        utrNumber: ''
       });
     } else {
       setForm({});
@@ -212,6 +213,7 @@ export default function DashboardClient() {
         discountAmount, 
         totalAmount,
         generatedBy: form.generatedBy || '', // Explicitly ensure it's mapped
+        utrNumber: form.utrNumber || '',
         items: form.items.map((it: any) => ({
           ...it,
           price: Number(it.price || 0),
@@ -334,10 +336,11 @@ export default function DashboardClient() {
     
     doc.setFont('helvetica', 'normal')
     doc.setTextColor(75, 85, 99)
-    doc.text(`Status:`, 130, 84)
+    doc.text(`Status / UTR:`, 130, 84)
     doc.setFont('helvetica', 'bold')
     doc.setTextColor(electricBlue[0], electricBlue[1], electricBlue[2])
-    doc.text(`${bill.status.toUpperCase()}`, 165, 84)
+    const statusText = bill.utrNumber ? `${bill.status.toUpperCase()} (${bill.utrNumber})` : bill.status.toUpperCase()
+    doc.text(statusText, 165, 84)
     
     // --- CLIENT SECTION ---
     doc.setFillColor(softGray[0], softGray[1], softGray[2])
@@ -435,19 +438,21 @@ export default function DashboardClient() {
     doc.setTextColor(75, 85, 99)
     doc.text(bill.notes || '1. Please pay within 7 days. \n2. Bank details will be shared on WhatsApp for payment. \n3. Thank you for your business!', 20, footerY + 6, { maxWidth: 100 })
     
+    // Signature Area
+    doc.setFont('helvetica', 'bold')
+    doc.setFontSize(12)
+    doc.setTextColor(charcoal[0], charcoal[1], charcoal[2])
+    const signName = bill.generatedBy || 'Authorized Signature'
+    doc.text(signName.toUpperCase(), 167, footerY + 12, { align: 'center' }) // Name above line
+
     // Signature Line
     doc.setDrawColor(electricBlue[0], electricBlue[1], electricBlue[2])
     doc.setLineWidth(0.5)
     doc.line(140, footerY + 15, 195, footerY + 15)
     
-    doc.setFont('helvetica', 'bold')
-    doc.setFontSize(12)
-    doc.setTextColor(charcoal[0], charcoal[1], charcoal[2])
-    const signName = bill.generatedBy || 'Authorized Signature'
-    doc.text(signName.toUpperCase(), 167, footerY + 22, { align: 'center' })
     doc.setFontSize(8)
     doc.setFont('helvetica', 'normal')
-    doc.text('(Authorized Signatory)', 167, footerY + 27, { align: 'center' })
+    doc.text('(Authorized Signatory)', 167, footerY + 20, { align: 'center' })
     
     // Bottom Accent Bar (Sticky-ish at the bottom of the current page)
     doc.setFillColor(charcoal[0], charcoal[1], charcoal[2])
@@ -961,13 +966,19 @@ export default function DashboardClient() {
                     </div>
                   </div>
 
-                  <div style={{ marginBottom: 18 }}>
-                    <label style={lbl}>Status</label>
-                    <select style={inp} value={form.status || 'draft'} onChange={(e) => setF('status', e.target.value)}>
-                      <option value="draft">Draft</option>
-                      <option value="sent">Sent</option>
-                      <option value="paid">Paid</option>
-                    </select>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: 16, marginBottom: 18 }}>
+                    <div>
+                      <label style={lbl}>UTR No. (Optional)</label>
+                      <input style={inp} value={form.utrNumber || ''} onChange={(e) => setF('utrNumber', e.target.value)} placeholder="Transaction ID / UTR" />
+                    </div>
+                    <div>
+                      <label style={lbl}>Status</label>
+                      <select style={inp} value={form.status || 'draft'} onChange={(e) => setF('status', e.target.value)}>
+                        <option value="draft">Draft</option>
+                        <option value="sent">Sent</option>
+                        <option value="paid">Paid</option>
+                      </select>
+                    </div>
                   </div>
 
                   <div style={{ marginBottom: 28 }}>
