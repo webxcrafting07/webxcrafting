@@ -132,3 +132,73 @@ export async function sendClientAutoReply(clientEmail: string, clientName: strin
     console.error('Error sending client auto-reply email:', error)
   }
 }
+
+export async function sendInvoiceEmail(clientEmail: string, clientName: string, invoiceNumber: string, totalAmount: number, items: any[]) {
+  if (!process.env.SMTP_PASS || process.env.SMTP_PASS === 'your_app_password_here') return
+
+  const mailOptions = {
+    from: `"WebXCrafting Billing" <${process.env.SMTP_USER}>`,
+    to: clientEmail,
+    subject: `Invoice from WebXCrafting - ${invoiceNumber}`,
+    html: `
+      <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background-color: #03050a; color: #e8eaf6; border-radius: 16px; overflow: hidden; border: 1px solid rgba(79, 111, 255, 0.2);">
+        <div style="background: linear-gradient(135deg, #4f6fff, #a259ff); padding: 40px 30px; text-align: center;">
+          <h1 style="color: white; margin: 0; font-size: 28px; letter-spacing: -0.5px;">Your Invoice</h1>
+          <p style="color: rgba(255,255,255,0.9); margin: 10px 0 0; font-size: 16px;">WebXCrafting Digital Solutions</p>
+        </div>
+        
+        <div style="padding: 40px 35px; background-color: #03050a;">
+          <p style="font-size: 18px; margin-bottom: 20px;">Hi <strong>${clientName}</strong>,</p>
+          <p style="color: #7b82a8; font-size: 15px; line-height: 1.8; margin-bottom: 30px;">
+            Thank you for choosing <strong>WebXCrafting</strong>. Please find the details for your latest invoice below.
+          </p>
+          
+          <div style="background: rgba(79, 111, 255, 0.05); border: 1px solid rgba(79, 111, 255, 0.1); border-radius: 12px; padding: 25px; margin-bottom: 35px;">
+            <div style="margin-bottom: 20px; text-align: center;">
+               <p style="color: #7b82a8; margin: 0; font-size: 12px; text-transform: uppercase;">Invoice Number</p>
+               <p style="color: #e8eaf6; margin: 5px 0 0; font-size: 20px; font-weight: 700;">${invoiceNumber}</p>
+            </div>
+            
+            <div style="border-top: 1px solid rgba(79, 111, 255, 0.1); border-bottom: 1px solid rgba(79, 111, 255, 0.1); padding: 15px 0; margin-bottom: 20px;">
+              ${items.map(item => `
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                  <span style="color: #e8eaf6;">${item.description}</span>
+                  <span style="color: #7b82a8;">₹${Number(item.price).toLocaleString('en-IN')}</span>
+                </div>
+              `).join('')}
+            </div>
+
+            <div style="text-align: right;">
+              <p style="color: #7b82a8; margin: 0; font-size: 13px;">Total Amount Due</p>
+              <h2 style="color: #4f6fff; margin: 5px 0 0; font-size: 32px;">₹${Number(totalAmount).toLocaleString('en-IN')}</h2>
+            </div>
+          </div>
+          
+          <p style="color: #7b82a8; font-size: 14px; text-align: center; margin-bottom: 35px;">
+            Your official PDF invoice is generated and will be shared with you shortly. 
+            If you have any questions, feel free to contact us on WhatsApp!
+          </p>
+
+          <div style="text-align: center;">
+            <a href="https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}" style="display: inline-block; padding: 14px 28px; background-color: #25d366; color: white; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 15px;">
+              Message on WhatsApp →
+            </a>
+          </div>
+        </div>
+        
+        <div style="padding: 25px; text-align: center; background-color: rgba(79, 111, 255, 0.05);">
+          <p style="color: #7b82a8; font-size: 12px; margin: 0;">&copy; ${new Date().getFullYear()} WebXCrafting. All rights reserved.</p>
+        </div>
+      </div>
+    `,
+  }
+
+  try {
+    await transporter.sendMail(mailOptions)
+    console.log('Invoice email sent successfully.')
+    return true
+  } catch (error) {
+    console.error('Error sending invoice email:', error)
+    return false
+  }
+}

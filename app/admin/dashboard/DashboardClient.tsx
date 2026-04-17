@@ -1,9 +1,10 @@
-'use client'
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import toast from 'react-hot-toast'
-import Link from 'next/link'
+import Link from 'react-hot-toast'
+import { jsPDF } from 'jspdf'
+import autoTable from 'jspdf-autotable'
 
 /* ── helpers ── */
 function authHeaders() {
@@ -30,6 +31,7 @@ const sidebarTabs = [
   { key: 'projects', label: 'Projects', icon: '🗂' },
   { key: 'leads', label: 'Leads', icon: '📬' },
   { key: 'services', label: 'Services', icon: '⚙️' },
+  { key: 'invoices', label: 'Invoices', icon: '🧾' },
 ]
 
 /* ─────────────────────────── MAIN ─────────────────────────── */
@@ -39,6 +41,7 @@ export default function DashboardClient() {
   const [projects, setProjects] = useState<any[]>([])
   const [leads, setLeads] = useState<any[]>([])
   const [services, setServices] = useState<any[]>([])
+  const [bills, setBills] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [modal, setModal] = useState<{ type: string; mode: string; item?: any } | null>(null)
   const [form, setForm] = useState<any>({})
@@ -55,14 +58,16 @@ export default function DashboardClient() {
   const fetchAll = useCallback(async () => {
     setLoading(true)
     try {
-      const [p, l, s] = await Promise.all([
+      const [p, l, s, b] = await Promise.all([
         fetch('/api/projects', { headers: authHeaders() }).then((r) => r.json()),
         fetch('/api/leads', { headers: authHeaders() }).then((r) => r.json()),
         fetch('/api/services', { headers: authHeaders() }).then((r) => r.json()),
+        fetch('/api/bills', { headers: authHeaders() }).then((r) => r.json()),
       ])
       if (p.success) setProjects(p.data)
       if (l.success) setLeads(l.data)
       if (s.success) setServices(s.data)
+      if (b.success) setBills(b.data)
     } catch { toast.error('Failed to load data') }
     finally { setLoading(false) }
   }, [])
@@ -156,6 +161,148 @@ export default function DashboardClient() {
     else toast.error(data.message)
   }
 
+  /* ── CRUD: Bills ── */
+  const saveBill = async () => {
+    if (!form.clientName || !form.clientEmail || !form.items?.length) {
+      toast.error('Client info and items are required'); return
+    }
+    setSaving(true)
+    try {
+      const url = modal?.mode === 'add' ? '/api/bills' : `/api/bills/${modal?.item?._id}`
+      const method = modal?.mode === 'add' ? 'POST' : 'PUT'
+      
+      const subtotal = form.items.reduce((acc: number, item: any) => acc + (item.price * item.quantity), 0)
+      const discountAmount = (subtotal * (form.discountPercent || 0)) / 100
+      const totalAmount = subtotal - discountAmount
+
+      const body = { ...form, subtotal, discountAmount, totalAmount }
+      const res = await fetch(url, { method, headers: authHeaders(), body: JSON.stringify(body) })
+      const data = await res.json()
+      if (data.success) {
+        toast.success(modal?.mode === 'add' ? 'Bill created!' : 'Bill updated!')
+        fetchAll(); closeModal()
+      } else toast.error(data.message)
+    } catch { toast.error('Error saving bill') }
+    finally { setSaving(false) }
+  }
+
+  const deleteBill = async (id: string) => {
+    if (!confirm('Delete this bill?')) return
+    const res = await fetch(`/api/bills/${id}`, { method: 'DELETE', headers: authHeaders() })
+    const data = await res.json()
+    if (data.success) { toast.success('Bill deleted'); fetchAll() }
+    else toast.error(data.message)
+  }
+
+  const updateBillStatus = async (id: string, status: string) => {
+    const res = await fetch(`/api/bills/${id}`, { method: 'PUT', headers: authHeaders(), body: JSON.stringify({ status }) })
+    const data = await res.json()
+    if (data.success) fetchAll(); else toast.error(data.message)
+  }
+
+  const sendBillEmail = async (id: string) => {
+    const loadId = toast.loading('Sending invoice...')
+    try {
+      const res = await fetch(`/api/bills/${id}/send`, { method: 'POST', headers: authHeaders() })
+      const data = await res.json()
+      if (data.success) {
+        toast.success('Invoice sent to email!', { id: loadId })
+        fetchAll()
+      } else {
+        toast.error(data.message, { id: loadId })
+      }
+    } catch { toast.error('Error sending email', { id: loadId }) }
+  }
+
+  /* ── PDF Generation ── */
+  const generatePDF = (bill: any) => {
+    const doc = new jsPDF()
+    const primary = [79, 111, 255] // Theme blue
+    
+    // Header
+    doc.setFillColor(primary[0], primary[1], primary[2])
+    doc.rect(0, 0, 210, 40, 'F')
+    
+    doc.setTextColor(255, 255, 255)
+    doc.setFontSize(24)
+    doc.text('WebXCrafting', 15, 20)
+    doc.setFontSize(10)
+    doc.text('Premium Digital Solutions', 15, 28)
+    
+    doc.setFontSize(18)
+    doc.text('INVOICE', 140, 25)
+    
+    // Company Info
+    doc.setTextColor(50, 50, 50)
+    doc.setFontSize(10)
+    doc.text('From:', 15, 55)
+    doc.setFont('helvetica', 'bold')
+    doc.text('WebXCrafting', 15, 60)
+    doc.setFont('helvetica', 'normal')
+    doc.text(bill.companyEmail || 'webxcrafting@gmail.com', 15, 65)
+    doc.text(bill.companyPhone || '+91 9102615343', 15, 70)
+    
+    // Client Info
+    doc.text('Bill To:', 120, 55)
+    doc.setFont('helvetica', 'bold')
+    doc.text(bill.clientName, 120, 60)
+    doc.setFont('helvetica', 'normal')
+    doc.text(bill.clientEmail, 120, 65)
+    doc.text(bill.clientPhone, 120, 70)
+    
+    // Invoice Details
+    doc.setDrawColor(200, 200, 200)
+    doc.line(15, 80, 195, 80)
+    
+    doc.text(`Invoice #: ${bill.invoiceNumber}`, 15, 90)
+    doc.text(`Date: ${new Date(bill.createdAt).toLocaleDateString('en-IN')}`, 120, 90)
+    
+    // Table
+    const tableData = bill.items.map((item: any) => [
+      item.description,
+      item.quantity,
+      `INR ${item.price.toLocaleString('en-IN')}`,
+      `INR ${(item.price * item.quantity).toLocaleString('en-IN')}`
+    ])
+    
+    autoTable(doc, {
+      startY: 100,
+      head: [['Description', 'Qty', 'Unit Price', 'Total']],
+      body: tableData,
+      theme: 'striped',
+      headStyles: { fillColor: primary },
+      styles: { fontSize: 9 }
+    })
+    
+    // Financials
+    const finalY = (doc as any).lastAutoTable.finalY + 10
+    doc.text(`Subtotal :`, 130, finalY)
+    doc.text(`INR ${bill.subtotal.toLocaleString('en-IN')}`, 170, finalY, { align: 'right' })
+    
+    doc.text(`Discount (${bill.discountPercent}%) :`, 130, finalY + 7)
+    doc.text(`- INR ${bill.discountAmount.toLocaleString('en-IN')}`, 170, finalY + 7, { align: 'right' })
+    
+    doc.setFont('helvetica', 'bold')
+    doc.setFontSize(14)
+    doc.setTextColor(primary[0], primary[1], primary[2])
+    doc.text(`Total Amount :`, 130, finalY + 18)
+    doc.text(`INR ${bill.totalAmount.toLocaleString('en-IN')}`, 170, finalY + 18, { align: 'right' })
+    
+    // Footer
+    doc.setTextColor(100, 100, 100)
+    doc.setFontSize(10)
+    doc.setFont('helvetica', 'italic')
+    doc.text('Notes:', 15, finalY + 40)
+    doc.text(bill.notes || 'Please pay within 7 days. Thank you for your business!', 15, finalY + 45, { maxWidth: 180 })
+    
+    doc.save(`${bill.invoiceNumber}.pdf`)
+  }
+
+  const shareWhatsApp = (bill: any) => {
+    const text = `Hello ${bill.clientName}, your invoice ${bill.invoiceNumber} for INR ${bill.totalAmount.toLocaleString('en-IN')} has been generated. View it here: ${window.location.origin}/bills/${bill._id}`
+    window.open(`https://wa.me/${bill.clientPhone.replace(/\D/g,'')}?text=${encodeURIComponent(text)}`, '_blank')
+  }
+
   /* ── computed stats ── */
   const completed = projects.filter((p) => p.status === 'completed').length
   const ongoing = projects.filter((p) => p.status === 'ongoing').length
@@ -237,7 +384,8 @@ export default function DashboardClient() {
                   <StatCard icon="⏳" value={ongoing} label="Ongoing" color="#ffb74d" />
                   <StatCard icon="📬" value={leads.length} label="Total Leads" color="#a259ff" />
                   <StatCard icon="🔥" value={newLeads} label="New Leads" color="#ff5252" />
-                <StatCard icon="⚙️" value={services.length} label="Services" color="#00e5ff" />
+                  <StatCard icon="⚙️" value={services.length} label="Services" color="#00e5ff" />
+                  <StatCard icon="🧾" value={bills.length} label="Bills/Invoices" color="#ff00e5" />
                 </div>
                 
                 <div className="mobile-grid-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
@@ -424,6 +572,58 @@ export default function DashboardClient() {
                 )}
               </div>
             )}
+
+            {/* ── INVOICES ── */}
+            {tab === 'invoices' && (
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 32 }}>
+                  <div>
+                    <h2 style={{ fontFamily: 'Syne', fontWeight: 800, fontSize: 28 }}>Billing & Invoices</h2>
+                    <p style={{ color: '#7b82a8', fontSize: 14, marginTop: 4 }}>{bills.length} invoices generated</p>
+                  </div>
+                  <button className="btn-primary" onClick={() => { openAdd('bill'); setF('items', [{ description: '', quantity: 1, price: 0 }]) }}>+ Create Bill</button>
+                </div>
+
+                <div style={{ display: 'grid', gap: 14 }}>
+                  {bills.map((b) => (
+                    <motion.div key={b._id} layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="glass mobile-p-4" style={{ padding: 22, borderRadius: 14, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
+                      <div className="mobile-stack" style={{ flex: 1, minWidth: 200, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap' }}>
+                        <div style={{ flex: 1 }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
+                            <span style={{ fontWeight: 700, fontSize: 16, color: '#4f6fff' }}>#{b.invoiceNumber}</span>
+                            <span style={{ fontWeight: 600, fontSize: 15 }}>{b.clientName}</span>
+                          </div>
+                          <div style={{ color: '#7b82a8', fontSize: 13 }}>
+                            {new Date(b.createdAt).toLocaleDateString('en-IN')} · INR {b.totalAmount?.toLocaleString('en-IN')}
+                          </div>
+                        </div>
+                        <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
+                          <span className={`tag ${b.status === 'paid' ? 'tag-green' : b.status === 'sent' ? 'tag-orange' : ''}`} style={{ fontSize: 11 }}>{b.status}</span>
+                          <select value={b.status} onChange={(e) => updateBillStatus(b._id, e.target.value)}
+                            style={{ ...inp, width: 'auto', padding: '7px 12px', fontSize: 13 }}>
+                            <option value="draft">Draft</option>
+                            <option value="sent">Sent</option>
+                            <option value="paid">Paid</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+                        <button className="btn-edit" onClick={() => generatePDF(b)} title="Download PDF">📄</button>
+                        <button className="btn-edit" onClick={() => sendBillEmail(b._id)} title="Send Email">📧</button>
+                        <button className="btn-edit" onClick={() => shareWhatsApp(b)} title="Share WhatsApp">💬</button>
+                        <button className="btn-danger" onClick={() => deleteBill(b._id)}>🗑</button>
+                      </div>
+                    </motion.div>
+                  ))}
+                  {bills.length === 0 && (
+                    <div style={{ textAlign: 'center', padding: 80, color: '#7b82a8' }}>
+                      <div style={{ fontSize: 48, marginBottom: 16 }}>🧾</div>
+                      <p>No invoices yet. Create your first bill!</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </>
         )}
       </div>
@@ -442,7 +642,10 @@ export default function DashboardClient() {
               style={{ width: '100%', maxWidth: 540, padding: 40, borderRadius: 22, maxHeight: '90vh', overflowY: 'auto' }}
             >
               <h3 style={{ fontFamily: 'Syne', fontWeight: 700, fontSize: 22, marginBottom: 28 }}>
-                {modal.mode === 'add' ? '+ Add' : '✏️ Edit'} {modal.type === 'project' ? 'Project' : 'Service'}
+                {modal.mode === 'add' ? '+ Add' : '✏️ Edit'} {
+                  modal.type === 'project' ? 'Project' : 
+                  modal.type === 'service' ? 'Service' : 'Bill'
+                }
               </h3>
 
               {/* PROJECT FORM */}
@@ -540,10 +743,92 @@ export default function DashboardClient() {
                   </div>
                 </>
               )}
+
+              {/* BILL FORM */}
+              {modal.type === 'bill' && (
+                <>
+                  <div style={{ marginBottom: 18 }}>
+                    <label style={lbl}>Client Name *</label>
+                    <input style={inp} value={form.clientName || ''} onChange={(e) => setF('clientName', e.target.value)} placeholder="Full Name" />
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 18 }}>
+                    <div>
+                      <label style={lbl}>Client Email *</label>
+                      <input style={inp} value={form.clientEmail || ''} onChange={(e) => setF('clientEmail', e.target.value)} placeholder="email@client.com" />
+                    </div>
+                    <div>
+                      <label style={lbl}>Client Phone *</label>
+                      <input style={inp} value={form.clientPhone || ''} onChange={(e) => setF('clientPhone', e.target.value)} placeholder="+91 XXXXXXXXXX" />
+                    </div>
+                  </div>
+
+                  <div style={{ marginBottom: 18 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                      <label style={lbl}>Items *</label>
+                      <button type="button" onClick={() => setF('items', [...(form.items || []), { description: '', quantity: 1, price: 0 }])} style={{ fontSize: 11, color: '#4f6fff', background: 'none', border: 'none', cursor: 'pointer' }}>+ Add Item</button>
+                    </div>
+                    {form.items?.map((item: any, idx: number) => (
+                      <div key={idx} style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1.5fr 40px', gap: 10, marginBottom: 10 }}>
+                        <input style={inp} value={item.description} onChange={(e) => {
+                          const newItems = [...form.items]; newItems[idx].description = e.target.value; setF('items', newItems);
+                        }} placeholder="Item description" />
+                        <input style={inp} type="number" value={item.quantity} onChange={(e) => {
+                          const newItems = [...form.items]; newItems[idx].quantity = Number(e.target.value); setF('items', newItems);
+                        }} placeholder="1" />
+                        <input style={inp} type="number" value={item.price} onChange={(e) => {
+                          const newItems = [...form.items]; newItems[idx].price = Number(e.target.value); setF('items', newItems);
+                        }} placeholder="8000" />
+                        <button type="button" onClick={() => setF('items', form.items.filter((_:any, i:number) => i !== idx))} style={{ background: 'none', border: 'none', color: '#ff5252', cursor: 'pointer' }}>✕</button>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 18 }}>
+                    <div>
+                      <label style={lbl}>Discount (%)</label>
+                      <input style={inp} type="number" value={form.discountPercent || 0} onChange={(e) => setF('discountPercent', Number(e.target.value))} />
+                    </div>
+                    <div>
+                      <label style={lbl}>Status</label>
+                      <select style={inp} value={form.status || 'draft'} onChange={(e) => setF('status', e.target.value)}>
+                        <option value="draft">Draft</option>
+                        <option value="sent">Sent</option>
+                        <option value="paid">Paid</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div style={{ marginBottom: 28 }}>
+                    <label style={lbl}>Notes & Terms (optional)</label>
+                    <textarea style={{ ...inp, resize: 'vertical' }} rows={2} value={form.notes || ''} onChange={(e) => setF('notes', e.target.value)} placeholder="Payment terms, bank details etc." />
+                  </div>
+
+                  <div style={{ background: 'rgba(79,111,255,0.08)', padding: 20, borderRadius: 14, marginBottom: 28 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', color: '#7b82a8', fontSize: 13, marginBottom: 8 }}>
+                      <span>Subtotal:</span>
+                      <span>INR {(form.items || []).reduce((acc: number, it: any) => acc + (it.price * it.quantity), 0).toLocaleString('en-IN')}</span>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', color: '#ffb74d', fontSize: 14, fontWeight: 700 }}>
+                      <span>Final Total:</span>
+                      <span style={{ color: '#e8eaf6' }}>
+                        INR {((form.items || []).reduce((acc: number, it: any) => acc + (it.price * it.quantity), 0) * (1 - (form.discountPercent || 0)/100)).toLocaleString('en-IN')}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', gap: 12 }}>
+                    <button className="btn-outline" style={{ flex: 1 }} onClick={closeModal}>Cancel</button>
+                    <button className="btn-primary" style={{ flex: 1 }} onClick={saveBill} disabled={saving}>
+                      {saving ? <><div className="spinner" />Saving…</> : 'Save Bill'}
+                    </button>
+                  </div>
+                </>
+              )}
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
+
     </div>
   )
 }

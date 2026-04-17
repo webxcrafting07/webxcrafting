@@ -1,0 +1,34 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { connectDB } from '@/lib/db';
+import Bill from '@/models/Bill';
+import { sendInvoiceEmail } from '@/lib/email';
+import { verifyToken } from '@/lib/auth';
+
+export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
+  try {
+    const auth = await verifyToken(req);
+    if (!auth) return NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 401 });
+
+    await connectDB();
+    const bill = await Bill.findById(params.id);
+    if (!bill) return NextResponse.json({ success: false, message: 'Bill not found' }, { status: 404 });
+
+    const emailSent = await sendInvoiceEmail(
+      bill.clientEmail,
+      bill.clientName,
+      bill.invoiceNumber,
+      bill.totalAmount,
+      bill.items
+    );
+
+    if (emailSent) {
+      bill.status = 'sent';
+      await bill.save();
+      return NextResponse.json({ success: true, message: 'Invoice email sent successfully' });
+    } else {
+      return NextResponse.json({ success: false, message: 'Failed to send invoice email' }, { status: 500 });
+    }
+  } catch (error: any) {
+    return NextResponse.json({ success: false, message: error.message }, { status: 500 });
+  }
+}
