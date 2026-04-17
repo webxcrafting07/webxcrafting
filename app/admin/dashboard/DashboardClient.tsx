@@ -201,6 +201,7 @@ export default function DashboardClient() {
       const url = modal?.mode === 'add' ? '/api/bills' : `/api/bills/${modal?.item?._id}`
       const method = modal?.mode === 'add' ? 'POST' : 'PUT'
       
+      console.log('DEBUG: Saving Bill with form data:', form);
       const subtotal = form.items.reduce((acc: number, item: any) => acc + (Number(item.price || 0) * Number(item.quantity || 0)), 0)
       const discountAmount = (subtotal * (form.discountPercent || 0)) / 100
       const totalAmount = subtotal - discountAmount
@@ -210,12 +211,14 @@ export default function DashboardClient() {
         subtotal, 
         discountAmount, 
         totalAmount,
+        generatedBy: form.generatedBy || '', // Explicitly ensure it's mapped
         items: form.items.map((it: any) => ({
           ...it,
           price: Number(it.price || 0),
           quantity: Number(it.quantity || 0)
         }))
       }
+      console.log('DEBUG: Constructed request body:', body);
       const res = await fetch(url, { method, headers: authHeaders(), body: JSON.stringify(body) })
       const data = await res.json()
       if (data.success) {
@@ -256,6 +259,7 @@ export default function DashboardClient() {
 
   /* ── PDF Generation ── */
   const generatePDF = (bill: any) => {
+    console.log('DEBUG: Generating PDF for bill:', bill);
     const doc = new jsPDF()
     const charcoal: [number, number, number] = [17, 24, 39] // Deep Charcoal
     const electricBlue: [number, number, number] = [79, 111, 255] // Accent Blue
@@ -986,6 +990,16 @@ export default function DashboardClient() {
 
                   <div style={{ display: 'flex', gap: 12 }}>
                     <button className="btn-outline" style={{ flex: 1 }} onClick={closeModal}>Cancel</button>
+                    <button className="btn-outline" style={{ flex: 1, borderColor: '#4f6fff', color: '#4f6fff' }} 
+                      onClick={() => generatePDF({
+                        ...form,
+                        subtotal: (form.items || []).reduce((acc: number, it: any) => acc + (Number(it.price || 0) * Number(it.quantity || 0)), 0),
+                        totalAmount: ((form.items || []).reduce((acc: number, it: any) => acc + (Number(it.price || 0) * Number(it.quantity || 0)), 0) * (1 - (Number(form.discountPercent || 0))/100)),
+                        createdAt: new Date(),
+                        invoiceNumber: form.invoiceNumber || 'PREVIEW'
+                      })}>
+                      👁️ Preview PDF
+                    </button>
                     <button className="btn-primary" style={{ flex: 1 }} onClick={saveBill} disabled={saving}>
                       {saving ? <><div className="spinner" />Saving…</> : 'Save Bill'}
                     </button>

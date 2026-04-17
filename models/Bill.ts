@@ -58,3 +58,4 @@ const BillSchema: Schema = new Schema(
 const Bill: Model<IBill> = mongoose.models.Bill || mongoose.model<IBill>('Bill', BillSchema);
 
 export default Bill;
+// Schema version: 1.1 (Added generatedBy)
