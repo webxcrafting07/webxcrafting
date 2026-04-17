@@ -419,28 +419,37 @@ export default function DashboardClient() {
     doc.text(`INR ${bill.totalAmount.toLocaleString('en-IN')}`, 195, finalY + 25, { align: 'right' })
     
     // --- FOOTER & SIGNATURE ---
-    const footerY = 250
+    const currentY = (doc as any).lastAutoTable.finalY + 30
+    const footerY = currentY > 230 ? currentY : 240 // Dynamic positioning if content is long
     
     doc.setTextColor(charcoal[0], charcoal[1], charcoal[2])
     doc.setFont('helvetica', 'bold')
+    doc.setFontSize(11)
     doc.text('Notes & Terms:', 20, footerY)
     doc.setFont('helvetica', 'italic')
     doc.setFontSize(9)
     doc.setTextColor(75, 85, 99)
     doc.text(bill.notes || '1. Please pay within 7 days. \n2. Bank details will be shared on WhatsApp for payment. \n3. Thank you for your business!', 20, footerY + 6, { maxWidth: 100 })
     
-    doc.setDrawColor(200, 200, 200)
+    // Signature Line
+    doc.setDrawColor(electricBlue[0], electricBlue[1], electricBlue[2])
+    doc.setLineWidth(0.5)
     doc.line(140, footerY + 15, 195, footerY + 15)
-    doc.setFont('helvetica', 'bold')
-    doc.setTextColor(charcoal[0], charcoal[1], charcoal[2])
-    doc.text(bill.generatedBy || 'Authorized Signature', 145, footerY + 22)
     
-    // Bottom Accent
+    doc.setFont('helvetica', 'bold')
+    doc.setFontSize(12)
+    doc.setTextColor(charcoal[0], charcoal[1], charcoal[2])
+    const signName = bill.generatedBy || 'Authorized Signature'
+    doc.text(signName.toUpperCase(), 167, footerY + 22, { align: 'center' })
+    doc.setFontSize(8)
+    doc.setFont('helvetica', 'normal')
+    doc.text('(Authorized Signatory)', 167, footerY + 27, { align: 'center' })
+    
+    // Bottom Accent Bar (Sticky-ish at the bottom of the current page)
     doc.setFillColor(charcoal[0], charcoal[1], charcoal[2])
     doc.rect(8, 285, 202, 12, 'F')
     doc.setTextColor(255, 255, 255)
-    doc.setFontSize(9)
-    doc.setFont('helvetica', 'normal')
+    doc.setFontSize(8)
     doc.text('Questions? Contact us on WhatsApp: +91 9102615343 | +91 7974579107   •   www.webxcrafting.in', 35, 292)
     
     doc.save(`${bill.invoiceNumber}.pdf`)
