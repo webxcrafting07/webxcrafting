@@ -105,7 +105,12 @@ export default function DashboardClient() {
   const updateBillItem = (idx: number, field: string, value: any) => {
     if (!form.items) return;
     const newItems = [...form.items];
-    newItems[idx] = { ...newItems[idx], [field]: value };
+    // Allow empty string for better input handling, otherwise convert to number if numeric field
+    let finalVal = value;
+    if ((field === 'quantity' || field === 'price') && value !== '') {
+      finalVal = Number(value);
+    }
+    newItems[idx] = { ...newItems[idx], [field]: finalVal };
     setF('items', newItems);
   }
 
@@ -196,11 +201,21 @@ export default function DashboardClient() {
       const url = modal?.mode === 'add' ? '/api/bills' : `/api/bills/${modal?.item?._id}`
       const method = modal?.mode === 'add' ? 'POST' : 'PUT'
       
-      const subtotal = form.items.reduce((acc: number, item: any) => acc + (item.price * item.quantity), 0)
+      const subtotal = form.items.reduce((acc: number, item: any) => acc + (Number(item.price || 0) * Number(item.quantity || 0)), 0)
       const discountAmount = (subtotal * (form.discountPercent || 0)) / 100
       const totalAmount = subtotal - discountAmount
 
-      const body = { ...form, subtotal, discountAmount, totalAmount }
+      const body = { 
+        ...form, 
+        subtotal, 
+        discountAmount, 
+        totalAmount,
+        items: form.items.map((it: any) => ({
+          ...it,
+          price: Number(it.price || 0),
+          quantity: Number(it.quantity || 0)
+        }))
+      }
       const res = await fetch(url, { method, headers: authHeaders(), body: JSON.stringify(body) })
       const data = await res.json()
       if (data.success) {
@@ -900,11 +915,22 @@ export default function DashboardClient() {
                       <label style={lbl}>Items *</label>
                       <button type="button" onClick={() => setF('items', [...(form.items || []), { description: '', quantity: 1, price: 0 }])} style={{ fontSize: 11, color: '#4f6fff', background: 'none', border: 'none', cursor: 'pointer' }}>+ Add Item</button>
                     </div>
+                    
+                    {/* Items Header */}
+                    {form.items?.length > 0 && (
+                      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1.5fr 40px', gap: 10, marginBottom: 8, padding: '0 4px' }}>
+                        <span style={{ fontSize: 10, color: '#7b82a8', fontWeight: 600, textTransform: 'uppercase' }}>Desc</span>
+                        <span style={{ fontSize: 10, color: '#7b82a8', fontWeight: 600, textTransform: 'uppercase' }}>Qty</span>
+                        <span style={{ fontSize: 10, color: '#7b82a8', fontWeight: 600, textTransform: 'uppercase' }}>Price</span>
+                        <span></span>
+                      </div>
+                    )}
+
                     {form.items?.map((item: any, idx: number) => (
                       <div key={idx} style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1.5fr 40px', gap: 10, marginBottom: 10 }}>
-                        <input style={inp} value={item.description} onChange={(e) => updateBillItem(idx, 'description', e.target.value)} placeholder="Item description" />
-                        <input style={inp} type="number" value={item.quantity} onChange={(e) => updateBillItem(idx, 'quantity', Number(e.target.value))} placeholder="1" />
-                        <input style={inp} type="number" value={item.price} onChange={(e) => updateBillItem(idx, 'price', Number(e.target.value))} placeholder="8000" />
+                        <input style={inp} value={item.description} onChange={(e) => updateBillItem(idx, 'description', e.target.value)} placeholder="e.g. Website Design" />
+                        <input style={inp} type="number" value={item.quantity} onChange={(e) => updateBillItem(idx, 'quantity', e.target.value)} placeholder="1" />
+                        <input style={inp} type="number" value={item.price} onChange={(e) => updateBillItem(idx, 'price', e.target.value)} placeholder="5000" />
                         <button type="button" onClick={() => setF('items', form.items.filter((_:any, i:number) => i !== idx))} style={{ background: 'none', border: 'none', color: '#ff5252', cursor: 'pointer' }}>✕</button>
                       </div>
                     ))}
@@ -938,12 +964,12 @@ export default function DashboardClient() {
                   <div style={{ background: 'rgba(79,111,255,0.08)', padding: 20, borderRadius: 14, marginBottom: 28 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', color: '#7b82a8', fontSize: 13, marginBottom: 8 }}>
                       <span>Subtotal:</span>
-                      <span>INR {(form.items || []).reduce((acc: number, it: any) => acc + (it.price * it.quantity), 0).toLocaleString('en-IN')}</span>
+                      <span>INR {(form.items || []).reduce((acc: number, it: any) => acc + (Number(it.price || 0) * Number(it.quantity || 0)), 0).toLocaleString('en-IN')}</span>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', color: '#ffb74d', fontSize: 14, fontWeight: 700 }}>
                       <span>Final Total:</span>
                       <span style={{ color: '#e8eaf6' }}>
-                        INR {((form.items || []).reduce((acc: number, it: any) => acc + (it.price * it.quantity), 0) * (1 - (form.discountPercent || 0)/100)).toLocaleString('en-IN')}
+                        INR {((form.items || []).reduce((acc: number, it: any) => acc + (Number(it.price || 0) * Number(it.quantity || 0)), 0) * (1 - (Number(form.discountPercent || 0))/100)).toLocaleString('en-IN')}
                       </span>
                     </div>
                   </div>
