@@ -404,12 +404,12 @@ export default function DashboardClient() {
     
     doc.text(`Subtotal :`, 130, finalY)
     doc.setTextColor(charcoal[0], charcoal[1], charcoal[2])
-    doc.text(`INR ${bill.subtotal.toLocaleString('en-IN')}`, 195, finalY, { align: 'right' })
+    doc.text(`INR ${(bill.subtotal || 0).toLocaleString('en-IN')}`, 195, finalY, { align: 'right' })
     
     doc.setTextColor(75, 85, 99)
-    doc.text(`Discount (${bill.discountPercent}%) :`, 130, finalY + 8)
+    doc.text(`Discount (${bill.discountPercent || 0}%) :`, 130, finalY + 8)
     doc.setTextColor(255, 0, 0) // Red for discount
-    doc.text(`- INR ${bill.discountAmount.toLocaleString('en-IN')}`, 195, finalY + 8, { align: 'right' })
+    doc.text(`- INR ${(bill.discountAmount || 0).toLocaleString('en-IN')}`, 195, finalY + 8, { align: 'right' })
     
     // Grand Total Box
     doc.setFillColor(electricBlue[0], electricBlue[1], electricBlue[2])
@@ -420,7 +420,7 @@ export default function DashboardClient() {
     doc.setFontSize(12)
     doc.text(`GRAND TOTAL`, 130, finalY + 25)
     doc.setFontSize(14)
-    doc.text(`INR ${bill.totalAmount.toLocaleString('en-IN')}`, 195, finalY + 25, { align: 'right' })
+    doc.text(`INR ${(bill.totalAmount || 0).toLocaleString('en-IN')}`, 195, finalY + 25, { align: 'right' })
     
     // --- FOOTER & SIGNATURE ---
     const currentY = (doc as any).lastAutoTable.finalY + 30
@@ -991,13 +991,19 @@ export default function DashboardClient() {
                   <div style={{ display: 'flex', gap: 12 }}>
                     <button className="btn-outline" style={{ flex: 1 }} onClick={closeModal}>Cancel</button>
                     <button className="btn-outline" style={{ flex: 1, borderColor: '#4f6fff', color: '#4f6fff' }} 
-                      onClick={() => generatePDF({
-                        ...form,
-                        subtotal: (form.items || []).reduce((acc: number, it: any) => acc + (Number(it.price || 0) * Number(it.quantity || 0)), 0),
-                        totalAmount: ((form.items || []).reduce((acc: number, it: any) => acc + (Number(it.price || 0) * Number(it.quantity || 0)), 0) * (1 - (Number(form.discountPercent || 0))/100)),
-                        createdAt: new Date(),
-                        invoiceNumber: form.invoiceNumber || 'PREVIEW'
-                      })}>
+                      onClick={() => {
+                        const subtotal = (form.items || []).reduce((acc: number, it: any) => acc + (Number(it.price || 0) * Number(it.quantity || 0)), 0);
+                        const discountAmount = (subtotal * (Number(form.discountPercent || 0))) / 100;
+                        const totalAmount = subtotal - discountAmount;
+                        generatePDF({
+                          ...form,
+                          subtotal,
+                          discountAmount,
+                          totalAmount,
+                          createdAt: new Date(),
+                          invoiceNumber: form.invoiceNumber || 'PREVIEW'
+                        });
+                      }}>
                       👁️ Preview PDF
                     </button>
                     <button className="btn-primary" style={{ flex: 1 }} onClick={saveBill} disabled={saving}>
