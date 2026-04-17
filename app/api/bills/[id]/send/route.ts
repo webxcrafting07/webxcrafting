@@ -13,13 +13,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     const bill = await Bill.findById(id);
     if (!bill) return NextResponse.json({ success: false, message: 'Bill not found' }, { status: 404 });
 
-    const emailSent = await sendInvoiceEmail(
-      bill.clientEmail,
-      bill.clientName,
-      bill.invoiceNumber,
-      bill.totalAmount,
-      bill.items
-    );
+    const emailSent = await sendInvoiceEmail(bill);
 
     if (emailSent) {
       bill.status = 'sent';

@@ -465,7 +465,9 @@ export default function DashboardClient() {
   }
 
   const shareWhatsApp = (bill: any) => {
-    const text = `Hello ${bill.clientName}, your invoice ${bill.invoiceNumber} for INR ${bill.totalAmount.toLocaleString('en-IN')} has been generated. View it here: ${window.location.origin}/bills/${bill._id}`
+    const downloadUrl = `${window.location.origin}/api/bills/${bill._id}/download`
+    const text = `*WEBXCRAFTING - INVOICE* ✨\n\nHello *${bill.clientName}*,\n\nGreetings from WebXCrafting. We are pleased to share your invoice *#${bill.invoiceNumber}* for the amount of *INR ${bill.totalAmount.toLocaleString('en-IN')}*.\n\n📥 *Download PDF Invoice:* \n${downloadUrl}\n\nThank you for choosing us for your digital needs. Have a great day!`
+    
     window.open(`https://wa.me/${bill.clientPhone.replace(/\D/g,'')}?text=${encodeURIComponent(text)}`, '_blank')
   }
 
