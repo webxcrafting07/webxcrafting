@@ -218,7 +218,7 @@ export default function DashboardClient() {
   /* ── PDF Generation ── */
   const generatePDF = (bill: any) => {
     const doc = new jsPDF()
-    const primary = [79, 111, 255] // Theme blue
+    const primary: [number, number, number] = [79, 111, 255] // Theme blue
     
     // Header
     doc.setFillColor(primary[0], primary[1], primary[2])

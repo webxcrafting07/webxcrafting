@@ -2,15 +2,15 @@ import { NextRequest, NextResponse } from 'next/server';
 import { connectDB } from '@/lib/db';
 import Bill from '@/models/Bill';
 import { sendInvoiceEmail } from '@/lib/email';
-import { verifyToken } from '@/lib/auth';
+import { isAdminAuthenticated } from '@/lib/auth';
 
-export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const auth = await verifyToken(req);
-    if (!auth) return NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 401 });
+    const { id } = await params;
+    if (!isAdminAuthenticated(req)) return NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 401 });
 
     await connectDB();
-    const bill = await Bill.findById(params.id);
+    const bill = await Bill.findById(id);
     if (!bill) return NextResponse.json({ success: false, message: 'Bill not found' }, { status: 404 });
 
     const emailSent = await sendInvoiceEmail(

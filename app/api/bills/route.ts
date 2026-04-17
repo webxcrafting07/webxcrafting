@@ -1,12 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { connectDB } from '@/lib/db';
 import Bill from '@/models/Bill';
-import { verifyToken } from '@/lib/auth';
+import { isAdminAuthenticated } from '@/lib/auth';
 
 export async function GET(req: NextRequest) {
   try {
-    const auth = await verifyToken(req);
-    if (!auth) return NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 401 });
+    if (!isAdminAuthenticated(req)) return NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 401 });
 
     await connectDB();
     const bills = await Bill.find().sort({ createdAt: -1 });
@@ -18,8 +17,7 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const auth = await verifyToken(req);
-    if (!auth) return NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 401 });
+    if (!isAdminAuthenticated(req)) return NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 401 });
 
     const body = await req.json();
     await connectDB();
