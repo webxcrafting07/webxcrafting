@@ -6,6 +6,7 @@ import toast from 'react-hot-toast'
 import Link from 'next/link'
 import { jsPDF } from 'jspdf'
 import autoTable from 'jspdf-autotable'
+import { FaChartBar, FaFolder, FaEnvelope, FaCog, FaFileInvoice, FaCheckCircle, FaFire, FaPencil, FaTrash, FaComments, FaFileAlt, FaSignOutAlt, FaBars, FaEye, FaEyeSlash, FaCheck, FaGlobe, FaHourglass } from 'react-icons/fa'
 
 /* ── helpers ── */
 function authHeaders() {
@@ -19,7 +20,7 @@ const catColors: Record<string, string> = { Business: '#4f6fff', 'E-commerce': '
 function StatCard({ icon, value, label, color }: any) {
   return (
     <motion.div whileHover={{ y: -4 }} className="glass" style={{ padding: 24, borderRadius: 16 }}>
-      <div style={{ fontSize: 30, marginBottom: 12 }}>{icon}</div>
+      <div style={{ fontSize: 30, marginBottom: 12, color }}>{typeof icon === 'function' ? <icon size={30} /> : icon}</div>
       <div style={{ fontFamily: 'Syne', fontSize: 38, fontWeight: 800, color }}>{value}</div>
       <div style={{ color: '#7b82a8', fontSize: 13, marginTop: 4 }}>{label}</div>
     </motion.div>
@@ -28,11 +29,11 @@ function StatCard({ icon, value, label, color }: any) {
 
 /* ── sidebar ── */
 const sidebarTabs = [
-  { key: 'overview', label: 'Overview', icon: '📊' },
-  { key: 'projects', label: 'Projects', icon: '🗂' },
-  { key: 'leads', label: 'Leads', icon: '📬' },
-  { key: 'services', label: 'Services', icon: '⚙️' },
-  { key: 'invoices', label: 'Invoices', icon: '🧾' },
+  { key: 'overview', label: 'Overview', icon: FaChartBar },
+  { key: 'projects', label: 'Projects', icon: FaFolder },
+  { key: 'leads', label: 'Leads', icon: FaEnvelope },
+  { key: 'services', label: 'Services', icon: FaCog },
+  { key: 'invoices', label: 'Invoices', icon: FaFileInvoice },
 ]
 
 /* ─────────────────────────── MAIN ─────────────────────────── */
@@ -504,7 +505,7 @@ export default function DashboardClient() {
             border: tab === t.key ? '1px solid rgba(79,111,255,.3)' : '1px solid transparent',
             color: tab === t.key ? '#e8eaf6' : '#7b82a8', fontFamily: 'DM Sans', fontWeight: 500, fontSize: 14, textAlign: 'left', transition: 'all .2s',
           }}>
-            <span>{t.icon}</span>{t.label}
+            <t.icon size={18} />{t.label}
             {t.key === 'leads' && newLeads > 0 && (
               <span style={{ marginLeft: 'auto', background: '#ff5252', borderRadius: 10, padding: '1px 7px', fontSize: 11, fontWeight: 700, color: '#fff' }}>{newLeads}</span>
             )}
@@ -515,11 +516,11 @@ export default function DashboardClient() {
           <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px', color: '#7b82a8', textDecoration: 'none', fontSize: 14, marginBottom: 4, borderRadius: 10, transition: 'all .2s' }}
             onMouseEnter={(e: any) => { e.currentTarget.style.color = '#e8eaf6'; e.currentTarget.style.background = 'rgba(99,120,255,.08)' }}
             onMouseLeave={(e: any) => { e.currentTarget.style.color = '#7b82a8'; e.currentTarget.style.background = 'transparent' }}
-          >🌐 View Site</Link>
+          ><FaGlobe size={16} style={{ marginRight: 4 }} /> View Site</Link>
           <button onClick={logout} style={{ display: 'flex', alignItems: 'center', gap: 10, width: '100%', padding: '10px 14px', borderRadius: 10, background: 'none', border: 'none', color: '#ff5252', cursor: 'pointer', fontFamily: 'DM Sans', fontSize: 14, transition: 'all .2s' }}
             onMouseEnter={(e: any) => e.currentTarget.style.background = 'rgba(255,82,82,.08)'}
             onMouseLeave={(e: any) => e.currentTarget.style.background = 'transparent'}
-          >🚪 Logout</button>
+          ><FaSignOutAlt size={16} style={{ marginRight: 4 }} /> Logout</button>
         </div>
       </div>
 
@@ -528,7 +529,7 @@ export default function DashboardClient() {
         {/* Mobile Header (Hamburger) */}
         <div className="show-mobile" style={{ alignItems: 'center', justifyContent: 'space-between', marginBottom: 24, width: '100%' }}>
           <button onClick={() => setIsSidebarOpen(true)} style={{ background: 'none', border: 'none', color: '#e8eaf6', cursor: 'pointer', padding: 4 }}>
-            <span style={{ fontSize: 28 }}>☰</span>
+            <FaBars size={24} />
           </button>
           <div style={{ fontFamily: 'Syne', fontWeight: 800, fontSize: 18, color: '#e8eaf6' }}>Admin Dashboard</div>
         </div>
@@ -547,13 +548,13 @@ export default function DashboardClient() {
                   <p style={{ color: '#7b82a8', fontSize: 14 }}>Welcome back, Admin 👋</p>
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(180px,1fr))', gap: 18, marginBottom: 36 }}>
-                  <StatCard icon="🗂" value={projects.length} label="Total Projects" color="#4f6fff" />
-                  <StatCard icon="✅" value={completed} label="Completed" color="#00e676" />
-                  <StatCard icon="⏳" value={ongoing} label="Ongoing" color="#ffb74d" />
-                  <StatCard icon="📬" value={leads.length} label="Total Leads" color="#a259ff" />
-                  <StatCard icon="🔥" value={newLeads} label="New Leads" color="#ff5252" />
-                  <StatCard icon="⚙️" value={services.length} label="Services" color="#00e5ff" />
-                  <StatCard icon="🧾" value={bills.length} label="Bills/Invoices" color="#ff00e5" />
+                  <StatCard icon={FaFolder} value={projects.length} label="Total Projects" color="#4f6fff" />
+                  <StatCard icon={FaCheckCircle} value={completed} label="Completed" color="#00e676" />
+                  <StatCard icon={FaHourglass} value={ongoing} label="Ongoing" color="#ffb74d" />
+                  <StatCard icon={FaEnvelope} value={leads.length} label="Total Leads" color="#a259ff" />
+                  <StatCard icon={FaFire} value={newLeads} label="New Leads" color="#ff5252" />
+                  <StatCard icon={FaCog} value={services.length} label="Services" color="#00e5ff" />
+                  <StatCard icon={FaFileInvoice} value={bills.length} label="Bills/Invoices" color="#ff00e5" />
                 </div>
                 
                 <div className="mobile-grid-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
@@ -628,12 +629,12 @@ export default function DashboardClient() {
                         </div>
                       </div>
                       <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap', borderTop: '0.5px solid rgba(99,120,255,0.08)', paddingTop: 12, width: '100%', justifyContent: 'flex-end', marginTop: 4 }} className="show-mobile">
-                        <button className="btn-edit" onClick={() => openEdit('project', p)}>✏️</button>
-                        <button className="btn-danger" onClick={() => deleteProject(p._id)}>🗑</button>
+                        <button className="btn-edit" onClick={() => openEdit('project', p)}><FaPencil size={14} /></button>
+                        <button className="btn-danger" onClick={() => deleteProject(p._id)}><FaTrash size={14} /></button>
                       </div>
                       <div className="hide-mobile" style={{ display: 'flex', gap: 10 }}>
-                        <button className="btn-edit" onClick={() => openEdit('project', p)}>✏️ Edit</button>
-                        <button className="btn-danger" onClick={() => deleteProject(p._id)}>🗑 Delete</button>
+                        <button className="btn-edit" onClick={() => openEdit('project', p)}><FaPencil size={14} style={{ marginRight: 6 }} /> Edit</button>
+                        <button className="btn-danger" onClick={() => deleteProject(p._id)}><FaTrash size={14} style={{ marginRight: 6 }} /> Delete</button>
                       </div>
                     </motion.div>
                   ))}
@@ -673,8 +674,8 @@ export default function DashboardClient() {
                             <option value="contacted">Contacted</option>
                             <option value="closed">Closed</option>
                           </select>
-                          <a href={`mailto:${l.email}`} className="btn-edit" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 6 }}>📧 Reply</a>
-                          <button className="btn-danger" onClick={() => deleteLead(l._id)}>🗑</button>
+                          <a href={`mailto:${l.email}`} className="btn-edit" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 6 }}><FaEnvelope size={14} /> Reply</a>
+                          <button className="btn-danger" onClick={() => deleteLead(l._id)}><FaTrash size={14} /></button>
                         </div>
                       </div>
                       <p style={{ color: '#b0b8d8', fontSize: 14, lineHeight: 1.65, marginBottom: 8 }}>{l.message}</p>
@@ -706,7 +707,7 @@ export default function DashboardClient() {
                   {services.map((s) => (
                     <motion.div key={s._id} whileHover={{ y: -4 }} className="glass" style={{ padding: 26, borderRadius: 18, position: 'relative' }}>
                       {s.popular && <div style={{ position: 'absolute', top: 14, right: 14, background: 'linear-gradient(135deg,#4f6fff,#a259ff)', borderRadius: 20, padding: '3px 10px', fontSize: 10, fontWeight: 700 }}>POPULAR</div>}
-                      <div style={{ fontSize: 28, marginBottom: 12 }}>{s.icon || '🌐'}</div>
+                      <div style={{ fontSize: 28, marginBottom: 12, color: '#4f6fff' }}>{typeof s.icon === 'function' ? <s.icon size={28} /> : <FaGlobe size={28} />}</div>
                       <h3 style={{ fontFamily: 'Syne', fontWeight: 700, fontSize: 18, marginBottom: 8 }}>{s.title}</h3>
                       <p style={{ color: '#7b82a8', fontSize: 13, lineHeight: 1.65, marginBottom: 14 }}>{s.description}</p>
                       {s.features?.length > 0 && (
@@ -726,15 +727,15 @@ export default function DashboardClient() {
                         )}
                       </div>
                       <div style={{ display: 'flex', gap: 10 }}>
-                        <button className="btn-edit" style={{ flex: 1, justifyContent: 'center' }} onClick={() => openEdit('service', s)}>✏️ Edit</button>
-                        <button className="btn-danger" style={{ flex: 1, justifyContent: 'center' }} onClick={() => deleteService(s._id)}>🗑 Delete</button>
+                        <button className="btn-edit" style={{ flex: 1, justifyContent: 'center' }} onClick={() => openEdit('service', s)}><FaPencil size={14} style={{ marginRight: 6 }} /> Edit</button>
+                        <button className="btn-danger" style={{ flex: 1, justifyContent: 'center' }} onClick={() => deleteService(s._id)}><FaTrash size={14} style={{ marginRight: 6 }} /> Delete</button>
                       </div>
                     </motion.div>
                   ))}
                 </div>
                 {services.length === 0 && (
                   <div style={{ textAlign: 'center', padding: 80, color: '#7b82a8' }}>
-                    <div style={{ fontSize: 48, marginBottom: 16 }}>⚙️</div>
+                    <div style={{ fontSize: 48, marginBottom: 16, color: '#00e5ff' }}><FaCog size={48} /></div>
                     <p>No services yet.</p>
                   </div>
                 )}
@@ -776,10 +777,10 @@ export default function DashboardClient() {
                         </div>
                       </div>
                       <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-                        <button className="btn-edit" onClick={() => generatePDF(b)} title="Download PDF">📄</button>
-                        <button className="btn-edit" onClick={() => sendBillEmail(b._id)} title="Send Email">📧</button>
-                        <button className="btn-edit" onClick={() => shareWhatsApp(b)} title="Share WhatsApp">💬</button>
-                        <button className="btn-danger" onClick={() => deleteBill(b._id)}>🗑</button>
+                        <button className="btn-edit" onClick={() => generatePDF(b)} title="Download PDF"><FaFileAlt size={14} /></button>
+                        <button className="btn-edit" onClick={() => sendBillEmail(b._id)} title="Send Email"><FaEnvelope size={14} /></button>
+                        <button className="btn-edit" onClick={() => shareWhatsApp(b)} title="Share WhatsApp"><FaComments size={14} /></button>
+                        <button className="btn-danger" onClick={() => deleteBill(b._id)}><FaTrash size={14} /></button>
                       </div>
                     </motion.div>
                   ))}
@@ -810,7 +811,7 @@ export default function DashboardClient() {
               style={{ width: '100%', maxWidth: 540, padding: 40, borderRadius: 22, maxHeight: '90vh', overflowY: 'auto' }}
             >
               <h3 style={{ fontFamily: 'Syne', fontWeight: 700, fontSize: 22, marginBottom: 28 }}>
-                {modal.mode === 'add' ? '+ Add' : '✏️ Edit'} {
+                {modal.mode === 'add' ? '+ Add' : <><FaPencil size={14} style={{ marginRight: 6 }} /> Edit</>} {
                   modal.type === 'project' ? 'Project' : 
                   modal.type === 'service' ? 'Service' : 'Bill'
                 }

@@ -6,16 +6,17 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import DotBackground from '@/components/DotBackground'
 import WhatsAppButton from '@/components/WhatsAppButton'
+import { FaEnvelope, FaPhone, FaClock, FaGlobe } from 'react-icons/fa'
 
 const WA_NUM = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919000000000'
 const WA_MSG = process.env.NEXT_PUBLIC_WHATSAPP_MESSAGE || 'Hello%20I%20want%20a%20website'
 const WA = `https://wa.me/${WA_NUM}?text=${WA_MSG}`
 
 const infoItems = [
-  { icon: '📧', label: 'Email Us', value: 'webxcrafting@gmail.com' },
-  { icon: '📞', label: 'Call / WhatsApp', value: '+91 9102615343' },
-  { icon: '⏱', label: 'Response Time', value: 'Within 24 hours' },
-  { icon: '🌍', label: 'Working Hours', value: 'Mon to Sat, 9AM to 7PM IST' },
+  { icon: FaEnvelope, label: 'Email Us', value: 'webxcrafting@gmail.com' },
+  { icon: FaPhone, label: 'Call / WhatsApp', value: '+91 9102615343' },
+  { icon: FaClock, label: 'Response Time', value: 'Within 24 hours' },
+  { icon: FaGlobe, label: 'Working Hours', value: 'Mon to Sat, 9AM to 7PM IST' },
 ]
 
 export default function ContactClient() {
@@ -73,9 +74,9 @@ export default function ContactClient() {
         <div className="mobile-grid-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: 40, alignItems: 'start' }}>
           {/* Left: contact info */}
           <motion.div initial={{ opacity: 0, x: -24 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.1 }}>
-            {infoItems.map(({ icon, label, value }) => (
+            {infoItems.map(({ icon: Icon, label, value }) => (
               <motion.div key={label} whileHover={{ y: -4 }} className="glass" style={{ padding: 20, marginBottom: 16, display: 'flex', gap: 16, alignItems: 'center', borderRadius: 14 }}>
-                <div style={{ fontSize: 28, minWidth: 36, textAlign: 'center' }}>{icon}</div>
+                <div style={{ fontSize: 28, minWidth: 36, textAlign: 'center', color: '#4f6fff' }}><Icon size={24} /></div>
                 <div>
                   <div style={{ color: '#7b82a8', fontSize: 12, marginBottom: 3, fontWeight: 500 }}>{label}</div>
                   <div style={{ fontWeight: 600, fontSize: 15 }}>{value}</div>

@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import toast from 'react-hot-toast'
 import DotBackground from '@/components/DotBackground'
 import Link from 'next/link'
+import { FaLock, FaEye, FaEyeSlash } from 'react-icons/fa'
 
 export default function LoginClient() {
   const router = useRouter()
@@ -55,7 +56,7 @@ export default function LoginClient() {
             <span style={{ fontFamily: 'Syne', fontWeight: 800, fontSize: 20, color: '#e8eaf6' }}>WebX<span className="grad-text">Crafting</span></span>
           </Link>
 
-          <div style={{ width: 64, height: 64, borderRadius: 18, background: 'linear-gradient(135deg,rgba(79,111,255,.2),rgba(162,89,255,.2))', border: '1px solid rgba(79,111,255,.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 30, margin: '0 auto 20px' }}>🔐</div>
+          <div style={{ width: 64, height: 64, borderRadius: 18, background: 'linear-gradient(135deg,rgba(79,111,255,.2),rgba(162,89,255,.2))', border: '1px solid rgba(79,111,255,.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 30, margin: '0 auto 20px', color: '#4f6fff' }}><FaLock size={30} /></div>
 
           <h2 style={{ fontFamily: 'Syne', fontWeight: 800, fontSize: 28, marginBottom: 6 }}>Admin Login</h2>
           <p style={{ color: '#7b82a8', fontSize: 14, marginBottom: 36 }}>Access your WebXCrafting dashboard</p>
@@ -87,7 +88,7 @@ export default function LoginClient() {
               onClick={() => setShowPass(!showPass)}
               style={{ position: 'absolute', right: 14, top: 38, background: 'none', border: 'none', color: '#7b82a8', cursor: 'pointer', fontSize: 16 }}
             >
-              {showPass ? '🙈' : '👁'}
+              {showPass ? <FaEyeSlash size={16} /> : <FaEye size={16} />}
             </button>
           </div>
 

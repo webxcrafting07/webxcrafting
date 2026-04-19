@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import DotBackground from '@/components/DotBackground'
 import WhatsAppButton from '@/components/WhatsAppButton'
+import { FaGlobe, FaShoppingCart, FaBriefcase, FaCog, FaCheck } from 'react-icons/fa'
 
 const FadeUp = ({ children, delay = 0 }: any) => (
   <motion.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}>
@@ -14,10 +15,10 @@ const FadeUp = ({ children, delay = 0 }: any) => (
 )
 
 const defaultServices = [
-  { _id: '1', icon: '🌐', title: 'Business Website', description: 'Professional multi-page website with SEO, contact forms, and responsive design.', price: 8000, originalPrice: 12000, popular: false, features: ['5 Pages', 'SEO Optimized', 'Mobile Responsive', 'Contact Form', '1 Month Support'] },
-  { _id: '2', icon: '🛒', title: 'E-commerce Website', description: 'Full-featured online store with payments, inventory, and order tracking.', price: 25000, originalPrice: 35000, popular: true, features: ['Unlimited Products', 'Payment Gateway', 'Order Management', 'Inventory System', '3 Month Support'] },
-  { _id: '3', icon: '💼', title: 'Job Portal', description: 'Complete hiring platform with employer/candidate dashboards and AI matching.', price: 45000, originalPrice: 60000, popular: false, features: ['Employer Dashboard', 'Candidate Portal', 'Application Tracking', 'Search & Filters', '6 Month Support'] },
-  { _id: '4', icon: '⚙️', title: 'Custom Website', description: 'Tailored web apps, SaaS platforms, and dashboards built to your spec.', price: 60000, originalPrice: 80000, popular: false, features: ['Custom Features', 'API Integration', 'Admin Dashboard', 'Cloud Deployment', '1 Year Support'] },
+  { _id: '1', icon: () => <FaGlobe size={26} />, title: 'Business Website', description: 'Professional multi-page website with SEO, contact forms, and responsive design.', price: 8000, originalPrice: 12000, popular: false, features: ['5 Pages', 'SEO Optimized', 'Mobile Responsive', 'Contact Form', '1 Month Support'] },
+  { _id: '2', icon: () => <FaShoppingCart size={26} />, title: 'E-commerce Website', description: 'Full-featured online store with payments, inventory, and order tracking.', price: 25000, originalPrice: 35000, popular: true, features: ['Unlimited Products', 'Payment Gateway', 'Order Management', 'Inventory System', '3 Month Support'] },
+  { _id: '3', icon: () => <FaBriefcase size={26} />, title: 'Job Portal', description: 'Complete hiring platform with employer/candidate dashboards and AI matching.', price: 45000, originalPrice: 60000, popular: false, features: ['Employer Dashboard', 'Candidate Portal', 'Application Tracking', 'Search & Filters', '6 Month Support'] },
+  { _id: '4', icon: () => <FaCog size={26} />, title: 'Custom Website', description: 'Tailored web apps, SaaS platforms, and dashboards built to your spec.', price: 60000, originalPrice: 80000, popular: false, features: ['Custom Features', 'API Integration', 'Admin Dashboard', 'Cloud Deployment', '1 Year Support'] },
 ]
 
 export default function ServicesClient() {
@@ -67,8 +68,8 @@ export default function ServicesClient() {
                 {s.popular && (
                   <div style={{ position: 'absolute', top: 16, right: 16, background: 'linear-gradient(135deg,#4f6fff,#a259ff)', borderRadius: 20, padding: '4px 14px', fontSize: 11, fontWeight: 700, color: '#fff' }}>POPULAR</div>
                 )}
-                <div style={{ width: 54, height: 54, borderRadius: 14, background: s.popular ? 'linear-gradient(135deg,#4f6fff,#a259ff)' : 'rgba(79,111,255,.12)', border: s.popular ? 'none' : '1px solid rgba(79,111,255,.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 26, marginBottom: 20 }}>
-                  {s.icon || '🌐'}
+                <div style={{ width: 54, height: 54, borderRadius: 14, background: s.popular ? 'linear-gradient(135deg,#4f6fff,#a259ff)' : 'rgba(79,111,255,.12)', border: s.popular ? 'none' : '1px solid rgba(79,111,255,.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 26, marginBottom: 20, color: s.popular ? '#fff' : '#4f6fff' }}>
+                  {typeof s.icon === 'function' ? s.icon() : s.icon}
                 </div>
                 <h3 style={{ fontFamily: 'Syne', fontWeight: 700, fontSize: 21, fontStyle: 'italic', marginBottom: 10 }}>{s.title}</h3>
                 <p style={{ color: '#7b82a8', fontSize: 14, lineHeight: 1.75, marginBottom: 24, flex: 1 }}>{s.description}</p>
@@ -77,7 +78,7 @@ export default function ServicesClient() {
                   <ul style={{ listStyle: 'none', marginBottom: 24 }}>
                     {s.features.map((f: string) => (
                       <li key={f} style={{ display: 'flex', alignItems: 'center', gap: 10, color: '#b0b8d8', fontSize: 14, marginBottom: 8 }}>
-                        <span style={{ color: '#00e676', fontSize: 13 }}>✓</span> {f}
+                        <span style={{ color: '#00e676' }}><FaCheck size={13} /></span> {f}
                       </li>
                     ))}
                   </ul>

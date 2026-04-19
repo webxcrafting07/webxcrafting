@@ -1,84 +1,103 @@
-'use client'
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { HiMenu, HiX } from 'react-icons/hi'
-import { motion, AnimatePresence } from 'framer-motion'
+"use client";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { HiMenu, HiX } from "react-icons/hi";
+import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
-  { label: 'Services', href: '/services' },
-  { label: 'Portfolio', href: '/portfolio' },
-  { label: 'Contact', href: '/contact' },
-]
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "Contact", href: "/contact" },
+];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const pathname = usePathname()
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 30)
-    window.addEventListener('scroll', handler)
-    return () => window.removeEventListener('scroll', handler)
-  }, [])
+    const handler = () => setScrolled(window.scrollY > 30);
+    window.addEventListener("scroll", handler);
+    return () => window.removeEventListener("scroll", handler);
+  }, []);
 
   // Close menu on route change
-  useEffect(() => setMobileOpen(false), [pathname])
+  useEffect(() => setMobileOpen(false), [pathname]);
 
   return (
     <>
       <nav
         style={{
-          position: 'fixed',
+          position: "fixed",
           top: 0,
           left: 0,
           right: 0,
           zIndex: 500,
-          padding: '14px 32px',
-          background: scrolled ? 'rgba(3,5,10,0.92)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(24px)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(24px)' : 'none',
-          borderBottom: scrolled ? '1px solid rgba(99,120,255,0.12)' : 'none',
-          transition: 'all 0.35s ease',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
+          padding: "14px 32px",
+          background: scrolled ? "rgba(3,5,10,0.92)" : "transparent",
+          backdropFilter: scrolled ? "blur(24px)" : "none",
+          WebkitBackdropFilter: scrolled ? "blur(24px)" : "none",
+          borderBottom: scrolled ? "1px solid rgba(99,120,255,0.12)" : "none",
+          transition: "all 0.35s ease",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
         }}
       >
         {/* Logo */}
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
+        <Link
+          href="/"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 10,
+            textDecoration: "none",
+          }}
+        >
           <img
             src="/logo-wxc.png"
             alt="WebXCrafting"
             style={{
               width: 46,
               height: 46,
-              objectFit: 'contain',
+              objectFit: "contain",
             }}
           />
-          <span style={{ fontFamily: 'Syne', fontWeight: 800, fontSize: 20, color: '#e8eaf6' }}>
+          <span
+            style={{
+              fontFamily: "Syne",
+              fontWeight: 800,
+              fontSize: 20,
+              color: "#e8eaf6",
+            }}
+          >
             WebX<span className="grad-text">Crafting</span>
           </span>
         </Link>
 
         {/* Desktop Links */}
-        <div className="hide-mobile" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+        <div
+          className="hide-mobile"
+          style={{ display: "flex", alignItems: "center", gap: 4 }}
+        >
           {navLinks.map((l) => (
             <Link
               key={l.href}
               href={l.href}
               style={{
-                padding: '8px 16px',
+                padding: "8px 16px",
                 borderRadius: 8,
-                fontFamily: 'Plus Jakarta Sans',
+                fontFamily: "Plus Jakarta Sans",
                 fontWeight: 500,
                 fontSize: 15,
-                textDecoration: 'none',
-                color: pathname === l.href ? '#e8eaf6' : '#7b82a8',
-                background: pathname === l.href ? 'rgba(79,111,255,0.1)' : 'transparent',
-                transition: 'all 0.2s',
+                textDecoration: "none",
+                color: pathname === l.href ? "#e8eaf6" : "#7b82a8",
+                background:
+                  pathname === l.href ? "rgba(79,111,255,0.1)" : "transparent",
+                transition: "all 0.2s",
               }}
             >
               {l.label}
@@ -87,8 +106,15 @@ export default function Navbar() {
         </div>
 
         {/* Desktop CTA */}
-        <div className="hide-mobile" style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-          <Link href="/contact" className="btn-primary" style={{ padding: '9px 22px', fontSize: 14 }}>
+        <div
+          className="hide-mobile"
+          style={{ display: "flex", gap: 12, alignItems: "center" }}
+        >
+          <Link
+            href="/contact"
+            className="btn-primary"
+            style={{ padding: "9px 22px", fontSize: 14 }}
+          >
             Get Started
           </Link>
         </div>
@@ -98,10 +124,10 @@ export default function Navbar() {
           onClick={() => setMobileOpen(!mobileOpen)}
           className="show-mobile"
           style={{
-            background: 'none',
-            border: 'none',
-            color: '#e8eaf6',
-            cursor: 'pointer',
+            background: "none",
+            border: "none",
+            color: "#e8eaf6",
+            cursor: "pointer",
             padding: 4,
           }}
           aria-label="Toggle menu"
@@ -119,16 +145,16 @@ export default function Navbar() {
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.25 }}
             style={{
-              position: 'fixed',
+              position: "fixed",
               inset: 0,
               top: 65,
-              background: 'rgba(3,5,10,0.97)',
-              backdropFilter: 'blur(24px)',
-              WebkitBackdropFilter: 'blur(24px)',
+              background: "rgba(3,5,10,0.97)",
+              backdropFilter: "blur(24px)",
+              WebkitBackdropFilter: "blur(24px)",
               zIndex: 499,
-              padding: '28px 24px',
-              display: 'flex',
-              flexDirection: 'column',
+              padding: "28px 24px",
+              display: "flex",
+              flexDirection: "column",
               gap: 8,
             }}
           >
@@ -142,22 +168,31 @@ export default function Navbar() {
                 <Link
                   href={l.href}
                   style={{
-                    display: 'block',
-                    padding: '14px 0',
-                    fontFamily: 'Syne',
+                    display: "block",
+                    padding: "14px 0",
+                    fontFamily: "Syne",
                     fontWeight: 600,
                     fontSize: 22,
-                    textDecoration: 'none',
-                    color: pathname === l.href ? '#4f6fff' : '#e8eaf6',
-                    borderBottom: '1px solid rgba(99,120,255,0.08)',
+                    textDecoration: "none",
+                    color: pathname === l.href ? "#4f6fff" : "#e8eaf6",
+                    borderBottom: "1px solid rgba(99,120,255,0.08)",
                   }}
                 >
                   {l.label}
                 </Link>
               </motion.div>
             ))}
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }} style={{ marginTop: 20 }}>
-              <Link href="/contact" className="btn-primary" style={{ width: '100%', display: 'flex' }}>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.35 }}
+              style={{ marginTop: 20 }}
+            >
+              <Link
+                href="/contact"
+                className="btn-primary"
+                style={{ width: "100%", display: "flex" }}
+              >
                 Get Started →
               </Link>
             </motion.div>
@@ -165,5 +200,5 @@ export default function Navbar() {
         )}
       </AnimatePresence>
     </>
-  )
+  );
 }

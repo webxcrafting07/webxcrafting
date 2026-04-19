@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import DotBackground from '@/components/DotBackground'
 import WhatsAppButton from '@/components/WhatsAppButton'
+import { FaBolt, FaPalette, FaDollarSign, FaLock, FaPhone, FaRocket } from 'react-icons/fa'
 
 const FadeUp = ({ children, delay = 0 }: any) => (
   <motion.div
@@ -30,12 +31,12 @@ const timeline = [
 ]
 
 const whyUs = [
-  { icon: '⚡', title: 'Lightning Fast', desc: 'Optimized for Core Web Vitals and sub-2s load times on every project.' },
-  { icon: '🎨', title: 'Premium Design', desc: 'Custom designs tailored to your brand, no templates, no shortcuts.' },
-  { icon: '💰', title: 'Affordable Pricing', desc: 'Transparent pricing with no hidden costs or surprise invoices.' },
-  { icon: '🔒', title: 'Secure & Reliable', desc: 'Enterprise-grade security with 99.9% uptime guaranteed.' },
-  { icon: '📞', title: '24/7 Support', desc: 'Always reachable via WhatsApp, email, or phone call.' },
-  { icon: '🚀', title: 'On-Time Delivery', desc: 'We respect deadlines and deliver what we promise, when we promise.' },
+  { icon: FaBolt, title: 'Lightning Fast', desc: 'Optimized for Core Web Vitals and sub-2s load times on every project.' },
+  { icon: FaPalette, title: 'Premium Design', desc: 'Custom designs tailored to your brand, no templates, no shortcuts.' },
+  { icon: FaDollarSign, title: 'Affordable Pricing', desc: 'Transparent pricing with no hidden costs or surprise invoices.' },
+  { icon: FaLock, title: 'Secure & Reliable', desc: 'Enterprise-grade security with 99.9% uptime guaranteed.' },
+  { icon: FaPhone, title: '24/7 Support', desc: 'Always reachable via WhatsApp, email, or phone call.' },
+  { icon: FaRocket, title: 'On-Time Delivery', desc: 'We respect deadlines and deliver what we promise, when we promise.' },
 ]
 
 export default function AboutClient() {
@@ -75,9 +76,9 @@ export default function AboutClient() {
             <FadeUp delay={0.15}>
               <h3 style={{ fontFamily: 'Syne', fontWeight: 700, fontStyle: 'italic', marginBottom: 24, fontSize: 22 }}>Why Choose Us?</h3>
               <div className="mobile-grid-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-                {whyUs.map(({ icon, title, desc }) => (
+                {whyUs.map(({ icon: Icon, title, desc }) => (
                   <motion.div key={title} whileHover={{ y: -4 }} className="glass" style={{ padding: 20, borderRadius: 14 }}>
-                    <div style={{ fontSize: 26, marginBottom: 10 }}>{icon}</div>
+                    <div style={{ fontSize: 26, marginBottom: 10, color: '#4f6fff' }}><Icon size={26} /></div>
                     <div style={{ fontWeight: 600, fontSize: 14, marginBottom: 4 }}>{title}</div>
                     <div style={{ color: '#7b82a8', fontSize: 13, lineHeight: 1.6 }}>{desc}</div>
                   </motion.div>

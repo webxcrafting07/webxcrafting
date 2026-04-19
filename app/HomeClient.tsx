@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import DotBackground from '@/components/DotBackground'
 import WhatsAppButton from '@/components/WhatsAppButton'
+import { FaShoppingCart, FaCog, FaBriefcase, FaGlobe, FaCheck, FaComments } from 'react-icons/fa'
 
 /* ── tiny fade-up wrapper ── */
 const FadeUp = ({ children, delay = 0, className = '' }: any) => (
@@ -89,9 +90,10 @@ function ServiceCard({ icon, title, description, price, originalPrice, popular }
           justifyContent: 'center',
           fontSize: 24,
           marginBottom: 20,
+          color: popular ? '#fff' : '#4f6fff',
         }}
       >
-        {icon}
+        {typeof icon === 'function' ? icon() : icon}
       </div>
       <h3 style={{ fontFamily: 'Syne', fontWeight: 700, fontSize: 20, marginBottom: 10, fontStyle: 'italic' }}>{title}</h3>
       <p style={{ color: '#7b82a8', fontSize: 14, lineHeight: 1.75, marginBottom: 24 }}>{description}</p>
@@ -138,11 +140,15 @@ function ProjectCard({ title, description, category, status }: any) {
     Custom: '#00e5ff',
     'Job Portal': '#00e676',
   }
-  const catIcons: Record<string, string> = {
-    Business: '🌐',
-    'E-commerce': '🛒',
-    Custom: '⚙️',
-    'Job Portal': '💼',
+  const getCatIcon = (category: string) => {
+    const iconMap: Record<string, any> = {
+      Business: FaGlobe,
+      'E-commerce': FaShoppingCart,
+      Custom: FaCog,
+      'Job Portal': FaBriefcase,
+    }
+    const Icon = iconMap[category] || FaGlobe
+    return <Icon size={56} />
   }
   return (
     <motion.div
@@ -164,14 +170,15 @@ function ProjectCard({ title, description, category, status }: any) {
           alignItems: 'center',
           justifyContent: 'center',
           fontSize: 56,
+          color: catColors[category] || '#4f6fff',
         }}
       >
-        {catIcons[category] || '🌐'}
+        {getCatIcon(category)}
       </div>
       <div style={{ padding: 24 }}>
         <div style={{ display: 'flex', gap: 8, marginBottom: 12, flexWrap: 'wrap' }}>
-          <span className={`tag ${status === 'completed' ? 'tag-green' : 'tag-orange'}`} style={{ fontSize: 11, padding: '3px 10px' }}>
-            {status === 'completed' ? '✓ Completed' : '⟳ Ongoing'}
+          <span className={`tag ${status === 'completed' ? 'tag-green' : 'tag-orange'}`} style={{ fontSize: 11, padding: '3px 10px', display: 'flex', alignItems: 'center', gap: 4 }}>
+            {status === 'completed' ? <><FaCheck size={10} /> Completed</> : <>⟳ Ongoing</>}
           </span>
           <span
             className="tag"
@@ -202,7 +209,7 @@ function TestimonialCard({ name, role, text, initials }: any) {
       className="glass"
       style={{ padding: 28, borderRadius: 20 }}
     >
-      <div style={{ fontSize: 36, color: '#4f6fff', marginBottom: 16, lineHeight: 1 }}>❝</div>
+      <div style={{ fontSize: 36, color: '#4f6fff', marginBottom: 16, lineHeight: 1 }}>"</div>
       <p style={{ color: '#b0b8d8', lineHeight: 1.8, marginBottom: 24, fontSize: 15 }}>{text}</p>
       <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
         <div
@@ -233,10 +240,10 @@ function TestimonialCard({ name, role, text, initials }: any) {
 /* ─────────────────────────────────────────────────── */
 
 const defaultServices = [
-  { icon: '🌐', title: 'Business Website', description: 'Professional multi-page website with SEO, contact forms, and responsive design.', price: 8000, originalPrice: 12000, popular: false },
-  { icon: '🛒', title: 'E-commerce Website', description: 'Full-featured online store with payments, inventory, and order tracking.', price: 25000, originalPrice: 35000, popular: true },
-  { icon: '💼', title: 'Job Portal', description: 'Complete hiring platform with employer/candidate dashboards and AI matching.', price: 45000, originalPrice: 60000, popular: false },
-  { icon: '⚙️', title: 'Custom Website', description: 'Tailored web apps, SaaS platforms, and dashboards built to your spec.', price: 60000, originalPrice: 80000, popular: false },
+  { icon: () => <FaGlobe size={24} />, title: 'Business Website', description: 'Professional multi-page website with SEO, contact forms, and responsive design.', price: 8000, originalPrice: 12000, popular: false },
+  { icon: () => <FaShoppingCart size={24} />, title: 'E-commerce Website', description: 'Full-featured online store with payments, inventory, and order tracking.', price: 25000, originalPrice: 35000, popular: true },
+  { icon: () => <FaBriefcase size={24} />, title: 'Job Portal', description: 'Complete hiring platform with employer/candidate dashboards and AI matching.', price: 45000, originalPrice: 60000, popular: false },
+  { icon: () => <FaCog size={24} />, title: 'Custom Website', description: 'Tailored web apps, SaaS platforms, and dashboards built to your spec.', price: 60000, originalPrice: 80000, popular: false },
 ]
 
 const defaultProjects = [
@@ -445,7 +452,7 @@ export default function HomeClient() {
                 className="btn-outline"
                 style={{ borderColor: 'rgba(37,211,102,.4)', color: '#25d366' }}
               >
-                💬 WhatsApp Us
+                <FaComments size={18} style={{ marginRight: 6 }} /> WhatsApp Us
               </a>
             </div>
           </div>

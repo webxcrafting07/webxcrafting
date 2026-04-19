@@ -5,10 +5,11 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import DotBackground from '@/components/DotBackground'
 import WhatsAppButton from '@/components/WhatsAppButton'
+import { FaGlobe, FaShoppingCart, FaCog, FaBriefcase } from 'react-icons/fa'
 
 const categories = ['All', 'Business', 'E-commerce', 'Job Portal', 'Custom']
 const catColors: Record<string, string> = { Business: '#4f6fff', 'E-commerce': '#a259ff', Custom: '#00e5ff', 'Job Portal': '#00e676' }
-const catIcons: Record<string, string> = { Business: '🌐', 'E-commerce': '🛒', Custom: '⚙️', 'Job Portal': '💼' }
+const catIcons: Record<string, any> = { Business: FaGlobe, 'E-commerce': FaShoppingCart, Custom: FaCog, 'Job Portal': FaBriefcase }
 
 const defaultProjects = [
   { _id: '1', title: 'TechStart Landing', description: 'Animated landing page with lead capture, blog, and SEO optimization.', category: 'Business', status: 'completed', liveLink: '#' },
@@ -33,8 +34,11 @@ function ProjectCard({ project }: { project: any }) {
       onMouseLeave={() => setHovered(false)}
       style={{ borderRadius: 20, overflow: 'hidden', background: 'rgba(10,14,28,0.65)', backdropFilter: 'blur(20px)', border: '1px solid rgba(99,120,255,.15)' }}
     >
-      <div style={{ height: 200, background: `linear-gradient(135deg,${catColors[project.category] || '#4f6fff'}22,${catColors[project.category] || '#a259ff'}44)`, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-        <span style={{ fontSize: 60 }}>{catIcons[project.category] || '🌐'}</span>
+      <div style={{ height: 200, background: `linear-gradient(135deg,${catColors[project.category] || '#4f6fff'}22,${catColors[project.category] || '#a259ff'}44)`, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', color: catColors[project.category] || '#4f6fff' }}>
+        {(() => {
+          const Icon = catIcons[project.category] || FaGlobe
+          return <Icon size={60} />
+        })()}
         <AnimatePresence>
           {hovered && (
             <motion.div
@@ -46,7 +50,7 @@ function ProjectCard({ project }: { project: any }) {
                   View Live ↗
                 </a>
               ) : (
-                <span style={{ color: '#7b82a8', fontSize: 14 }}>{project.status === 'ongoing' ? '🔧 In Development' : 'No Live Link'}</span>
+                <span style={{ color: '#7b82a8', fontSize: 14 }}>{project.status === 'ongoing' ? 'In Development' : 'No Live Link'}</span>
               )}
             </motion.div>
           )}
