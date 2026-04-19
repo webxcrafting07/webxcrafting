@@ -1,6 +1,15 @@
 "use client";
 import Link from "next/link";
-import { FaTwitter, FaLinkedin, FaGithub, FaInstagram, FaEnvelope, FaPhone, FaClock, FaMapMarkerAlt } from "react-icons/fa";
+import {
+  FaTwitter,
+  FaLinkedin,
+  FaGithub,
+  FaInstagram,
+  FaEnvelope,
+  FaPhone,
+  FaClock,
+  FaMapMarkerAlt,
+} from "react-icons/fa";
 
 const services = [
   "Business Website",
@@ -242,7 +251,9 @@ export default function Footer() {
                   alignItems: "center",
                 }}
               >
-                <span style={{ fontSize: 14, minWidth: 20, color: "#4f6fff" }}><Icon size={14} /></span>
+                <span style={{ fontSize: 14, minWidth: 20, color: "#4f6fff" }}>
+                  <Icon size={14} />
+                </span>
                 <span style={{ color: "#7b82a8", fontSize: 14 }}>{text}</span>
               </div>
             ))}
@@ -308,37 +319,22 @@ export default function Footer() {
             }}
           >
             <span>
-              © {new Date().getFullYear()} WebXCrafting. All rights reserved.
+              © {new Date().getFullYear()} WebxCrafting. Crafted with precision
+              for a seamless digital experience
+              <Link
+                href="/admin/login"
+                style={{
+                  color: "#7b82a8",
+                  textDecoration: "none",
+                  transition: "opacity 0.2s",
+                  cursor: "default",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#e8eaf6")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#7b82a8")}
+              >
+                .
+              </Link>
             </span>
-            <span className="hide-mobile">·</span>
-            <Link
-              href="/admin/login"
-              style={{
-                color: "#7b82a8",
-                textDecoration: "none",
-                transition: "opacity 0.2s",
-                cursor: "default",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#e8eaf6")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "#7b82a8")}
-            >
-              .
-            </Link>
-          </p>
-          <p
-            style={{
-              color: "#7b82a8",
-              fontSize: 13,
-              width: "100%",
-              maxWidth: "100%",
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 6,
-              flexWrap: 'wrap',
-            }}
-          >
-            Built with <span style={{ color: '#ff5252' }}>♥</span> using Next.js · MongoDB · Framer Motion
           </p>
         </div>
       </div>
