@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 import Link from 'next/link'
 import { jsPDF } from 'jspdf'
 import autoTable from 'jspdf-autotable'
-import { FaChartBar, FaFolder, FaEnvelope, FaCog, FaFileInvoice, FaCheckCircle, FaFire, FaPencil, FaTrash, FaComments, FaFileAlt, FaSignOutAlt, FaBars, FaEye, FaEyeSlash, FaCheck, FaGlobe, FaHourglass } from 'react-icons/fa'
+import { FaChartBar, FaFolder, FaEnvelope, FaCog, FaFileInvoice, FaCheckCircle, FaFire, FaPencilAlt, FaTrash, FaComments, FaFileAlt, FaSignOutAlt, FaBars, FaEye, FaEyeSlash, FaCheck, FaGlobe, FaHourglass } from 'react-icons/fa'
 
 /* ── helpers ── */
 function authHeaders() {
@@ -17,10 +17,10 @@ function authHeaders() {
 const catColors: Record<string, string> = { Business: '#4f6fff', 'E-commerce': '#a259ff', Custom: '#00e5ff', 'Job Portal': '#00e676' }
 
 /* ── stat card ── */
-function StatCard({ icon, value, label, color }: any) {
+function StatCard({ icon: Icon, value, label, color }: any) {
   return (
     <motion.div whileHover={{ y: -4 }} className="glass" style={{ padding: 24, borderRadius: 16 }}>
-      <div style={{ fontSize: 30, marginBottom: 12, color }}>{typeof icon === 'function' ? <icon size={30} /> : icon}</div>
+      <div style={{ fontSize: 30, marginBottom: 12, color }}>{typeof Icon === 'function' ? <Icon size={30} /> : Icon}</div>
       <div style={{ fontFamily: 'Syne', fontSize: 38, fontWeight: 800, color }}>{value}</div>
       <div style={{ color: '#7b82a8', fontSize: 13, marginTop: 4 }}>{label}</div>
     </motion.div>
@@ -629,11 +629,11 @@ export default function DashboardClient() {
                         </div>
                       </div>
                       <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap', borderTop: '0.5px solid rgba(99,120,255,0.08)', paddingTop: 12, width: '100%', justifyContent: 'flex-end', marginTop: 4 }} className="show-mobile">
-                        <button className="btn-edit" onClick={() => openEdit('project', p)}><FaPencil size={14} /></button>
+                        <button className="btn-edit" onClick={() => openEdit('project', p)}><FaPencilAlt size={14} /></button>
                         <button className="btn-danger" onClick={() => deleteProject(p._id)}><FaTrash size={14} /></button>
                       </div>
                       <div className="hide-mobile" style={{ display: 'flex', gap: 10 }}>
-                        <button className="btn-edit" onClick={() => openEdit('project', p)}><FaPencil size={14} style={{ marginRight: 6 }} /> Edit</button>
+                        <button className="btn-edit" onClick={() => openEdit('project', p)}><FaPencilAlt size={14} style={{ marginRight: 6 }} /> Edit</button>
                         <button className="btn-danger" onClick={() => deleteProject(p._id)}><FaTrash size={14} style={{ marginRight: 6 }} /> Delete</button>
                       </div>
                     </motion.div>
@@ -707,7 +707,7 @@ export default function DashboardClient() {
                   {services.map((s) => (
                     <motion.div key={s._id} whileHover={{ y: -4 }} className="glass" style={{ padding: 26, borderRadius: 18, position: 'relative' }}>
                       {s.popular && <div style={{ position: 'absolute', top: 14, right: 14, background: 'linear-gradient(135deg,#4f6fff,#a259ff)', borderRadius: 20, padding: '3px 10px', fontSize: 10, fontWeight: 700 }}>POPULAR</div>}
-                      <div style={{ fontSize: 28, marginBottom: 12, color: '#4f6fff' }}>{typeof s.icon === 'function' ? <s.icon size={28} /> : <FaGlobe size={28} />}</div>
+                      <div style={{ fontSize: 28, marginBottom: 12, color: '#4f6fff' }}>{(() => { const ServiceIcon = s.icon; return typeof ServiceIcon === 'function' ? <ServiceIcon size={28} /> : <FaGlobe size={28} /> })()}</div>
                       <h3 style={{ fontFamily: 'Syne', fontWeight: 700, fontSize: 18, marginBottom: 8 }}>{s.title}</h3>
                       <p style={{ color: '#7b82a8', fontSize: 13, lineHeight: 1.65, marginBottom: 14 }}>{s.description}</p>
                       {s.features?.length > 0 && (
@@ -727,7 +727,7 @@ export default function DashboardClient() {
                         )}
                       </div>
                       <div style={{ display: 'flex', gap: 10 }}>
-                        <button className="btn-edit" style={{ flex: 1, justifyContent: 'center' }} onClick={() => openEdit('service', s)}><FaPencil size={14} style={{ marginRight: 6 }} /> Edit</button>
+                        <button className="btn-edit" style={{ flex: 1, justifyContent: 'center' }} onClick={() => openEdit('service', s)}><FaPencilAlt size={14} style={{ marginRight: 6 }} /> Edit</button>
                         <button className="btn-danger" style={{ flex: 1, justifyContent: 'center' }} onClick={() => deleteService(s._id)}><FaTrash size={14} style={{ marginRight: 6 }} /> Delete</button>
                       </div>
                     </motion.div>
@@ -811,7 +811,7 @@ export default function DashboardClient() {
               style={{ width: '100%', maxWidth: 540, padding: 40, borderRadius: 22, maxHeight: '90vh', overflowY: 'auto' }}
             >
               <h3 style={{ fontFamily: 'Syne', fontWeight: 700, fontSize: 22, marginBottom: 28 }}>
-                {modal.mode === 'add' ? '+ Add' : <><FaPencil size={14} style={{ marginRight: 6 }} /> Edit</>} {
+                {modal.mode === 'add' ? '+ Add' : <><FaPencilAlt size={14} style={{ marginRight: 6 }} /> Edit</>} {
                   modal.type === 'project' ? 'Project' : 
                   modal.type === 'service' ? 'Service' : 'Bill'
                 }
