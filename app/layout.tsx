@@ -49,7 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               color: '#e8eaf6',
               border: '1px solid rgba(99, 120, 255, 0.25)',
               backdropFilter: 'blur(20px)',
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "'Inter', sans-serif",
               fontSize: '14px',
               borderRadius: '12px',
               padding: '12px 18px',

@@ -9,7 +9,7 @@ module.exports = {
     extend: {
       fontFamily: {
         clash: ['Clash Display', 'sans-serif'],
-        jakarta: ['Plus Jakarta Sans', 'sans-serif'],
+        jakarta: ['Inter', 'sans-serif'],
       },
       colors: {
         bg: '#03050a',

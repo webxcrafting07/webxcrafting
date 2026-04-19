@@ -90,7 +90,7 @@ export default function Navbar() {
               style={{
                 padding: "8px 16px",
                 borderRadius: 8,
-                fontFamily: "Plus Jakarta Sans",
+                fontFamily: "Inter",
                 fontWeight: 500,
                 fontSize: 15,
                 textDecoration: "none",
