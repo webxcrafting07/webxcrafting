@@ -48,25 +48,31 @@ export default function Footer() {
         >
           {/* Brand */}
           <div className="mobile-center" style={{ display: 'flex', flexDirection: 'column' }}>
-            <Link href="/" className="mobile-center" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', marginBottom: 16 }}>
-              <div
+            <Link
+              href="/"
+              className="mobile-center"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 12,
+                textDecoration: 'none',
+                marginBottom: 16,
+                flexWrap: 'wrap',
+                whiteSpace: 'nowrap',
+                width: 'fit-content',
+                maxWidth: 240,
+              }}
+            >
+              <img
+                src="/logo-wxc.png"
+                alt="WebXCrafting"
                 style={{
-                  width: 36,
-                  height: 36,
-                  borderRadius: 10,
-                  background: 'linear-gradient(135deg,#4f6fff,#a259ff)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontFamily: 'Syne',
-                  fontWeight: 800,
-                  fontSize: 18,
-                  color: '#fff',
+                  width: 42,
+                  height: 42,
+                  objectFit: 'contain',
                 }}
-              >
-                X
-              </div>
-              <span style={{ fontFamily: 'Syne', fontWeight: 800, fontSize: 18, color: '#e8eaf6' }}>
+              />
+              <span style={{ fontFamily: 'Syne', fontWeight: 800, fontSize: 16, color: '#e8eaf6', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                 WebX<span className="grad-text">Crafting</span>
               </span>
             </Link>

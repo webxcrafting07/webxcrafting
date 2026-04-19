@@ -49,23 +49,15 @@ export default function Navbar() {
       >
         {/* Logo */}
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
-          <div
+          <img
+            src="/logo-wxc.png"
+            alt="WebXCrafting"
             style={{
-              width: 38,
-              height: 38,
-              borderRadius: 10,
-              background: 'linear-gradient(135deg,#4f6fff,#a259ff)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontFamily: 'Syne',
-              fontWeight: 800,
-              fontSize: 19,
-              color: '#fff',
+              width: 46,
+              height: 46,
+              objectFit: 'contain',
             }}
-          >
-            X
-          </div>
+          />
           <span style={{ fontFamily: 'Syne', fontWeight: 800, fontSize: 20, color: '#e8eaf6' }}>
             WebX<span className="grad-text">Crafting</span>
           </span>
