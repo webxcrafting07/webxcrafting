@@ -10,6 +10,14 @@ const quickLinks = [
   { label: 'Portfolio', href: '/portfolio' },
   { label: 'Contact', href: '/contact' },
 ]
+
+const legalLinks = [
+  { label: 'Privacy Policy', href: '/privacy-policy' },
+  { label: 'Terms of Service', href: '/terms-of-service' },
+  { label: 'Cookie Policy', href: '/cookie-policy' },
+  { label: 'Disclaimer', href: '/disclaimer' },
+  { label: 'Refund Policy', href: '/refund-policy' },
+]
 const socials = [
   { icon: FaTwitter, href: '#', label: 'Twitter' },
   { icon: FaLinkedin, href: 'https://www.linkedin.com/in/webx-crafting-a1a875402/', label: 'LinkedIn' },
@@ -159,6 +167,29 @@ export default function Footer() {
                 <span style={{ fontSize: 14, minWidth: 20 }}>{icon}</span>
                 <span style={{ color: '#7b82a8', fontSize: 14 }}>{text}</span>
               </div>
+            ))}
+          </div>
+
+          {/* Legal */}
+          <div className="mobile-center">
+            <h4 style={{ fontFamily: 'Syne', fontWeight: 700, marginBottom: 20, fontSize: 16, fontStyle: 'italic' }}>Legal</h4>
+            {legalLinks.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                style={{
+                  display: 'block',
+                  color: '#7b82a8',
+                  textDecoration: 'none',
+                  fontSize: 14,
+                  marginBottom: 10,
+                  transition: 'color 0.2s',
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = '#e8eaf6')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = '#7b82a8')}
+              >
+                {l.label}
+              </Link>
             ))}
           </div>
         </div>
