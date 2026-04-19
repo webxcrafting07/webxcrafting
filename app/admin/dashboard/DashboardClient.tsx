@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { jsPDF } from 'jspdf'
 import autoTable from 'jspdf-autotable'
 import { FaChartBar, FaFolder, FaEnvelope, FaCog, FaFileInvoice, FaCheckCircle, FaFire, FaPen, FaTrash, FaComments, FaFileAlt, FaSignOutAlt, FaBars, FaEye, FaEyeSlash, FaCheck, FaGlobe, FaHourglass } from 'react-icons/fa'
+import { SERVICE_ICONS, getServiceIcon } from '@/lib/icons'
 
 /* ── helpers ── */
 function authHeaders() {
@@ -710,7 +711,7 @@ export default function DashboardClient() {
                   {services.map((s) => (
                     <motion.div key={s._id} whileHover={{ y: -4 }} className="glass" style={{ padding: 26, borderRadius: 18, position: 'relative' }}>
                       {s.popular && <div style={{ position: 'absolute', top: 14, right: 14, background: 'linear-gradient(135deg,#4f6fff,#a259ff)', borderRadius: 20, padding: '3px 10px', fontSize: 10, fontWeight: 700 }}>POPULAR</div>}
-                      <div style={{ fontSize: 28, marginBottom: 12, color: '#4f6fff' }}>{typeof s.icon === 'function' ? (() => { const Icon = s.icon; return <Icon size={28} /> })() : <FaGlobe size={28} />}</div>
+                      <div style={{ fontSize: 28, marginBottom: 12, color: '#4f6fff' }}>{getServiceIcon(s.icon, 28)}</div>
                       <h3 style={{ fontFamily: 'Syne', fontWeight: 700, fontSize: 18, marginBottom: 8 }}>{s.title}</h3>
                       <p style={{ color: '#7b82a8', fontSize: 13, lineHeight: 1.65, marginBottom: 14 }}>{s.description}</p>
                       {s.features?.length > 0 && (
@@ -874,8 +875,12 @@ export default function DashboardClient() {
                       <input style={inp} value={form.title || ''} onChange={(e) => setF('title', e.target.value)} placeholder="e.g. Business Website" />
                     </div>
                     <div>
-                      <label style={lbl}>Icon (emoji)</label>
-                      <input style={inp} value={form.icon || ''} onChange={(e) => setF('icon', e.target.value)} placeholder="🌐" />
+                      <label style={lbl}>Service Icon</label>
+                      <select style={inp} value={form.icon || 'FaGlobe'} onChange={(e) => setF('icon', e.target.value)}>
+                        {Object.keys(SERVICE_ICONS).map((name) => (
+                          <option key={name} value={name}>{name}</option>
+                        ))}
+                      </select>
                     </div>
                   </div>
                   <div style={{ marginBottom: 18 }}>
