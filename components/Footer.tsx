@@ -1,9 +1,7 @@
 "use client";
 import Link from "next/link";
 import {
-  FaTwitter,
   FaLinkedin,
-  FaGithub,
   FaInstagram,
   FaEnvelope,
   FaPhone,
@@ -33,13 +31,11 @@ const legalLinks = [
   { label: "Refund Policy", href: "/refund-policy" },
 ];
 const socials = [
-  { icon: FaTwitter, href: "#", label: "Twitter" },
   {
     icon: FaLinkedin,
     href: "https://www.linkedin.com/in/webx-crafting-a1a875402/",
     label: "LinkedIn",
   },
-  { icon: FaGithub, href: "#", label: "GitHub" },
   {
     icon: FaInstagram,
     href: "https://www.instagram.com/webxcrafting",
