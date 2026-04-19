@@ -1,99 +1,200 @@
-'use client'
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import toast from 'react-hot-toast'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
-import DotBackground from '@/components/DotBackground'
-import WhatsAppButton from '@/components/WhatsAppButton'
-import { FaEnvelope, FaPhone, FaClock, FaGlobe } from 'react-icons/fa'
+"use client";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import toast from "react-hot-toast";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import DotBackground from "@/components/DotBackground";
+import WhatsAppButton from "@/components/WhatsAppButton";
+import { FaEnvelope, FaPhone, FaClock, FaGlobe } from "react-icons/fa";
 
-const WA_NUM = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919000000000'
-const WA_MSG = process.env.NEXT_PUBLIC_WHATSAPP_MESSAGE || 'Hello%20I%20want%20a%20website'
-const WA = `https://wa.me/${WA_NUM}?text=${WA_MSG}`
+const WA_NUM = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919000000000";
+const WA_MSG =
+  process.env.NEXT_PUBLIC_WHATSAPP_MESSAGE || "Hello%20I%20want%20a%20website";
+const WA = `https://wa.me/${WA_NUM}?text=${WA_MSG}`;
 
 const infoItems = [
-  { icon: FaEnvelope, label: 'Email Us', value: 'webxcrafting@gmail.com' },
-  { icon: FaPhone, label: 'Call / WhatsApp', value: '+91 9102615343' },
-  { icon: FaClock, label: 'Response Time', value: 'Within 24 hours' },
-  { icon: FaGlobe, label: 'Working Hours', value: 'Mon to Sat, 9AM to 7PM IST' },
-]
+  { icon: FaEnvelope, label: "Email Us", value: "webxcrafting@gmail.com" },
+  { icon: FaPhone, label: "Call / WhatsApp", value: "+91 9102615343" },
+  { icon: FaClock, label: "Response Time", value: "Within 24 hours" },
+  {
+    icon: FaGlobe,
+    label: "Working Hours",
+    value: "Mon to Sat, 9AM to 7PM IST",
+  },
+];
 
 export default function ContactClient() {
-  const [form, setForm] = useState({ name: '', email: '', budget: '', message: '' })
-  const [loading, setLoading] = useState(false)
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    budget: "",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
 
-  const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }))
+  const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
 
   const handleSubmit = async () => {
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
-      toast.error('Please fill in all required fields.')
-      return
+      toast.error("Please fill in all required fields.");
+      return;
     }
     if (!/\S+@\S+\.\S+/.test(form.email)) {
-      toast.error('Please enter a valid email address.')
-      return
+      toast.error("Please enter a valid email address.");
+      return;
     }
-    setLoading(true)
+    setLoading(true);
     try {
-      const res = await fetch('/api/leads', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
-      })
-      const data = await res.json()
+      });
+      const data = await res.json();
       if (data.success) {
-        toast.success('Message sent! We will get back to you within 24 hours.')
-        setForm({ name: '', email: '', budget: '', message: '' })
+        toast.success("Message sent! We will get back to you within 24 hours.");
+        setForm({ name: "", email: "", budget: "", message: "" });
       } else {
-        toast.error(data.message || 'Something went wrong. Please try again.')
+        toast.error(data.message || "Something went wrong. Please try again.");
       }
     } catch {
-      toast.error('Network error. Please try again.')
+      toast.error("Network error. Please try again.");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <>
       <DotBackground />
       <Navbar />
 
-      <div className="mobile-p-6" style={{ position: 'relative', zIndex: 10, padding: '130px 32px 80px', maxWidth: 1100, margin: '0 auto', width: '100%', boxSizing: 'border-box' }}>
-        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} style={{ textAlign: 'center', marginBottom: 64 }}>
-          <div className="section-label" style={{ margin: '0 auto 20px' }}>Contact Us</div>
-          <h1 style={{ fontFamily: 'Syne', fontSize: 'clamp(32px,5vw,60px)', fontWeight: 800, fontStyle: 'italic', marginBottom: 16 }}>
+      <div
+        className="mobile-p-6"
+        style={{
+          position: "relative",
+          zIndex: 10,
+          padding: "130px 32px 80px",
+          maxWidth: 1100,
+          margin: "0 auto",
+          width: "100%",
+          boxSizing: "border-box",
+        }}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          style={{ textAlign: "center", marginBottom: 64 }}
+        >
+          <div className="section-label" style={{ margin: "0 auto 20px" }}>
+            Contact Us
+          </div>
+          <h1
+            style={{
+              fontFamily: "Syne",
+              fontSize: "clamp(32px,5vw,60px)",
+              fontWeight: 800,
+              fontStyle: "italic",
+              marginBottom: 16,
+            }}
+          >
             Build Something <span className="grad-text">Amazing</span>
           </h1>
-          <p style={{ color: '#7b82a8', fontSize: 17, maxWidth: 480, margin: '0 auto' }}>
-            Tell us about your project and we will get back to you within 24 hours.
+          <p
+            style={{
+              color: "#7b82a8",
+              fontSize: 17,
+              maxWidth: 480,
+              margin: "0 auto",
+            }}
+          >
+            Tell us about your project and we will get back to you within 24
+            hours.
           </p>
         </motion.div>
 
-        <div className="mobile-grid-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: 40, alignItems: 'start' }}>
+        <div
+          className="mobile-grid-1"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1.5fr",
+            gap: 40,
+            alignItems: "start",
+          }}
+        >
           {/* Left: contact info */}
-          <motion.div initial={{ opacity: 0, x: -24 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.1 }}>
+          <motion.div
+            initial={{ opacity: 0, x: -24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+          >
             {infoItems.map(({ icon: Icon, label, value }) => (
-              <motion.div key={label} whileHover={{ y: -4 }} className="glass" style={{ padding: 20, marginBottom: 16, display: 'flex', gap: 16, alignItems: 'center', borderRadius: 14 }}>
-                <div style={{ fontSize: 28, minWidth: 36, textAlign: 'center', color: '#4f6fff' }}><Icon size={24} /></div>
+              <motion.div
+                key={label}
+                whileHover={{ y: -4 }}
+                className="glass"
+                style={{
+                  padding: 20,
+                  marginBottom: 16,
+                  display: "flex",
+                  gap: 16,
+                  alignItems: "center",
+                  borderRadius: 14,
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: 28,
+                    minWidth: 36,
+                    textAlign: "center",
+                    color: "#4f6fff",
+                  }}
+                >
+                  <Icon size={24} />
+                </div>
                 <div>
-                  <div style={{ color: '#7b82a8', fontSize: 12, marginBottom: 3, fontWeight: 500 }}>{label}</div>
+                  <div
+                    style={{
+                      color: "#7b82a8",
+                      fontSize: 12,
+                      marginBottom: 3,
+                      fontWeight: 500,
+                    }}
+                  >
+                    {label}
+                  </div>
                   <div style={{ fontWeight: 600, fontSize: 15 }}>{value}</div>
                 </div>
               </motion.div>
             ))}
 
-            <a href={WA} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', display: 'block', marginTop: 8 }}>
+            <a
+              href={WA}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ textDecoration: "none", display: "block", marginTop: 8 }}
+            >
               <motion.button
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 style={{
-                  width: '100%', padding: '15px 24px', borderRadius: 12, border: 'none', cursor: 'pointer',
-                  background: 'linear-gradient(135deg,#25d366,#128c7e)', color: '#fff',
-                  fontFamily: 'DM Sans', fontWeight: 600, fontSize: 16,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
-                  boxShadow: '0 4px 24px rgba(37,211,102,.35)',
+                  width: "100%",
+                  padding: "15px 24px",
+                  borderRadius: 12,
+                  border: "none",
+                  cursor: "pointer",
+                  background: "linear-gradient(135deg,#25d366,#128c7e)",
+                  color: "#fff",
+                  fontFamily: "Inter",
+                  fontWeight: 600,
+                  fontSize: 16,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 10,
+                  boxShadow: "0 4px 24px rgba(37,211,102,.35)",
                 }}
               >
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
@@ -105,23 +206,92 @@ export default function ContactClient() {
           </motion.div>
 
           {/* Right: form */}
-          <motion.div initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.15 }} className="glass mobile-p-6" style={{ padding: 40, borderRadius: 22 }}>
-            <h3 style={{ fontFamily: 'Syne', fontWeight: 700, fontSize: 22, fontStyle: 'italic', marginBottom: 28 }}>Send Us a Message</h3>
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="glass mobile-p-6"
+            style={{ padding: 40, borderRadius: 22 }}
+          >
+            <h3
+              style={{
+                fontFamily: "Syne",
+                fontWeight: 700,
+                fontSize: 22,
+                fontStyle: "italic",
+                marginBottom: 28,
+              }}
+            >
+              Send Us a Message
+            </h3>
 
-            <div className="mobile-grid-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 20 }}>
+            <div
+              className="mobile-grid-1"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: 20,
+                marginBottom: 20,
+              }}
+            >
               <div>
-                <label style={{ display: 'block', fontSize: 13, color: '#7b82a8', marginBottom: 7, fontWeight: 500 }}>Full Name *</label>
-                <input className="form-input" placeholder="John Doe" value={form.name} onChange={(e) => set('name', e.target.value)} />
+                <label
+                  style={{
+                    display: "block",
+                    fontSize: 13,
+                    color: "#7b82a8",
+                    marginBottom: 7,
+                    fontWeight: 500,
+                  }}
+                >
+                  Full Name *
+                </label>
+                <input
+                  className="form-input"
+                  placeholder="John Doe"
+                  value={form.name}
+                  onChange={(e) => set("name", e.target.value)}
+                />
               </div>
               <div>
-                <label style={{ display: 'block', fontSize: 13, color: '#7b82a8', marginBottom: 7, fontWeight: 500 }}>Email Address *</label>
-                <input className="form-input" type="email" placeholder="john@example.com" value={form.email} onChange={(e) => set('email', e.target.value)} />
+                <label
+                  style={{
+                    display: "block",
+                    fontSize: 13,
+                    color: "#7b82a8",
+                    marginBottom: 7,
+                    fontWeight: 500,
+                  }}
+                >
+                  Email Address *
+                </label>
+                <input
+                  className="form-input"
+                  type="email"
+                  placeholder="john@example.com"
+                  value={form.email}
+                  onChange={(e) => set("email", e.target.value)}
+                />
               </div>
             </div>
 
             <div style={{ marginBottom: 20 }}>
-              <label style={{ display: 'block', fontSize: 13, color: '#7b82a8', marginBottom: 7, fontWeight: 500 }}>Budget Range</label>
-              <select className="form-input" value={form.budget} onChange={(e) => set('budget', e.target.value)}>
+              <label
+                style={{
+                  display: "block",
+                  fontSize: 13,
+                  color: "#7b82a8",
+                  marginBottom: 7,
+                  fontWeight: 500,
+                }}
+              >
+                Budget Range
+              </label>
+              <select
+                className="form-input"
+                value={form.budget}
+                onChange={(e) => set("budget", e.target.value)}
+              >
                 <option value="">Select your budget</option>
                 <option>Rs. 5,000 to Rs. 15,000</option>
                 <option>Rs. 15,000 to Rs. 40,000</option>
@@ -132,14 +302,24 @@ export default function ContactClient() {
             </div>
 
             <div style={{ marginBottom: 32 }}>
-              <label style={{ display: 'block', fontSize: 13, color: '#7b82a8', marginBottom: 7, fontWeight: 500 }}>Message *</label>
+              <label
+                style={{
+                  display: "block",
+                  fontSize: 13,
+                  color: "#7b82a8",
+                  marginBottom: 7,
+                  fontWeight: 500,
+                }}
+              >
+                Message *
+              </label>
               <textarea
                 className="form-input"
                 rows={5}
                 placeholder="Tell us about your project — what you need, your timeline, and any other details..."
                 value={form.message}
-                onChange={(e) => set('message', e.target.value)}
-                style={{ resize: 'vertical' }}
+                onChange={(e) => set("message", e.target.value)}
+                style={{ resize: "vertical" }}
               />
             </div>
 
@@ -147,18 +327,28 @@ export default function ContactClient() {
               whileHover={{ scale: 1.01, y: -2 }}
               whileTap={{ scale: 0.99 }}
               className="btn-primary"
-              style={{ width: '100%', padding: '15px', fontSize: 16 }}
+              style={{ width: "100%", padding: "15px", fontSize: 16 }}
               onClick={handleSubmit}
               disabled={loading}
             >
               {loading ? (
-                <><div className="spinner" />Sending...</>
+                <>
+                  <div className="spinner" />
+                  Sending...
+                </>
               ) : (
                 <>Send Message &rarr;</>
               )}
             </motion.button>
 
-            <p style={{ color: '#7b82a8', fontSize: 12, textAlign: 'center', marginTop: 16 }}>
+            <p
+              style={{
+                color: "#7b82a8",
+                fontSize: 12,
+                textAlign: "center",
+                marginTop: 16,
+              }}
+            >
               Your info is safe. We never share your data.
             </p>
           </motion.div>
@@ -168,5 +358,5 @@ export default function ContactClient() {
       <Footer />
       <WhatsAppButton />
     </>
-  )
+  );
 }
