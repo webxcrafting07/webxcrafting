@@ -4,7 +4,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import DotBackground from '@/components/DotBackground'
 import WhatsAppButton from '@/components/WhatsAppButton'
-import { FaBolt, FaPalette, FaDollarSign, FaLock, FaPhone, FaRocket } from 'react-icons/fa'
+import { FaBolt, FaPalette, FaDollarSign, FaLock, FaPhone, FaRocket, FaLinkedin } from 'react-icons/fa'
 
 const FadeUp = ({ children, delay = 0 }: any) => (
   <motion.div
@@ -37,6 +37,27 @@ const whyUs = [
   { icon: FaLock, title: 'Secure & Reliable', desc: 'Enterprise-grade security with 99.9% uptime guaranteed.' },
   { icon: FaPhone, title: '24/7 Support', desc: 'Always reachable via WhatsApp, email, or phone call.' },
   { icon: FaRocket, title: 'On-Time Delivery', desc: 'We respect deadlines and deliver what we promise, when we promise.' },
+]
+
+const team = [
+  {
+    name: 'Riyal Chandrakar',
+    role: 'Co-Founder & Technical Lead',
+    education: 'MCA Graduate',
+    experience: '2+ Years Experience',
+    projects: '30+ Projects Delivered',
+    linkedin: 'https://www.linkedin.com/in/riyalchandrakar/',
+    initials: 'RC'
+  },
+  {
+    name: 'Nitesh Kumar',
+    role: 'Co-Founder & Product Lead',
+    education: 'MCA Graduate',
+    experience: '2+ Years Experience',
+    projects: '25+ Projects Delivered',
+    linkedin: 'https://www.linkedin.com/in/nitesh-kumar654/',
+    initials: 'NK'
+  }
 ]
 
 export default function AboutClient() {
@@ -123,6 +144,68 @@ export default function AboutClient() {
                 </div>
               ))}
             </FadeUp>
+          </div>
+        </div>
+
+        {/* Meet the Founders */}
+        <div style={{ marginTop: 120, marginBottom: 40 }}>
+          <FadeUp>
+            <div style={{ textAlign: 'center', marginBottom: 56 }}>
+              <div className="section-label" style={{ margin: '0 auto 20px' }}>The Brains Behind WebXCrafting</div>
+              <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(28px,4vw,48px)', fontWeight: 800, fontStyle: 'italic', marginBottom: 16 }}>
+                Meet Our <span className="grad-text">Founders</span>
+              </h2>
+              <p style={{ color: '#7b82a8', fontSize: 16, maxWidth: 640, margin: '0 auto', lineHeight: 1.75 }}>
+                Driven by passion and expertise, our MCA-graduate founders bring years of experience and dozens of successful projects to the table, ensuring every client receives top-tier digital solutions.
+              </p>
+            </div>
+          </FadeUp>
+          
+          <div className="mobile-grid-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 32, maxWidth: 860, margin: '0 auto' }}>
+            {team.map((member, i) => (
+              <FadeUp key={member.name} delay={i * 0.15}>
+                <motion.div 
+                  whileHover={{ y: -8, boxShadow: '0 24px 64px rgba(0,0,0,0.45)' }}
+                  className="glass" 
+                  style={{ 
+                    padding: '48px 32px', 
+                    borderRadius: 24, 
+                    textAlign: 'center', 
+                    position: 'relative', 
+                    overflow: 'hidden',
+                    border: '1px solid rgba(99,120,255,.15)',
+                    background: 'rgba(10,14,28,0.65)'
+                  }}
+                >
+                  <div style={{ 
+                    width: 86, height: 86, borderRadius: '50%', background: 'linear-gradient(135deg,#4f6fff,#a259ff)', 
+                    margin: '0 auto 24px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontSize: 28, fontWeight: 800, color: '#fff', fontFamily: 'Syne',
+                    boxShadow: '0 12px 32px rgba(79,111,255,0.3)'
+                  }}>
+                    {member.initials}
+                  </div>
+                  <h3 style={{ fontFamily: 'Syne', fontSize: 24, fontWeight: 700, fontStyle: 'italic', marginBottom: 8 }}>{member.name}</h3>
+                  <div style={{ color: '#4f6fff', fontWeight: 600, fontSize: 14, marginBottom: 28 }}>{member.role}</div>
+                  
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 36, alignItems: 'center' }}>
+                    <span className="tag" style={{ fontSize: 13, padding: '6px 14px', width: 'fit-content' }}>🎓 {member.education}</span>
+                    <span className="tag" style={{ fontSize: 13, padding: '6px 14px', width: 'fit-content' }}>💻 {member.projects}</span>
+                    <span className="tag" style={{ fontSize: 13, padding: '6px 14px', width: 'fit-content' }}>⭐ {member.experience}</span>
+                  </div>
+
+                  <a 
+                    href={member.linkedin} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="btn-outline"
+                    style={{ padding: '10px 24px', display: 'inline-flex', alignItems: 'center', gap: 10, fontSize: 14 }}
+                  >
+                    <FaLinkedin size={18} /> Connect
+                  </a>
+                </motion.div>
+              </FadeUp>
+            ))}
           </div>
         </div>
       </div>
