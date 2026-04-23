@@ -134,7 +134,7 @@ function ServiceCard({ icon, title, description, price, originalPrice, popular }
 }
 
 /* ── project card ── */
-function ProjectCard({ title, description, category, status, image }: any) {
+function ProjectCard({ title, description, category, status, image, liveLink }: any) {
   const catColors: Record<string, string> = {
     Business: '#4f6fff',
     'E-commerce': '#a259ff',
@@ -153,6 +153,7 @@ function ProjectCard({ title, description, category, status, image }: any) {
   }
   return (
     <motion.div
+      onClick={() => liveLink && liveLink !== "#" && window.open(liveLink, "_blank")}
       whileHover={{ y: -6 }}
       transition={{ type: 'spring', stiffness: 280 }}
       style={{
@@ -161,6 +162,7 @@ function ProjectCard({ title, description, category, status, image }: any) {
         background: 'rgba(10,14,28,0.65)',
         backdropFilter: 'blur(20px)',
         border: '1px solid rgba(99,120,255,.15)',
+        cursor: liveLink && liveLink !== "#" ? 'pointer' : 'default',
       }}
     >
       <div

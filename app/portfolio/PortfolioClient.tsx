@@ -90,12 +90,14 @@ function ProjectCard({ project }: { project: any }) {
       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onClick={() => project.liveLink && project.liveLink !== "#" && window.open(project.liveLink, "_blank")}
       style={{
         borderRadius: 20,
         overflow: "hidden",
         background: "rgba(10,14,28,0.65)",
         backdropFilter: "blur(20px)",
         border: "1px solid rgba(99,120,255,.15)",
+        cursor: project.liveLink && project.liveLink !== "#" ? "pointer" : "default",
       }}
     >
       <div
