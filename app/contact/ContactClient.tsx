@@ -16,7 +16,7 @@ const WA = `https://wa.me/${WA_NUM}?text=${WA_MSG}`;
 
 const infoItems = [
   { icon: FaEnvelope, label: "Email Us", value: "webxcrafting@gmail.com", href: "mailto:webxcrafting@gmail.com" },
-  { icon: FaPhone, label: "Call / WhatsApp", value: "+91 9102615343, +91 7974579107", href: "tel:+919102615343" },
+  { icon: FaPhone, label: "Call / WhatsApp", value: "+91 9102615343\n+91 7974579107", href: "tel:+919102615343" },
   { icon: FaClock, label: "Response Time", value: "Within 24 hours" },
   {
     icon: FaGlobe,
@@ -176,7 +176,7 @@ export default function ContactClient() {
                     >
                       {label}
                     </div>
-                    <div style={{ fontWeight: 600, fontSize: 15, color: "#e8eaf6" }}>{value}</div>
+                    <div style={{ fontWeight: 600, fontSize: 15, color: "#e8eaf6", whiteSpace: "pre-line" }}>{value}</div>
                   </div>
                 </Tag>
               );

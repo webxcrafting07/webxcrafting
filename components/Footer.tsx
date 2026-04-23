@@ -234,14 +234,14 @@ export default function Footer() {
             </h4>
             {[
               { icon: FaEnvelope, text: "webxcrafting@gmail.com", href: "mailto:webxcrafting@gmail.com" },
-              { icon: FaPhone, text: "+91 9102615343, +91 7974579107", href: "tel:+919102615343" },
+              { icon: FaPhone, text: "+91 9102615343\n+91 7974579107", href: "tel:+919102615343" },
               { icon: FaClock, text: "Mon–Sat, 9AM–7PM IST" },
               { icon: FaMapMarkerAlt, text: "India (Remote Worldwide)" },
             ].map(({ icon: Icon, text, href }) => {
               const Tag = href ? "a" : "div";
               return (
                 <Tag
-                  key={text}
+                  key={href || text}
                   href={href}
                   className="mobile-center"
                   style={{
@@ -256,7 +256,7 @@ export default function Footer() {
                   <span style={{ fontSize: 14, minWidth: 20, color: "#4f6fff" }}>
                     <Icon size={14} />
                   </span>
-                  <span style={{ color: "#7b82a8", fontSize: 14 }}>{text}</span>
+                  <span style={{ color: "#7b82a8", fontSize: 14, whiteSpace: "pre-line", textAlign: "left" }}>{text}</span>
                 </Tag>
               );
             })}
