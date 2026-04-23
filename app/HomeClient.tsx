@@ -318,7 +318,7 @@ export default function HomeClient() {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             style={{
               fontFamily: 'Syne',
-              fontSize: 'clamp(38px, 7vw, 68px)',
+              fontSize: 'clamp(28px, 6.5vw, 64px)',
               fontWeight: 800,
               fontStyle: 'italic',
               lineHeight: 1.08,
