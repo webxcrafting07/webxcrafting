@@ -10,6 +10,7 @@ const navLinks = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Portfolio", href: "/portfolio" },
+  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -67,6 +68,7 @@ export default function Navbar() {
             }}
           />
           <span
+            className="nav-logo-text"
             style={{
               fontFamily: "Syne",
               fontWeight: 800,

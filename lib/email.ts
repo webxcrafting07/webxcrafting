@@ -23,44 +23,48 @@ export async function sendLeadNotification(lead: { name: string; email: string; 
     to: notificationEmail,
     subject: `🚀 New Lead: ${lead.name}`,
     html: `
-      <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f9f9f9; border-radius: 12px; overflow: hidden; border: 1px solid #e0e0e0;">
-        <div style="background: linear-gradient(135deg, #4f6fff, #a259ff); padding: 30px; text-align: center;">
-          <h1 style="color: white; margin: 0; font-size: 24px;">New Project Inquiry</h1>
-          <p style="color: rgba(255,255,255,0.8); margin: 5px 0 0;">WebXCrafting Leads</p>
+      <div style="font-family: 'Inter', 'Segoe UI', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.1); border: 1px solid #f0f0f0;">
+        <div style="background: #030510; padding: 40px 30px; text-align: center;">
+          <div style="margin-bottom: 24px;">
+            <img src="${process.env.NEXT_PUBLIC_SITE_URL}/logo-wxc.png" alt="WebXCrafting" style="width: 50px; height: 50px;">
+          </div>
+          <div style="display: inline-block; padding: 8px 16px; background: rgba(79, 111, 255, 0.1); border-radius: 100px; margin-bottom: 16px;">
+            <span style="color: #4f6fff; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">New Business Alert</span>
+          </div>
+          <h1 style="color: white; margin: 0; font-size: 32px; font-weight: 800; letter-spacing: -1px;">New Lead <span style="color: #4f6fff;">Received</span></h1>
         </div>
         
-        <div style="padding: 30px; background-color: white;">
-          <div style="margin-bottom: 25px;">
-            <p style="color: #7b82a8; margin: 0; font-size: 13px; font-weight: 600; text-transform: uppercase;">From</p>
-            <p style="color: #03050a; margin: 5px 0 0; font-size: 18px; font-weight: 700;">${lead.name}</p>
+        <div style="padding: 40px 35px;">
+          <div style="display: flex; gap: 20px; margin-bottom: 30px; padding-bottom: 25px; border-bottom: 1px solid #f0f0f0;">
+            <div style="flex: 1;">
+              <p style="color: #94a3b8; margin: 0; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Client Name</p>
+              <p style="color: #0f172a; margin: 4px 0 0; font-size: 18px; font-weight: 700;">${lead.name}</p>
+            </div>
+            <div style="flex: 1;">
+              <p style="color: #94a3b8; margin: 0; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Budget</p>
+              <p style="color: #0f172a; margin: 4px 0 0; font-size: 18px; font-weight: 700;">${lead.budget || 'Not specified'}</p>
+            </div>
           </div>
           
-          <div style="margin-bottom: 25px;">
-            <p style="color: #7b82a8; margin: 0; font-size: 13px; font-weight: 600; text-transform: uppercase;">Email</p>
-            <p style="color: #4f6fff; margin: 5px 0 0; font-size: 16px;">${lead.email}</p>
+          <div style="margin-bottom: 30px;">
+            <p style="color: #94a3b8; margin: 0; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Contact Information</p>
+            <p style="color: #4f6fff; margin: 4px 0 0; font-size: 16px; font-weight: 600;">${lead.email}</p>
           </div>
           
-          ${lead.budget ? `
-          <div style="margin-bottom: 25px;">
-            <p style="color: #7b82a8; margin: 0; font-size: 13px; font-weight: 600; text-transform: uppercase;">Budget Range</p>
-            <p style="color: #03050a; margin: 5px 0 0; font-size: 16px; font-weight: 600;">${lead.budget}</p>
-          </div>
-          ` : ''}
-          
-          <div style="margin-bottom: 30px; padding: 20px; background-color: #f3f5ff; border-left: 4px solid #4f6fff; border-radius: 4px;">
-            <p style="color: #7b82a8; margin: 0 0 10px; font-size: 13px; font-weight: 600; text-transform: uppercase;">Message</p>
-            <p style="color: #03050a; margin: 0; font-size: 15px; line-height: 1.6;">${lead.message}</p>
+          <div style="margin-bottom: 40px; padding: 25px; background-color: #f8fafc; border-radius: 16px; border: 1px solid #f1f5f9;">
+            <p style="color: #94a3b8; margin: 0 0 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Project Message</p>
+            <p style="color: #334155; margin: 0; font-size: 15px; line-height: 1.7; font-style: italic;">"${lead.message}"</p>
           </div>
           
           <div style="text-align: center;">
-            <a href="${process.env.NEXT_PUBLIC_SITE_URL}/admin/dashboard" style="display: inline-block; padding: 14px 28px; background-color: #4f6fff; color: white; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 15px; transition: background 0.3s;">
-              View Lead in Dashboard →
+            <a href="${process.env.NEXT_PUBLIC_SITE_URL}/admin/dashboard" style="display: inline-block; padding: 16px 35px; background-color: #4f6fff; color: white; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 16px; box-shadow: 0 10px 20px rgba(79, 111, 255, 0.25);">
+              Manage in Dashboard →
             </a>
           </div>
         </div>
         
-        <div style="padding: 20px; text-align: center; border-top: 1px solid #eeeeee;">
-          <p style="color: #999999; font-size: 12px; margin: 0;">&copy; ${new Date().getFullYear()} WebXCrafting. All rights reserved.</p>
+        <div style="padding: 30px; text-align: center; background-color: #f8fafc; border-top: 1px solid #f0f0f0;">
+          <p style="color: #94a3b8; font-size: 12px; margin: 0;">This is an automated notification from WebXCrafting CMS.</p>
         </div>
       </div>
     `,
@@ -82,48 +86,67 @@ export async function sendClientAutoReply(clientEmail: string, clientName: strin
     to: clientEmail,
     subject: `Thank you for reaching out, ${clientName}! ✨`,
     html: `
-      <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background-color: #03050a; color: #e8eaf6; border-radius: 16px; overflow: hidden; border: 1px solid rgba(79, 111, 255, 0.2);">
-        <div style="background: linear-gradient(135deg, #4f6fff, #a259ff); padding: 40px 30px; text-align: center;">
-          <h1 style="color: white; margin: 0; font-size: 28px; letter-spacing: -0.5px;">Message Received!</h1>
-          <p style="color: rgba(255,255,255,0.9); margin: 10px 0 0; font-size: 16px;">We're excited to learn about your project.</p>
+      <div style="font-family: 'Inter', 'Segoe UI', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; color: #1e293b; border-radius: 24px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15); border: 1px solid #e2e8f0;">
+        <div style="background: #030510; padding: 60px 40px; text-align: center; position: relative;">
+          <div style="margin-bottom: 24px;">
+            <img src="${process.env.NEXT_PUBLIC_SITE_URL}/logo-wxc.png" alt="WebXCrafting" style="width: 64px; height: 64px; margin-bottom: 20px;">
+          </div>
+          <h1 style="color: white; margin: 0; font-size: 36px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.1;">Welcome to <span style="color: #4f6fff;">WebXCrafting</span></h1>
+          <p style="color: #94a3b8; margin: 15px 0 0; font-size: 18px; font-weight: 500;">Your digital transformation starts here.</p>
         </div>
         
-        <div style="padding: 40px 35px; background-color: #03050a;">
-          <p style="font-size: 18px; margin-bottom: 20px;">Hi <strong>${clientName}</strong>,</p>
-          <p style="color: #7b82a8; font-size: 15px; line-height: 1.8; margin-bottom: 30px;">
-            Thank you for contacting <strong>WebXCrafting</strong>. We've successfully received your inquiry and our team is already reviewing the details.
+        <div style="padding: 50px 45px;">
+          <p style="font-size: 20px; margin-bottom: 20px; color: #0f172a;">Hi <strong>${clientName}</strong>,</p>
+          <p style="color: #475569; font-size: 16px; line-height: 1.8; margin-bottom: 40px;">
+            Thank you for reaching out to us. We have received your inquiry regarding a new project, and we're thrilled at the possibility of working together.
           </p>
           
-          <div style="background: rgba(79, 111, 255, 0.05); border: 1px solid rgba(79, 111, 255, 0.1); border-radius: 12px; padding: 25px; margin-bottom: 35px;">
-            <h3 style="color: #4f6fff; margin-top: 0; font-size: 16px; text-transform: uppercase; letter-spacing: 1px;">What happens next?</h3>
-            <ul style="color: #7b82a8; font-size: 14px; padding-left: 20px; margin: 15px 0 0; line-height: 1.6;">
-              <li style="margin-bottom: 10px;">Our expert team will analyze your requirements.</li>
-              <li style="margin-bottom: 10px;">We will contact you via email or phone within 24 hours.</li>
-              <li>We will schedule a brief discovery call to discuss your vision.</li>
-            </ul>
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 20px; padding: 35px; margin-bottom: 45px;">
+            <h3 style="color: #4f6fff; margin-top: 0; font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">The Next Steps</h3>
+            
+            <div style="display: flex; margin-bottom: 20px;">
+              <div style="min-width: 24px; height: 24px; border-radius: 50%; background: #4f6fff; color: white; display: flex; alignItems: center; justify-content: center; font-size: 12px; font-weight: 800; margin-right: 15px; margin-top: 2px;">1</div>
+              <p style="margin: 0; color: #334155; font-size: 15px; line-height: 1.6;"><strong>Analysis:</strong> Our experts are reviewing your requirements right now.</p>
+            </div>
+            
+            <div style="display: flex; margin-bottom: 20px;">
+              <div style="min-width: 24px; height: 24px; border-radius: 50%; background: #4f6fff; color: white; display: flex; alignItems: center; justify-content: center; font-size: 12px; font-weight: 800; margin-right: 15px; margin-top: 2px;">2</div>
+              <p style="margin: 0; color: #334155; font-size: 15px; line-height: 1.6;"><strong>Discovery:</strong> We'll contact you within 24 hours to discuss the finer details.</p>
+            </div>
+            
+            <div style="display: flex;">
+              <div style="min-width: 24px; height: 24px; border-radius: 50%; background: #4f6fff; color: white; display: flex; alignItems: center; justify-content: center; font-size: 12px; font-weight: 800; margin-right: 15px; margin-top: 2px;">3</div>
+              <p style="margin: 0; color: #334155; font-size: 15px; line-height: 1.6;"><strong>Execution:</strong> We'll provide a roadmap and quote to bring your vision to life.</p>
+            </div>
           </div>
           
-          <p style="color: #7b82a8; font-size: 15px; margin-bottom: 40px;">
-            In the meantime, feel free to check out our recent work on our <a href="${process.env.NEXT_PUBLIC_SITE_URL}/portfolio" style="color: #4f6fff; text-decoration: none; font-weight: 600;">Portfolio</a>.
-          </p>
+          <div style="text-align: center; margin-bottom: 50px;">
+            <p style="color: #64748b; font-size: 15px; margin-bottom: 25px;">While you wait, feel free to explore our journey:</p>
+            <a href="${process.env.NEXT_PUBLIC_SITE_URL}/portfolio" style="display: inline-block; padding: 18px 40px; background-color: #030510; color: white; text-decoration: none; border-radius: 14px; font-weight: 700; font-size: 16px; letter-spacing: 0.5px;">View Our Portfolio</a>
+          </div>
           
-          <div style="text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 30px; margin-top: 30px;">
-            <p style="color: #64748b; font-size: 13px; margin-bottom: 20px;">Connect with us</p>
-            <div style="display: flex; justify-content: center; gap: 20px;">
-              <a href="https://www.webxcrafting.in" style="color: #4f6fff; text-decoration: none; font-size: 14px; font-weight: 600;">Website</a>
-              <span style="color: rgba(255,255,255,0.1);">|</span>
-              <a href="https://www.linkedin.com/in/webx-crafting-a1a875402/" style="color: #4f6fff; text-decoration: none; font-size: 14px; font-weight: 600;">LinkedIn</a>
-              <span style="color: rgba(255,255,255,0.1);">|</span>
-              <a href="https://www.instagram.com/webxcrafting" style="color: #4f6fff; text-decoration: none; font-size: 14px; font-weight: 600;">Instagram</a>
-              <span style="color: rgba(255,255,255,0.1);">|</span>
-              <a href="https://www.facebook.com/profile.php?id=61570712849063" style="color: #4f6fff; text-decoration: none; font-size: 14px; font-weight: 600;">Facebook</a>
+          <div style="text-align: center; border-top: 1px solid #f1f5f9; padding-top: 40px;">
+            <p style="color: #94a3b8; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 25px;">Connect With Us</p>
+            <div style="display: flex; justify-content: center; align-items: center; gap: 24px;">
+              <a href="https://www.webxcrafting.in" style="text-decoration: none;">
+                <img src="https://img.icons8.com/color/48/domain.png" alt="Website" width="32" height="32" style="display: block; border: 0;">
+              </a>
+              <a href="https://www.linkedin.com/in/webx-crafting-a1a875402/" style="text-decoration: none;">
+                <img src="https://img.icons8.com/color/48/linkedin-circled--v1.png" alt="LinkedIn" width="32" height="32" style="display: block; border: 0;">
+              </a>
+              <a href="https://www.instagram.com/webxcrafting" style="text-decoration: none;">
+                <img src="https://img.icons8.com/color/48/instagram-new--v1.png" alt="Instagram" width="32" height="32" style="display: block; border: 0;">
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=61570712849063" style="text-decoration: none;">
+                <img src="https://img.icons8.com/color/48/facebook-circled--v1.png" alt="Facebook" width="32" height="32" style="display: block; border: 0;">
+              </a>
             </div>
           </div>
         </div>
         
-        <div style="padding: 25px; text-align: center; background-color: rgba(79, 111, 255, 0.05);">
-          <p style="color: #7b82a8; font-size: 12px; margin: 0;">&copy; ${new Date().getFullYear()} WebXCrafting. All rights reserved.</p>
-          <p style="color: #4f6fff; font-size: 11px; margin-top: 5px;">Premium Web Solutions for Modern Businesses</p>
+        <div style="padding: 35px; text-align: center; background-color: #f8fafc; border-top: 1px solid #f1f5f9;">
+          <p style="color: #94a3b8; font-size: 12px; margin: 0; font-weight: 500;">&copy; ${new Date().getFullYear()} WebXCrafting. All rights reserved.</p>
+          <p style="color: #4f6fff; font-size: 11px; margin-top: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;">Premium Web Solutions</p>
         </div>
       </div>
     `,
@@ -151,7 +174,9 @@ export async function sendInvoiceEmail(bill: any) {
     html: `
       <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background-color: #03050a; color: #e8eaf6; border-radius: 20px; overflow: hidden; border: 1px solid rgba(79, 111, 255, 0.2); box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
         <div style="background: linear-gradient(135deg, #111827, #1e293b); padding: 50px 30px; text-align: center; border-bottom: 2px solid #4f6fff;">
-          <h1 style="color: white; margin: 0; font-size: 32px; letter-spacing: -1px; font-weight: 800;">WEBXCRAFTING</h1>
+          <div style="margin-bottom: 20px;">
+            <img src="${process.env.NEXT_PUBLIC_SITE_URL}/logo-wxc.png" alt="WebXCrafting" style="width: 60px; height: 60px;">
+          </div>
           <p style="color: #4f6fff; margin: 10px 0 0; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 3px;">Payment Received / Invoice</p>
         </div>
         
@@ -204,14 +229,19 @@ export async function sendInvoiceEmail(bill: any) {
         <div style="padding: 20px 35px 40px; text-align: center;">
           <div style="text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 30px;">
             <p style="color: #64748b; font-size: 13px; margin-bottom: 20px;">Follow us on</p>
-            <div style="display: flex; justify-content: center; gap: 20px;">
-              <a href="https://www.webxcrafting.in" style="color: #4f6fff; text-decoration: none; font-size: 14px; font-weight: 600;">Website</a>
-              <span style="color: rgba(255,255,255,0.1);">|</span>
-              <a href="https://www.linkedin.com/in/webx-crafting-a1a875402/" style="color: #4f6fff; text-decoration: none; font-size: 14px; font-weight: 600;">LinkedIn</a>
-              <span style="color: rgba(255,255,255,0.1);">|</span>
-              <a href="https://www.instagram.com/webxcrafting" style="color: #4f6fff; text-decoration: none; font-size: 14px; font-weight: 600;">Instagram</a>
-              <span style="color: rgba(255,255,255,0.1);">|</span>
-              <a href="https://www.facebook.com/profile.php?id=61570712849063" style="color: #4f6fff; text-decoration: none; font-size: 14px; font-weight: 600;">Facebook</a>
+            <div style="display: flex; justify-content: center; align-items: center; gap: 24px;">
+              <a href="https://www.webxcrafting.in" style="text-decoration: none;">
+                <img src="https://img.icons8.com/color/48/domain.png" alt="Website" width="32" height="32" style="display: block; border: 0;">
+              </a>
+              <a href="https://www.linkedin.com/in/webx-crafting-a1a875402/" style="text-decoration: none;">
+                <img src="https://img.icons8.com/color/48/linkedin-circled--v1.png" alt="LinkedIn" width="32" height="32" style="display: block; border: 0;">
+              </a>
+              <a href="https://www.instagram.com/webxcrafting" style="text-decoration: none;">
+                <img src="https://img.icons8.com/color/48/instagram-new--v1.png" alt="Instagram" width="32" height="32" style="display: block; border: 0;">
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=61570712849063" style="text-decoration: none;">
+                <img src="https://img.icons8.com/color/48/facebook-circled--v1.png" alt="Facebook" width="32" height="32" style="display: block; border: 0;">
+              </a>
             </div>
           </div>
         </div>

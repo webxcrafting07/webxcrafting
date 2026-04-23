@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import HomeClient from './HomeClient'
 
 export const metadata: Metadata = {
-  title: 'WebXCrafting — Premium Websites at Affordable Prices',
-  description: 'We build stunning, fast, and conversion-optimized websites for businesses, e-commerce stores, job portals, and custom web apps.',
+  title: "Best Web Development Company in India | WebXCrafting",
+  description: "WebXCrafting is India's premier web development agency. We deliver high-ranking, premium business websites, e-commerce platforms, and custom web apps pan-India.",
 }
 
 export default function HomePage() {

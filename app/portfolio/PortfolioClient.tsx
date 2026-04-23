@@ -101,7 +101,9 @@ function ProjectCard({ project }: { project: any }) {
       <div
         style={{
           height: 200,
-          background: `linear-gradient(135deg,${catColors[project.category] || "#4f6fff"}22,${catColors[project.category] || "#a259ff"}44)`,
+          background: project.image 
+            ? `url(${project.image}) center/cover no-repeat` 
+            : `linear-gradient(135deg,${catColors[project.category] || "#4f6fff"}22,${catColors[project.category] || "#a259ff"}44)`,
           position: "relative",
           display: "flex",
           alignItems: "center",
@@ -110,7 +112,7 @@ function ProjectCard({ project }: { project: any }) {
           color: catColors[project.category] || "#4f6fff",
         }}
       >
-        {(() => {
+        {!project.image && (() => {
           const Icon = catIcons[project.category] || FaGlobe;
           return <Icon size={60} />;
         })()}

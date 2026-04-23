@@ -3,41 +3,76 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://webxcrafting.in"),
   title: {
-    default: "WebXCrafting — Premium Websites at Affordable Prices",
+    default: "WebXCrafting — Best Web Development Company in India | Premium Websites",
     template: "%s | WebXCrafting",
   },
   description:
-    "WebXCrafting builds stunning, high-performance websites for businesses, e-commerce, job portals, and custom web apps — at prices that make sense.",
+    "Top-rated Web Development Agency in India. We craft premium, high-performance business websites, E-commerce stores, Job Portals, and Custom Web Applications with guaranteed SEO performance and modern design.",
   keywords: [
-    "web development",
-    "website design",
-    "Next.js",
-    "React",
-    "affordable websites",
-    "e-commerce",
-    "business website",
-    "India",
-    "freelance developer",
+    "web development company India",
+    "best website design agency",
+    "premium web development services",
+    "ecommerce website development",
+    "custom web application development",
+    "affordable web design india",
+    "next.js development company",
+    "react developers india",
+    "job portal development services",
+    "business website design",
+    "startup website development",
+    "webxcrafting",
+    "web development solutions",
+    "professional web designers",
+    "high performance websites",
   ],
   authors: [{ name: "WebXCrafting" }],
   creator: "WebXCrafting",
+  publisher: "WebXCrafting",
+  alternates: {
+    canonical: "https://webxcrafting.in",
+  },
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: process.env.NEXT_PUBLIC_SITE_URL,
-    title: "WebXCrafting — Premium Websites at Affordable Prices",
+    url: "https://webxcrafting.in",
+    title: "WebXCrafting — Premium Web Development Agency",
     description:
-      "We build stunning, high-performance websites that grow your business.",
+      "Expert web development solutions to scale your business. We build stunning, high-performance websites that rank and convert.",
     siteName: "WebXCrafting",
+    images: [
+      {
+        url: "/logo-wxc.png",
+        width: 1200,
+        height: 630,
+        alt: "WebXCrafting Logo",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "WebXCrafting — Premium Websites at Affordable Prices",
+    title: "WebXCrafting — Premium Web Development Agency",
     description:
-      "We build stunning, high-performance websites that grow your business.",
+      "High-performance websites for businesses, e-commerce, and custom apps.",
+    images: ["/logo-wxc.png"],
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  icons: {
+    icon: "/logo-wxc.png",
+    shortcut: "/logo-wxc.png",
+    apple: "/logo-wxc.png",
+  },
 };
 
 export default function RootLayout({
@@ -45,11 +80,35 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "WebXCrafting",
+    "url": "https://webxcrafting.in",
+    "logo": "https://webxcrafting.in/logo-wxc.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+91 9102615343",
+      "contactType": "customer service",
+      "areaServed": "IN",
+      "availableLanguage": ["en", "Hindi"]
+    },
+    "sameAs": [
+      "https://www.linkedin.com/in/webx-crafting-a1a875402/",
+      "https://www.instagram.com/webxcrafting",
+      "https://www.facebook.com/profile.php?id=61570712849063"
+    ]
+  };
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logo-wxc.png" />
         <meta name="theme-color" content="#03050a" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body>
         {children}

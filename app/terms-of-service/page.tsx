@@ -512,7 +512,7 @@ export default function TermsOfService() {
               <p>For questions about these Terms:</p>
               <div className="mt-4 p-6 bg-gray-900 rounded-lg border border-gray-700">
                 <p>
-                  <strong>Email:</strong> legal@webxcrafting.com
+                  <strong>Email:</strong> webxcrafting@gmail.com
                 </p>
                 <p className="mt-2">
                   <strong>Contact Form:</strong>{" "}

@@ -168,7 +168,7 @@ export default function RefundPolicy() {
               <ol className="list-decimal list-inside space-y-2 ml-4 mt-4">
                 <li>
                   Submit a written cancellation request via email to
-                  support@webxcrafting.com
+                  webxcrafting@gmail.com
                 </li>
                 <li>
                   Include the project name, project ID, and reason for
@@ -479,7 +479,7 @@ export default function RefundPolicy() {
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4 mt-4">
                 <li>
-                  Contact us at support@webxcrafting.com with detailed
+                  Contact us at webxcrafting@gmail.com with detailed
                   explanation
                 </li>
                 <li>Provide supporting documentation if available</li>
@@ -511,13 +511,13 @@ export default function RefundPolicy() {
               <p>For refund requests or policy questions:</p>
               <div className="mt-4 p-6 bg-gray-900 rounded-lg border border-gray-700">
                 <p>
-                  <strong>Email:</strong> support@webxcrafting.com
+                  <strong>Email:</strong> webxcrafting@gmail.com
                 </p>
                 <p className="mt-2">
                   <strong>Subject Line:</strong> Refund Request - [Project Name]
                 </p>
                 <p className="mt-2">
-                  <strong>Legal Inquiries:</strong> legal@webxcrafting.com
+                  <strong>Legal Inquiries:</strong> webxcrafting@gmail.com
                 </p>
                 <p className="mt-2">
                   <strong>Contact Form:</strong>{" "}

@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import Navbar from "@/components/Navbar";
@@ -15,7 +16,7 @@ const WA = `https://wa.me/${WA_NUM}?text=${WA_MSG}`;
 
 const infoItems = [
   { icon: FaEnvelope, label: "Email Us", value: "webxcrafting@gmail.com" },
-  { icon: FaPhone, label: "Call / WhatsApp", value: "+91 9102615343" },
+  { icon: FaPhone, label: "Call / WhatsApp", value: "+91 9102615343, +91 7974579107" },
   { icon: FaClock, label: "Response Time", value: "Within 24 hours" },
   {
     icon: FaGlobe,
@@ -32,6 +33,8 @@ export default function ContactClient() {
     message: "",
   });
   const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [userName, setUserName] = useState("");
 
   const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
 
@@ -53,8 +56,10 @@ export default function ContactClient() {
       });
       const data = await res.json();
       if (data.success) {
-        toast.success("Message sent! We will get back to you within 24 hours.");
+        setUserName(form.name);
+        setSubmitted(true);
         setForm({ name: "", email: "", budget: "", message: "" });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         toast.error(data.message || "Something went wrong. Please try again.");
       }
@@ -213,144 +218,194 @@ export default function ContactClient() {
             className="glass mobile-p-6"
             style={{ padding: 40, borderRadius: 22 }}
           >
-            <h3
-              style={{
-                fontFamily: "Syne",
-                fontWeight: 700,
-                fontSize: 22,
-                fontStyle: "italic",
-                marginBottom: 28,
-              }}
-            >
-              Send Us a Message
-            </h3>
-
-            <div
-              className="mobile-grid-1"
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: 20,
-                marginBottom: 20,
-              }}
-            >
-              <div>
-                <label
+            {submitted ? (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                style={{ textAlign: 'center', padding: '20px 0' }}
+              >
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: 'spring', stiffness: 260, damping: 20, delay: 0.1 }}
                   style={{
-                    display: "block",
-                    fontSize: 13,
-                    color: "#7b82a8",
-                    marginBottom: 7,
-                    fontWeight: 500,
+                    width: 80,
+                    height: 80,
+                    borderRadius: '50%',
+                    background: 'rgba(0, 230, 118, 0.15)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    margin: '0 auto 24px',
+                    color: '#00e676',
+                    border: '2px solid rgba(0, 230, 118, 0.3)'
                   }}
                 >
-                  Full Name *
-                </label>
-                <input
-                  className="form-input"
-                  placeholder="John Doe"
-                  value={form.name}
-                  onChange={(e) => set("name", e.target.value)}
-                />
-              </div>
-              <div>
-                <label
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </motion.div>
+                <h3 style={{ fontFamily: 'Syne', fontWeight: 800, fontSize: 28, marginBottom: 16, fontStyle: 'italic' }}>
+                  Message <span className="grad-text">Received!</span>
+                </h3>
+                <p style={{ color: '#7b82a8', fontSize: 16, lineHeight: 1.6, marginBottom: 32 }}>
+                  Thank you, <strong>{userName}</strong>. Your inquiry has been successfully sent. 
+                  Our team will review your requirements and reach out to you via email within 24 hours.
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                  <Link href="/" className="btn-primary" style={{ width: '100%', textDecoration: 'none', display: 'flex', justifyContent: 'center' }}>
+                    Return to Homepage
+                  </Link>
+                  <Link href="/services" className="btn-outline" style={{ width: '100%', textDecoration: 'none', display: 'flex', justifyContent: 'center' }}>
+                    Browse Our Services
+                  </Link>
+                </div>
+                <p style={{ marginTop: 24, fontSize: 13, color: '#4f6fff', fontWeight: 500, cursor: 'pointer' }} onClick={() => setSubmitted(false)}>
+                  ← Send another message
+                </p>
+              </motion.div>
+            ) : (
+              <>
+                <h3
                   style={{
-                    display: "block",
-                    fontSize: 13,
-                    color: "#7b82a8",
-                    marginBottom: 7,
-                    fontWeight: 500,
+                    fontFamily: "Syne",
+                    fontWeight: 700,
+                    fontSize: 22,
+                    fontStyle: "italic",
+                    marginBottom: 28,
                   }}
                 >
-                  Email Address *
-                </label>
-                <input
-                  className="form-input"
-                  type="email"
-                  placeholder="john@example.com"
-                  value={form.email}
-                  onChange={(e) => set("email", e.target.value)}
-                />
-              </div>
-            </div>
+                  Send Us a Message
+                </h3>
 
-            <div style={{ marginBottom: 20 }}>
-              <label
-                style={{
-                  display: "block",
-                  fontSize: 13,
-                  color: "#7b82a8",
-                  marginBottom: 7,
-                  fontWeight: 500,
-                }}
-              >
-                Budget Range
-              </label>
-              <select
-                className="form-input"
-                value={form.budget}
-                onChange={(e) => set("budget", e.target.value)}
-              >
-                <option value="">Select your budget</option>
-                <option>Rs. 5,000 to Rs. 15,000</option>
-                <option>Rs. 15,000 to Rs. 40,000</option>
-                <option>Rs. 40,000 to Rs. 1,00,000</option>
-                <option>Rs. 1,00,000+</option>
-                <option>Open to discussion</option>
-              </select>
-            </div>
+                <div
+                  className="mobile-grid-1"
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr",
+                    gap: 20,
+                    marginBottom: 20,
+                  }}
+                >
+                  <div>
+                    <label
+                      style={{
+                        display: "block",
+                        fontSize: 13,
+                        color: "#7b82a8",
+                        marginBottom: 7,
+                        fontWeight: 500,
+                      }}
+                    >
+                      Full Name *
+                    </label>
+                    <input
+                      className="form-input"
+                      placeholder="John Doe"
+                      value={form.name}
+                      onChange={(e) => set("name", e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <label
+                      style={{
+                        display: "block",
+                        fontSize: 13,
+                        color: "#7b82a8",
+                        marginBottom: 7,
+                        fontWeight: 500,
+                      }}
+                    >
+                      Email Address *
+                    </label>
+                    <input
+                      className="form-input"
+                      type="email"
+                      placeholder="john@example.com"
+                      value={form.email}
+                      onChange={(e) => set("email", e.target.value)}
+                    />
+                  </div>
+                </div>
 
-            <div style={{ marginBottom: 32 }}>
-              <label
-                style={{
-                  display: "block",
-                  fontSize: 13,
-                  color: "#7b82a8",
-                  marginBottom: 7,
-                  fontWeight: 500,
-                }}
-              >
-                Message *
-              </label>
-              <textarea
-                className="form-input"
-                rows={5}
-                placeholder="Tell us about your project — what you need, your timeline, and any other details..."
-                value={form.message}
-                onChange={(e) => set("message", e.target.value)}
-                style={{ resize: "vertical" }}
-              />
-            </div>
+                <div style={{ marginBottom: 20 }}>
+                  <label
+                    style={{
+                      display: "block",
+                      fontSize: 13,
+                      color: "#7b82a8",
+                      marginBottom: 7,
+                      fontWeight: 500,
+                    }}
+                  >
+                    Budget Range
+                  </label>
+                  <select
+                    className="form-input"
+                    value={form.budget}
+                    onChange={(e) => set("budget", e.target.value)}
+                  >
+                    <option value="">Select your budget</option>
+                    <option>Rs. 5,000 to Rs. 15,000</option>
+                    <option>Rs. 15,000 to Rs. 40,000</option>
+                    <option>Rs. 40,000 to Rs. 1,00,000</option>
+                    <option>Rs. 1,00,000+</option>
+                    <option>Open to discussion</option>
+                  </select>
+                </div>
 
-            <motion.button
-              whileHover={{ scale: 1.01, y: -2 }}
-              whileTap={{ scale: 0.99 }}
-              className="btn-primary"
-              style={{ width: "100%", padding: "15px", fontSize: 16 }}
-              onClick={handleSubmit}
-              disabled={loading}
-            >
-              {loading ? (
-                <>
-                  <div className="spinner" />
-                  Sending...
-                </>
-              ) : (
-                <>Send Message &rarr;</>
-              )}
-            </motion.button>
+                <div style={{ marginBottom: 32 }}>
+                  <label
+                    style={{
+                      display: "block",
+                      fontSize: 13,
+                      color: "#7b82a8",
+                      marginBottom: 7,
+                      fontWeight: 500,
+                    }}
+                  >
+                    Message *
+                  </label>
+                  <textarea
+                    className="form-input"
+                    rows={5}
+                    placeholder="Tell us about your project — what you need, your timeline, and any other details..."
+                    value={form.message}
+                    onChange={(e) => set("message", e.target.value)}
+                    style={{ resize: "vertical" }}
+                  />
+                </div>
 
-            <p
-              style={{
-                color: "#7b82a8",
-                fontSize: 12,
-                textAlign: "center",
-                marginTop: 16,
-              }}
-            >
-              Your info is safe. We never share your data.
-            </p>
+                <motion.button
+                  whileHover={{ scale: 1.01, y: -2 }}
+                  whileTap={{ scale: 0.99 }}
+                  className="btn-primary"
+                  style={{ width: "100%", padding: "15px", fontSize: 16 }}
+                  onClick={handleSubmit}
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <>
+                      <div className="spinner" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>Send Message &rarr;</>
+                  )}
+                </motion.button>
+
+                <p
+                  style={{
+                    color: "#7b82a8",
+                    fontSize: 12,
+                    textAlign: "center",
+                    marginTop: 16,
+                  }}
+                >
+                  Your info is safe. We never share your data.
+                </p>
+              </>
+            )}
           </motion.div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.webxcrafting.in'
 
   const routes = [
@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/contact',
     '/services',
     '/portfolio',
+    '/blog',
     '/privacy-policy',
     '/terms-of-service',
     '/refund-policy',
@@ -16,10 +17,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/disclaimer',
   ]
 
-  return routes.map((route) => ({
+  const staticRoutes: MetadataRoute.Sitemap = routes.map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: route === '' ? 1 : 0.8,
+    changeFrequency: route === '/blog' ? 'weekly' : 'monthly',
+    priority: route === '' ? 1 : route === '/blog' ? 0.9 : 0.8,
   }))
+
+  // Fetch published blog slugs for dynamic routes
+  let blogRoutes: MetadataRoute.Sitemap = []
+  try {
+    const res = await fetch(`${baseUrl}/api/blogs?status=published`, { cache: 'no-store' })
+    const data = await res.json()
+    if (data.success && data.data) {
+      blogRoutes = data.data.map((blog: any) => ({
+        url: `${baseUrl}/blog/${blog.slug}`,
+        lastModified: new Date(blog.updatedAt || blog.createdAt),
+        changeFrequency: 'weekly' as const,
+        priority: 0.7,
+      }))
+    }
+  } catch {
+    // If fetch fails (e.g., during build), just skip blog routes
+  }
+
+  return [...staticRoutes, ...blogRoutes]
 }

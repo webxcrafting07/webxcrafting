@@ -152,7 +152,7 @@ export default function CookiePolicy() {
               <p>If you have questions about our cookie usage:</p>
               <div className="mt-4 p-6 bg-gray-900 rounded-lg border border-gray-700">
                 <p>
-                  <strong>Email:</strong> privacy@webxcrafting.com
+                  <strong>Email:</strong> webxcrafting@gmail.com
                 </p>
                 <p className="mt-2">
                   <strong>Contact Form:</strong>{" "}

@@ -287,7 +287,7 @@ export default function PrivacyPolicy() {
                 </li>
               </ul>
               <p className="mt-4">
-                To exercise these rights, contact us at privacy@webxcrafting.com
+                To exercise these rights, contact us at webxcrafting@gmail.com
                 with "Data Request" in the subject line.
               </p>
             </section>
@@ -363,7 +363,7 @@ export default function PrivacyPolicy() {
               </p>
               <div className="mt-4 p-6 bg-gray-900 rounded-lg border border-gray-700">
                 <p>
-                  <strong>Email:</strong> privacy@webxcrafting.com
+                  <strong>Email:</strong> webxcrafting@gmail.com
                 </p>
                 <p className="mt-2">
                   <strong>Contact Form:</strong>{" "}

@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 import Link from 'next/link'
 import { jsPDF } from 'jspdf'
 import autoTable from 'jspdf-autotable'
-import { FaChartBar, FaFolder, FaEnvelope, FaCog, FaFileInvoice, FaCheckCircle, FaFire, FaPen, FaTrash, FaComments, FaFileAlt, FaSignOutAlt, FaBars, FaEye, FaEyeSlash, FaCheck, FaGlobe, FaHourglass } from 'react-icons/fa'
+import { FaChartBar, FaFolder, FaEnvelope, FaCog, FaFileInvoice, FaCheckCircle, FaFire, FaPen, FaTrash, FaComments, FaFileAlt, FaSignOutAlt, FaBars, FaEye, FaEyeSlash, FaCheck, FaGlobe, FaHourglass, FaNewspaper, FaImage, FaCloudUploadAlt, FaLink } from 'react-icons/fa'
 import { SERVICE_ICONS, getServiceIcon } from '@/lib/icons'
 
 /* ── helpers ── */
@@ -35,6 +35,7 @@ const sidebarTabs = [
   { key: 'leads', label: 'Leads', icon: FaEnvelope },
   { key: 'services', label: 'Services', icon: FaCog },
   { key: 'invoices', label: 'Invoices', icon: FaFileInvoice },
+  { key: 'blog', label: 'Blog', icon: FaNewspaper },
 ]
 
 /* ─────────────────────────── MAIN ─────────────────────────── */
@@ -45,10 +46,13 @@ export default function DashboardClient() {
   const [leads, setLeads] = useState<any[]>([])
   const [services, setServices] = useState<any[]>([])
   const [bills, setBills] = useState<any[]>([])
+  const [blogs, setBlogs] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [modal, setModal] = useState<{ type: string; mode: string; item?: any } | null>(null)
   const [form, setForm] = useState<any>({})
   const [saving, setSaving] = useState(false)
+  const [uploading, setUploading] = useState(false)
+  const [imageMode, setImageMode] = useState<'upload' | 'link'>('upload')
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   /* ── auth check ── */
@@ -61,16 +65,18 @@ export default function DashboardClient() {
   const fetchAll = useCallback(async () => {
     setLoading(true)
     try {
-      const [p, l, s, b] = await Promise.all([
+      const [p, l, s, b, bl] = await Promise.all([
         fetch('/api/projects', { headers: authHeaders() }).then((r) => r.json()),
         fetch('/api/leads', { headers: authHeaders() }).then((r) => r.json()),
         fetch('/api/services', { headers: authHeaders() }).then((r) => r.json()),
         fetch('/api/bills', { headers: authHeaders() }).then((r) => r.json()),
+        fetch('/api/blogs?all=true', { headers: authHeaders() }).then((r) => r.json()),
       ])
       if (p.success) setProjects(p.data)
       if (l.success) setLeads(l.data)
       if (s.success) setServices(s.data)
       if (b.success) setBills(b.data)
+      if (bl.success) setBlogs(bl.data)
     } catch { toast.error('Failed to load data') }
     finally { setLoading(false) }
   }, [])
@@ -96,6 +102,13 @@ export default function DashboardClient() {
         generatedBy: '',
         utrNumber: ''
       });
+    } else if (type === 'blog') {
+      setForm({
+        title: '', slug: '', excerpt: '', content: '', category: '',
+        tags: '', coverImage: '', author: 'WebXCrafting', status: 'draft',
+        readTime: 5, metaTitle: '', metaDescription: '', featured: false,
+      });
+      setImageMode('upload');
     } else {
       setForm({});
     }
@@ -245,6 +258,79 @@ export default function DashboardClient() {
     const res = await fetch(`/api/bills/${id}`, { method: 'PUT', headers: authHeaders(), body: JSON.stringify({ status }) })
     const data = await res.json()
     if (data.success) fetchAll(); else toast.error(data.message)
+  }
+
+  /* ── CRUD: Blogs ── */
+  const generateSlug = (title: string) => {
+    return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+  }
+
+  const saveBlog = async () => {
+    if (!form.title || !form.excerpt || !form.content || !form.category) {
+      toast.error('Title, excerpt, content & category required'); return
+    }
+    setSaving(true)
+    try {
+      const slug = form.slug || generateSlug(form.title)
+      const body = { ...form, slug }
+      const url = modal?.mode === 'add' ? '/api/blogs' : `/api/blogs/${modal?.item?._id}`
+      const method = modal?.mode === 'add' ? 'POST' : 'PUT'
+      const res = await fetch(url, { method, headers: authHeaders(), body: JSON.stringify(body) })
+      const data = await res.json()
+      if (data.success) {
+        toast.success(modal?.mode === 'add' ? 'Blog post created!' : 'Blog post updated!')
+        fetchAll(); closeModal()
+      } else toast.error(data.message)
+    } catch { toast.error('Error saving blog') }
+    finally { setSaving(false) }
+  }
+
+  const deleteBlog = async (id: string) => {
+    if (!confirm('Delete this blog post?')) return
+    const res = await fetch(`/api/blogs/${id}`, { method: 'DELETE', headers: authHeaders() })
+    const data = await res.json()
+    if (data.success) { toast.success('Blog deleted'); fetchAll() }
+    else toast.error(data.message)
+  }
+
+  const uploadBlogImage = async (file: File) => {
+    setUploading(true)
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+      const token = localStorage.getItem('admin_token') || ''
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+        body: formData,
+      })
+      const data = await res.json()
+      if (data.success) {
+        setF('coverImage', data.url)
+        toast.success('Image uploaded!')
+      } else toast.error(data.message)
+    } catch { toast.error('Upload failed') }
+    finally { setUploading(false) }
+  }
+
+  const uploadProjectImage = async (file: File) => {
+    setUploading(true)
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+      const token = localStorage.getItem('admin_token') || ''
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+        body: formData,
+      })
+      const data = await res.json()
+      if (data.success) {
+        setF('image', data.url)
+        toast.success('Project image uploaded!')
+      } else toast.error(data.message)
+    } catch { toast.error('Upload failed') }
+    finally { setUploading(false) }
   }
 
   const sendBillEmail = async (id: string) => {
@@ -477,6 +563,7 @@ export default function DashboardClient() {
   const completed = projects.filter((p) => p.status === 'completed').length
   const ongoing = projects.filter((p) => p.status === 'ongoing').length
   const newLeads = leads.filter((l) => l.status === 'new').length
+  const publishedBlogs = blogs.filter((b) => b.status === 'published').length
 
   /* ── input style ── */
   const inp: React.CSSProperties = { width: '100%', padding: '11px 14px', background: 'rgba(10,14,28,0.8)', border: '1px solid rgba(99,120,255,.2)', borderRadius: 10, color: '#e8eaf6', fontFamily: 'DM Sans', fontSize: 14, outline: 'none' }
@@ -559,6 +646,7 @@ export default function DashboardClient() {
                   <StatCard icon={FaFire} value={newLeads} label="New Leads" color="#ff5252" />
                   <StatCard icon={FaCog} value={services.length} label="Services" color="#00e5ff" />
                   <StatCard icon={FaFileInvoice} value={bills.length} label="Bills/Invoices" color="#ff00e5" />
+                  <StatCard icon={FaNewspaper} value={blogs.length} label="Blog Posts" color="#00bcd4" />
                 </div>
                 
                 <div className="mobile-grid-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
@@ -797,6 +885,62 @@ export default function DashboardClient() {
                 </div>
               </div>
             )}
+
+            {/* ── BLOG ── */}
+            {tab === 'blog' && (
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 32 }}>
+                  <div>
+                    <h2 style={{ fontFamily: 'Syne', fontWeight: 800, fontSize: 28 }}>Blog Management</h2>
+                    <p style={{ color: '#7b82a8', fontSize: 14, marginTop: 4 }}>{blogs.length} posts · {publishedBlogs} published</p>
+                  </div>
+                  <button className="btn-primary" onClick={() => openAdd('blog')}>+ Add Blog Post</button>
+                </div>
+
+                <div style={{ display: 'grid', gap: 14 }}>
+                  {blogs.map((blog) => (
+                    <motion.div key={blog._id} layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="glass mobile-p-4" style={{ padding: 22, borderRadius: 14, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
+                      <div className="mobile-stack" style={{ flex: 1, minWidth: 200, display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
+                        {/* Thumbnail */}
+                        <div style={{
+                          width: 70, height: 70, borderRadius: 12, flexShrink: 0, overflow: 'hidden',
+                          background: blog.coverImage ? `url(${blog.coverImage}) center/cover no-repeat` : 'linear-gradient(135deg,rgba(79,111,255,.15),rgba(162,89,255,.1))',
+                          border: '1px solid rgba(99,120,255,.12)',
+                          display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        }}>
+                          {!blog.coverImage && <FaImage size={24} style={{ color: '#4f6fff', opacity: 0.5 }} />}
+                        </div>
+                        <div style={{ flex: 1 }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4, flexWrap: 'wrap' }}>
+                            <span style={{ fontWeight: 600, fontSize: 15 }}>{blog.title}</span>
+                            <span className={`tag ${blog.status === 'published' ? 'tag-green' : ''}`} style={{ fontSize: 11 }}>
+                              {blog.status === 'published' && new Date(blog.publishDate) > new Date() ? 'Scheduled' : blog.status}
+                            </span>
+                            {blog.featured && <span className="tag tag-purple" style={{ fontSize: 10 }}>FEATURED</span>}
+                          </div>
+                          <div style={{ color: '#7b82a8', fontSize: 13 }}>
+                            {blog.category} · {blog.readTime} min · 
+                            {new Date(blog.publishDate) > new Date() ? ' Scheduled for: ' : ' '}
+                            {new Date(blog.publishDate || blog.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
+                          </div>
+                        </div>
+                      </div>
+                      <div style={{ display: 'flex', gap: 10 }}>
+                        <a href={`/blog/${blog.slug}`} target="_blank" rel="noopener noreferrer" className="btn-edit" title="View"><FaEye size={14} /></a>
+                        <button className="btn-edit" onClick={() => { openEdit('blog', blog); setImageMode(blog.coverImage ? 'link' : 'upload') }}><FaPen size={14} style={{ marginRight: 6 }} />Edit</button>
+                        <button className="btn-danger" onClick={() => deleteBlog(blog._id)}><FaTrash size={14} style={{ marginRight: 6 }} />Delete</button>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+                {blogs.length === 0 && (
+                  <div style={{ textAlign: 'center', padding: 80, color: '#7b82a8' }}>
+                    <div style={{ fontSize: 48, marginBottom: 16 }}>📝</div>
+                    <p>No blog posts yet. Create your first article!</p>
+                  </div>
+                )}
+              </div>
+            )}
           </>
         )}
       </div>
@@ -817,7 +961,8 @@ export default function DashboardClient() {
               <h3 style={{ fontFamily: 'Syne', fontWeight: 700, fontSize: 22, marginBottom: 28 }}>
                 {modal.mode === 'add' ? '+ Add' : <><FaPen size={14} style={{ marginRight: 6 }} /> Edit</>} {
                   modal.type === 'project' ? 'Project' : 
-                  modal.type === 'service' ? 'Service' : 'Bill'
+                  modal.type === 'service' ? 'Service' : 
+                  modal.type === 'blog' ? 'Blog Post' : 'Bill'
                 }
               </h3>
 
@@ -852,6 +997,73 @@ export default function DashboardClient() {
                   <div style={{ marginBottom: 18 }}>
                     <label style={lbl}>Live Link</label>
                     <input style={inp} value={form.liveLink || ''} onChange={(e) => setF('liveLink', e.target.value)} placeholder="https://example.com" />
+                  </div>
+
+                  {/* Project Image Selection */}
+                  <div style={{ marginBottom: 18 }}>
+                    <label style={lbl}>Project Display (Photo or Icon)</label>
+                    <div style={{ display: 'flex', gap: 10, marginBottom: 12 }}>
+                      <button 
+                        className={imageMode === 'upload' ? 'btn-primary' : 'btn-outline'} 
+                        style={{ flex: 1, fontSize: 13, padding: '8px' }}
+                        onClick={() => setImageMode('upload')}
+                      >
+                        <FaCloudUploadAlt style={{ marginRight: 6 }} /> Upload
+                      </button>
+                      <button 
+                        className={imageMode === 'link' ? 'btn-primary' : 'btn-outline'} 
+                        style={{ flex: 1, fontSize: 13, padding: '8px' }}
+                        onClick={() => setImageMode('link')}
+                      >
+                        <FaLink style={{ marginRight: 6 }} /> Link
+                      </button>
+                    </div>
+
+                    {imageMode === 'upload' ? (
+                      <div 
+                        style={{ 
+                          border: '2px dashed rgba(99,120,255,0.2)', 
+                          borderRadius: 12, 
+                          padding: 20, 
+                          textAlign: 'center',
+                          cursor: 'pointer',
+                          background: 'rgba(10,14,28,0.4)'
+                        }}
+                        onClick={() => document.getElementById('project-img-input')?.click()}
+                      >
+                        <input 
+                          type="file" 
+                          id="project-img-input" 
+                          hidden 
+                          accept="image/*" 
+                          onChange={(e) => e.target.files?.[0] && uploadProjectImage(e.target.files[0])} 
+                        />
+                        {uploading ? <div className="spinner" style={{ margin: '0 auto' }} /> : (
+                          <>
+                            <FaCloudUploadAlt size={24} style={{ color: '#4f6fff', marginBottom: 8 }} />
+                            <div style={{ fontSize: 13, color: '#7b82a8' }}>Click to upload project photo</div>
+                          </>
+                        )}
+                      </div>
+                    ) : (
+                      <input 
+                        style={inp} 
+                        value={form.image || ''} 
+                        onChange={(e) => setF('image', e.target.value)} 
+                        placeholder="Paste image URL here..." 
+                      />
+                    )}
+
+                    {form.image && (
+                      <div style={{ marginTop: 12, position: 'relative', width: 100, height: 60, borderRadius: 8, overflow: 'hidden', border: '1px solid rgba(99,120,255,0.2)' }}>
+                        <img src={form.image} alt="Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        <button 
+                          style={{ position: 'absolute', top: 2, right: 2, background: 'rgba(255,82,82,0.8)', border: 'none', borderRadius: '50%', width: 18, height: 18, color: '#fff', fontSize: 10, cursor: 'pointer' }}
+                          onClick={() => setF('image', '')}
+                        >✕</button>
+                      </div>
+                    )}
+                    <p style={{ fontSize: 11, color: '#7b82a8', marginTop: 6 }}>* Leave empty to use category emoji</p>
                   </div>
                   <div style={{ marginBottom: 28, display: 'flex', alignItems: 'center', gap: 10 }}>
                     <input type="checkbox" id="featured" checked={form.featured || false} onChange={(e) => setF('featured', e.target.checked)} style={{ width: 'auto' }} />
@@ -1030,6 +1242,150 @@ export default function DashboardClient() {
                     </button>
                     <button className="btn-primary" style={{ flex: 1 }} onClick={saveBill} disabled={saving}>
                       {saving ? <><div className="spinner" />Saving…</> : 'Save Bill'}
+                    </button>
+                  </div>
+                </>
+              )}
+
+              {/* BLOG FORM */}
+              {modal.type === 'blog' && (
+                <>
+                  <div style={{ marginBottom: 18 }}>
+                    <label style={lbl}>Title *</label>
+                    <input style={inp} value={form.title || ''} onChange={(e) => { setF('title', e.target.value); if (!form.slug || form.slug === generateSlug(form.title?.replace(/.$/, '') || '')) setF('slug', generateSlug(e.target.value)) }} placeholder="e.g. Why Every Business Needs a Website" />
+                  </div>
+                  <div style={{ marginBottom: 18 }}>
+                    <label style={lbl}>Slug (URL-friendly, auto-generated)</label>
+                    <input style={inp} value={form.slug || ''} onChange={(e) => setF('slug', e.target.value)} placeholder="why-every-business-needs-a-website" />
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 18 }}>
+                    <div>
+                      <label style={lbl}>Category *</label>
+                      <select style={inp} value={form.category || ''} onChange={(e) => setF('category', e.target.value)}>
+                        <option value="">Select…</option>
+                        <option>Web Development</option>
+                        <option>SEO</option>
+                        <option>E-Commerce</option>
+                        <option>Business Tips</option>
+                        <option>Technology</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label style={lbl}>Author</label>
+                      <input style={inp} value={form.author || 'WebXCrafting'} onChange={(e) => setF('author', e.target.value)} />
+                    </div>
+                  </div>
+                  <div style={{ marginBottom: 18 }}>
+                    <label style={lbl}>Excerpt * (short description for cards & meta)</label>
+                    <textarea style={{ ...inp, resize: 'vertical' }} rows={2} value={form.excerpt || ''} onChange={(e) => setF('excerpt', e.target.value)} placeholder="Brief summary of the article (max 500 chars)…" maxLength={500} />
+                  </div>
+                  <div style={{ marginBottom: 18 }}>
+                    <label style={lbl}>Content * (HTML)</label>
+                    <textarea style={{ ...inp, resize: 'vertical', fontFamily: 'monospace', fontSize: 13, lineHeight: 1.6 }} rows={12} value={form.content || ''} onChange={(e) => setF('content', e.target.value)} placeholder="<h2>Introduction</h2>\n<p>Your article content here...</p>\n<h2>Key Points</h2>\n<ul>\n  <li>Point one</li>\n  <li>Point two</li>\n</ul>" />
+                  </div>
+
+                  {/* Cover Image */}
+                  <div style={{ marginBottom: 18 }}>
+                    <label style={lbl}>Cover Image</label>
+                    <div style={{ display: 'flex', gap: 8, marginBottom: 12 }}>
+                      <button type="button" onClick={() => setImageMode('upload')} style={{
+                        ...inp, width: 'auto', padding: '8px 16px', fontSize: 13, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6,
+                        background: imageMode === 'upload' ? 'rgba(79,111,255,.15)' : 'rgba(10,14,28,0.8)',
+                        borderColor: imageMode === 'upload' ? 'rgba(79,111,255,.4)' : 'rgba(99,120,255,.2)',
+                        color: imageMode === 'upload' ? '#e8eaf6' : '#7b82a8',
+                      }}><FaCloudUploadAlt size={14} /> Upload from Device</button>
+                      <button type="button" onClick={() => setImageMode('link')} style={{
+                        ...inp, width: 'auto', padding: '8px 16px', fontSize: 13, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6,
+                        background: imageMode === 'link' ? 'rgba(79,111,255,.15)' : 'rgba(10,14,28,0.8)',
+                        borderColor: imageMode === 'link' ? 'rgba(79,111,255,.4)' : 'rgba(99,120,255,.2)',
+                        color: imageMode === 'link' ? '#e8eaf6' : '#7b82a8',
+                      }}><FaLink size={14} /> Paste URL</button>
+                    </div>
+
+                    {imageMode === 'upload' ? (
+                      <div style={{
+                        border: '2px dashed rgba(99,120,255,.25)', borderRadius: 14, padding: 24,
+                        textAlign: 'center', background: 'rgba(10,14,28,0.4)', cursor: 'pointer',
+                        transition: 'border-color 0.2s',
+                      }}
+                        onDragOver={(e) => { e.preventDefault(); e.currentTarget.style.borderColor = 'rgba(79,111,255,.6)' }}
+                        onDragLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(99,120,255,.25)' }}
+                        onDrop={(e) => { e.preventDefault(); e.currentTarget.style.borderColor = 'rgba(99,120,255,.25)'; const f = e.dataTransfer.files[0]; if (f) uploadBlogImage(f) }}
+                        onClick={() => { const input = document.createElement('input'); input.type = 'file'; input.accept = 'image/*'; input.onchange = (e: any) => { const f = e.target.files[0]; if (f) uploadBlogImage(f) }; input.click() }}
+                      >
+                        {uploading ? (
+                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, color: '#7b82a8' }}>
+                            <div className="spinner" /> Uploading to Cloudinary…
+                          </div>
+                        ) : (
+                          <>
+                            <FaCloudUploadAlt size={28} style={{ color: '#4f6fff', marginBottom: 8 }} />
+                            <p style={{ color: '#7b82a8', fontSize: 13 }}>Click or drag & drop an image here</p>
+                            <p style={{ color: '#7b82a8', fontSize: 11, marginTop: 4 }}>Uploads to Cloudinary automatically</p>
+                          </>
+                        )}
+                      </div>
+                    ) : (
+                      <input style={inp} value={form.coverImage || ''} onChange={(e) => setF('coverImage', e.target.value)} placeholder="https://res.cloudinary.com/..." />
+                    )}
+
+                    {/* Image Preview */}
+                    {form.coverImage && (
+                      <div style={{ marginTop: 12, position: 'relative' }}>
+                        <img src={form.coverImage} alt="Cover preview" style={{
+                          width: '100%', height: 160, objectFit: 'cover', borderRadius: 12,
+                          border: '1px solid rgba(99,120,255,.12)',
+                        }} />
+                        <button type="button" onClick={() => setF('coverImage', '')} style={{
+                          position: 'absolute', top: 8, right: 8, width: 28, height: 28, borderRadius: '50%',
+                          background: 'rgba(255,82,82,0.9)', border: 'none', color: '#fff', cursor: 'pointer',
+                          display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14,
+                        }}>✕</button>
+                      </div>
+                    )}
+                  </div>
+
+                  <div style={{ marginBottom: 18 }}>
+                    <label style={lbl}>Tags (comma-separated)</label>
+                    <input style={inp} value={Array.isArray(form.tags) ? form.tags.join(', ') : form.tags || ''} onChange={(e) => setF('tags', e.target.value)} placeholder="web development, business, SEO" />
+                  </div>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 18 }}>
+                    <div>
+                      <label style={lbl}>Read Time (minutes)</label>
+                      <input style={inp} type="number" value={form.readTime || 5} onChange={(e) => setF('readTime', Number(e.target.value))} min={1} />
+                    </div>
+                    <div>
+                      <label style={lbl}>Status</label>
+                      <select style={inp} value={form.status || 'draft'} onChange={(e) => setF('status', e.target.value)}>
+                        <option value="draft">Draft</option>
+                        <option value="published">Published</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* SEO Fields */}
+                  <div style={{ marginBottom: 18, padding: 16, borderRadius: 12, border: '1px solid rgba(99,120,255,.1)', background: 'rgba(79,111,255,.03)' }}>
+                    <div style={{ fontSize: 12, fontWeight: 700, color: '#4f6fff', letterSpacing: 1, textTransform: 'uppercase', marginBottom: 14 }}>SEO Settings</div>
+                    <div style={{ marginBottom: 12 }}>
+                      <label style={lbl}>Meta Title (max 70 chars)</label>
+                      <input style={inp} value={form.metaTitle || ''} onChange={(e) => setF('metaTitle', e.target.value)} placeholder="Custom title for search engines" maxLength={70} />
+                    </div>
+                    <div>
+                      <label style={lbl}>Meta Description (max 160 chars)</label>
+                      <textarea style={{ ...inp, resize: 'vertical' }} rows={2} value={form.metaDescription || ''} onChange={(e) => setF('metaDescription', e.target.value)} placeholder="Custom description for search engines" maxLength={160} />
+                    </div>
+                  </div>
+
+                  <div style={{ marginBottom: 28, display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <input type="checkbox" id="blogFeatured" checked={form.featured || false} onChange={(e) => setF('featured', e.target.checked)} style={{ width: 'auto' }} />
+                    <label htmlFor="blogFeatured" style={{ ...lbl, margin: 0, cursor: 'pointer' }}>Featured on homepage</label>
+                  </div>
+
+                  <div style={{ display: 'flex', gap: 12 }}>
+                    <button className="btn-outline" style={{ flex: 1 }} onClick={closeModal}>Cancel</button>
+                    <button className="btn-primary" style={{ flex: 1 }} onClick={saveBlog} disabled={saving}>
+                      {saving ? <><div className="spinner" />Saving…</> : 'Save Blog Post'}
                     </button>
                   </div>
                 </>

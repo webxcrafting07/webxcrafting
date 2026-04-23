@@ -6,7 +6,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import DotBackground from '@/components/DotBackground'
 import WhatsAppButton from '@/components/WhatsAppButton'
-import { FaShoppingCart, FaCog, FaBriefcase, FaGlobe, FaCheck, FaComments } from 'react-icons/fa'
+import { FaShoppingCart, FaCog, FaBriefcase, FaGlobe, FaCheck, FaComments, FaCalendarAlt, FaClock, FaArrowRight } from 'react-icons/fa'
 import { getServiceIcon } from '@/lib/icons'
 
 /* ── tiny fade-up wrapper ── */
@@ -134,7 +134,7 @@ function ServiceCard({ icon, title, description, price, originalPrice, popular }
 }
 
 /* ── project card ── */
-function ProjectCard({ title, description, category, status }: any) {
+function ProjectCard({ title, description, category, status, image }: any) {
   const catColors: Record<string, string> = {
     Business: '#4f6fff',
     'E-commerce': '#a259ff',
@@ -166,7 +166,9 @@ function ProjectCard({ title, description, category, status }: any) {
       <div
         style={{
           height: 180,
-          background: `linear-gradient(135deg,${catColors[category] || '#4f6fff'}22,${catColors[category] || '#a259ff'}44)`,
+          background: image 
+            ? `url(${image}) center/cover no-repeat`
+            : `linear-gradient(135deg,${catColors[category] || '#4f6fff'}22,${catColors[category] || '#a259ff'}44)`,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -174,7 +176,7 @@ function ProjectCard({ title, description, category, status }: any) {
           color: catColors[category] || '#4f6fff',
         }}
       >
-        {getCatIcon(category)}
+        {!image && getCatIcon(category)}
       </div>
       <div style={{ padding: 24 }}>
         <div style={{ display: 'flex', gap: 8, marginBottom: 12, flexWrap: 'wrap' }}>
@@ -262,6 +264,7 @@ const testimonials = [
 export default function HomeClient() {
   const [services, setServices] = useState(defaultServices)
   const [projects, setProjects] = useState(defaultProjects)
+  const [blogs, setBlogs] = useState<any[]>([])
 
   useEffect(() => {
     // Fetch live data from MongoDB
@@ -273,6 +276,11 @@ export default function HomeClient() {
     fetch('/api/projects?limit=3&featured=true')
       .then((r) => r.json())
       .then((d) => { if (d.success && d.data.length) setProjects(d.data.slice(0, 3)) })
+      .catch(() => { })
+
+    fetch('/api/blogs?limit=8')
+      .then((r) => r.json())
+      .then((d) => { if (d.success && d.data.length) setBlogs(d.data) })
       .catch(() => { })
   }, [])
 
@@ -303,22 +311,21 @@ export default function HomeClient() {
           </motion.div>
 
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             style={{
               fontFamily: 'Syne',
-              fontSize: 'clamp(38px, 6.5vw, 76px)',
+              fontSize: 'clamp(38px, 7vw, 68px)',
               fontWeight: 800,
               fontStyle: 'italic',
               lineHeight: 1.08,
               marginBottom: 28,
             }}
           >
-            We Build{' '}
-            <span className="shimmer-text">Premium Websites</span>
+            Best <span className="shimmer-text">Web Development Company</span>
             <br />
-            at Affordable Prices
+            in India for Premium Websites
           </motion.h1>
 
           <motion.p
@@ -329,11 +336,11 @@ export default function HomeClient() {
               color: '#7b82a8',
               fontSize: 'clamp(16px, 2vw, 19px)',
               lineHeight: 1.75,
-              maxWidth: 620,
+              maxWidth: 700,
               margin: '0 auto 48px',
             }}
           >
-            From business sites to full-scale e-commerce platforms — we craft fast, beautiful, and conversion-optimized web experiences that grow your business.
+            We are a leading digital agency crafting high-performance e-commerce stores, business websites, and custom web applications. Rank higher and convert better with our premium SEO-ready web solutions.
           </motion.p>
 
           <motion.div
@@ -361,12 +368,11 @@ export default function HomeClient() {
         </div>
       </section>
 
-      {/* ─── SERVICES ────────────────────────────── */}
       <section style={{ padding: '80px 32px', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
         <FadeUp style={{ textAlign: 'center', marginBottom: 56 }}>
-          <div className="section-label" style={{ margin: '0 auto 20px' }}>Our Services</div>
+          <div className="section-label" style={{ margin: '0 auto 20px' }}>Premium Solutions</div>
           <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(28px,4vw,48px)', fontWeight: 800, fontStyle: 'italic' }}>
-            Everything You Need to <span className="grad-text">Succeed Online</span>
+            Professional <span className="grad-text">Web Services</span> for Modern Businesses
           </h2>
         </FadeUp>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 24 }}>
@@ -404,6 +410,78 @@ export default function HomeClient() {
           </div>
         </FadeUp>
       </section>
+      
+      {/* ─── LATEST BLOGS ────────────────────────── */}
+      {blogs.length > 0 && (
+        <section style={{ padding: '80px 32px', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
+          <FadeUp style={{ textAlign: 'center', marginBottom: 56 }}>
+            <div className="section-label" style={{ margin: '0 auto 20px' }}>Insights</div>
+            <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(28px,4vw,48px)', fontWeight: 800, fontStyle: 'italic' }}>
+              Latest <span className="grad-text">Articles</span>
+            </h2>
+          </FadeUp>
+
+          <div className="blog-scroll-container">
+            {blogs.map((blog: any, i: number) => (
+              <FadeUp key={blog._id} delay={i * 0.05} className="blog-scroll-item">
+                <motion.div
+                  whileHover={{ y: -8, boxShadow: '0 24px 64px rgba(0,0,0,0.45)' }}
+                  transition={{ type: 'spring', stiffness: 300 }}
+                  style={{
+                    borderRadius: 20,
+                    overflow: 'hidden',
+                    background: 'rgba(10,14,28,0.65)',
+                    backdropFilter: 'blur(20px)',
+                    border: '1px solid rgba(99,120,255,0.15)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: '100%',
+                  }}
+                >
+                  <Link href={`/blog/${blog.slug}`} style={{ textDecoration: 'none' }}>
+                    <div style={{ 
+                      height: 180, 
+                      background: blog.coverImage ? `url(${blog.coverImage}) center/cover no-repeat` : 'linear-gradient(135deg,rgba(79,111,255,0.1),rgba(162,89,255,0.15))',
+                      position: 'relative',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}>
+                      {!blog.coverImage && <div style={{ fontSize: 40, opacity: 0.3 }}>📝</div>}
+                      <div style={{
+                        position: 'absolute', top: 14, left: 14, padding: '4px 14px', borderRadius: 20, fontSize: 11, fontWeight: 700,
+                        background: 'rgba(3,5,10,0.75)', backdropFilter: 'blur(10px)', color: '#4f6fff', border: '1px solid rgba(79,111,255,0.3)'
+                      }}>{blog.category}</div>
+                    </div>
+                  </Link>
+                  <div style={{ padding: 22, flex: 1, display: 'flex', flexDirection: 'column' }}>
+                    <div style={{ display: 'flex', gap: 14, marginBottom: 10, color: '#7b82a8', fontSize: 12 }}>
+                      <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><FaCalendarAlt size={11} /> {new Date(blog.publishDate || blog.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}</span>
+                      <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><FaClock size={11} /> {blog.readTime} min</span>
+                    </div>
+                    <Link href={`/blog/${blog.slug}`} style={{ textDecoration: 'none' }}>
+                      <h3 style={{ 
+                        fontFamily: 'Syne', fontWeight: 700, fontSize: 18, marginBottom: 12, fontStyle: 'italic', color: '#e8eaf6',
+                        lineHeight: 1.3, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden'
+                      }}>{blog.title}</h3>
+                    </Link>
+                    <p style={{ color: '#7b82a8', fontSize: 14, lineHeight: 1.6, marginBottom: 20, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{blog.excerpt}</p>
+                    <Link href={`/blog/${blog.slug}`} style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: '#4f6fff', fontWeight: 600, textDecoration: 'none' }}>
+                      Read More <FaArrowRight size={12} />
+                    </Link>
+                  </div>
+                </motion.div>
+              </FadeUp>
+            ))}
+          </div>
+
+          <FadeUp delay={0.3}>
+            <div style={{ textAlign: 'center', marginTop: 40 }}>
+              <Link href="/blog" className="btn-outline">View All Insights →</Link>
+            </div>
+          </FadeUp>
+        </section>
+      )}
 
       {/* ─── TESTIMONIALS ────────────────────────── */}
       <section style={{ padding: '80px 32px', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
@@ -417,6 +495,33 @@ export default function HomeClient() {
           {testimonials.map((t, i) => (
             <FadeUp key={i} delay={i * 0.1}>
               <TestimonialCard {...t} />
+            </FadeUp>
+          ))}
+        </div>
+      </section>
+
+      {/* ─── FAQ SECTION (SEO BOOST) ───────────────── */}
+      <section style={{ padding: '80px 32px', maxWidth: 1000, margin: '0 auto', position: 'relative', zIndex: 10 }}>
+        <FadeUp style={{ textAlign: 'center', marginBottom: 56 }}>
+          <div className="section-label" style={{ margin: '0 auto 20px' }}>Questions</div>
+          <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(28px,4vw,42px)', fontWeight: 800, fontStyle: 'italic' }}>
+            Frequently Asked <span className="grad-text">Questions</span>
+          </h2>
+        </FadeUp>
+        
+        <div style={{ display: 'grid', gap: 20 }}>
+          {[
+            { q: "How much does a professional website cost in India?", a: "A basic professional business website starts from ₹8,000. For custom e-commerce or job portals, prices vary based on features, but we offer the most competitive premium pricing in India." },
+            { q: "Do you provide SEO with website development?", a: "Yes, every website we build is SEO-optimized from the ground up, ensuring fast loading speeds, mobile responsiveness, and clean code structure to help you rank on Google." },
+            { q: "Can you build custom e-commerce stores?", a: "Absolutely. We specialize in high-performance e-commerce solutions with custom dashboards, secure payment integrations, and advanced inventory management." },
+            { q: "How long does it take to build a website?", a: "A standard business website typically takes 7-10 days, while complex platforms like job portals or SaaS web apps may take 3-6 weeks depending on the requirements." },
+            { q: "Do you offer maintenance and support?", a: "Yes, we provide dedicated post-launch support and maintenance to ensure your website remains secure, updated, and performing at its best." }
+          ].map((item, idx) => (
+            <FadeUp key={idx} delay={idx * 0.05}>
+              <div className="glass" style={{ padding: '24px 32px', borderRadius: 16, border: '1px solid rgba(99,120,255,0.1)' }}>
+                <h4 style={{ fontFamily: 'Syne', fontSize: 18, fontWeight: 700, marginBottom: 12, color: '#e8eaf6' }}>{item.q}</h4>
+                <p style={{ color: '#7b82a8', fontSize: 15, lineHeight: 1.6 }}>{item.a}</p>
+              </div>
             </FadeUp>
           ))}
         </div>

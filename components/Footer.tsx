@@ -20,6 +20,7 @@ const quickLinks = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Portfolio", href: "/portfolio" },
+  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -114,7 +115,7 @@ export default function Footer() {
                 marginBottom: 20,
               }}
             >
-              Building premium websites at affordable prices. Your digital
+              Building premium websites at affordable prices. Proudly serving clients Pan India. Your digital
               success is our mission.
             </p>
             <div style={{ display: "flex", gap: 10 }}>
@@ -233,7 +234,7 @@ export default function Footer() {
             </h4>
             {[
               { icon: FaEnvelope, text: "webxcrafting@gmail.com" },
-              { icon: FaPhone, text: "+91 9102615343" },
+              { icon: FaPhone, text: "+91 9102615343, +91 7974579107" },
               { icon: FaClock, text: "Mon–Sat, 9AM–7PM IST" },
               { icon: FaMapMarkerAlt, text: "India (Remote Worldwide)" },
             ].map(({ icon: Icon, text }) => (
