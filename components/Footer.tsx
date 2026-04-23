@@ -233,27 +233,33 @@ export default function Footer() {
               Contact
             </h4>
             {[
-              { icon: FaEnvelope, text: "webxcrafting@gmail.com" },
-              { icon: FaPhone, text: "+91 9102615343, +91 7974579107" },
+              { icon: FaEnvelope, text: "webxcrafting@gmail.com", href: "mailto:webxcrafting@gmail.com" },
+              { icon: FaPhone, text: "+91 9102615343, +91 7974579107", href: "tel:+919102615343" },
               { icon: FaClock, text: "Mon–Sat, 9AM–7PM IST" },
               { icon: FaMapMarkerAlt, text: "India (Remote Worldwide)" },
-            ].map(({ icon: Icon, text }) => (
-              <div
-                key={text}
-                className="mobile-center"
-                style={{
-                  display: "flex",
-                  gap: 10,
-                  marginBottom: 12,
-                  alignItems: "center",
-                }}
-              >
-                <span style={{ fontSize: 14, minWidth: 20, color: "#4f6fff" }}>
-                  <Icon size={14} />
-                </span>
-                <span style={{ color: "#7b82a8", fontSize: 14 }}>{text}</span>
-              </div>
-            ))}
+            ].map(({ icon: Icon, text, href }) => {
+              const Tag = href ? "a" : "div";
+              return (
+                <Tag
+                  key={text}
+                  href={href}
+                  className="mobile-center"
+                  style={{
+                    display: "flex",
+                    gap: 10,
+                    marginBottom: 12,
+                    alignItems: "center",
+                    textDecoration: "none",
+                    cursor: href ? "pointer" : "default"
+                  }}
+                >
+                  <span style={{ fontSize: 14, minWidth: 20, color: "#4f6fff" }}>
+                    <Icon size={14} />
+                  </span>
+                  <span style={{ color: "#7b82a8", fontSize: 14 }}>{text}</span>
+                </Tag>
+              );
+            })}
           </div>
 
           {/* Legal */}

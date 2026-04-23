@@ -15,8 +15,8 @@ const WA_MSG =
 const WA = `https://wa.me/${WA_NUM}?text=${WA_MSG}`;
 
 const infoItems = [
-  { icon: FaEnvelope, label: "Email Us", value: "webxcrafting@gmail.com" },
-  { icon: FaPhone, label: "Call / WhatsApp", value: "+91 9102615343, +91 7974579107" },
+  { icon: FaEnvelope, label: "Email Us", value: "webxcrafting@gmail.com", href: "mailto:webxcrafting@gmail.com" },
+  { icon: FaPhone, label: "Call / WhatsApp", value: "+91 9102615343, +91 7974579107", href: "tel:+919102615343" },
   { icon: FaClock, label: "Response Time", value: "Within 24 hours" },
   {
     icon: FaGlobe,
@@ -135,45 +135,52 @@ export default function ContactClient() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
           >
-            {infoItems.map(({ icon: Icon, label, value }) => (
-              <motion.div
-                key={label}
-                whileHover={{ y: -4 }}
-                className="glass"
-                style={{
-                  padding: 20,
-                  marginBottom: 16,
-                  display: "flex",
-                  gap: 16,
-                  alignItems: "center",
-                  borderRadius: 14,
-                }}
-              >
-                <div
+            {infoItems.map(({ icon: Icon, label, value, href }) => {
+              const Tag = href ? motion.a : motion.div;
+              return (
+                <Tag
+                  key={label}
+                  href={href}
+                  whileHover={{ y: -4 }}
+                  className="glass"
                   style={{
-                    fontSize: 28,
-                    minWidth: 36,
-                    textAlign: "center",
-                    color: "#4f6fff",
+                    padding: 20,
+                    marginBottom: 16,
+                    display: "flex",
+                    gap: 16,
+                    alignItems: "center",
+                    borderRadius: 14,
+                    textDecoration: "none",
+                    cursor: href ? "pointer" : "default",
+                    color: "inherit"
                   }}
                 >
-                  <Icon size={24} />
-                </div>
-                <div>
                   <div
                     style={{
-                      color: "#7b82a8",
-                      fontSize: 12,
-                      marginBottom: 3,
-                      fontWeight: 500,
+                      fontSize: 28,
+                      minWidth: 36,
+                      textAlign: "center",
+                      color: "#4f6fff",
                     }}
                   >
-                    {label}
+                    <Icon size={24} />
                   </div>
-                  <div style={{ fontWeight: 600, fontSize: 15 }}>{value}</div>
-                </div>
-              </motion.div>
-            ))}
+                  <div>
+                    <div
+                      style={{
+                        color: "#7b82a8",
+                        fontSize: 12,
+                        marginBottom: 3,
+                        fontWeight: 500,
+                      }}
+                    >
+                      {label}
+                    </div>
+                    <div style={{ fontWeight: 600, fontSize: 15, color: "#e8eaf6" }}>{value}</div>
+                  </div>
+                </Tag>
+              );
+            })}
 
             <a
               href={WA}
