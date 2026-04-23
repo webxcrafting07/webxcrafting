@@ -47,7 +47,9 @@ const team = [
     experience: '2+ Years Experience',
     projects: '30+ Projects Delivered',
     linkedin: 'https://www.linkedin.com/in/riyalchandrakar/',
-    initials: 'RC'
+    initials: 'RC',
+    quote: '"Code is art, and scalability is the canvas. We build systems designed to last."',
+    vision: 'With a deep passion for complex system architecture and performance optimization, Riyal focuses on building high-speed, secure infrastructures. His future roadmap includes integrating advanced AI automation tools directly into client web apps.'
   },
   {
     name: 'Nitesh Kumar',
@@ -56,7 +58,9 @@ const team = [
     experience: '2+ Years Experience',
     projects: '25+ Projects Delivered',
     linkedin: 'https://www.linkedin.com/in/nitesh-kumar654/',
-    initials: 'NK'
+    initials: 'NK',
+    quote: '"Design is not just what it looks like; it\'s how deeply it connects with the user."',
+    vision: 'Nitesh bridges the gap between powerful engineering and intuitive user experiences. He believes every website should tell a compelling brand story. Looking ahead, he aims to expand WebXCrafting into a full-scale digital product lab.'
   }
 ]
 
@@ -186,7 +190,16 @@ export default function AboutClient() {
                     {member.initials}
                   </div>
                   <h3 style={{ fontFamily: 'Syne', fontSize: 24, fontWeight: 700, fontStyle: 'italic', marginBottom: 8 }}>{member.name}</h3>
-                  <div style={{ color: '#4f6fff', fontWeight: 600, fontSize: 14, marginBottom: 28 }}>{member.role}</div>
+                  <div style={{ color: '#4f6fff', fontWeight: 600, fontSize: 14, marginBottom: 24 }}>{member.role}</div>
+                  
+                  <div style={{ marginBottom: 32, padding: '0 8px' }}>
+                    <div style={{ color: '#e8eaf6', fontStyle: 'italic', fontSize: 15, marginBottom: 16, lineHeight: 1.6 }}>
+                      {member.quote}
+                    </div>
+                    <div style={{ color: '#7b82a8', fontSize: 14, lineHeight: 1.75 }}>
+                      {member.vision}
+                    </div>
+                  </div>
                   
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 36, alignItems: 'center' }}>
                     <span className="tag" style={{ fontSize: 13, padding: '6px 14px', width: 'fit-content' }}>🎓 {member.education}</span>
