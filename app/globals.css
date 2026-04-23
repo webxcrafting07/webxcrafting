@@ -718,10 +718,7 @@ h6 {
 
 @media (max-width: 380px) {
   .nav-logo-text {
-    font-size: 14px !important;
-  }
-  .nav-logo-text span.grad-text {
-    display: none; /* Hide 'Crafting' on very tiny screens if needed */
+    font-size: 15px !important;
   }
 }
 
