@@ -4,7 +4,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import DotBackground from '@/components/DotBackground'
 import WhatsAppButton from '@/components/WhatsAppButton'
-import { FaBolt, FaPalette, FaDollarSign, FaLock, FaPhone, FaRocket, FaLinkedin } from 'react-icons/fa'
+import { FaBolt, FaPalette, FaDollarSign, FaLock, FaPhone, FaRocket, FaLinkedin, FaGraduationCap, FaLaptopCode, FaBriefcase } from 'react-icons/fa'
 
 const FadeUp = ({ children, delay = 0 }: any) => (
   <motion.div
@@ -202,9 +202,15 @@ export default function AboutClient() {
                   </div>
                   
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 36, alignItems: 'center' }}>
-                    <span className="tag" style={{ fontSize: 13, padding: '6px 14px', width: 'fit-content' }}>🎓 {member.education}</span>
-                    <span className="tag" style={{ fontSize: 13, padding: '6px 14px', width: 'fit-content' }}>💻 {member.projects}</span>
-                    <span className="tag" style={{ fontSize: 13, padding: '6px 14px', width: 'fit-content' }}>⭐ {member.experience}</span>
+                    <span className="tag" style={{ fontSize: 13, padding: '6px 14px', width: 'fit-content', display: 'flex', alignItems: 'center', gap: 6 }}>
+                      <FaGraduationCap size={15} /> {member.education}
+                    </span>
+                    <span className="tag" style={{ fontSize: 13, padding: '6px 14px', width: 'fit-content', display: 'flex', alignItems: 'center', gap: 6 }}>
+                      <FaLaptopCode size={15} /> {member.projects}
+                    </span>
+                    <span className="tag" style={{ fontSize: 13, padding: '6px 14px', width: 'fit-content', display: 'flex', alignItems: 'center', gap: 6 }}>
+                      <FaBriefcase size={15} /> {member.experience}
+                    </span>
                   </div>
 
                   <a 
