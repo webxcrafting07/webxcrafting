@@ -621,6 +621,29 @@ h6 {
   display: none;
 }
 
+.marquee-container {
+  overflow: hidden;
+  width: 100%;
+  padding: 20px 0 40px;
+  position: relative;
+}
+
+.marquee-content {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+}
+
+.marquee-content:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 12px)); }
+}
+
 .blog-scroll-item {
   flex: 0 0 calc(33.333% - 16px);
   min-width: 300px;

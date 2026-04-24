@@ -377,13 +377,25 @@ export default function HomeClient() {
             Professional <span className="grad-text">Web Services</span> for Modern Businesses
           </h2>
         </FadeUp>
-        <div className={services.length > 4 ? "scroll-container" : "services-grid"}>
-          {services.map((s: any, i) => (
-            <FadeUp key={i} delay={i * 0.08} className={services.length > 4 ? "service-scroll-item" : ""}>
-              <ServiceCard {...s} />
-            </FadeUp>
-          ))}
-        </div>
+        {services.length > 4 ? (
+          <div className="marquee-container">
+            <div className="marquee-content">
+              {[...services, ...services].map((s: any, i) => (
+                <div key={i} className="service-scroll-item">
+                  <ServiceCard {...s} />
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div className="services-grid">
+            {services.map((s: any, i) => (
+              <FadeUp key={i} delay={i * 0.08}>
+                <ServiceCard {...s} />
+              </FadeUp>
+            ))}
+          </div>
+        )}
         <FadeUp delay={0.3}>
           <div style={{ textAlign: 'center', marginTop: 40 }}>
             <Link href="/services" className="btn-outline">View All Services →</Link>
