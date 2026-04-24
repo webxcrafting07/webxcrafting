@@ -12,6 +12,10 @@ import {
   FaClipboardList,
   FaInfoCircle,
   FaRocket,
+  FaLaptopCode,
+  FaStore,
+  FaUserTie,
+  FaDatabase
 } from "react-icons/fa";
 import { getServiceIcon } from "@/lib/icons";
 
@@ -29,7 +33,7 @@ const FadeUp = ({ children, delay = 0 }: any) => (
 const defaultServices = [
   {
     _id: "1",
-    icon: "FaGlobe",
+    icon: "FaLaptopCode",
     title: "Business Website",
     description: "Professional multi-page website with SEO, contact forms, and responsive design.",
     price: 8000,
@@ -43,7 +47,7 @@ const defaultServices = [
   },
   {
     _id: "2",
-    icon: "FaShoppingCart",
+    icon: "FaStore",
     title: "E-commerce Website",
     description: "Full-featured online store with payments, inventory, and order tracking.",
     price: 25000,
@@ -57,7 +61,7 @@ const defaultServices = [
   },
   {
     _id: "3",
-    icon: "FaBriefcase",
+    icon: "FaUserTie",
     title: "Job Portal / Directory",
     description: "Complete hiring platform with employer/candidate dashboards and AI matching.",
     price: 45000,
@@ -71,7 +75,7 @@ const defaultServices = [
   },
   {
     _id: "4",
-    icon: "FaCog",
+    icon: "FaDatabase",
     title: "Custom SaaS / Web App",
     description: "Tailored web apps, SaaS platforms, and dashboards built to your spec.",
     price: 60000,
@@ -204,18 +208,15 @@ export default function ServicesClient() {
                     width: 54,
                     height: 54,
                     borderRadius: 14,
-                    background: s.popular
-                      ? "linear-gradient(135deg,#4f6fff,#a259ff)"
-                      : "rgba(79,111,255,0.06)",
-                    border: s.popular
-                      ? "none"
-                      : "1px solid rgba(79,111,255,0.12)",
+                    background: 'rgba(79,111,255,0.05)',
+                    border: '1px solid rgba(79,111,255,0.15)',
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     fontSize: 26,
                     marginBottom: 20,
-                    color: s.popular ? "#fff" : "#4f6fff",
+                    color: '#4f6fff',
+                    boxShadow: 'inset 0 0 12px rgba(79,111,255,0.1)'
                   }}
                 >
                   {getServiceIcon(s.icon, 26)}
@@ -370,16 +371,17 @@ export default function ServicesClient() {
                   width: 100,
                   height: 100,
                   borderRadius: 24,
-                  background: 'linear-gradient(135deg,#4f6fff,#a259ff)',
+                  background: 'rgba(79,111,255,0.1)',
+                  backdropFilter: 'blur(10px)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   fontSize: 44,
-                  color: '#fff',
-                  boxShadow: '0 12px 32px rgba(79,111,255,0.4)',
-                  border: '4px solid #03050a'
+                  color: '#4f6fff',
+                  boxShadow: '0 12px 32px rgba(0,0,0,0.3)',
+                  border: '2px solid rgba(79,111,255,0.3)'
                 }}>
-                  {typeof selectedService.icon === "function" ? selectedService.icon() : getServiceIcon(selectedService.icon, 44)}
+                  {getServiceIcon(selectedService.icon, 44)}
                 </div>
                 
                 <motion.button

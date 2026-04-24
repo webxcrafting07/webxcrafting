@@ -6,7 +6,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import DotBackground from '@/components/DotBackground'
 import WhatsAppButton from '@/components/WhatsAppButton'
-import { FaCheck, FaMoneyBillWave, FaClipboardList, FaInfoCircle, FaRocket, FaGlobe, FaShoppingCart, FaBriefcase, FaCog, FaCalendarAlt, FaClock, FaArrowRight } from 'react-icons/fa'
+import { FaCheck, FaMoneyBillWave, FaClipboardList, FaInfoCircle, FaRocket, FaGlobe, FaShoppingCart, FaBriefcase, FaCog, FaCalendarAlt, FaClock, FaArrowRight, FaLaptopCode, FaStore, FaUserTie, FaDatabase } from 'react-icons/fa'
 import { getServiceIcon } from '@/lib/icons'
 
 /* ── tiny fade-up wrapper ── */
@@ -83,17 +83,18 @@ function ServiceCard({ icon, title, description, price, originalPrice, popular, 
       )}
       <div
         style={{
-          width: 52,
-          height: 52,
+          width: 56,
+          height: 56,
           borderRadius: 14,
-          background: popular ? 'linear-gradient(135deg,#4f6fff,#a259ff)' : 'rgba(79,111,255,.12)',
-          border: popular ? 'none' : '1px solid rgba(79,111,255,.2)',
+          background: 'rgba(79,111,255,0.05)',
+          border: '1px solid rgba(79,111,255,0.15)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          fontSize: 24,
+          fontSize: 26,
           marginBottom: 20,
-          color: popular ? '#fff' : '#4f6fff',
+          color: '#4f6fff',
+          boxShadow: 'inset 0 0 12px rgba(79,111,255,0.1)'
         }}
       >
         {getServiceIcon(icon, 24)}
@@ -248,7 +249,7 @@ function TestimonialCard({ name, role, text, initials }: any) {
 
 const defaultServices = [
   {
-    icon: 'FaGlobe',
+    icon: 'FaLaptopCode',
     title: 'Business Website',
     description: 'Professional multi-page website with SEO, contact forms, and responsive design.',
     price: 8000,
@@ -261,7 +262,7 @@ const defaultServices = [
     detailedDescription: 'The Business Website package is designed for professionals and small businesses looking to establish a strong online presence. We include high-quality design, mobile-first responsiveness, and basic SEO to help you get found on Google.'
   },
   {
-    icon: 'FaShoppingCart',
+    icon: 'FaStore',
     title: 'E-commerce Website',
     description: 'Full-featured online store with payments, inventory, and order tracking.',
     price: 25000,
@@ -274,7 +275,7 @@ const defaultServices = [
     detailedDescription: 'Launch your online business with our robust E-commerce solution. We integrate secure payment gateways (Razorpay/Stripe), automated invoice generation, and a powerful admin panel.'
   },
   {
-    icon: 'FaBriefcase',
+    icon: 'FaUserTie',
     title: 'Job Portal / Directory',
     description: 'Complete hiring platform with employer/candidate dashboards and AI matching.',
     price: 45000,
@@ -287,7 +288,7 @@ const defaultServices = [
     detailedDescription: 'A highly complex Job Portal or Business Directory with distinct user roles. Includes advanced search filters, notification systems, and an integrated blog for SEO growth.'
   },
   {
-    icon: 'FaCog',
+    icon: 'FaDatabase',
     title: 'Custom SaaS / Web App',
     description: 'Tailored web apps, SaaS platforms, and dashboards built to your spec.',
     price: 60000,
@@ -509,16 +510,17 @@ export default function HomeClient() {
                   width: 100,
                   height: 100,
                   borderRadius: 24,
-                  background: 'linear-gradient(135deg,#4f6fff,#a259ff)',
+                  background: 'rgba(79,111,255,0.1)',
+                  backdropFilter: 'blur(10px)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   fontSize: 44,
-                  color: '#fff',
-                  boxShadow: '0 12px 32px rgba(79,111,255,0.4)',
-                  border: '4px solid #03050a'
+                  color: '#4f6fff',
+                  boxShadow: '0 12px 32px rgba(0,0,0,0.3)',
+                  border: '2px solid rgba(79,111,255,0.3)'
                 }}>
-                  {typeof selectedService.icon === "function" ? selectedService.icon() : getServiceIcon(selectedService.icon, 44)}
+                  {getServiceIcon(selectedService.icon, 44)}
                 </div>
                 
                 <motion.button
