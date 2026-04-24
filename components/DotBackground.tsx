@@ -21,15 +21,15 @@ export default function DotBackground() {
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       t += 0.008
-      const cols = Math.ceil(canvas.width / 38)
-      const rows = Math.ceil(canvas.height / 38)
+      const cols = Math.ceil(canvas.width / 60)
+      const rows = Math.ceil(canvas.height / 60)
 
       for (let r = 0; r <= rows; r++) {
         for (let c = 0; c <= cols; c++) {
-          const x = c * 38
-          const y = r * 38
-          const wave = Math.sin(c * 0.28 + t) * Math.cos(r * 0.28 + t * 0.65)
-          const alpha = ((wave + 1) / 2) * 0.38 + 0.04
+          const x = c * 60
+          const y = r * 60
+          const wave = Math.sin(c * 0.2 + t) * Math.cos(r * 0.2 + t * 0.5)
+          const alpha = (wave + 1) * 0.15 + 0.05
           const hue = 225 + wave * 45
           ctx.beginPath()
           ctx.arc(x, y, 1.4, 0, Math.PI * 2)

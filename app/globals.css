@@ -195,6 +195,7 @@ h6 {
   border: 1px solid rgba(99, 120, 255, 0.15);
   border-radius: 16px;
   transition: border-color 0.3s ease;
+  will-change: transform, opacity;
 }
 
 .glass:hover {
@@ -206,6 +207,7 @@ h6 {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(99, 120, 255, 0.2);
+  will-change: transform, opacity;
 }
 
 .section-label {
@@ -633,6 +635,7 @@ h6 {
   gap: 24px;
   width: max-content;
   animation: marquee 25s linear infinite;
+  will-change: transform;
 }
 
 .marquee-content:hover {
