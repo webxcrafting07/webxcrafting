@@ -337,6 +337,15 @@ export default function HomeClient() {
       .catch(() => { })
   }, [])
 
+  useEffect(() => {
+    if (selectedService) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => { document.body.style.overflow = 'unset' }
+  }, [selectedService])
+
   return (
     <>
       <DotBackground />
