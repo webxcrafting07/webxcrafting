@@ -20,13 +20,16 @@ export async function POST(req: NextRequest) {
 
     const lead = await Lead.create({ name, email, budget, message })
     
-    // Send email notifications (non-blocking)
-    sendLeadNotification({ name, email, budget, message }).catch(err => 
-      console.error('Failed to send admin notification:', err)
-    )
-    sendClientAutoReply(email, name).catch(err => 
-      console.error('Failed to send client auto-reply:', err)
-    )
+    // Send email notifications
+    try {
+      await Promise.all([
+        sendLeadNotification({ name, email, budget, message }),
+        sendClientAutoReply(email, name)
+      ])
+    } catch (err) {
+      console.error('Email notification sequence failed:', err)
+      // We don't return error to user here as the lead was already created in DB
+    }
 
     return NextResponse.json(
       { success: true, message: 'Message sent successfully! We will get back to you within 24 hours.', data: lead },

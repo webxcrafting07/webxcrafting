@@ -1,20 +1,30 @@
 import nodemailer from 'nodemailer'
 
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
+  host: process.env.SMTP_HOST || 'smtp.gmail.com',
   port: Number(process.env.SMTP_PORT) || 465,
-  secure: Number(process.env.SMTP_PORT) === 465, // true for 465, false for other ports
+  secure: (Number(process.env.SMTP_PORT) || 465) === 465, 
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
+  // Add timeout for better reliability
+  connectionTimeout: 10000,
+  greetingTimeout: 10000,
 })
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://webxcrafting.in'
 
 export async function sendLeadNotification(lead: { name: string; email: string; budget?: string; message: string }) {
   const notificationEmail = process.env.NOTIFICATION_EMAIL || process.env.SMTP_USER
 
+  if (!process.env.SMTP_USER) {
+    console.error('SMTP_USER not configured. Cannot send email.')
+    return
+  }
+
   if (!process.env.SMTP_PASS || process.env.SMTP_PASS === 'your_app_password_here') {
-    console.warn('SMTP_PASS not configured. Skipping email notification.')
+    console.warn(`SMTP_PASS for ${process.env.SMTP_USER} not configured or using placeholder. Skipping email notification.`)
     return
   }
 
@@ -26,7 +36,7 @@ export async function sendLeadNotification(lead: { name: string; email: string; 
       <div style="font-family: 'Inter', 'Segoe UI', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.1); border: 1px solid #f0f0f0;">
         <div style="background: #030510; padding: 40px 30px; text-align: center;">
           <div style="margin-bottom: 24px;">
-            <img src="${process.env.NEXT_PUBLIC_SITE_URL}/logo-wxc.png" alt="WebXCrafting" style="width: 50px; height: 50px;">
+            <img src="${SITE_URL}/logo-wxc.png" alt="WebXCrafting" style="width: 50px; height: 50px;">
           </div>
           <div style="display: inline-block; padding: 8px 16px; background: rgba(79, 111, 255, 0.1); border-radius: 100px; margin-bottom: 16px;">
             <span style="color: #4f6fff; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">New Business Alert</span>
@@ -57,7 +67,7 @@ export async function sendLeadNotification(lead: { name: string; email: string; 
           </div>
           
           <div style="text-align: center;">
-            <a href="${process.env.NEXT_PUBLIC_SITE_URL}/admin/dashboard" style="display: inline-block; padding: 16px 35px; background-color: #4f6fff; color: white; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 16px; box-shadow: 0 10px 20px rgba(79, 111, 255, 0.25);">
+            <a href="${SITE_URL}/admin/dashboard" style="display: inline-block; padding: 16px 35px; background-color: #4f6fff; color: white; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 16px; box-shadow: 0 10px 20px rgba(79, 111, 255, 0.25);">
               Manage in Dashboard →
             </a>
           </div>
@@ -79,7 +89,10 @@ export async function sendLeadNotification(lead: { name: string; email: string; 
 }
 
 export async function sendClientAutoReply(clientEmail: string, clientName: string) {
-  if (!process.env.SMTP_PASS || process.env.SMTP_PASS === 'your_app_password_here') return
+  if (!process.env.SMTP_USER || !process.env.SMTP_PASS || process.env.SMTP_PASS === 'your_app_password_here') {
+    console.warn('SMTP credentials missing or incomplete. Skipping client auto-reply.')
+    return
+  }
 
   const mailOptions = {
     from: `"WebXCrafting Support" <${process.env.SMTP_USER}>`,
@@ -89,7 +102,7 @@ export async function sendClientAutoReply(clientEmail: string, clientName: strin
       <div style="font-family: 'Inter', 'Segoe UI', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; color: #1e293b; border-radius: 24px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15); border: 1px solid #e2e8f0;">
         <div style="background: #030510; padding: 60px 40px; text-align: center; position: relative;">
           <div style="margin-bottom: 24px;">
-            <img src="${process.env.NEXT_PUBLIC_SITE_URL}/logo-wxc.png" alt="WebXCrafting" style="width: 64px; height: 64px; margin-bottom: 20px;">
+            <img src="${SITE_URL}/logo-wxc.png" alt="WebXCrafting" style="width: 64px; height: 64px; margin-bottom: 20px;">
           </div>
           <h1 style="color: white; margin: 0; font-size: 36px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.1;">Welcome to <span style="color: #4f6fff;">WebXCrafting</span></h1>
           <p style="color: #94a3b8; margin: 15px 0 0; font-size: 18px; font-weight: 500;">Your digital transformation starts here.</p>
@@ -122,7 +135,7 @@ export async function sendClientAutoReply(clientEmail: string, clientName: strin
           
           <div style="text-align: center; margin-bottom: 50px;">
             <p style="color: #64748b; font-size: 15px; margin-bottom: 25px;">While you wait, feel free to explore our journey:</p>
-            <a href="${process.env.NEXT_PUBLIC_SITE_URL}/portfolio" style="display: inline-block; padding: 18px 40px; background-color: #030510; color: white; text-decoration: none; border-radius: 14px; font-weight: 700; font-size: 16px; letter-spacing: 0.5px;">View Our Portfolio</a>
+            <a href="${SITE_URL}/portfolio" style="display: inline-block; padding: 18px 40px; background-color: #030510; color: white; text-decoration: none; border-radius: 14px; font-weight: 700; font-size: 16px; letter-spacing: 0.5px;">View Our Portfolio</a>
           </div>
           
           <div style="text-align: center; border-top: 1px solid #f1f5f9; padding-top: 40px;">
@@ -175,7 +188,7 @@ export async function sendInvoiceEmail(bill: any) {
       <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background-color: #03050a; color: #e8eaf6; border-radius: 20px; overflow: hidden; border: 1px solid rgba(79, 111, 255, 0.2); box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
         <div style="background: linear-gradient(135deg, #111827, #1e293b); padding: 50px 30px; text-align: center; border-bottom: 2px solid #4f6fff;">
           <div style="margin-bottom: 20px;">
-            <img src="${process.env.NEXT_PUBLIC_SITE_URL}/logo-wxc.png" alt="WebXCrafting" style="width: 60px; height: 60px;">
+            <img src="${SITE_URL}/logo-wxc.png" alt="WebXCrafting" style="width: 60px; height: 60px;">
           </div>
           <p style="color: #4f6fff; margin: 10px 0 0; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 3px;">Payment Received / Invoice</p>
         </div>
