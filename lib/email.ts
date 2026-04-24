@@ -150,9 +150,6 @@ export async function sendClientAutoReply(clientEmail: string, clientName: strin
               <a href="https://www.instagram.com/webxcrafting" style="text-decoration: none;">
                 <img src="https://img.icons8.com/color/48/instagram-new--v1.png" alt="Instagram" width="32" height="32" style="display: block; border: 0;">
               </a>
-              <a href="https://www.facebook.com/profile.php?id=61570712849063" style="text-decoration: none;">
-                <img src="https://img.icons8.com/color/48/facebook-circled--v1.png" alt="Facebook" width="32" height="32" style="display: block; border: 0;">
-              </a>
             </div>
           </div>
         </div>
@@ -252,9 +249,6 @@ export async function sendInvoiceEmail(bill: any) {
               <a href="https://www.instagram.com/webxcrafting" style="text-decoration: none;">
                 <img src="https://img.icons8.com/color/48/instagram-new--v1.png" alt="Instagram" width="32" height="32" style="display: block; border: 0;">
               </a>
-              <a href="https://www.facebook.com/profile.php?id=61570712849063" style="text-decoration: none;">
-                <img src="https://img.icons8.com/color/48/facebook-circled--v1.png" alt="Facebook" width="32" height="32" style="display: block; border: 0;">
-              </a>
             </div>
           </div>
         </div>
@@ -327,9 +321,6 @@ export async function sendCustomReply(toEmail: string, toName: string, message: 
               </a>
               <a href="https://www.instagram.com/webxcrafting" style="text-decoration: none;">
                 <img src="https://img.icons8.com/color/48/instagram-new--v1.png" alt="Instagram" width="32" height="32" style="display: block; border: 0;">
-              </a>
-              <a href="https://www.facebook.com/profile.php?id=61570712849063" style="text-decoration: none;">
-                <img src="https://img.icons8.com/color/48/facebook-circled--v1.png" alt="Facebook" width="32" height="32" style="display: block; border: 0;">
               </a>
             </div>
           </div>
