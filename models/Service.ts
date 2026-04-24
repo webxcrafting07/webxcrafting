@@ -9,6 +9,10 @@ export interface IService extends Document {
   popular: boolean
   icon: string
   order: number
+  detailedDescription: string
+  paymentTerms: string
+  additionalCharges: string
+  requirements: string[]
   createdAt: Date
   updatedAt: Date
 }
@@ -51,6 +55,22 @@ const ServiceSchema = new Schema<IService>(
     order: {
       type: Number,
       default: 0,
+    },
+    detailedDescription: {
+      type: String,
+      default: '',
+    },
+    paymentTerms: {
+      type: String,
+      default: '50% Advance, 50% after completion',
+    },
+    additionalCharges: {
+      type: String,
+      default: 'Domain and Hosting charges are separate.',
+    },
+    requirements: {
+      type: [String],
+      default: [],
     },
   },
   { timestamps: true }

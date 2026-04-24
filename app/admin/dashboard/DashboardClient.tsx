@@ -197,7 +197,8 @@ export default function DashboardClient() {
         ...form, 
         price: Number(form.price), 
         originalPrice: form.originalPrice ? Number(form.originalPrice) : undefined,
-        features: typeof form.features === 'string' ? form.features.split('\n').filter(Boolean) : form.features 
+        features: typeof form.features === 'string' ? form.features.split('\n').filter(Boolean) : form.features,
+        requirements: typeof form.requirements === 'string' ? form.requirements.split('\n').filter(Boolean) : form.requirements
       }
       const res = await fetch(url, { method, headers: authHeaders(), body: JSON.stringify(body) })
       const data = await res.json()
@@ -1143,12 +1144,29 @@ export default function DashboardClient() {
                     <label style={lbl}>Order (display sequence)</label>
                     <input style={inp} type="number" value={form.order || ''} onChange={(e) => setF('order', e.target.value)} placeholder="1" />
                   </div>
-                  <div style={{ marginBottom: 18 }}>
-                    <label style={lbl}>Features (one per line)</label>
-                    <textarea style={{ ...inp, resize: 'vertical' }} rows={5}
-                      value={Array.isArray(form.features) ? form.features.join('\n') : form.features || ''}
                       onChange={(e) => setF('features', e.target.value)}
                       placeholder={'5 Pages\nSEO Optimized\nMobile Responsive\n1 Month Support'} />
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 18 }}>
+                    <div>
+                      <label style={lbl}>Payment Terms (Advance % etc.)</label>
+                      <input style={inp} value={form.paymentTerms || ''} onChange={(e) => setF('paymentTerms', e.target.value)} placeholder="e.g. 50% Advance" />
+                    </div>
+                    <div>
+                      <label style={lbl}>Hosting/Domain Note</label>
+                      <input style={inp} value={form.additionalCharges || ''} onChange={(e) => setF('additionalCharges', e.target.value)} placeholder="e.g. Hosting separate" />
+                    </div>
+                  </div>
+                  <div style={{ marginBottom: 18 }}>
+                    <label style={lbl}>Requirements (one per line)</label>
+                    <textarea style={{ ...inp, resize: 'vertical' }} rows={3}
+                      value={Array.isArray(form.requirements) ? form.requirements.join('\n') : form.requirements || ''}
+                      onChange={(e) => setF('requirements', e.target.value)}
+                      placeholder={'Logo\nContent\nImages'} />
+                  </div>
+                  <div style={{ marginBottom: 18 }}>
+                    <label style={lbl}>Detailed Description / Package Details</label>
+                    <textarea style={{ ...inp, resize: 'vertical' }} rows={5} value={form.detailedDescription || ''} onChange={(e) => setF('detailedDescription', e.target.value)} placeholder="Full package breakdown…" />
                   </div>
                   <div style={{ marginBottom: 28, display: 'flex', alignItems: 'center', gap: 10 }}>
                     <input type="checkbox" id="popular" checked={form.popular || false} onChange={(e) => setF('popular', e.target.checked)} style={{ width: 'auto' }} />

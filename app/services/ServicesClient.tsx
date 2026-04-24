@@ -99,6 +99,7 @@ const defaultServices = [
 
 export default function ServicesClient() {
   const [services, setServices] = useState(defaultServices);
+  const [selectedService, setSelectedService] = useState<any>(null);
 
   useEffect(() => {
     fetch("/api/services")
@@ -163,12 +164,14 @@ export default function ServicesClient() {
           {services.map((s: any, i) => (
             <FadeUp key={s._id || i} delay={i * 0.09}>
               <motion.div
+                onClick={() => setSelectedService(s)}
                 whileHover={{ y: -8, boxShadow: "0 24px 64px rgba(0,0,0,0.5)" }}
                 transition={{ type: "spring", stiffness: 300 }}
                 style={{
                   borderRadius: 22,
                   padding: 32,
                   height: "100%",
+                  cursor: "pointer",
                   background: s.popular
                     ? "linear-gradient(135deg,rgba(79,111,255,.18),rgba(162,89,255,.14))"
                     : "rgba(10,14,28,0.65)",
@@ -318,6 +321,160 @@ export default function ServicesClient() {
             </FadeUp>
           ))}
         </div>
+
+        {/* Service Detail Modal */}
+        {selectedService && (
+          <div
+            className="animate-fade-in"
+            style={{
+              position: "fixed",
+              inset: 0,
+              background: "rgba(3,5,10,0.85)",
+              backdropFilter: "blur(12px)",
+              zIndex: 1000,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: 20,
+            }}
+            onClick={() => setSelectedService(null)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              className="glass-strong"
+              style={{
+                width: "100%",
+                maxWidth: 700,
+                maxHeight: "90vh",
+                overflowY: "auto",
+                padding: "40px",
+                position: "relative",
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setSelectedService(null)}
+                style={{
+                  position: "absolute",
+                  top: 20,
+                  right: 20,
+                  background: "rgba(255,255,255,0.05)",
+                  border: "none",
+                  color: "#fff",
+                  width: 36,
+                  height: 36,
+                  borderRadius: "50%",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                ✕
+              </button>
+
+              <div style={{ display: "flex", alignItems: "center", gap: 20, marginBottom: 32 }}>
+                <div
+                  style={{
+                    width: 60,
+                    height: 60,
+                    borderRadius: 16,
+                    background: "linear-gradient(135deg,#4f6fff,#a259ff)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: 28,
+                    color: "#fff",
+                  }}
+                >
+                  {typeof selectedService.icon === "function" ? selectedService.icon() : getServiceIcon(selectedService.icon, 28)}
+                </div>
+                <div>
+                  <h2 style={{ fontFamily: "Syne", fontSize: 28, fontWeight: 800, fontStyle: "italic", marginBottom: 4 }}>
+                    {selectedService.title}
+                  </h2>
+                  <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
+                    <span style={{ fontSize: 24, fontWeight: 800, color: "#4f6fff" }}>
+                      ₹{Number(selectedService.price).toLocaleString("en-IN")}
+                    </span>
+                    {selectedService.originalPrice && (
+                      <span style={{ color: "#7b82a8", textDecoration: "line-through", fontSize: 16 }}>
+                        ₹{Number(selectedService.originalPrice).toLocaleString("en-IN")}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 32, marginBottom: 32 }}>
+                <div>
+                  <h4 style={{ fontFamily: "Syne", fontSize: 16, fontWeight: 700, color: "#e8eaf6", marginBottom: 16, textTransform: "uppercase", letterSpacing: 1 }}>
+                    What's Included
+                  </h4>
+                  <ul style={{ listStyle: "none", display: "grid", gap: 12 }}>
+                    {(selectedService.features || []).map((f: string, idx: number) => (
+                      <li key={idx} style={{ display: "flex", alignItems: "center", gap: 10, color: "#b0b8d8", fontSize: 14 }}>
+                        <FaCheck size={12} style={{ color: "#00e676" }} /> {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 style={{ fontFamily: "Syne", fontSize: 16, fontWeight: 700, color: "#e8eaf6", marginBottom: 16, textTransform: "uppercase", letterSpacing: 1 }}>
+                    Payment Terms
+                  </h4>
+                  <div style={{ padding: 16, borderRadius: 12, background: "rgba(79,111,255,0.08)", border: "1px solid rgba(79,111,255,0.15)", marginBottom: 16 }}>
+                    <p style={{ color: "#e8eaf6", fontSize: 14, fontWeight: 600, marginBottom: 4 }}>{selectedService.paymentTerms || "50% Advance"}</p>
+                    <p style={{ color: "#7b82a8", fontSize: 12 }}>{selectedService.additionalCharges || "Domain/Hosting charges are separate"}</p>
+                  </div>
+
+                  {selectedService.requirements?.length > 0 && (
+                    <>
+                      <h4 style={{ fontFamily: "Syne", fontSize: 16, fontWeight: 700, color: "#e8eaf6", marginBottom: 16, textTransform: "uppercase", letterSpacing: 1, marginTop: 24 }}>
+                        What we need
+                      </h4>
+                      <ul style={{ listStyle: "none", display: "grid", gap: 10 }}>
+                        {selectedService.requirements.map((r: string, idx: number) => (
+                          <li key={idx} style={{ color: "#7b82a8", fontSize: 14, display: "flex", gap: 8 }}>
+                            • {r}
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                </div>
+              </div>
+
+              {selectedService.detailedDescription && (
+                <div style={{ marginBottom: 32 }}>
+                  <h4 style={{ fontFamily: "Syne", fontSize: 16, fontWeight: 700, color: "#e8eaf6", marginBottom: 16, textTransform: "uppercase", letterSpacing: 1 }}>
+                    Detailed Breakdown
+                  </h4>
+                  <p style={{ color: "#7b82a8", fontSize: 15, lineHeight: 1.8, whiteSpace: "pre-wrap" }}>
+                    {selectedService.detailedDescription}
+                  </p>
+                </div>
+              )}
+
+              <div style={{ display: "flex", gap: 16, marginTop: 40 }}>
+                <Link href="/contact" className="btn-primary" style={{ flex: 1 }}>
+                  Book This Package
+                </Link>
+                <a
+                  href={`https://wa.me/919000000000?text=Hello%20I%20am%20interested%20in%20the%20${encodeURIComponent(selectedService.title)}%20package`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline"
+                  style={{ flex: 1, borderColor: "rgba(37,211,102,.4)", color: "#25d366" }}
+                >
+                  Discuss on WhatsApp
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        )}
 
         {/* Custom CTA */}
         <FadeUp delay={0.3}>
