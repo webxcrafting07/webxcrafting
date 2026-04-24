@@ -409,27 +409,27 @@ export default function ServicesClient() {
                 </motion.button>
               </div>
 
-              <div style={{ padding: '0 40px 40px' }}>
+              <div style={{ padding: 'clamp(20px, 5vw, 40px)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 20, marginBottom: 32 }}>
                   <div>
-                    <h2 style={{ fontFamily: "Syne", fontSize: 36, fontWeight: 800, fontStyle: "italic", marginBottom: 8, letterSpacing: -1 }}>
+                    <h2 style={{ fontFamily: "Syne", fontSize: "clamp(24px, 5vw, 36px)", fontWeight: 800, fontStyle: "italic", marginBottom: 8, letterSpacing: -1 }}>
                       {selectedService.title}
                     </h2>
-                    <p style={{ color: '#7b82a8', fontSize: 16, maxWidth: 500 }}>{selectedService.description}</p>
+                    <p style={{ color: '#7b82a8', fontSize: "clamp(14px, 2vw, 16px)", maxWidth: 500 }}>{selectedService.description}</p>
                   </div>
-                  <div style={{ textAlign: 'right' }}>
-                    <div style={{ fontSize: 40, fontWeight: 800, background: 'linear-gradient(135deg,#4f6fff,#a259ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', lineHeight: 1 }}>
+                  <div style={{ textAlign: 'left' }}>
+                    <div style={{ fontSize: "clamp(30px, 6vw, 40px)", fontWeight: 800, background: 'linear-gradient(135deg,#4f6fff,#a259ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', lineHeight: 1 }}>
                       ₹{Number(selectedService.price).toLocaleString("en-IN")}
                     </div>
                     {selectedService.originalPrice && (
-                      <div style={{ color: "#7b82a8", textDecoration: "line-through", fontSize: 18, marginTop: 4 }}>
+                      <div style={{ color: "#7b82a8", textDecoration: "line-through", fontSize: "clamp(14px, 3vw, 18px)", marginTop: 4 }}>
                         ₹{Number(selectedService.originalPrice).toLocaleString("en-IN")}
                       </div>
                     )}
                   </div>
                 </div>
 
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 40 }}>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "clamp(20px, 5vw, 40px)" }}>
                   {/* Left Column */}
                   <div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
