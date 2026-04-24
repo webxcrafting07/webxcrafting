@@ -9,7 +9,7 @@ import DotBackground from "@/components/DotBackground";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { FaEnvelope, FaPhone, FaClock, FaGlobe } from "react-icons/fa";
 
-const WA_NUM = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919000000000";
+const WA_NUM = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919102615343";
 const WA_MSG =
   process.env.NEXT_PUBLIC_WHATSAPP_MESSAGE || "Hello%20I%20want%20a%20website";
 const WA = `https://wa.me/${WA_NUM}?text=${WA_MSG}`;
