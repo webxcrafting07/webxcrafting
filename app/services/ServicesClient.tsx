@@ -316,8 +316,8 @@ export default function ServicesClient() {
             style={{
               position: "fixed",
               inset: 0,
-              background: "rgba(3,5,10,0.92)",
-              backdropFilter: "blur(20px)",
+              background: "rgba(3,5,10,0.95)",
+              backdropFilter: "blur(40px)",
               zIndex: 9999,
               display: "flex",
               alignItems: "flex-start",
@@ -328,8 +328,9 @@ export default function ServicesClient() {
             onClick={() => setSelectedService(null)}
           >
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 30 }}
+              initial={{ opacity: 0, scale: 0.97, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
               className="glass-strong"
               style={{
                 width: "100%",
