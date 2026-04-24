@@ -379,9 +379,9 @@ export default function HomeClient() {
         </FadeUp>
         {services.length > 4 ? (
           <div className="marquee-container">
-            <div className="marquee-content">
+            <div className="marquee-content" style={{ gap: 24 }}>
               {[...services, ...services].map((s: any, i) => (
-                <div key={i} className="service-scroll-item">
+                <div key={i} className="service-marquee-item">
                   <ServiceCard {...s} />
                 </div>
               ))}

@@ -641,7 +641,12 @@ h6 {
 
 @keyframes marquee {
   0% { transform: translateX(0); }
-  100% { transform: translateX(calc(-50% - 12px)); }
+  100% { transform: translateX(-50%); }
+}
+
+.service-marquee-item {
+  width: 320px;
+  flex-shrink: 0;
 }
 
 .blog-scroll-item {
