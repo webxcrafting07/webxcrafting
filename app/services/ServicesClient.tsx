@@ -320,9 +320,10 @@ export default function ServicesClient() {
               backdropFilter: "blur(20px)",
               zIndex: 9999,
               display: "flex",
-              alignItems: "center",
+              alignItems: "flex-start",
               justifyContent: "center",
-              padding: 20,
+              padding: "100px 20px 40px",
+              overflowY: "auto",
             }}
             onClick={() => setSelectedService(null)}
           >
