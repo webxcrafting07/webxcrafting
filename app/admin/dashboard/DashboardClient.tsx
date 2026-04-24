@@ -1144,6 +1144,10 @@ export default function DashboardClient() {
                     <label style={lbl}>Order (display sequence)</label>
                     <input style={inp} type="number" value={form.order || ''} onChange={(e) => setF('order', e.target.value)} placeholder="1" />
                   </div>
+                  <div style={{ marginBottom: 18 }}>
+                    <label style={lbl}>Features (one per line)</label>
+                    <textarea style={{ ...inp, resize: 'vertical' }} rows={5}
+                      value={Array.isArray(form.features) ? form.features.join('\n') : form.features || ''}
                       onChange={(e) => setF('features', e.target.value)}
                       placeholder={'5 Pages\nSEO Optimized\nMobile Responsive\n1 Month Support'} />
                   </div>
