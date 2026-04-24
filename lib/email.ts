@@ -293,38 +293,51 @@ export async function sendCustomReply(toEmail: string, toName: string, message: 
   const mailOptions = {
     from: `"WebXCrafting Support" <${process.env.SMTP_USER}>`,
     to: toEmail,
-    subject: `Response to your inquiry - WebXCrafting`,
+    subject: `Re: Your inquiry with WebXCrafting ✨`,
     html: `
       <div style="font-family: 'Inter', 'Segoe UI', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; color: #1e293b; border-radius: 24px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15); border: 1px solid #e2e8f0;">
-        <div style="background: #030510; padding: 60px 40px; text-align: center;">
+        <div style="background: #030510; padding: 60px 40px; text-align: center; position: relative;">
           <div style="margin-bottom: 24px;">
             <img src="${SITE_URL}/logo-wxc.png" alt="WebXCrafting" style="width: 64px; height: 64px;">
           </div>
-          <h1 style="color: white; margin: 0; font-size: 32px; font-weight: 800; letter-spacing: -1.5px;">Message from <span style="color: #4f6fff;">WebXCrafting</span></h1>
+          <h1 style="color: white; margin: 0; font-size: 32px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.2;">Personalized <span style="color: #4f6fff;">Response</span></h1>
+          <p style="color: #94a3b8; margin: 10px 0 0; font-size: 16px;">From the desk of WebXCrafting</p>
         </div>
         
         <div style="padding: 50px 45px;">
-          <p style="font-size: 18px; margin-bottom: 25px; color: #0f172a;">Hi <strong>${toName}</strong>,</p>
-          
           <div style="color: #475569; font-size: 16px; line-height: 1.8; margin-bottom: 40px; white-space: pre-wrap;">${message}</div>
           
-          <div style="text-align: center; margin-bottom: 50px; padding: 30px; background: #f8fafc; border-radius: 20px; border: 1px solid #e2e8f0;">
-            <p style="color: #64748b; font-size: 14px; margin-bottom: 20px;">Need to see our work or discuss more?</p>
-            <div style="display: flex; justify-content: center; gap: 15px;">
-              <a href="${SITE_URL}/portfolio" style="display: inline-block; padding: 14px 25px; background-color: #030510; color: white; text-decoration: none; border-radius: 12px; font-weight: 600; font-size: 14px;">Our Portfolio</a>
-              <a href="https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}" style="display: inline-block; padding: 14px 25px; background-color: #4f6fff; color: white; text-decoration: none; border-radius: 12px; font-weight: 600; font-size: 14px;">WhatsApp Us</a>
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 20px; padding: 35px; margin-bottom: 45px; text-align: center;">
+            <h3 style="color: #4f6fff; margin-top: 0; font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">Ready to Start?</h3>
+            <p style="color: #64748b; font-size: 15px; margin-bottom: 25px;">Explore our previous work or chat with us directly:</p>
+            <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+              <a href="${SITE_URL}/portfolio" style="display: inline-block; padding: 14px 28px; background-color: #030510; color: white; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 14px;">View Portfolio</a>
+              <a href="https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}" style="display: inline-block; padding: 14px 28px; background-color: #25d366; color: white; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 14px;">WhatsApp Chat</a>
             </div>
           </div>
           
           <div style="text-align: center; border-top: 1px solid #f1f5f9; padding-top: 40px;">
-            <p style="color: #94a3b8; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px;">Best Regards,</p>
-            <p style="color: #0f172a; font-size: 18px; font-weight: 800; margin: 0;">Team WebXCrafting</p>
-            <p style="color: #4f6fff; font-size: 12px; margin-top: 5px; font-weight: 600;">Premium Web Solutions</p>
+            <p style="color: #94a3b8; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 25px;">Connect With Us</p>
+            <div style="display: flex; justify-content: center; align-items: center; gap: 24px;">
+              <a href="https://www.webxcrafting.in" style="text-decoration: none;">
+                <img src="https://img.icons8.com/color/48/domain.png" alt="Website" width="32" height="32" style="display: block; border: 0;">
+              </a>
+              <a href="https://www.linkedin.com/in/webx-crafting-a1a875402/" style="text-decoration: none;">
+                <img src="https://img.icons8.com/color/48/linkedin-circled--v1.png" alt="LinkedIn" width="32" height="32" style="display: block; border: 0;">
+              </a>
+              <a href="https://www.instagram.com/webxcrafting" style="text-decoration: none;">
+                <img src="https://img.icons8.com/color/48/instagram-new--v1.png" alt="Instagram" width="32" height="32" style="display: block; border: 0;">
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=61570712849063" style="text-decoration: none;">
+                <img src="https://img.icons8.com/color/48/facebook-circled--v1.png" alt="Facebook" width="32" height="32" style="display: block; border: 0;">
+              </a>
+            </div>
           </div>
         </div>
         
-        <div style="padding: 30px; text-align: center; background-color: #f8fafc; border-top: 1px solid #f1f5f9;">
-          <p style="color: #94a3b8; font-size: 12px; margin: 0;">&copy; ${new Date().getFullYear()} WebXCrafting. All rights reserved.</p>
+        <div style="padding: 35px; text-align: center; background-color: #f8fafc; border-top: 1px solid #f1f5f9;">
+          <p style="color: #94a3b8; font-size: 12px; margin: 0; font-weight: 500;">&copy; ${new Date().getFullYear()} WebXCrafting. All rights reserved.</p>
+          <p style="color: #4f6fff; font-size: 11px; margin-top: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;">Premium Web Solutions</p>
         </div>
       </div>
     `,

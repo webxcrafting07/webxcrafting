@@ -114,7 +114,17 @@ export default function DashboardClient() {
     }
   }
 
-  const openEdit = (type: string, item: any) => { setModal({ type, mode: 'edit', item }); setForm({ ...item }) }
+  const openEdit = (type: string, item: any) => { 
+    setModal({ type, mode: 'edit', item }); 
+    if (type === 'reply') {
+      setForm({ 
+        ...item, 
+        message: `Hi ${item.name},\n\nThank you for reaching out to WebXCrafting. We have reviewed your inquiry regarding "${item.message.slice(0, 50)}${item.message.length > 50 ? '...' : ''}" and would love to discuss how we can help you bring this vision to life.\n\n[Write your specific response here...]\n\nAre you available for a quick discovery call sometime this week?\n\nBest regards,\nNitesh Kumar\nFounder, WebXCrafting` 
+      })
+    } else {
+      setForm({ ...item })
+    }
+  }
   const closeModal = () => { setModal(null); setForm({}) }
   const setF = (k: string, v: any) => setForm((f: any) => ({ ...f, [k]: v }))
 
