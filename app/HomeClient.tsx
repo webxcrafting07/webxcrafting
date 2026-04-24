@@ -377,9 +377,9 @@ export default function HomeClient() {
             Professional <span className="grad-text">Web Services</span> for Modern Businesses
           </h2>
         </FadeUp>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 24 }}>
+        <div className={services.length > 4 ? "scroll-container" : "services-grid"}>
           {services.map((s: any, i) => (
-            <FadeUp key={i} delay={i * 0.08}>
+            <FadeUp key={i} delay={i * 0.08} className={services.length > 4 ? "service-scroll-item" : ""}>
               <ServiceCard {...s} />
             </FadeUp>
           ))}
@@ -423,7 +423,7 @@ export default function HomeClient() {
             </h2>
           </FadeUp>
 
-          <div className="blog-scroll-container">
+          <div className="scroll-container">
             {blogs.map((blog: any, i: number) => (
               <FadeUp key={blog._id} delay={i * 0.05} className="blog-scroll-item">
                 <motion.div
