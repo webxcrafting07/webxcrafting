@@ -203,8 +203,8 @@ h6 {
 
 .glass-strong {
   background: rgba(10, 14, 28, 0.85);
-  backdrop-filter: blur(32px);
-  -webkit-backdrop-filter: blur(32px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(99, 120, 255, 0.2);
 }
 
@@ -632,7 +632,7 @@ h6 {
   display: flex;
   gap: 24px;
   width: max-content;
-  animation: marquee 40s linear infinite;
+  animation: marquee 25s linear infinite;
 }
 
 .marquee-content:hover {

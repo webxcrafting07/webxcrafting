@@ -454,8 +454,8 @@ export default function HomeClient() {
             style={{
               position: "fixed",
               inset: 0,
-              background: "rgba(3,5,10,0.95)",
-              backdropFilter: "blur(40px)",
+              background: "rgba(3,5,10,0.9)",
+              backdropFilter: "blur(20px)",
               zIndex: 9999,
               display: "flex",
               alignItems: "flex-start",
