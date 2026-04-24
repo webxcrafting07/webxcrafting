@@ -284,3 +284,58 @@ export async function sendInvoiceEmail(bill: any) {
   }
 }
 
+export async function sendCustomReply(toEmail: string, toName: string, message: string) {
+  if (!process.env.SMTP_USER || !process.env.SMTP_PASS || process.env.SMTP_PASS === 'your_app_password_here') {
+    console.warn('SMTP credentials missing or incomplete. Skipping custom reply.')
+    return false
+  }
+
+  const mailOptions = {
+    from: `"WebXCrafting Support" <${process.env.SMTP_USER}>`,
+    to: toEmail,
+    subject: `Response to your inquiry - WebXCrafting`,
+    html: `
+      <div style="font-family: 'Inter', 'Segoe UI', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; color: #1e293b; border-radius: 24px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15); border: 1px solid #e2e8f0;">
+        <div style="background: #030510; padding: 60px 40px; text-align: center;">
+          <div style="margin-bottom: 24px;">
+            <img src="${SITE_URL}/logo-wxc.png" alt="WebXCrafting" style="width: 64px; height: 64px;">
+          </div>
+          <h1 style="color: white; margin: 0; font-size: 32px; font-weight: 800; letter-spacing: -1.5px;">Message from <span style="color: #4f6fff;">WebXCrafting</span></h1>
+        </div>
+        
+        <div style="padding: 50px 45px;">
+          <p style="font-size: 18px; margin-bottom: 25px; color: #0f172a;">Hi <strong>${toName}</strong>,</p>
+          
+          <div style="color: #475569; font-size: 16px; line-height: 1.8; margin-bottom: 40px; white-space: pre-wrap;">${message}</div>
+          
+          <div style="text-align: center; margin-bottom: 50px; padding: 30px; background: #f8fafc; border-radius: 20px; border: 1px solid #e2e8f0;">
+            <p style="color: #64748b; font-size: 14px; margin-bottom: 20px;">Need to see our work or discuss more?</p>
+            <div style="display: flex; justify-content: center; gap: 15px;">
+              <a href="${SITE_URL}/portfolio" style="display: inline-block; padding: 14px 25px; background-color: #030510; color: white; text-decoration: none; border-radius: 12px; font-weight: 600; font-size: 14px;">Our Portfolio</a>
+              <a href="https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}" style="display: inline-block; padding: 14px 25px; background-color: #4f6fff; color: white; text-decoration: none; border-radius: 12px; font-weight: 600; font-size: 14px;">WhatsApp Us</a>
+            </div>
+          </div>
+          
+          <div style="text-align: center; border-top: 1px solid #f1f5f9; padding-top: 40px;">
+            <p style="color: #94a3b8; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px;">Best Regards,</p>
+            <p style="color: #0f172a; font-size: 18px; font-weight: 800; margin: 0;">Team WebXCrafting</p>
+            <p style="color: #4f6fff; font-size: 12px; margin-top: 5px; font-weight: 600;">Premium Web Solutions</p>
+          </div>
+        </div>
+        
+        <div style="padding: 30px; text-align: center; background-color: #f8fafc; border-top: 1px solid #f1f5f9;">
+          <p style="color: #94a3b8; font-size: 12px; margin: 0;">&copy; ${new Date().getFullYear()} WebXCrafting. All rights reserved.</p>
+        </div>
+      </div>
+    `,
+  }
+
+  try {
+    await transporter.sendMail(mailOptions)
+    console.log('Custom reply email sent successfully.')
+    return true
+  } catch (error) {
+    console.error('Error sending custom reply email:', error)
+    return false
+  }
+}

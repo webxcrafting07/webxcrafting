@@ -346,6 +346,26 @@ export default function DashboardClient() {
       }
     } catch { toast.error('Error sending email', { id: loadId }) }
   }
+  
+  const saveReply = async () => {
+    if (!form.message) { toast.error('Message is required'); return }
+    setSaving(true)
+    try {
+      const res = await fetch(`/api/leads/${modal?.item?._id}/reply`, {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify({ message: form.message })
+      })
+      const data = await res.json()
+      if (data.success) {
+        toast.success('Reply sent successfully!')
+        fetchAll(); closeModal()
+      } else {
+        toast.error(data.message)
+      }
+    } catch { toast.error('Error sending reply') }
+    finally { setSaving(false) }
+  }
 
   /* ── PDF Generation ── */
   const generatePDF = (bill: any) => {
@@ -766,7 +786,7 @@ export default function DashboardClient() {
                             <option value="contacted">Contacted</option>
                             <option value="closed">Closed</option>
                           </select>
-                          <a href={`mailto:${l.email}`} className="btn-edit" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 6 }}><FaEnvelope size={14} /> Reply</a>
+                          <button className="btn-edit" onClick={() => openEdit('reply', l)} style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 6 }}><FaEnvelope size={14} /> Reply</button>
                           <button className="btn-danger" onClick={() => deleteLead(l._id)}><FaTrash size={14} /></button>
                         </div>
                       </div>
@@ -1386,6 +1406,38 @@ export default function DashboardClient() {
                     <button className="btn-outline" style={{ flex: 1 }} onClick={closeModal}>Cancel</button>
                     <button className="btn-primary" style={{ flex: 1 }} onClick={saveBlog} disabled={saving}>
                       {saving ? <><div className="spinner" />Saving…</> : 'Save Blog Post'}
+                    </button>
+                  </div>
+                </>
+              )}
+              {/* REPLY FORM */}
+              {modal.type === 'reply' && (
+                <>
+                  <div style={{ marginBottom: 18 }}>
+                    <label style={lbl}>Replying to:</label>
+                    <div style={{ fontSize: 16, fontWeight: 700, color: '#e8eaf6' }}>{modal.item?.name} &lt;{modal.item?.email}&gt;</div>
+                  </div>
+                  <div style={{ marginBottom: 18, padding: 16, background: 'rgba(79,111,255,0.05)', borderRadius: 12, border: '1px solid rgba(79,111,255,0.1)' }}>
+                    <label style={lbl}>Client's Message:</label>
+                    <div style={{ fontSize: 13, color: '#7b82a8', fontStyle: 'italic' }}>"{modal.item?.message}"</div>
+                  </div>
+                  <div style={{ marginBottom: 24 }}>
+                    <label style={lbl}>Your Message *</label>
+                    <textarea 
+                      style={{ ...inp, resize: 'vertical', minHeight: 200 }} 
+                      rows={8} 
+                      value={form.message || ''} 
+                      onChange={(e) => setF('message', e.target.value)} 
+                      placeholder="Hi! Thank you for reaching out. We would love to help you with your project..." 
+                    />
+                    <p style={{ fontSize: 11, color: '#7b82a8', marginTop: 8 }}>
+                      * This message will be wrapped in a professional WebXCrafting template with your logo and links.
+                    </p>
+                  </div>
+                  <div style={{ display: 'flex', gap: 12 }}>
+                    <button className="btn-outline" style={{ flex: 1 }} onClick={closeModal}>Cancel</button>
+                    <button className="btn-primary" style={{ flex: 1 }} onClick={saveReply} disabled={saving}>
+                      {saving ? <><div className="spinner" />Sending…</> : <><FaEnvelope style={{ marginRight: 8 }} /> Send Reply</>}
                     </button>
                   </div>
                 </>
