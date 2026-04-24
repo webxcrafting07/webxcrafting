@@ -318,7 +318,7 @@ export default function ServicesClient() {
               inset: 0,
               background: "rgba(3,5,10,0.92)",
               backdropFilter: "blur(20px)",
-              zIndex: 1000,
+              zIndex: 9999,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -371,7 +371,9 @@ export default function ServicesClient() {
                   {typeof selectedService.icon === "function" ? selectedService.icon() : getServiceIcon(selectedService.icon, 44)}
                 </div>
                 
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.1, background: "rgba(255,255,255,0.15)", rotate: 90 }}
+                  whileTap={{ scale: 0.9 }}
                   onClick={() => setSelectedService(null)}
                   style={{
                     position: "absolute",
@@ -388,11 +390,12 @@ export default function ServicesClient() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    zIndex: 10
+                    zIndex: 10,
+                    transition: "all 0.2s"
                   }}
                 >
                   ✕
-                </button>
+                </motion.button>
               </div>
 
               <div style={{ padding: '0 40px 40px' }}>
