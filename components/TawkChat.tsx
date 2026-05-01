@@ -4,8 +4,8 @@ import { useEffect } from 'react'
 export default function TawkChat() {
   useEffect(() => {
     // Replace the IDs below with your actual Tawk.to IDs
-    const TAWK_PROPERTY_ID = 'YOUR_PROPERTY_ID'
-    const TAWK_WIDGET_ID = 'YOUR_WIDGET_ID'
+    const TAWK_PROPERTY_ID = '69f491b84451ae1c35c0f8d7'
+    const TAWK_WIDGET_ID = '1jnhlieso'
 
     if (TAWK_PROPERTY_ID !== 'YOUR_PROPERTY_ID') {
       var s1 = document.createElement("script"),
