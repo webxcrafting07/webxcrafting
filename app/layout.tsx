@@ -3,7 +3,7 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://webxcrafting.in"),
+  metadataBase: new URL("https://www.webxcrafting.in"),
   title: {
     default: "WebXCrafting — Best Web Development Company in India | Premium Websites",
     template: "%s | WebXCrafting",
@@ -86,8 +86,8 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "WebXCrafting",
-    "url": "https://webxcrafting.in",
-    "logo": "https://webxcrafting.in/logo-wxc.png",
+    "url": "https://www.webxcrafting.in",
+    "logo": "https://www.webxcrafting.in/logo-wxc.png",
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": "+91 9102615343",

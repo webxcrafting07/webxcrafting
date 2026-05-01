@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const envUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://webxcrafting.in'
+  const envUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.webxcrafting.in'
   // Remove trailing slash if present
   const baseUrl = envUrl.endsWith('/') ? envUrl.slice(0, -1) : envUrl
 
