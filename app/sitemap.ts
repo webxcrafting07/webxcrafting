@@ -1,7 +1,9 @@
 import { MetadataRoute } from 'next'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.webxcrafting.in'
+  const envUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://webxcrafting.in'
+  // Remove trailing slash if present
+  const baseUrl = envUrl.endsWith('/') ? envUrl.slice(0, -1) : envUrl
 
   const routes = [
     '',
@@ -21,7 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: route === '/blog' ? 'weekly' : 'monthly',
-    priority: route === '' ? 1 : route === '/blog' ? 0.9 : 0.8,
+    priority: route === '' ? 1 : (route === '/blog' || route === '/services') ? 0.9 : 0.8,
   }))
 
   // Fetch published blog slugs for dynamic routes
@@ -37,7 +39,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.7,
       }))
     }
-  } catch {
+  } catch (error) {
+    console.error('Sitemap fetch error:', error)
     // If fetch fails (e.g., during build), just skip blog routes
   }
 

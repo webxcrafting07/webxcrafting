@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Disclaimer | WebXCrafting",
   description:
     "WebXCrafting Disclaimer - Liability limitations and disclaimers",
+  alternates: {
+    canonical: "/disclaimer",
+  },
 };
 
 export default function Disclaimer() {

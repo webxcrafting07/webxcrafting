@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Cookie Policy | WebXCrafting",
   description:
     "WebXCrafting Cookie Policy - Information about cookies and tracking technologies",
+  alternates: {
+    canonical: "/cookie-policy",
+  },
 };
 
 export default function CookiePolicy() {

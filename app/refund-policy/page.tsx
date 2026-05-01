@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Refund & Cancellation Policy | WebXCrafting",
   description:
     "WebXCrafting Refund and Cancellation Policy - Terms for refunds, cancellations, and project modifications",
+  alternates: {
+    canonical: "/refund-policy",
+  },
 };
 
 export default function RefundPolicy() {

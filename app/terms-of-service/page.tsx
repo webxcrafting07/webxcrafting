@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Terms of Service | WebXCrafting",
   description:
     "WebXCrafting Terms of Service - Legal terms governing your use of our services",
+  alternates: {
+    canonical: "/terms-of-service",
+  },
 };
 
 export default function TermsOfService() {

@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Privacy Policy | WebXCrafting",
   description:
     "WebXCrafting Privacy Policy - How we collect, use, and protect your personal data",
+  alternates: {
+    canonical: "/privacy-policy",
+  },
 };
 
 export default function PrivacyPolicy() {

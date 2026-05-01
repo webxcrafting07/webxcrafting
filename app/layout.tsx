@@ -31,7 +31,9 @@ export const metadata: Metadata = {
   creator: "WebXCrafting",
   publisher: "WebXCrafting",
   alternates: {
-    canonical: "https://webxcrafting.in",
+    languages: {
+      'en-IN': '/',
+    },
   },
   openGraph: {
     type: "website",
