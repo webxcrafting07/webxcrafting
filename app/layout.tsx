@@ -86,23 +86,102 @@ export default function RootLayout({
 }) {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "WebXCrafting",
-    "alternateName": "WebX Crafting",
-    "url": "https://www.webxcrafting.in",
-    "logo": "https://www.webxcrafting.in/logo-wxc.png",
-    "description": "Global premium web development agency specializing in Next.js, React, and high-performance digital solutions.",
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+91 9102615343",
-      "contactType": "customer service",
-      "areaServed": "Worldwide",
-      "availableLanguage": ["en", "Hindi"]
-    },
-    "sameAs": [
-      "https://www.linkedin.com/in/webx-crafting-a1a875402/",
-      "https://www.instagram.com/webxcrafting",
-      "https://www.facebook.com/profile.php?id=61570712849063"
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.webxcrafting.in/#organization",
+        "name": "WebXCrafting",
+        "alternateName": "WebX Crafting",
+        "url": "https://www.webxcrafting.in",
+        "logo": "https://www.webxcrafting.in/logo-wxc.png",
+        "description": "Global premium web development agency specializing in Next.js, React, and high-performance digital solutions.",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+91 9102615343",
+          "contactType": "customer service",
+          "areaServed": "Worldwide",
+          "availableLanguage": ["en", "Hindi"]
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/webx-crafting-a1a875402/",
+          "https://www.instagram.com/webxcrafting",
+          "https://www.facebook.com/profile.php?id=61570712849063"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.webxcrafting.in/#website",
+        "url": "https://www.webxcrafting.in",
+        "name": "WebXCrafting",
+        "publisher": { "@id": "https://www.webxcrafting.in/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://www.webxcrafting.in/blog?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How much does a professional website cost?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A professional business website starts from ₹8,000. Custom e-commerce platforms or job portals vary based on features, but we offer competitive premium pricing worldwide."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you provide SEO with website development?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, every website we build is SEO-optimized from the ground up, ensuring fast loading speeds, mobile responsiveness, and clean code structure to help you rank globally on Google."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can you build custom e-commerce stores?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Absolutely. We specialize in high-performance e-commerce solutions with custom dashboards, secure payment integrations, and advanced inventory management."
+            }
+          }
+        ]
+      },
+      {
+        "@type": "Service",
+        "serviceType": "Web Development",
+        "provider": { "@id": "https://www.webxcrafting.in/#organization" },
+        "areaServed": "Worldwide",
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Web Development Services",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Business Website Development"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "E-commerce Development"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Custom SaaS & Web Apps"
+              }
+            }
+          ]
+        }
+      }
     ]
   };
 
