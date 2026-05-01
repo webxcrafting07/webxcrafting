@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
+import TawkChat from "@/components/TawkChat";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.webxcrafting.in"),
@@ -210,6 +211,7 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <TawkChat />
         {children}
         <Toaster
           position="bottom-right"
