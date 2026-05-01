@@ -178,6 +178,20 @@ export default function RootLayout({
                 "@type": "Service",
                 "name": "Custom SaaS & Web Apps"
               }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "School Management Systems"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Inventory & POS Systems"
+              }
             }
           ]
         }

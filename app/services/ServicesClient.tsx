@@ -87,6 +87,34 @@ const defaultServices = [
     requirements: ["Detailed Feature List", "Workflow/Flowchart", "API Documentation (if any)", "Reference Projects"],
     detailedDescription: "For unique business ideas that don't fit into standard boxes. Whether you're building a SaaS platform, a custom CRM, or a unique marketplace, our team uses the latest MERN/Next.js stack to build scalable, high-performance web applications that grow with your business."
   },
+  {
+    _id: "5",
+    icon: "FaLaptopCode",
+    title: "School Management System",
+    description: "Complete digital solution for schools with student, fee, and exam management.",
+    price: 35000,
+    originalPrice: 50000,
+    popular: false,
+    features: ["Student & Staff Profiles", "Attendance Tracking", "Fee Management", "Exam Result Portal", "Parent-Teacher App"],
+    paymentTerms: "40% Advance, 30% after Demo, 30% on Final Setup",
+    additionalCharges: "Server hosting & SMS gateway separate",
+    requirements: ["School Logo", "Student Data", "Fee Structure", "Staff Details"],
+    detailedDescription: "A comprehensive management system for educational institutions. Automate your school's daily operations, from attendance tracking to digital result generation and secure fee processing. Includes a robust database and user-friendly dashboards for admins and parents."
+  },
+  {
+    _id: "6",
+    icon: "FaStore",
+    title: "Inventory & POS System",
+    description: "Advanced stock tracking and point-of-sale system for retail shops and stores.",
+    price: 15000,
+    originalPrice: 22000,
+    popular: false,
+    features: ["Stock Tracking", "Sales Reporting", "Barcode Integration", "Supplier Management", "Low Stock Alerts"],
+    paymentTerms: "50% Advance, 50% on Delivery",
+    additionalCharges: "POS Hardware & Hosting separate",
+    requirements: ["Product List", "Category Data", "Supplier Info", "Tax Configuration"],
+    detailedDescription: "Take control of your shop's inventory with our premium POS solution. Track every sale, monitor stock levels in real-time, and generate daily/monthly sales reports to grow your business efficiently. Designed for speed and accuracy in retail environments."
+  },
 ];
 
 export default function ServicesClient() {
