@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import PortfolioClient from './PortfolioClient'
 export const metadata: Metadata = {
-  title: "Web Development Portfolio | Featured Projects & Case Studies",
+  title: "Web Development Portfolio | Premium Global Projects & Case Studies",
   description:
-    "Explore our successful web development projects. From premium business websites to complex e-commerce platforms and job portals in India.",
+    "Discover our portfolio of high-performance web solutions. We showcase premium business websites, scalable e-commerce platforms, and custom software delivered worldwide.",
   alternates: {
     canonical: '/portfolio',
   }

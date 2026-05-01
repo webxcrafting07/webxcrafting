@@ -5,43 +5,45 @@ import { Toaster } from "react-hot-toast";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.webxcrafting.in"),
   title: {
-    default: "WebXCrafting — Best Web Development Company in India | Premium Websites",
+    default: "WebXCrafting — Global Web Development & Digital Solutions Agency",
     template: "%s | WebXCrafting",
   },
   description:
-    "Top-rated Web Development Agency in India. We craft premium, high-performance business websites, E-commerce stores, Job Portals, and Custom Web Applications with guaranteed SEO performance and modern design.",
+    "WebXCrafting is a premier global web development agency. We craft high-performance business websites, E-commerce stores, Job Portals, and Custom Web Applications with cutting-edge tech and SEO excellence.",
   keywords: [
-    "web development company India",
-    "best website design agency",
+    "global web development agency",
+    "best website design company",
     "premium web development services",
-    "ecommerce website development",
+    "ecommerce development experts",
     "custom web application development",
-    "affordable web design india",
     "next.js development company",
-    "react developers india",
-    "job portal development services",
+    "react developers worldwide",
+    "job portal development",
     "business website design",
-    "startup website development",
+    "SaaS application development",
     "webxcrafting",
-    "web development solutions",
+    "full stack development services",
     "professional web designers",
     "high performance websites",
+    "SEO optimized web development",
   ],
   authors: [{ name: "WebXCrafting" }],
   creator: "WebXCrafting",
   publisher: "WebXCrafting",
   alternates: {
     languages: {
+      'en-US': '/',
       'en-IN': '/',
+      'x-default': '/',
     },
   },
   openGraph: {
     type: "website",
-    locale: "en_IN",
-    url: "https://webxcrafting.in",
-    title: "WebXCrafting — Premium Web Development Agency",
+    locale: "en_US",
+    url: "https://www.webxcrafting.in",
+    title: "WebXCrafting — Premium Global Web Development Agency",
     description:
-      "Expert web development solutions to scale your business. We build stunning, high-performance websites that rank and convert.",
+      "Expert web development solutions to scale your business globally. We build stunning, high-performance websites that rank and convert.",
     siteName: "WebXCrafting",
     images: [
       {
@@ -54,9 +56,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "WebXCrafting — Premium Web Development Agency",
+    title: "WebXCrafting — Premium Global Web Development Agency",
     description:
-      "High-performance websites for businesses, e-commerce, and custom apps.",
+      "High-performance websites for businesses, e-commerce, and custom apps worldwide.",
     images: ["/logo-wxc.png"],
   },
   robots: {
@@ -86,13 +88,15 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "WebXCrafting",
+    "alternateName": "WebX Crafting",
     "url": "https://www.webxcrafting.in",
     "logo": "https://www.webxcrafting.in/logo-wxc.png",
+    "description": "Global premium web development agency specializing in Next.js, React, and high-performance digital solutions.",
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": "+91 9102615343",
       "contactType": "customer service",
-      "areaServed": "IN",
+      "areaServed": "Worldwide",
       "availableLanguage": ["en", "Hindi"]
     },
     "sameAs": [

@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import ServicesClient from './ServicesClient'
 export const metadata: Metadata = {
-  title: "Professional Web Design & Development Services India",
+  title: "Professional Web Design & Development Services | WebXCrafting",
   description:
-    "Affordable and premium web development services. We specialize in Business Websites, E-commerce Stores, Job Portals, and Custom Web Applications with transparent pricing.",
+    "Explore our premium global web development services. From custom e-commerce solutions to enterprise-grade web applications, we build digital products that drive growth.",
   alternates: {
     canonical: '/services',
   }
