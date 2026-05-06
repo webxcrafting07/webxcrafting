@@ -9,6 +9,20 @@ const nextConfig = {
     ],
   },
   serverExternalPackages: ['mongoose'],
+  async redirects() {
+    return [
+      {
+        source: '/$',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/&',
+        destination: '/',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig

@@ -32,12 +32,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const res = await fetch(`${baseUrl}/api/blogs?status=published`, { cache: 'no-store' })
     const data = await res.json()
     if (data.success && data.data) {
-      blogRoutes = data.data.map((blog: any) => ({
-        url: `${baseUrl}/blog/${blog.slug}`,
-        lastModified: new Date(blog.updatedAt || blog.createdAt),
-        changeFrequency: 'weekly' as const,
-        priority: 0.7,
-      }))
+      blogRoutes = data.data
+        .filter((blog: any) => blog.slug && blog.slug.trim() !== '')
+        .map((blog: any) => ({
+          url: `${baseUrl}/blog/${blog.slug}`,
+          lastModified: new Date(blog.updatedAt || blog.createdAt),
+          changeFrequency: 'weekly' as const,
+          priority: 0.7,
+        }))
     }
   } catch (error) {
     console.error('Sitemap fetch error:', error)
