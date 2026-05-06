@@ -46,5 +46,8 @@ export async function generateMetadata({ params }: PageProps) {
 
 export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await params
-  return <BlogPostClient slug={slug} />
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.webxcrafting.in'
+  const fullUrl = `${baseUrl}/blog/${slug}`
+  
+  return <BlogPostClient slug={slug} fullUrl={fullUrl} />
 }

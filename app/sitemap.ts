@@ -26,13 +26,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: route === '' ? 1 : (route === '/blog' || route === '/services') ? 0.9 : 0.8,
   }))
 
-  // Fetch published blog slugs for dynamic routes
+  // Fetch published blog slugs for dynamic routes using direct DB connection for robustness
   let blogRoutes: MetadataRoute.Sitemap = []
   try {
-    const res = await fetch(`${baseUrl}/api/blogs?status=published`, { cache: 'no-store' })
-    const data = await res.json()
-    if (data.success && data.data) {
-      blogRoutes = data.data
+    const { connectDB } = await import('@/lib/db')
+    const Blog = (await import('@/models/Blog')).default
+    
+    await connectDB()
+    const blogs = await Blog.find({ 
+      status: 'published',
+      publishDate: { $lte: new Date() }
+    }).select('slug updatedAt createdAt').lean()
+
+    if (blogs && blogs.length > 0) {
+      blogRoutes = blogs
         .filter((blog: any) => blog.slug && blog.slug.trim() !== '')
         .map((blog: any) => ({
           url: `${baseUrl}/blog/${blog.slug}`,
@@ -42,8 +49,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         }))
     }
   } catch (error) {
-    console.error('Sitemap fetch error:', error)
-    // If fetch fails (e.g., during build), just skip blog routes
+    console.error('Sitemap DB fetch error:', error)
   }
 
   return [...staticRoutes, ...blogRoutes]

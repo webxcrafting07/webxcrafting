@@ -16,7 +16,7 @@ const catColors: Record<string, string> = {
   'Technology': '#00e5ff',
 }
 
-export default function BlogPostClient({ slug }: { slug: string }) {
+export default function BlogPostClient({ slug, fullUrl }: { slug: string, fullUrl: string }) {
   const [blog, setBlog] = useState<any>(null)
   const [relatedBlogs, setRelatedBlogs] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
@@ -89,14 +89,14 @@ export default function BlogPostClient({ slug }: { slug: string }) {
       name: 'WebXCrafting',
       logo: {
         '@type': 'ImageObject',
-        url: `${typeof window !== 'undefined' ? window.location.origin : ''}/logo-wxc.png`,
+        url: 'https://www.webxcrafting.in/logo-wxc.png',
       },
     },
     datePublished: blog.publishDate || blog.createdAt,
     dateModified: blog.updatedAt,
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': typeof window !== 'undefined' ? window.location.href : '',
+      '@id': fullUrl,
     },
   }
 

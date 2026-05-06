@@ -353,7 +353,7 @@ export default function HomeClient() {
       .then((d) => { if (d.success && d.data.length) setServices(d.data) })
       .catch(() => { })
 
-    fetch('/api/projects?limit=3&featured=true')
+    fetch('/api/projects?limit=3')
       .then((r) => r.json())
       .then((d) => { if (d.success && d.data.length) setProjects(d.data.slice(0, 3)) })
       .catch(() => { })
