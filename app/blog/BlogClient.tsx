@@ -30,9 +30,13 @@ const FadeUp = ({ children, delay = 0, style = {} }: any) => (
   </motion.div>
 )
 
-export default function BlogClient() {
-  const [blogs, setBlogs] = useState<any[]>([])
-  const [loading, setLoading] = useState(true)
+interface BlogClientProps {
+  initialBlogs: any[]
+}
+
+export default function BlogClient({ initialBlogs }: BlogClientProps) {
+  const [blogs, setBlogs] = useState<any[]>(initialBlogs || [])
+  const [loading, setLoading] = useState(false)
   const [activeCategory, setActiveCategory] = useState('All')
   const [searchQuery, setSearchQuery] = useState('')
 
@@ -40,7 +44,7 @@ export default function BlogClient() {
     fetch('/api/blogs?status=published')
       .then((r) => r.json())
       .then((d) => {
-        if (d.success) setBlogs(d.data)
+        if (d.success && d.data?.length) setBlogs(d.data)
       })
       .catch(() => {})
       .finally(() => setLoading(false))
