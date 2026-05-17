@@ -159,6 +159,126 @@ export const CITIES_CONFIG: Record<string, { name: string; state: string; descri
     state: 'Assam',
     description: 'Top web development company in Guwahati. Empowering Northeast India businesses with premium, scalable, and responsive digital web solutions.',
     keywords: 'web development company in guwahati, web design assam, website developers guwahati, northeast web development'
+  },
+  'gurgaon': {
+    name: 'Gurgaon',
+    state: 'Haryana',
+    description: 'Looking for a top web development company in Gurgaon? We build hyper-scalable corporate websites, custom SaaS, and eCommerce solutions for startups and enterprises.',
+    keywords: 'web development company in gurgaon, web design gurgaon, software development gurugram, ecommerce agency gurgaon'
+  },
+  'noida': {
+    name: 'Noida',
+    state: 'Uttar Pradesh',
+    description: 'Best web development company in Noida. WebXCrafting delivers ultra-fast, premium React and Next.js applications tailored to elevate your corporate branding.',
+    keywords: 'web development company in noida, website developers noida, web design noida, top it company noida'
+  },
+  'dehradun': {
+    name: 'Dehradun',
+    state: 'Uttarakhand',
+    description: 'Leading web development company in Dehradun. Grow your local business with stunning, search-engine-optimized websites and custom digital platforms.',
+    keywords: 'web development company in dehradun, web design dehradun, it services uttarakhand, website makers dehradun'
+  },
+  'bhubaneswar': {
+    name: 'Bhubaneswar',
+    state: 'Odisha',
+    description: 'Premium website design and development services in Bhubaneswar. Unlock your digital potential with custom web applications and business portfolios.',
+    keywords: 'web development company in bhubaneswar, web design odisha, website developers bhubaneswar, it companies in odisha'
+  },
+  'ranchi': {
+    name: 'Ranchi',
+    state: 'Jharkhand',
+    description: 'Top-tier web development company in Ranchi. We specialize in dynamic B2B portals, ecommerce websites, and high-performance business applications.',
+    keywords: 'web development company in ranchi, web design ranchi, website developers jharkhand, ranchi software developers'
+  },
+  'rajkot': {
+    name: 'Rajkot',
+    state: 'Gujarat',
+    description: 'Expert web development company in Rajkot. Accelerate your manufacturing or retail business with blazing-fast eCommerce sites and corporate portals.',
+    keywords: 'web development company in rajkot, website design rajkot, ecommerce development gujarat, rajkot web developers'
+  },
+  'jodhpur': {
+    name: 'Jodhpur',
+    state: 'Rajasthan',
+    description: 'Leading website development company in Jodhpur. Build a premium digital identity for your business with bespoke web design and custom software.',
+    keywords: 'web development company in jodhpur, web design jodhpur, rajasthan website developers, ecommerce jodhpur'
+  },
+  'mysore': {
+    name: 'Mysore',
+    state: 'Karnataka',
+    description: 'WebXCrafting is the premier web development company in Mysore. We deliver custom SaaS, dynamic corporate sites, and fast e-commerce stores.',
+    keywords: 'web development company in mysore, web design mysore, karnataka software developers, it company mysore'
+  },
+  'madurai': {
+    name: 'Madurai',
+    state: 'Tamil Nadu',
+    description: 'Best web development company in Madurai. Take your local brand global with highly-optimized, fast-loading, and mobile-friendly business websites.',
+    keywords: 'web development company in madurai, website design madurai, tamil nadu web developers, ecommerce madurai'
+  },
+  'mangalore': {
+    name: 'Mangalore',
+    state: 'Karnataka',
+    description: 'Top web development agency in Mangalore. We craft beautiful UI/UX designs and robust backend systems for enterprises and digital startups.',
+    keywords: 'web development company in mangalore, web design mangalore, software company mangalore, mangalore website makers'
+  },
+  'udaipur': {
+    name: 'Udaipur',
+    state: 'Rajasthan',
+    description: 'Premium web development company in Udaipur. From luxury hospitality websites to robust eCommerce engines, we build digital excellence.',
+    keywords: 'web development company in udaipur, web design udaipur, rajasthan web developers, hospitality web design udaipur'
+  },
+  'jalandhar': {
+    name: 'Jalandhar',
+    state: 'Punjab',
+    description: 'Expert web development company in Jalandhar. Scale your sports, manufacturing, or service business with tailored, high-performance websites.',
+    keywords: 'web development company in jalandhar, web design jalandhar, punjab web developers, website makers jalandhar'
+  },
+  'amritsar': {
+    name: 'Amritsar',
+    state: 'Punjab',
+    description: 'Leading website development company in Amritsar. We build lead-generating, SEO-optimized digital platforms for progressive businesses.',
+    keywords: 'web development company in amritsar, web design amritsar, it company amritsar, punjab software development'
+  },
+  'faridabad': {
+    name: 'Faridabad',
+    state: 'Haryana',
+    description: 'Top-rated web development company in Faridabad. Industrial strength web solutions, corporate portals, and eCommerce applications built to scale.',
+    keywords: 'web development company in faridabad, website design faridabad, haryana web developers, faridabad software companies'
+  },
+  'ghaziabad': {
+    name: 'Ghaziabad',
+    state: 'Uttar Pradesh',
+    description: 'Grow your enterprise with the best web development company in Ghaziabad. We specialize in fast Next.js applications and digital marketing platforms.',
+    keywords: 'web development company in ghaziabad, web design ghaziabad, up website developers, ghaziabad it services'
+  },
+  'navi-mumbai': {
+    name: 'Navi Mumbai',
+    state: 'Maharashtra',
+    description: 'Premium web development company in Navi Mumbai. Experience world-class web engineering, SaaS development, and bespoke React digital portals.',
+    keywords: 'web development company in navi mumbai, web design navi mumbai, software developers navi mumbai, ecommerce navi mumbai'
+  },
+  'thane': {
+    name: 'Thane',
+    state: 'Maharashtra',
+    description: 'Expert website development company in Thane. We help businesses automate and grow through high-end web applications and corporate websites.',
+    keywords: 'web development company in thane, web design thane, thane software company, website creators thane'
+  },
+  'raipur': {
+    name: 'Raipur',
+    state: 'Chhattisgarh',
+    description: 'Best web development company in Raipur. Empower your brand with cutting-edge website design and highly scalable corporate digital software.',
+    keywords: 'web development company in raipur, web design raipur, chhattisgarh web developers, it services raipur'
+  },
+  'gwalior': {
+    name: 'Gwalior',
+    state: 'Madhya Pradesh',
+    description: 'Leading web development company in Gwalior. Transform your vision into reality with our premium web design and custom software solutions.',
+    keywords: 'web development company in gwalior, website design gwalior, mp web developers, gwalior it company'
+  },
+  'jabalpur': {
+    name: 'Jabalpur',
+    state: 'Madhya Pradesh',
+    description: 'Top web development agency in Jabalpur. We build extremely fast, responsive, and secure websites for growing startups and established businesses.',
+    keywords: 'web development company in jabalpur, web design jabalpur, software development mp, jabalpur website developers'
   }
 }
 
