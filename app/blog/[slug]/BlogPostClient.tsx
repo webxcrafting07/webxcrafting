@@ -1,5 +1,4 @@
 'use client'
-import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
@@ -16,61 +15,7 @@ const catColors: Record<string, string> = {
   'Technology': '#00e5ff',
 }
 
-export default function BlogPostClient({ slug, fullUrl }: { slug: string, fullUrl: string }) {
-  const [blog, setBlog] = useState<any>(null)
-  const [relatedBlogs, setRelatedBlogs] = useState<any[]>([])
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    fetch(`/api/blogs/${slug}`)
-      .then((r) => r.json())
-      .then((d) => {
-        if (d.success) {
-          setBlog(d.data)
-          // Fetch related blogs
-          fetch(`/api/blogs?status=published&category=${encodeURIComponent(d.data.category)}`)
-            .then((r) => r.json())
-            .then((rd) => {
-              if (rd.success) {
-                setRelatedBlogs(rd.data.filter((b: any) => b.slug !== slug).slice(0, 3))
-              }
-            })
-            .catch(() => {})
-        }
-      })
-      .catch(() => {})
-      .finally(() => setLoading(false))
-  }, [slug])
-
-  if (loading) {
-    return (
-      <>
-        <DotBackground />
-        <Navbar />
-        <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16, color: '#7b82a8' }}>
-          <div className="spinner" /> Loading article…
-        </div>
-        <Footer />
-      </>
-    )
-  }
-
-  if (!blog) {
-    return (
-      <>
-        <DotBackground />
-        <Navbar />
-        <div style={{ minHeight: '80vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 20, color: '#7b82a8', padding: 32 }}>
-          <div style={{ fontSize: 56 }}>📄</div>
-          <h1 style={{ fontFamily: 'Syne', fontWeight: 800, fontSize: 32, color: '#e8eaf6', fontStyle: 'italic' }}>Article Not Found</h1>
-          <p>The blog post you&apos;re looking for doesn&apos;t exist or has been removed.</p>
-          <Link href="/blog" className="btn-primary">← Back to Blog</Link>
-        </div>
-        <Footer />
-      </>
-    )
-  }
-
+export default function BlogPostClient({ blog, relatedBlogs, fullUrl }: { blog: any, relatedBlogs: any[], fullUrl: string }) {
   const accentColor = catColors[blog.category] || '#4f6fff'
 
   // JSON-LD structured data

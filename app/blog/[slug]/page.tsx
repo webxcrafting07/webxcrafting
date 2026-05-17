@@ -1,4 +1,7 @@
+import { connectDB } from '@/lib/db'
+import Blog from '@/models/Blog'
 import BlogPostClient from './BlogPostClient'
+import { notFound } from 'next/navigation'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -6,26 +9,31 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.webxcrafting.in'
 
   try {
-    const res = await fetch(`${baseUrl}/api/blogs/${slug}`, { cache: 'no-store' })
-    const data = await res.json()
+    await connectDB()
+    const blog = await Blog.findOne({
+      slug,
+      status: 'published',
+      publishDate: { $lte: new Date() }
+    }).select('title metaTitle metaDescription excerpt coverImage createdAt updatedAt author').lean()
 
-    if (!data.success || !data.data) {
+    if (!blog) {
       return { title: 'Blog Post Not Found' }
     }
 
-    const blog = data.data
+    const title = blog.metaTitle || blog.title
+    const description = blog.metaDescription || blog.excerpt
+
     return {
-      title: blog.metaTitle || blog.title,
-      description: blog.metaDescription || blog.excerpt,
+      title,
+      description,
       alternates: {
         canonical: `/blog/${slug}`,
       },
       openGraph: {
-        title: blog.metaTitle || blog.title,
-        description: blog.metaDescription || blog.excerpt,
+        title,
+        description,
         type: 'article',
         publishedTime: blog.createdAt,
         modifiedTime: blog.updatedAt,
@@ -34,8 +42,8 @@ export async function generateMetadata({ params }: PageProps) {
       },
       twitter: {
         card: 'summary_large_image',
-        title: blog.metaTitle || blog.title,
-        description: blog.metaDescription || blog.excerpt,
+        title,
+        description,
         images: blog.coverImage ? [blog.coverImage] : [],
       },
     }
@@ -49,5 +57,31 @@ export default async function BlogPostPage({ params }: PageProps) {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.webxcrafting.in'
   const fullUrl = `${baseUrl}/blog/${slug}`
   
-  return <BlogPostClient slug={slug} fullUrl={fullUrl} />
+  await connectDB()
+  
+  // Find the blog, ensuring it is published and not scheduled in the future
+  const blogObj = await Blog.findOne({
+    slug,
+    status: 'published',
+    publishDate: { $lte: new Date() }
+  }).lean()
+
+  if (!blogObj) {
+    notFound()
+  }
+
+  // Convert BSON fields to JSON-serializable types for client component boundary
+  const blog = JSON.parse(JSON.stringify(blogObj))
+
+  // Fetch up to 3 related blogs in the same category
+  const relatedBlogsObj = await Blog.find({
+    status: 'published',
+    publishDate: { $lte: new Date() },
+    category: blog.category,
+    slug: { $ne: slug }
+  }).limit(3).lean()
+
+  const relatedBlogs = JSON.parse(JSON.stringify(relatedBlogsObj))
+
+  return <BlogPostClient blog={blog} relatedBlogs={relatedBlogs} fullUrl={fullUrl} />
 }

@@ -3,6 +3,14 @@ import type { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone()
+  const pathname = request.nextUrl.pathname
+
+  // Handle literal trailing or standalone $ and & to prevent Google Search Console 404s
+  if (pathname === '/$' || pathname === '/&' || pathname.endsWith('$') || pathname.endsWith('&')) {
+    url.pathname = '/'
+    return NextResponse.redirect(url, 301)
+  }
+
   const hostname = request.headers.get('host')
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.webxcrafting.in'
   const canonicalHost = new URL(siteUrl).host
