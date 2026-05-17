@@ -23,6 +23,7 @@ export const metadata: Metadata = {
     "business website design",
     "SaaS application development",
     "webxcrafting",
+    "webx crafting",
     "full stack development services",
     "professional web designers",
     "high performance websites",
