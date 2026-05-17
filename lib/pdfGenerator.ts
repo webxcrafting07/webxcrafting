@@ -394,8 +394,8 @@ export async function generateProposalPDFBuffer(lead: { name: string; email: str
       cellPadding: 6
     },
     columnStyles: {
-      0: { cellWidth: 55, fontStyle: "bold" },
-      1: { cellWidth: "auto" },
+      0: { cellWidth: 50, fontStyle: "bold" },
+      1: { cellWidth: 90 },
       2: { halign: "right", fontStyle: "bold", cellWidth: 35 }
     },
     styles: {
@@ -403,7 +403,8 @@ export async function generateProposalPDFBuffer(lead: { name: string; email: str
       font: "helvetica",
       cellPadding: 5.5,
       lineColor: [229, 231, 235],
-      lineWidth: 0.1
+      lineWidth: 0.1,
+      overflow: "linebreak"
     },
     alternateRowStyles: {
       fillColor: [250, 250, 252]
