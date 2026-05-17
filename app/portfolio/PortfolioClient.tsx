@@ -208,7 +208,7 @@ function ProjectCard({ project }: { project: any }) {
 export default function PortfolioClient() {
   const [projects, setProjects] = useState(defaultProjects);
   const [filter, setFilter] = useState("All");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetch("/api/projects")
