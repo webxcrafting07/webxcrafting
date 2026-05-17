@@ -28,7 +28,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }))
 
   // Pre-generate location city routes for maximum index visibility
-  const cities = ['bangalore', 'mumbai', 'delhi-ncr', 'pune', 'hyderabad', 'ahmedabad']
+  const cities = [
+    'bangalore', 'mumbai', 'delhi-ncr', 'pune', 'hyderabad', 'ahmedabad',
+    'chennai', 'kolkata', 'jaipur', 'lucknow', 'surat', 'nagpur',
+    'indore', 'chandigarh', 'patna', 'bhopal', 'vadodara', 'ludhiana',
+    'agra', 'nashik', 'kochi', 'thiruvananthapuram', 'visakhapatnam',
+    'coimbatore', 'kanpur', 'guwahati', 'gurgaon', 'noida', 'dehradun',
+    'bhubaneswar', 'ranchi', 'rajkot', 'jodhpur', 'mysore', 'madurai',
+    'mangalore', 'udaipur', 'jalandhar', 'amritsar', 'faridabad',
+    'ghaziabad', 'navi-mumbai', 'thane', 'raipur', 'gwalior', 'jabalpur'
+  ]
   const locationRoutes: MetadataRoute.Sitemap = cities.map((city) => ({
     url: `${baseUrl}/locations/web-development-company-in-${city}`,
     lastModified: new Date(),
