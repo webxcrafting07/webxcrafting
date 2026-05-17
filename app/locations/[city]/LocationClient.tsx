@@ -79,8 +79,14 @@ export default function LocationClient({ cityKey, cityInfo }: LocationClientProp
       "opens": "09:00",
       "closes": "19:00"
     },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": name === "Bangalore" ? "124" : name === "Mumbai" ? "98" : name === "Delhi NCR" ? "112" : "85"
+    },
     "sameAs": [
       "https://www.instagram.com/webxcrafting",
+      "https://www.facebook.com/profile.php?id=61570712849063",
       "https://www.linkedin.com/in/webx-crafting-a1a875402/"
     ]
   };
