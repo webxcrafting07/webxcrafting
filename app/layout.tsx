@@ -122,35 +122,6 @@ export default function RootLayout({
         }
       },
       {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "How much does a professional website cost?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "A professional business website starts from ₹8,000. Custom e-commerce platforms or job portals vary based on features, but we offer competitive premium pricing worldwide."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Do you provide SEO with website development?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, every website we build is SEO-optimized from the ground up, ensuring fast loading speeds, mobile responsiveness, and clean code structure to help you rank globally on Google."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Can you build custom e-commerce stores?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Absolutely. We specialize in high-performance e-commerce solutions with custom dashboards, secure payment integrations, and advanced inventory management."
-            }
-          }
-        ]
-      },
-      {
         "@type": "Service",
         "serviceType": "Web Development",
         "provider": { "@id": "https://www.webxcrafting.in/#organization" },
