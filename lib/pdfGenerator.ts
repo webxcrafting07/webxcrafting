@@ -1,6 +1,7 @@
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 import { IBill } from '@/models/Bill';
+import { LOGO_BASE64 } from './logo-base64';
 
 export async function generateInvoicePDFBuffer(bill: any): Promise<Buffer> {
   const doc = new jsPDF();
@@ -210,226 +211,355 @@ export async function generateInvoicePDFBuffer(bill: any): Promise<Buffer> {
 export async function generateProposalPDFBuffer(lead: { name: string; email: string; budget?: string; message: string }): Promise<Buffer> {
   const doc = new jsPDF();
   
-  const charcoal: [number, number, number] = [17, 24, 39]; // Deep Charcoal
-  const electricBlue: [number, number, number] = [79, 111, 255]; // Accent Blue
+  const charcoal: [number, number, number] = [17, 24, 39]; // Deep Charcoal (#111827)
+  const electricBlue: [number, number, number] = [79, 111, 255]; // Accent Blue (#4f6fff)
   const softGray: [number, number, number] = [243, 244, 246];
+
+  // ==========================================
+  // PAGE 1: EXECUTIVE COVER PAGE
+  // ==========================================
   
-  // Background Accent Stripe
+  // Fill charcoal background for page 1
+  doc.setFillColor(13, 15, 26);
+  doc.rect(0, 0, 210, 297, "F");
+  
+  // Left electric blue accent glow bar
   doc.setFillColor(electricBlue[0], electricBlue[1], electricBlue[2]);
-  doc.rect(0, 0, 8, 297, 'F');
-  
-  // Header Block
-  doc.setFillColor(charcoal[0], charcoal[1], charcoal[2]);
-  doc.rect(8, 0, 202, 50, 'F');
-  
-  // Custom geometric Logo icon (interlocking tech block)
-  doc.setFillColor(79, 111, 255);
-  doc.rect(20, 15, 10, 10, 'F');
-  doc.setFillColor(162, 89, 255);
-  doc.rect(25, 20, 10, 10, 'F');
-  
-  // Brand Name
-  doc.setTextColor(255, 255, 255);
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(22);
-  doc.text('WebXCrafting', 42, 24);
-  
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(9);
-  doc.setTextColor(162, 89, 255);
-  doc.text('PREMIUM CUSTOM WEB DEVELOPMENT & SEO', 42, 32);
-  
-  // Title (Right side of header banner)
-  doc.setTextColor(255, 255, 255);
-  doc.setFontSize(18);
-  doc.setFont('helvetica', 'bold');
-  doc.text('PROJECT PROPOSAL', 130, 25);
-  doc.setFontSize(9);
-  doc.setFont('helvetica', 'normal');
-  doc.setTextColor(156, 163, 175);
-  doc.text('Custom Estimate & Scope', 130, 32);
-  
-  // Horizontal line
-  doc.setDrawColor(electricBlue[0], electricBlue[1], electricBlue[2]);
-  doc.setLineWidth(0.5);
-  doc.line(20, 50, 195, 50);
-  
-  // --- CLIENT DETAILS SECTION ---
-  doc.setTextColor(charcoal[0], charcoal[1], charcoal[2]);
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(11);
-  doc.text('PREPARED FOR:', 20, 65);
-  
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(14);
-  doc.setTextColor(electricBlue[0], electricBlue[1], electricBlue[2]);
-  doc.text(lead.name, 20, 72);
-  
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(10);
-  doc.setTextColor(75, 85, 99);
-  doc.text(`Email: ${lead.email}`, 20, 78);
-  
-  // Extracted WhatsApp/Phone if available in message
-  let phone = 'Not specified';
-  const phoneMatch = lead.message.match(/Client Phone:\s*([^\n]+)/i);
-  if (phoneMatch) {
-    phone = phoneMatch[1].trim();
-  } else {
-    const whatsappMatch = lead.message.match(/WhatsApp Number:\s*([^\n]+)/i);
-    if (whatsappMatch) phone = whatsappMatch[1].trim();
+  doc.rect(0, 0, 10, 297, "F");
+
+  // Logo image centered
+  try {
+    doc.addImage(LOGO_BASE64, "PNG", 90, 45, 30, 30);
+  } catch (e) {
+    console.error("Failed to add image to server PDFCover:", e);
+    // Draw vector fallback logo if image fail
+    doc.setFillColor(79, 111, 255);
+    doc.rect(90, 45, 15, 15, "F");
+    doc.setFillColor(162, 89, 255);
+    doc.rect(95, 50, 15, 15, "F");
   }
-  doc.text(`Contact: ${phone}`, 20, 84);
-  
-  // Proposal Meta
-  doc.setTextColor(charcoal[0], charcoal[1], charcoal[2]);
-  doc.setFont('helvetica', 'bold');
-  doc.text('PROPOSAL DETAILS:', 120, 65);
-  
-  doc.setFont('helvetica', 'normal');
+
+  // Company Brand Name
+  doc.setTextColor(255, 255, 255);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(28);
+  doc.text("WebXCrafting", 105, 90, { align: "center" });
+
+  doc.setFont("helvetica", "normal");
   doc.setFontSize(10);
-  doc.setTextColor(75, 85, 99);
-  doc.text(`Proposal Ref: #WXC-${Math.floor(100000 + Math.random() * 900000)}`, 120, 72);
-  doc.text(`Date Generated: ${new Date().toLocaleDateString('en-IN')}`, 120, 78);
-  doc.text(`Valid Until: 30 Days from date`, 120, 84);
+  doc.setTextColor(162, 89, 255);
+  doc.text("PREMIUM CUSTOM WEB DEVELOPMENT & SEO", 105, 98, { align: "center" });
   
-  // Divider
-  doc.setDrawColor(229, 231, 235);
-  doc.setLineWidth(0.2);
-  doc.line(20, 92, 195, 92);
+  doc.setDrawColor(79, 111, 255);
+  doc.setLineWidth(0.6);
+  doc.line(40, 110, 170, 110);
+
+  // Proposal Subtitle
+  doc.setTextColor(255, 255, 255);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(18);
+  doc.text("DIGITAL ARCHITECTURE PROPOSAL", 105, 125, { align: "center" });
+
+  doc.setFont("helvetica", "italic");
+  doc.setFontSize(11);
+  doc.setTextColor(156, 163, 175);
+  doc.text("Personalized Project Estimate & Technical Roadmap", 105, 133, { align: "center" });
+
+  // Prepared Client Card
+  const cardY = 160;
+  doc.setFillColor(22, 28, 45); // Dark blue card background
+  doc.rect(30, cardY, 150, 65, "F");
   
-  // --- SPECIFICATIONS / MESSAGE SECTION ---
-  const lines = lead.message.split('\n');
-  const specs: any[] = [];
-  
-  for (const line of lines) {
-    if (line.startsWith('- ')) {
-      const cleanLine = line.substring(2).trim();
-      const colonIdx = cleanLine.indexOf(':');
-      if (colonIdx !== -1) {
-        const item = cleanLine.substring(0, colonIdx).trim();
-        const value = cleanLine.substring(colonIdx + 1).trim();
-        specs.push([item, value]);
-      } else {
-        specs.push([cleanLine, 'Selected']);
+  doc.setDrawColor(79, 111, 255);
+  doc.setLineWidth(0.3);
+  doc.rect(30, cardY, 150, 65, "D");
+
+  doc.setTextColor(162, 89, 255);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(9);
+  doc.text("PREPARED EXCLUSIVELY FOR:", 40, cardY + 12);
+
+  doc.setTextColor(255, 255, 255);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(15);
+  doc.text(lead.name, 40, cardY + 22);
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(10);
+  doc.setTextColor(156, 163, 175);
+  doc.text(`Email: ${lead.email}`, 40, cardY + 32);
+
+  // Extract phone number if present in the message
+  const phoneMatch = lead.message.match(/WhatsApp Number:\s*([^\n]+)/i) || lead.message.match(/Phone:\s*([^\n]+)/i);
+  const clientPhone = phoneMatch ? phoneMatch[1].trim() : "Provided on Inquiry";
+  doc.text(`WhatsApp: ${clientPhone}`, 40, cardY + 38);
+
+  doc.setTextColor(162, 89, 255);
+  doc.setFont("helvetica", "bold");
+  doc.text("DOCUMENT CONTROL:", 40, cardY + 48);
+  doc.setTextColor(255, 255, 255);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(9);
+  doc.text(`Ref: #WXC-${Math.floor(100000 + Math.random() * 900000)}   |   Date: ${new Date().toLocaleDateString("en-IN")}`, 40, cardY + 56);
+
+  // Footer cover
+  doc.setTextColor(107, 114, 128);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(8);
+  doc.text(`© ${new Date().getFullYear()} WebXCrafting. All rights reserved. Confidential document.`, 105, 275, { align: "center" });
+
+  // ==========================================
+  // PAGE 2: SPECS AND FINANCIAL DETAILS
+  // ==========================================
+  doc.addPage();
+
+  // Left accent bar
+  doc.setFillColor(electricBlue[0], electricBlue[1], electricBlue[2]);
+  doc.rect(0, 0, 8, 297, "F");
+
+  // Mini Header Banner
+  doc.setFillColor(17, 24, 39);
+  doc.rect(8, 0, 202, 35, "F");
+
+  try {
+    doc.addImage(LOGO_BASE64, "PNG", 20, 7, 20, 20);
+  } catch (e) {}
+
+  doc.setTextColor(255, 255, 255);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(16);
+  doc.text("WebXCrafting", 48, 17);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(8);
+  doc.setTextColor(162, 89, 255);
+  doc.text("PREMIUM CUSTOM WEB DEVELOPMENT & SEO", 48, 23);
+
+  // Quote info right aligned mini header
+  doc.setTextColor(255, 255, 255);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(11);
+  doc.text("PROJECT ESTIMATE", 145, 15);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(8);
+  doc.setTextColor(156, 163, 175);
+  doc.text("Interactive Proposal Breakdown", 145, 21);
+
+  // Header line
+  doc.setDrawColor(electricBlue[0], electricBlue[1], electricBlue[2]);
+  doc.setLineWidth(0.4);
+  doc.line(20, 35, 195, 35);
+
+  // Section Title
+  doc.setTextColor(17, 24, 39);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(13);
+  doc.text("01. SERVICE SPECIFICATIONS & PRICING", 20, 48);
+
+  // Parse specifications from message
+  const specItems: any[] = [];
+  const specLines = lead.message.split("\n");
+  let hasSpecs = false;
+
+  specLines.forEach(line => {
+    if (line.includes(":") && !line.startsWith("http") && !line.toLowerCase().includes("message")) {
+      const parts = line.split(":");
+      const key = parts[0].trim();
+      const val = parts.slice(1).join(":").trim();
+      if (key && val && !key.toLowerCase().includes("whatsapp") && !key.toLowerCase().includes("phone") && !key.toLowerCase().includes("email")) {
+        specItems.push([key, val, "Included in scope"]);
+        hasSpecs = true;
       }
     }
+  });
+
+  // If no specs found, render custom message card
+  if (!hasSpecs) {
+    const cleanMsg = lead.message.replace(/Website URL:.*|WhatsApp Number:.*/g, "").trim();
+    specItems.push(["Custom Consultation Inquiry", cleanMsg || "Requesting custom estimate.", "TBD on Discovery Call"]);
   }
-  
-  let currentY = 100;
-  
-  if (specs.length > 0) {
-    doc.setTextColor(charcoal[0], charcoal[1], charcoal[2]);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(12);
-    doc.text('PROJECT SPECIFICATIONS & ITEMIZATION', 20, 102);
-    
-    (doc as any).autoTable({
-      startY: 108,
-      margin: { left: 20, right: 15 },
-      head: [['ITEM SPECIFICATION CATEGORY', 'SELECTED CHOICES & DELIVERABLES']],
-      body: specs,
-      theme: 'grid',
-      headStyles: {
-        fillColor: charcoal,
-        textColor: [255, 255, 255],
-        fontSize: 10,
-        fontStyle: 'bold',
-        halign: 'left',
-        cellPadding: 5
-      },
-      columnStyles: {
-        0: { cellWidth: 70, fontStyle: 'bold' },
-        1: { cellWidth: 'auto' }
-      },
-      styles: {
-        fontSize: 9,
-        font: 'helvetica',
-        cellPadding: 5,
-        lineColor: [229, 231, 235],
-        lineWidth: 0.1
-      },
-      alternateRowStyles: {
-        fillColor: [250, 250, 252]
-      }
-    });
-    
-    currentY = (doc as any).lastAutoTable.finalY + 12;
-  } else {
-    doc.setTextColor(charcoal[0], charcoal[1], charcoal[2]);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(12);
-    doc.text('CLIENT ENQUIRY & MESSAGE', 20, 102);
-    
-    doc.setFillColor(softGray[0], softGray[1], softGray[2]);
-    doc.rect(20, 108, 175, 45, 'F');
-    
-    doc.setTextColor(55, 65, 81);
-    doc.setFont('helvetica', 'italic');
-    doc.setFontSize(10);
-    
-    const cleanMsg = lead.message.replace(/Website URL:.*|WhatsApp Number:.*/g, '').trim();
-    const textLines = doc.splitTextToSize(cleanMsg || 'Requesting information for custom website development.', 165);
-    doc.text(textLines, 25, 116);
-    
-    currentY = 165;
-  }
-  
-  // --- ESTIMATED INVESTMENT BOX ---
+
+  // Render Table
+  (doc as any).autoTable({
+    startY: 53,
+    margin: { left: 20, right: 15 },
+    head: [["TECHNICAL SPECIFICATION CATEGORY", "SELECTED SOLUTION & SCOPE", "DELIVERY ALLOCATION"]],
+    body: specItems,
+    theme: "grid",
+    headStyles: {
+      fillColor: [17, 24, 39],
+      textColor: [255, 255, 255],
+      fontSize: 10,
+      fontStyle: "bold",
+      halign: "left",
+      cellPadding: 6
+    },
+    columnStyles: {
+      0: { cellWidth: 55, fontStyle: "bold" },
+      1: { cellWidth: "auto" },
+      2: { halign: "right", fontStyle: "bold", cellWidth: 35 }
+    },
+    styles: {
+      fontSize: 9,
+      font: "helvetica",
+      cellPadding: 5.5,
+      lineColor: [229, 231, 235],
+      lineWidth: 0.1
+    },
+    alternateRowStyles: {
+      fillColor: [250, 250, 252]
+    }
+  });
+
+  const finalY = (doc as any).lastAutoTable.finalY + 8;
+
+  // --- GRAND TOTAL ESTIMATE BOX ---
   doc.setFillColor(79, 111, 255);
-  doc.rect(20, currentY, 175, 22, 'F');
-  
+  doc.rect(20, finalY, 175, 22, "F");
+
   doc.setTextColor(255, 255, 255);
-  doc.setFont('helvetica', 'bold');
+  doc.setFont("helvetica", "bold");
   doc.setFontSize(11);
-  doc.text('ESTIMATED BUDGET / INVESTMENT', 25, currentY + 8);
+  doc.text("ESTIMATED BUDGET / INVESTMENT", 25, finalY + 8);
   doc.setFontSize(10);
-  doc.setFont('helvetica', 'normal');
+  doc.setFont("helvetica", "normal");
   doc.setTextColor(200, 215, 255);
-  doc.text('Estimated Timeline: 7 - 14 Business Days', 25, currentY + 16);
-  
+  doc.text("Estimated Timeline: 7 - 14 Business Days", 25, finalY + 16);
+
   doc.setTextColor(255, 255, 255);
-  doc.setFont('helvetica', 'bold');
+  doc.setFont("helvetica", "bold");
   doc.setFontSize(16);
-  const budgetText = lead.budget ? lead.budget.replace(' (Calculated)', '') : 'Open discussion';
-  doc.text(`${budgetText}*`, 190, currentY + 14, { align: 'right' });
-  
-  // --- NEGOTIATION / FLEXIBILITY BADGE ---
-  const negotiableY = currentY + 34;
+  const budgetText = lead.budget ? lead.budget.replace(" (Calculated)", "") : "Open discussion";
+  doc.text(`${budgetText}*`, 190, finalY + 14, { align: "right" });
+
+  // --- NEGOTIABLE WARNING BOX (PURPLE BORDER) ---
+  const negotiableY = finalY + 34;
   doc.setFillColor(243, 244, 246);
-  doc.rect(20, negotiableY, 175, 28, 'F');
-  
-  doc.setDrawColor(162, 89, 255);
+  doc.rect(20, negotiableY, 175, 28, "F");
+
+  doc.setDrawColor(162, 89, 255); // Purple left border for premium accent
   doc.setLineWidth(0.8);
   doc.line(20, negotiableY, 20, negotiableY + 28);
-  
+
   doc.setTextColor(charcoal[0], charcoal[1], charcoal[2]);
-  doc.setFont('helvetica', 'bold');
+  doc.setFont("helvetica", "bold");
   doc.setFontSize(11);
-  doc.text('💡 BUDGET & TIMELINE ARE 100% NEGOTIABLE', 25, negotiableY + 8);
-  
-  doc.setFont('helvetica', 'normal');
+  doc.text("💡 BUDGET & TIMELINE ARE 100% NEGOTIABLE", 25, negotiableY + 8);
+
+  doc.setFont("helvetica", "normal");
   doc.setFontSize(9);
   doc.setTextColor(75, 85, 99);
-  doc.text('Please note that this pricing is a preliminary dynamic estimate. We are highly flexible\nand open to customization and negotiations to fit your specific budget targets and technical\nmilestones. Let\'s connect to finalize a plan that fits your exact goals!', 25, negotiableY + 15);
-  
-  // --- WHY WEBXCRAFTING SECTION ---
-  const benefitsY = negotiableY + 40;
-  doc.setTextColor(charcoal[0], charcoal[1], charcoal[2]);
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(12);
-  doc.text('WHY PARTNER WITH WEBXCRAFTING?', 20, benefitsY);
-  
-  doc.setFont('helvetica', 'normal');
+  doc.text("Please note that this pricing is a preliminary dynamic estimate. We are highly flexible\nand open to customization and negotiations to fit your specific budget targets and technical\nmilestones. Let's connect to finalize a plan that fits your exact goals!", 25, negotiableY + 15);
+
+  // Footer Page 2
+  doc.setFillColor(charcoal[0], charcoal[1], charcoal[2]);
+  doc.rect(8, 284, 202, 13, "F");
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(8);
+  doc.text("WebXCrafting   •   contact@webxcrafting.in   •   +91 9102615343   •   Page 2", 36, 292);
+
+  // ==========================================
+  // PAGE 3: TECHNICAL ROADMAP
+  // ==========================================
+  doc.addPage();
+
+  // Left accent bar
+  doc.setFillColor(electricBlue[0], electricBlue[1], electricBlue[2]);
+  doc.rect(0, 0, 8, 297, "F");
+
+  // Mini Header Banner
+  doc.setFillColor(17, 24, 39);
+  doc.rect(8, 0, 202, 35, "F");
+
+  try {
+    doc.addImage(LOGO_BASE64, "PNG", 20, 7, 20, 20);
+  } catch (e) {}
+
+  doc.setTextColor(255, 255, 255);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(16);
+  doc.text("WebXCrafting", 48, 17);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(8);
+  doc.setTextColor(162, 89, 255);
+  doc.text("PREMIUM CUSTOM WEB DEVELOPMENT & SEO", 48, 23);
+
+  // Quote info right aligned mini header
+  doc.setTextColor(255, 255, 255);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(11);
+  doc.text("TECHNICAL ROADMAP", 140, 15);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(8);
+  doc.setTextColor(156, 163, 175);
+  doc.text("Engineering Phases & Delivery Timeline", 140, 21);
+
+  // Header line
+  doc.setDrawColor(electricBlue[0], electricBlue[1], electricBlue[2]);
+  doc.setLineWidth(0.4);
+  doc.line(20, 35, 195, 35);
+
+  // Section Title
+  doc.setTextColor(17, 24, 39);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(13);
+  doc.text("02. ENGINEERING ROADMAP & IMPLEMENTATION PHASES", 20, 48);
+
+  // Draw Vertical Timeline line
+  doc.setDrawColor(229, 231, 235);
+  doc.setLineWidth(1);
+  doc.line(30, 58, 30, 185);
+
+  // Timeline Phase 1
+  doc.setFillColor(162, 89, 255); // Purple
+  doc.circle(30, 68, 3, "F");
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(11);
+  doc.setTextColor(79, 111, 255);
+  doc.text("Phase 1: Discovery, Wireframing & UX Strategy (Days 1 - 3)", 38, 70);
+  doc.setFont("helvetica", "normal");
   doc.setFontSize(9.5);
   doc.setTextColor(75, 85, 99);
-  doc.text('✓ Premium Next.js 16 frameworks for ultra-responsive load speeds (<1s).', 25, benefitsY + 7);
-  doc.text('✓ Harmonized color palettes, elegant animations, and state-of-the-art UI.', 25, benefitsY + 14);
-  doc.text('✓ Full SEO optimization, Schema.org markups, and Google index registry.', 25, benefitsY + 21);
-  
+  doc.text("Conduct a kickoff meeting, draft complete UX wireframes, maps website structures,\nand review client asset integration.", 38, 76);
+
+  // Timeline Phase 2
+  doc.setFillColor(79, 111, 255); // Blue
+  doc.circle(30, 103, 3, "F");
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(11);
+  doc.setTextColor(79, 111, 255);
+  doc.text("Phase 2: High-Fidelity Branding & Responsive Design (Days 4 - 7)", 38, 105);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(9.5);
+  doc.setTextColor(75, 85, 99);
+  doc.text("Build bespoke modern layouts styled explicitly around your company guidelines.\nCraft full mobile-responsive prototypes with interactive hover states.", 38, 111);
+
+  // Timeline Phase 3
+  doc.setFillColor(162, 89, 255); // Purple
+  doc.circle(30, 138, 3, "F");
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(11);
+  doc.setTextColor(79, 111, 255);
+  doc.text("Phase 3: Full-Stack Production Engineering (Days 8 - 12)", 38, 140);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(9.5);
+  doc.setTextColor(75, 85, 99);
+  doc.text("Program clean Next.js server components with maximum performance optimizations.\nConfigure secured API routes, MongoDB collection mappings, and control dashboards.", 38, 146);
+
+  // Timeline Phase 4
+  doc.setFillColor(79, 111, 255); // Blue
+  doc.circle(30, 173, 3, "F");
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(11);
+  doc.setTextColor(79, 111, 255);
+  doc.text("Phase 4: Performance Audits, Local SEO Setup & Launch (Days 13 - 15)", 38, 175);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(9.5);
+  doc.setTextColor(75, 85, 99);
+  doc.text("Conduct strict speed audits (<1s load times), validate Schema.org microdata,\nand register your sitemap with Google Search Console.", 38, 181);
+
   // --- OFFICIAL SEAL (VECTOR GRAPHICS) ---
-  const sealX = 168;
-  const sealY = benefitsY + 12;
+  const sealY = 230;
+  const sealX = 40;
   doc.setDrawColor(79, 111, 255);
   doc.setLineWidth(0.4);
   doc.circle(sealX, sealY, 14, "D"); // Outer circle
@@ -447,15 +577,29 @@ export async function generateProposalPDFBuffer(lead: { name: string; email: str
   doc.setTextColor(79, 111, 255);
   doc.setFontSize(4);
   doc.text("BUDGET & QUALITY", sealX, sealY + 5, { align: "center" });
-
-  // Footer Banner
-  doc.setFillColor(charcoal[0], charcoal[1], charcoal[2]);
-  doc.rect(8, 284, 202, 13, 'F');
   
+  // Signature lines on the right side
+  const sigX = 130;
+  doc.setDrawColor(209, 213, 219);
+  doc.setLineWidth(0.5);
+  doc.line(sigX, sealY + 8, sigX + 50, sealY + 8);
+  
+  doc.setTextColor(17, 24, 39);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(9);
+  doc.text("Authorized Verification Signature", sigX + 25, sealY + 14, { align: "center" });
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(8);
+  doc.setTextColor(107, 114, 128);
+  doc.text("WebXCrafting Operations Unit", sigX + 25, sealY + 19, { align: "center" });
+
+  // Footer Page 3
+  doc.setFillColor(charcoal[0], charcoal[1], charcoal[2]);
+  doc.rect(8, 284, 202, 13, "F");
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(8);
-  doc.text('WebXCrafting   •   contact@webxcrafting.in   •   +91 9102615343   •   www.webxcrafting.in', 36, 292);
-  
-  const arrayBuffer = doc.output('arraybuffer');
+  doc.text("WebXCrafting   •   contact@webxcrafting.in   •   +91 9102615343   •   Page 3", 36, 292);
+
+  const arrayBuffer = doc.output("arraybuffer");
   return Buffer.from(arrayBuffer);
 }
