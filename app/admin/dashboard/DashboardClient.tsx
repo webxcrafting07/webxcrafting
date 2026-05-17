@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 import Link from 'next/link'
 import { jsPDF } from 'jspdf'
 import autoTable from 'jspdf-autotable'
-import { FaChartBar, FaFolder, FaEnvelope, FaCog, FaFileInvoice, FaCheckCircle, FaFire, FaPen, FaTrash, FaComments, FaFileAlt, FaSignOutAlt, FaBars, FaEye, FaEyeSlash, FaCheck, FaGlobe, FaHourglass, FaNewspaper, FaImage, FaCloudUploadAlt, FaLink } from 'react-icons/fa'
+import { FaChartBar, FaFolder, FaEnvelope, FaCog, FaFileInvoice, FaCheckCircle, FaFire, FaPen, FaTrash, FaComments, FaFileAlt, FaSignOutAlt, FaBars, FaEye, FaEyeSlash, FaCheck, FaGlobe, FaHourglass, FaNewspaper, FaImage, FaCloudUploadAlt, FaLink, FaSync } from 'react-icons/fa'
 import { SERVICE_ICONS, getServiceIcon } from '@/lib/icons'
 
 /* ── helpers ── */
@@ -774,9 +774,14 @@ export default function DashboardClient() {
             {/* ── LEADS ── */}
             {tab === 'leads' && (
               <div>
-                <div style={{ marginBottom: 32 }}>
-                  <h2 style={{ fontFamily: 'Syne', fontWeight: 800, fontSize: 28 }}>Lead Management</h2>
-                  <p style={{ color: '#7b82a8', fontSize: 14, marginTop: 4 }}>{leads.length} leads · {newLeads} new</p>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 32, flexWrap: 'wrap', gap: 16 }}>
+                  <div>
+                    <h2 style={{ fontFamily: 'Syne', fontWeight: 800, fontSize: 28 }}>Lead Management</h2>
+                    <p style={{ color: '#7b82a8', fontSize: 14, marginTop: 4 }}>{leads.length} leads · {newLeads} new</p>
+                  </div>
+                  <button className="btn-primary" onClick={fetchAll} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 20px', borderRadius: 10 }}>
+                    <FaSync size={13} /> Refresh Leads
+                  </button>
                 </div>
 
                 <div style={{ display: 'grid', gap: 14 }}>

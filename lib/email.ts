@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer'
+import { generateInvoicePDFBuffer, generateProposalPDFBuffer } from './pdfGenerator';
 
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST || 'smtp.gmail.com',
@@ -88,16 +89,42 @@ export async function sendLeadNotification(lead: { name: string; email: string; 
   }
 }
 
-export async function sendClientAutoReply(clientEmail: string, clientName: string) {
+export async function sendClientAutoReply(clientEmail: string, clientName: string, budget?: string, message?: string) {
   if (!process.env.SMTP_USER || !process.env.SMTP_PASS || process.env.SMTP_PASS === 'your_app_password_here') {
     console.warn('SMTP credentials missing or incomplete. Skipping client auto-reply.')
     return
   }
 
-  const mailOptions = {
+  let pdfAttachment: any = null;
+  let customIntro = `Thank you for reaching out to us. We have received your inquiry regarding a new project, and we're thrilled at the possibility of working together.`;
+
+  if (message) {
+    try {
+      const pdfBuffer = await generateProposalPDFBuffer({ name: clientName, email: clientEmail, budget, message });
+      pdfAttachment = {
+        filename: `WebXCrafting_Proposal_${clientName.replace(/\s+/g, '_')}.pdf`,
+        content: pdfBuffer,
+        contentType: 'application/pdf'
+      };
+      
+      if (budget && budget !== 'Not specified') {
+        customIntro = `Thank you for utilizing our <strong>Website Cost Calculator</strong>! We have successfully received your inquiry and custom specifications. 
+        We have automatically compiled a comprehensive project estimate proposal PDF and attached it directly to this email for your records. 
+        Please note that this is a dynamic ballpark figure: <strong>our pricing and timelines are highly customizable and 100% negotiable</strong> to fit your business budget. Let's discuss to find the perfect plan for you!`;
+      } else {
+        customIntro = `Thank you for reaching out to us! We have successfully received your inquiry. 
+        A professional custom proposal PDF has been generated based on your inquiry message and is attached to this email. 
+        Please note that <strong>our project scopes, budget allocations, and timelines are 100% negotiable</strong> to perfectly align with your goals!`;
+      }
+    } catch (err) {
+      console.error('Failed to generate proposal PDF attachment:', err);
+    }
+  }
+
+  const mailOptions: any = {
     from: `"WebXCrafting Support" <${process.env.SMTP_USER}>`,
     to: clientEmail,
-    subject: `Thank you for reaching out, ${clientName}! ✨`,
+    subject: budget ? `Your Custom Web Proposal & Estimate from WebXCrafting ✨` : `Thank you for reaching out, ${clientName}! ✨`,
     html: `
       <div style="font-family: 'Inter', 'Segoe UI', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; color: #1e293b; border-radius: 24px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15); border: 1px solid #e2e8f0;">
         <div style="background: #030510; padding: 60px 40px; text-align: center; position: relative;">
@@ -111,31 +138,34 @@ export async function sendClientAutoReply(clientEmail: string, clientName: strin
         <div style="padding: 50px 45px;">
           <p style="font-size: 20px; margin-bottom: 20px; color: #0f172a;">Hi <strong>${clientName}</strong>,</p>
           <p style="color: #475569; font-size: 16px; line-height: 1.8; margin-bottom: 40px;">
-            Thank you for reaching out to us. We have received your inquiry regarding a new project, and we're thrilled at the possibility of working together.
+            ${customIntro}
           </p>
           
           <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 20px; padding: 35px; margin-bottom: 45px;">
             <h3 style="color: #4f6fff; margin-top: 0; font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">The Next Steps</h3>
             
             <div style="display: flex; margin-bottom: 20px;">
-              <div style="min-width: 24px; height: 24px; border-radius: 50%; background: #4f6fff; color: white; display: flex; alignItems: center; justify-content: center; font-size: 12px; font-weight: 800; margin-right: 15px; margin-top: 2px;">1</div>
+              <div style="min-width: 24px; height: 24px; border-radius: 50%; background: #4f6fff; color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; margin-right: 15px; margin-top: 2px;">1</div>
               <p style="margin: 0; color: #334155; font-size: 15px; line-height: 1.6;"><strong>Analysis:</strong> Our experts are reviewing your requirements right now.</p>
             </div>
             
             <div style="display: flex; margin-bottom: 20px;">
-              <div style="min-width: 24px; height: 24px; border-radius: 50%; background: #4f6fff; color: white; display: flex; alignItems: center; justify-content: center; font-size: 12px; font-weight: 800; margin-right: 15px; margin-top: 2px;">2</div>
-              <p style="margin: 0; color: #334155; font-size: 15px; line-height: 1.6;"><strong>Discovery:</strong> We'll contact you within 24 hours to discuss the finer details.</p>
+              <div style="min-width: 24px; height: 24px; border-radius: 50%; background: #4f6fff; color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; margin-right: 15px; margin-top: 2px;">2</div>
+              <p style="margin: 0; color: #334155; font-size: 15px; line-height: 1.6;"><strong>Discovery:</strong> We will contact you within 24 hours to discuss negotiable points and align with your exact budget goals.</p>
             </div>
             
             <div style="display: flex;">
-              <div style="min-width: 24px; height: 24px; border-radius: 50%; background: #4f6fff; color: white; display: flex; alignItems: center; justify-content: center; font-size: 12px; font-weight: 800; margin-right: 15px; margin-top: 2px;">3</div>
-              <p style="margin: 0; color: #334155; font-size: 15px; line-height: 1.6;"><strong>Execution:</strong> We'll provide a roadmap and quote to bring your vision to life.</p>
+              <div style="min-width: 24px; height: 24px; border-radius: 50%; background: #4f6fff; color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; margin-right: 15px; margin-top: 2px;">3</div>
+              <p style="margin: 0; color: #334155; font-size: 15px; line-height: 1.6;"><strong>Execution:</strong> We will establish a custom development plan and begin engineering your vision.</p>
             </div>
           </div>
           
           <div style="text-align: center; margin-bottom: 50px;">
-            <p style="color: #64748b; font-size: 15px; margin-bottom: 25px;">While you wait, feel free to explore our journey:</p>
-            <a href="${SITE_URL}/portfolio" style="display: inline-block; padding: 18px 40px; background-color: #030510; color: white; text-decoration: none; border-radius: 14px; font-weight: 700; font-size: 16px; letter-spacing: 0.5px;">View Our Portfolio</a>
+            <p style="color: #64748b; font-size: 15px; margin-bottom: 25px;">While you wait, feel free to explore our journey or chat with our experts:</p>
+            <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+              <a href="${SITE_URL}/portfolio" style="display: inline-block; padding: 18px 40px; background-color: #030510; color: white; text-decoration: none; border-radius: 14px; font-weight: 700; font-size: 16px; letter-spacing: 0.5px;">View Our Portfolio</a>
+              <a href="https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919102615343'}" style="display: inline-block; padding: 18px 40px; background-color: #25d366; color: white; text-decoration: none; border-radius: 14px; font-weight: 700; font-size: 16px; letter-spacing: 0.5px;">WhatsApp Chat</a>
+            </div>
           </div>
           
           <div style="text-align: center; border-top: 1px solid #f1f5f9; padding-top: 40px;">
@@ -156,10 +186,14 @@ export async function sendClientAutoReply(clientEmail: string, clientName: strin
         
         <div style="padding: 35px; text-align: center; background-color: #f8fafc; border-top: 1px solid #f1f5f9;">
           <p style="color: #94a3b8; font-size: 12px; margin: 0; font-weight: 500;">&copy; ${new Date().getFullYear()} WebXCrafting. All rights reserved.</p>
-          <p style="color: #4f6fff; font-size: 11px; margin-top: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;">Premium Web Solutions</p>
+          <p style="color: #4f6fff; font-size: 11px; margin-top: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;">Premium Web Solutions &bull; Negotiable &amp; Customizable</p>
         </div>
       </div>
-    `,
+    `
+  };
+
+  if (pdfAttachment) {
+    mailOptions.attachments = [pdfAttachment];
   }
 
   try {
@@ -169,8 +203,6 @@ export async function sendClientAutoReply(clientEmail: string, clientName: strin
     console.error('Error sending client auto-reply email:', error)
   }
 }
-
-import { generateInvoicePDFBuffer } from './pdfGenerator';
 
 export async function sendInvoiceEmail(bill: any) {
   if (!process.env.SMTP_PASS || process.env.SMTP_PASS === 'your_app_password_here') return

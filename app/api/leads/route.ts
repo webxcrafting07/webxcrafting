@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
     try {
       await Promise.all([
         sendLeadNotification({ name, email, budget, message }),
-        sendClientAutoReply(email, name)
+        sendClientAutoReply(email, name, budget, message)
       ])
     } catch (err) {
       console.error('Email notification sequence failed:', err)

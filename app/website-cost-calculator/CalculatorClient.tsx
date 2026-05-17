@@ -22,6 +22,8 @@ import {
   FaFilePdf,
   FaPhone
 } from "react-icons/fa";
+import { jsPDF } from "jspdf";
+import autoTable from "jspdf-autotable";
 
 // Step 1: Website Type Options
 const WEBSITE_TYPES = [
@@ -146,6 +148,228 @@ export default function CalculatorClient() {
     }
   };
 
+  const downloadProposalPDF = (clientName: string, clientEmail: string, clientPhone: string) => {
+    try {
+      const doc = new jsPDF();
+      const charcoal: [number, number, number] = [17, 24, 39]; // Deep Charcoal (#111827)
+      const electricBlue: [number, number, number] = [79, 111, 255]; // Accent Blue (#4f6fff)
+      const softGray: [number, number, number] = [243, 244, 246];
+
+      // Draw background accent line on the left side
+      doc.setFillColor(electricBlue[0], electricBlue[1], electricBlue[2]);
+      doc.rect(0, 0, 8, 297, "F");
+
+      // Draw header banner block
+      doc.setFillColor(charcoal[0], charcoal[1], charcoal[2]);
+      doc.rect(8, 0, 202, 50, "F");
+
+      // Custom geometric Logo icon (interlocking tech blocks)
+      doc.setFillColor(79, 111, 255);
+      doc.rect(20, 15, 10, 10, "F");
+      doc.setFillColor(162, 89, 255);
+      doc.rect(25, 20, 10, 10, "F");
+
+      // Brand Name
+      doc.setTextColor(255, 255, 255);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(22);
+      doc.text("WebXCrafting", 42, 24);
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(9);
+      doc.setTextColor(162, 89, 255);
+      doc.text("PREMIUM CUSTOM WEB DEVELOPMENT & SEO", 42, 32);
+
+      // Proposal Badge (Right aligned in header banner)
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(18);
+      doc.setFont("helvetica", "bold");
+      doc.text("PROJECT PROPOSAL", 130, 25);
+      doc.setFontSize(9);
+      doc.setFont("helvetica", "normal");
+      doc.setTextColor(156, 163, 175);
+      doc.text("Custom Estimate & Scope", 130, 32);
+
+      // Divider line
+      doc.setDrawColor(electricBlue[0], electricBlue[1], electricBlue[2]);
+      doc.setLineWidth(0.5);
+      doc.line(20, 50, 195, 50);
+
+      // --- CLIENT DETAILS SECTION ---
+      doc.setTextColor(charcoal[0], charcoal[1], charcoal[2]);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(11);
+      doc.text("PREPARED FOR:", 20, 65);
+      
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(14);
+      doc.setTextColor(electricBlue[0], electricBlue[1], electricBlue[2]);
+      doc.text(clientName, 20, 72);
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(10);
+      doc.setTextColor(75, 85, 99);
+      doc.text(`Email: ${clientEmail}`, 20, 78);
+      doc.text(`WhatsApp: ${clientPhone}`, 20, 84);
+
+      // Proposal Meta info (Right side)
+      doc.setTextColor(charcoal[0], charcoal[1], charcoal[2]);
+      doc.setFont("helvetica", "bold");
+      doc.text("PROPOSAL DETAILS:", 120, 65);
+      
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(10);
+      doc.setTextColor(75, 85, 99);
+      doc.text(`Proposal Ref: #WXC-${Math.floor(100000 + Math.random() * 900000)}`, 120, 72);
+      doc.text(`Date Generated: ${new Date().toLocaleDateString("en-IN")}`, 120, 78);
+      doc.text(`Valid Until: 30 Days from date`, 120, 84);
+
+      // Divider
+      doc.setDrawColor(229, 231, 235);
+      doc.setLineWidth(0.2);
+      doc.line(20, 92, 195, 92);
+
+      // --- SPECIFICATIONS TABLE ---
+      doc.setTextColor(charcoal[0], charcoal[1], charcoal[2]);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(12);
+      doc.text("PROJECT SPECIFICATIONS & ITEMIZATION", 20, 102);
+
+      const items = [
+        ["Website Type Tier", selectedType.title, `INR ${selectedType.basePrice.toLocaleString("en-IN")}`],
+        ["Scale & Page Count", selectedPages.label, selectedPages.price === 0 ? "Included" : `INR ${selectedPages.price.toLocaleString("en-IN")}`],
+        ["UI/UX Design Level", selectedDesign.label, selectedDesign.price === 0 ? "Included" : `INR ${selectedDesign.price.toLocaleString("en-IN")}`],
+        ["Support & SLA Maintenance", selectedSupport.label, selectedSupport.price === 0 ? "Included" : `INR ${selectedSupport.price.toLocaleString("en-IN")}`]
+      ];
+
+      // Add addons if selected
+      if (selectedAddons.length > 0) {
+        selectedAddons.forEach(addon => {
+          items.push([`Addon Feature: ${addon.label}`, "Advanced Integration", `INR ${addon.price.toLocaleString("en-IN")}`]);
+        });
+      }
+
+      autoTable(doc, {
+        startY: 108,
+        margin: { left: 20, right: 15 },
+        head: [["ITEM SPECIFICATION CATEGORY", "SELECTED CHOICES & DELIVERABLES", "ESTIMATED PRICE"]],
+        body: items,
+        theme: "grid",
+        headStyles: {
+          fillColor: charcoal,
+          textColor: [255, 255, 255],
+          fontSize: 10,
+          fontStyle: "bold",
+          halign: "left",
+          cellPadding: 5
+        },
+        columnStyles: {
+          0: { cellWidth: 55, fontStyle: "bold" },
+          1: { cellWidth: "auto" },
+          2: { halign: "right", fontStyle: "bold", cellWidth: 35 }
+        },
+        styles: {
+          fontSize: 9,
+          font: "helvetica",
+          cellPadding: 5,
+          lineColor: [229, 231, 235],
+          lineWidth: 0.1
+        },
+        alternateRowStyles: {
+          fillColor: [250, 250, 252]
+        }
+      });
+
+      const finalY = (doc as any).lastAutoTable.finalY + 12;
+
+      // --- GRAND TOTAL ESTIMATE BOX ---
+      doc.setFillColor(79, 111, 255);
+      doc.rect(20, finalY, 175, 22, "F");
+
+      doc.setTextColor(255, 255, 255);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(11);
+      doc.text("ESTIMATED BUDGET / INVESTMENT", 25, finalY + 8);
+      doc.setFontSize(10);
+      doc.setFont("helvetica", "normal");
+      doc.setTextColor(200, 215, 255);
+      doc.text("Estimated Timeline: 7 - 14 Business Days", 25, finalY + 16);
+
+      doc.setTextColor(255, 255, 255);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(16);
+      doc.text(`INR ${totalPrice.toLocaleString("en-IN")}*`, 190, finalY + 14, { align: "right" });
+
+      // --- NEGOTIABLE WARNING BOX (PURPLE BORDER) ---
+      const negotiableY = finalY + 34;
+      doc.setFillColor(243, 244, 246);
+      doc.rect(20, negotiableY, 175, 28, "F");
+
+      doc.setDrawColor(162, 89, 255); // Purple left border for premium accent
+      doc.setLineWidth(0.8);
+      doc.line(20, negotiableY, 20, negotiableY + 28);
+
+      doc.setTextColor(charcoal[0], charcoal[1], charcoal[2]);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(11);
+      doc.text("💡 BUDGET & TIMELINE ARE 100% NEGOTIABLE", 25, negotiableY + 8);
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(9);
+      doc.setTextColor(75, 85, 99);
+      doc.text("Please note that this pricing is a preliminary dynamic estimate. We are highly flexible\nand open to customization and negotiations to fit your specific budget targets and technical\nmilestones. Let's connect to finalize a plan that fits your exact goals!", 25, negotiableY + 15);
+
+      // --- WHY PARTNER WITH US? ---
+      const featuresY = negotiableY + 40;
+      doc.setTextColor(charcoal[0], charcoal[1], charcoal[2]);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(12);
+      doc.text("WHY PARTNER WITH WEBXCRAFTING?", 20, featuresY);
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(9.5);
+      doc.setTextColor(75, 85, 99);
+      doc.text("✓ Premium Next.js 16 frameworks for ultra-responsive load speeds (<1s).", 25, featuresY + 7);
+      doc.text("✓ Harmonized color palettes, elegant animations, and state-of-the-art UI.", 25, featuresY + 14);
+      doc.text("✓ Full SEO optimization, Schema.org markups, and Google index registry.", 25, featuresY + 21);
+
+      // --- OFFICIAL SEAL (VECTOR GRAPHICS) ---
+      const sealX = 168;
+      const sealY = featuresY + 12;
+      doc.setDrawColor(79, 111, 255);
+      doc.setLineWidth(0.4);
+      doc.circle(sealX, sealY, 14, "D"); // Outer circle
+      doc.setDrawColor(162, 89, 255);
+      doc.circle(sealX, sealY, 12, "D"); // Inner circle
+      
+      // Text inside seal
+      doc.setTextColor(79, 111, 255);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(5);
+      doc.text("OFFICIAL", sealX, sealY - 4, { align: "center" });
+      doc.setTextColor(162, 89, 255);
+      doc.setFontSize(6);
+      doc.text("VERIFIED", sealX, sealY + 1, { align: "center" });
+      doc.setTextColor(79, 111, 255);
+      doc.setFontSize(4);
+      doc.text("BUDGET & QUALITY", sealX, sealY + 5, { align: "center" });
+
+      // Bottom footer banner
+      doc.setFillColor(charcoal[0], charcoal[1], charcoal[2]);
+      doc.rect(8, 284, 202, 13, "F");
+      
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(8);
+      doc.text("WebXCrafting   •   contact@webxcrafting.in   •   +91 9102615343   •   www.webxcrafting.in", 36, 292);
+
+      doc.save(`WebXCrafting_Proposal_${clientName.replace(/\s+/g, "_")}.pdf`);
+      toast.success("PDF Proposal downloaded successfully!");
+    } catch (err) {
+      console.error("PDF generation failed:", err);
+      toast.error("Could not auto-download PDF. Please try again.");
+    }
+  };
+
   const handleLeadSubmit = async () => {
     if (!name.trim() || !email.trim() || !phone.trim()) {
       toast.error("Please fill in all contact details.");
@@ -185,6 +409,7 @@ export default function CalculatorClient() {
       if (data.success) {
         setSubmitted(true);
         toast.success("Proposal request submitted successfully!");
+        downloadProposalPDF(name, email, phone);
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         toast.error(data.message || "Failed to submit request.");
@@ -568,7 +793,14 @@ export default function CalculatorClient() {
                         Thank you, <strong>{name}</strong>! We have saved your website structure estimate of <strong>₹{totalPrice.toLocaleString("en-IN")}</strong>. Our technical head will review your requirements and share a custom PDF proposal and details via <strong>{email}</strong> and WhatsApp within 24 hours.
                       </p>
                       <div style={{ display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center" }}>
-                        <Link href="/" className="btn-primary" style={{ padding: "12px 28px", textDecoration: "none" }}>
+                        <button
+                          onClick={() => downloadProposalPDF(name, email, phone)}
+                          className="btn-primary"
+                          style={{ padding: "12px 28px", display: "flex", alignItems: "center", gap: 8 }}
+                        >
+                          <FaFilePdf /> Download PDF Proposal
+                        </button>
+                        <Link href="/" className="btn-outline" style={{ padding: "12px 28px", textDecoration: "none", color: "#b0b8d8" }}>
                           Return Home
                         </Link>
                         <button

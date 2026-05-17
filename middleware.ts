@@ -15,8 +15,9 @@ export function middleware(request: NextRequest) {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.webxcrafting.in'
   const canonicalHost = new URL(siteUrl).host
 
-  // Enforce www if canonicalHost has it and current hostname doesn't
-  if (canonicalHost.startsWith('www.') && hostname && !hostname.startsWith('www.')) {
+  // Enforce www if canonicalHost has it and current hostname doesn't, skipping localhost
+  const isLocalhost = hostname && (hostname.includes('localhost') || hostname.includes('127.0.0.1'))
+  if (!isLocalhost && canonicalHost.startsWith('www.') && hostname && !hostname.startsWith('www.')) {
     url.host = canonicalHost
     return NextResponse.redirect(url, 301)
   }
