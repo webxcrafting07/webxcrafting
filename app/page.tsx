@@ -10,5 +10,104 @@ export const metadata: Metadata = {
 }
 
 export default function HomePage() {
-  return <HomeClient />
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "WebXCrafting",
+    "image": "https://www.webxcrafting.in/logo.png",
+    "@id": "https://www.webxcrafting.in/#organization",
+    "url": "https://www.webxcrafting.in",
+    "telephone": "+91 9102615343",
+    "priceRange": "₹₹",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "HSR Layout",
+      "addressLocality": "Bangalore",
+      "addressRegion": "Karnataka",
+      "postalCode": "560102",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 12.9141,
+      "longitude": 77.6413
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "opens": "09:00",
+      "closes": "21:00"
+    },
+    "sameAs": [
+      "https://wa.me/919102615343"
+    ]
+  }
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much does a professional website cost in India?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A basic professional business website starts from ₹8,000. For custom e-commerce or job portals, prices vary based on features, but we offer the most competitive premium pricing in India."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you provide SEO with website development?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, every website we build is SEO-optimized from the ground up, ensuring fast loading speeds, mobile responsiveness, and clean code structure to help you rank on Google."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you build custom e-commerce stores?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely. We specialize in high-performance e-commerce solutions with custom dashboards, secure payment integrations, and advanced inventory management."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does it take to build a website?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A standard business website typically takes 7-10 days, while complex platforms like job portals or SaaS web apps may take 3-6 weeks depending on the requirements."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you offer maintenance and support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, we provide dedicated post-launch support and maintenance to ensure your website remains secure, updated, and performing at its best."
+        }
+      }
+    ]
+  }
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <HomeClient />
+    </>
+  )
 }
