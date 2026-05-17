@@ -381,7 +381,7 @@ export default function CalculatorClient() {
       doc.rect(8, 284, 202, 13, "F");
       doc.setTextColor(255, 255, 255);
       doc.setFontSize(8);
-      doc.text("WebXCrafting   •   contact@webxcrafting.in   •   +91 9102615343   •   Page 2", 36, 292);
+      doc.text("WebXCrafting   •   webxcrafting@gmail.com   •   +91 9102615343   •   Page 2", 36, 292);
 
       // ==========================================
       // PAGE 3: TECHNICAL ROADMAP
@@ -524,7 +524,7 @@ export default function CalculatorClient() {
       doc.rect(8, 284, 202, 13, "F");
       doc.setTextColor(255, 255, 255);
       doc.setFontSize(8);
-      doc.text("WebXCrafting   •   contact@webxcrafting.in   •   +91 9102615343   •   Page 3", 36, 292);
+      doc.text("WebXCrafting   •   webxcrafting@gmail.com   •   +91 9102615343   •   Page 3", 36, 292);
 
       doc.save(`WebXCrafting_Proposal_${clientName.replace(/\s+/g, "_")}.pdf`);
       toast.success("PDF Proposal downloaded successfully!");
