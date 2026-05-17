@@ -127,58 +127,58 @@ export async function sendClientAutoReply(clientEmail: string, clientName: strin
     subject: budget ? `Your Custom Web Proposal & Estimate from WebXCrafting ✨` : `Thank you for reaching out, ${clientName}! ✨`,
     html: `
       <div style="font-family: 'Inter', 'Segoe UI', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; color: #1e293b; border-radius: 24px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15); border: 1px solid #e2e8f0;">
-        <div style="background: #030510; padding: 60px 40px; text-align: center; position: relative;">
-          <div style="margin-bottom: 24px;">
-            <img src="${SITE_URL}/logo-wxc.png" alt="WebXCrafting" style="width: 64px; height: 64px; margin-bottom: 20px;">
+        <div style="background: #030510; padding: 40px 30px; text-align: center; position: relative;">
+          <div style="margin-bottom: 16px;">
+            <img src="${SITE_URL}/logo-wxc.png" alt="WebXCrafting" width="48" height="48" style="width: 48px; height: 48px; margin: 0 auto; display: block;">
           </div>
-          <h1 style="color: white; margin: 0; font-size: 36px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.1;">Welcome to <span style="color: #4f6fff;">WebXCrafting</span></h1>
-          <p style="color: #94a3b8; margin: 15px 0 0; font-size: 18px; font-weight: 500;">Your digital transformation starts here.</p>
+          <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -1px; line-height: 1.2;">Welcome to <span style="color: #4f6fff;">WebXCrafting</span></h1>
+          <p style="color: #94a3b8; margin: 10px 0 0; font-size: 15px; font-weight: 500;">Your digital transformation starts here.</p>
         </div>
         
-        <div style="padding: 50px 45px;">
-          <p style="font-size: 20px; margin-bottom: 20px; color: #0f172a;">Hi <strong>${clientName}</strong>,</p>
-          <p style="color: #475569; font-size: 16px; line-height: 1.8; margin-bottom: 40px;">
+        <div style="padding: 40px 35px;">
+          <p style="font-size: 18px; margin-bottom: 16px; color: #0f172a;">Hi <strong>${clientName}</strong>,</p>
+          <p style="color: #475569; font-size: 15px; line-height: 1.7; margin-bottom: 30px;">
             ${customIntro}
           </p>
           
-          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 20px; padding: 35px; margin-bottom: 45px;">
-            <h3 style="color: #4f6fff; margin-top: 0; font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">The Next Steps</h3>
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 25px; margin-bottom: 35px;">
+            <h3 style="color: #4f6fff; margin-top: 0; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px;">The Next Steps</h3>
             
-            <div style="display: flex; margin-bottom: 20px;">
-              <div style="min-width: 24px; height: 24px; border-radius: 50%; background: #4f6fff; color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; margin-right: 15px; margin-top: 2px;">1</div>
-              <p style="margin: 0; color: #334155; font-size: 15px; line-height: 1.6;"><strong>Analysis:</strong> Our experts are reviewing your requirements right now.</p>
+            <div style="display: flex; margin-bottom: 16px;">
+              <div style="min-width: 20px; height: 20px; border-radius: 50%; background: #4f6fff; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; margin-right: 12px; margin-top: 2px;">1</div>
+              <p style="margin: 0; color: #334155; font-size: 14px; line-height: 1.5;"><strong>Analysis:</strong> Our experts are reviewing your requirements right now.</p>
             </div>
             
-            <div style="display: flex; margin-bottom: 20px;">
-              <div style="min-width: 24px; height: 24px; border-radius: 50%; background: #4f6fff; color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; margin-right: 15px; margin-top: 2px;">2</div>
-              <p style="margin: 0; color: #334155; font-size: 15px; line-height: 1.6;"><strong>Discovery:</strong> We will contact you within 24 hours to discuss negotiable points and align with your exact budget goals.</p>
+            <div style="display: flex; margin-bottom: 16px;">
+              <div style="min-width: 20px; height: 20px; border-radius: 50%; background: #4f6fff; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; margin-right: 12px; margin-top: 2px;">2</div>
+              <p style="margin: 0; color: #334155; font-size: 14px; line-height: 1.5;"><strong>Discovery:</strong> We will contact you within 24 hours to discuss negotiable points and align with your exact budget goals.</p>
             </div>
             
             <div style="display: flex;">
-              <div style="min-width: 24px; height: 24px; border-radius: 50%; background: #4f6fff; color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; margin-right: 15px; margin-top: 2px;">3</div>
-              <p style="margin: 0; color: #334155; font-size: 15px; line-height: 1.6;"><strong>Execution:</strong> We will establish a custom development plan and begin engineering your vision.</p>
+              <div style="min-width: 20px; height: 20px; border-radius: 50%; background: #4f6fff; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; margin-right: 12px; margin-top: 2px;">3</div>
+              <p style="margin: 0; color: #334155; font-size: 14px; line-height: 1.5;"><strong>Execution:</strong> We will establish a custom development plan and begin engineering your vision.</p>
             </div>
           </div>
           
-          <div style="text-align: center; margin-bottom: 50px;">
-            <p style="color: #64748b; font-size: 15px; margin-bottom: 25px;">While you wait, feel free to explore our journey or chat with our experts:</p>
-            <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-              <a href="${SITE_URL}/portfolio" style="display: inline-block; padding: 18px 40px; background-color: #030510; color: white; text-decoration: none; border-radius: 14px; font-weight: 700; font-size: 16px; letter-spacing: 0.5px;">View Our Portfolio</a>
-              <a href="https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919102615343'}" style="display: inline-block; padding: 18px 40px; background-color: #25d366; color: white; text-decoration: none; border-radius: 14px; font-weight: 700; font-size: 16px; letter-spacing: 0.5px;">WhatsApp Chat</a>
+          <div style="text-align: center; margin-bottom: 40px;">
+            <p style="color: #64748b; font-size: 14px; margin-bottom: 20px;">While you wait, feel free to explore our journey or chat with our experts:</p>
+            <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+              <a href="${SITE_URL}/portfolio" style="display: inline-block; padding: 12px 24px; background-color: #030510; color: white; text-decoration: none; border-radius: 10px; font-weight: 700; font-size: 14px; letter-spacing: 0.5px;">View Our Portfolio</a>
+              <a href="https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919102615343'}" style="display: inline-block; padding: 12px 24px; background-color: #25d366; color: white; text-decoration: none; border-radius: 10px; font-weight: 700; font-size: 14px; letter-spacing: 0.5px;">WhatsApp Chat</a>
             </div>
           </div>
           
-          <div style="text-align: center; border-top: 1px solid #f1f5f9; padding-top: 40px;">
-            <p style="color: #94a3b8; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 25px;">Connect With Us</p>
-            <div style="display: flex; justify-content: center; align-items: center; gap: 24px;">
+          <div style="text-align: center; border-top: 1px solid #f1f5f9; padding-top: 30px;">
+            <p style="color: #94a3b8; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px;">Connect With Us</p>
+            <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
               <a href="https://www.webxcrafting.in" style="text-decoration: none;">
-                <img src="https://img.icons8.com/color/48/domain.png" alt="Website" width="32" height="32" style="display: block; border: 0;">
+                <img src="https://img.icons8.com/color/48/domain.png" alt="Website" width="24" height="24" style="display: block; border: 0; width: 24px; height: 24px;">
               </a>
               <a href="https://www.linkedin.com/in/webx-crafting-a1a875402/" style="text-decoration: none;">
-                <img src="https://img.icons8.com/color/48/linkedin-circled--v1.png" alt="LinkedIn" width="32" height="32" style="display: block; border: 0;">
+                <img src="https://img.icons8.com/color/48/linkedin-circled--v1.png" alt="LinkedIn" width="24" height="24" style="display: block; border: 0; width: 24px; height: 24px;">
               </a>
               <a href="https://www.instagram.com/webxcrafting" style="text-decoration: none;">
-                <img src="https://img.icons8.com/color/48/instagram-new--v1.png" alt="Instagram" width="32" height="32" style="display: block; border: 0;">
+                <img src="https://img.icons8.com/color/48/instagram-new--v1.png" alt="Instagram" width="24" height="24" style="display: block; border: 0; width: 24px; height: 24px;">
               </a>
             </div>
           </div>
@@ -322,37 +322,37 @@ export async function sendCustomReply(toEmail: string, toName: string, message: 
     subject: `Re: Your inquiry with WebXCrafting ✨`,
     html: `
       <div style="font-family: 'Inter', 'Segoe UI', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; color: #1e293b; border-radius: 24px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15); border: 1px solid #e2e8f0;">
-        <div style="background: #030510; padding: 60px 40px; text-align: center; position: relative;">
-          <div style="margin-bottom: 24px;">
-            <img src="${SITE_URL}/logo-wxc.png" alt="WebXCrafting" style="width: 64px; height: 64px;">
+        <div style="background: #030510; padding: 40px 30px; text-align: center; position: relative;">
+          <div style="margin-bottom: 16px;">
+            <img src="${SITE_URL}/logo-wxc.png" alt="WebXCrafting" width="48" height="48" style="width: 48px; height: 48px; margin: 0 auto; display: block;">
           </div>
-          <h1 style="color: white; margin: 0; font-size: 32px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.2;">Personalized <span style="color: #4f6fff;">Response</span></h1>
-          <p style="color: #94a3b8; margin: 10px 0 0; font-size: 16px;">From the desk of WebXCrafting</p>
+          <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -1px; line-height: 1.2;">Personalized <span style="color: #4f6fff;">Response</span></h1>
+          <p style="color: #94a3b8; margin: 10px 0 0; font-size: 15px;">From the desk of WebXCrafting</p>
         </div>
         
-        <div style="padding: 50px 45px;">
-          <div style="color: #475569; font-size: 16px; line-height: 1.8; margin-bottom: 40px; white-space: pre-wrap;">${message}</div>
+        <div style="padding: 40px 35px;">
+          <div style="color: #475569; font-size: 15px; line-height: 1.7; margin-bottom: 30px; white-space: pre-wrap;">${message}</div>
           
-          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 20px; padding: 35px; margin-bottom: 45px; text-align: center;">
-            <h3 style="color: #4f6fff; margin-top: 0; font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">Ready to Start?</h3>
-            <p style="color: #64748b; font-size: 15px; margin-bottom: 25px;">Explore our previous work or chat with us directly:</p>
-            <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-              <a href="${SITE_URL}/portfolio" style="display: inline-block; padding: 14px 28px; background-color: #030510; color: white; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 14px;">View Portfolio</a>
-              <a href="https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}" style="display: inline-block; padding: 14px 28px; background-color: #25d366; color: white; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 14px;">WhatsApp Chat</a>
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 25px; margin-bottom: 35px; text-align: center;">
+            <h3 style="color: #4f6fff; margin-top: 0; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px;">Ready to Start?</h3>
+            <p style="color: #64748b; font-size: 14px; margin-bottom: 20px;">Explore our previous work or chat with us directly:</p>
+            <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+              <a href="${SITE_URL}/portfolio" style="display: inline-block; padding: 12px 24px; background-color: #030510; color: white; text-decoration: none; border-radius: 10px; font-weight: 700; font-size: 14px;">View Portfolio</a>
+              <a href="https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}" style="display: inline-block; padding: 12px 24px; background-color: #25d366; color: white; text-decoration: none; border-radius: 10px; font-weight: 700; font-size: 14px;">WhatsApp Chat</a>
             </div>
           </div>
           
-          <div style="text-align: center; border-top: 1px solid #f1f5f9; padding-top: 40px;">
-            <p style="color: #94a3b8; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 25px;">Connect With Us</p>
-            <div style="display: flex; justify-content: center; align-items: center; gap: 24px;">
+          <div style="text-align: center; border-top: 1px solid #f1f5f9; padding-top: 30px;">
+            <p style="color: #94a3b8; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px;">Connect With Us</p>
+            <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
               <a href="https://www.webxcrafting.in" style="text-decoration: none;">
-                <img src="https://img.icons8.com/color/48/domain.png" alt="Website" width="32" height="32" style="display: block; border: 0;">
+                <img src="https://img.icons8.com/color/48/domain.png" alt="Website" width="24" height="24" style="display: block; border: 0; width: 24px; height: 24px;">
               </a>
               <a href="https://www.linkedin.com/in/webx-crafting-a1a875402/" style="text-decoration: none;">
-                <img src="https://img.icons8.com/color/48/linkedin-circled--v1.png" alt="LinkedIn" width="32" height="32" style="display: block; border: 0;">
+                <img src="https://img.icons8.com/color/48/linkedin-circled--v1.png" alt="LinkedIn" width="24" height="24" style="display: block; border: 0; width: 24px; height: 24px;">
               </a>
               <a href="https://www.instagram.com/webxcrafting" style="text-decoration: none;">
-                <img src="https://img.icons8.com/color/48/instagram-new--v1.png" alt="Instagram" width="32" height="32" style="display: block; border: 0;">
+                <img src="https://img.icons8.com/color/48/instagram-new--v1.png" alt="Instagram" width="24" height="24" style="display: block; border: 0; width: 24px; height: 24px;">
               </a>
             </div>
           </div>
