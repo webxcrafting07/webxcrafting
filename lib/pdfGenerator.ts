@@ -503,6 +503,14 @@ export async function generateProposalPDFBuffer(lead: { name: string; email: str
   const budgetText = lead.budget ? lead.budget.replace(" (Calculated)", "").replace("₹", "INR ") : "Open discussion";
   doc.text(`${budgetText}*`, 190, finalY + 14, { align: "right" });
 
+  // 100% NEGOTIABLE Pill Tag Badge
+  doc.setFillColor(255, 255, 255);
+  doc.roundedRect(150, finalY + 16, 40, 4.5, 1.5, 1.5, "F");
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(7);
+  doc.setTextColor(79, 111, 255);
+  doc.text("100% NEGOTIABLE", 170, finalY + 19.5, { align: "center" });
+
   // --- NEGOTIABLE WARNING BOX (PURPLE BORDER) ---
   const negotiableY = finalY + 34;
   doc.setFillColor(243, 244, 246);
