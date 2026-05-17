@@ -357,32 +357,103 @@ export async function generateProposalPDFBuffer(lead: { name: string; email: str
 
   // Parse specifications from message
   const specItems: any[] = [];
-  const specLines = lead.message.split("\n");
-  let hasSpecs = false;
+  const isCalculator = lead.message.includes("Website Cost Calculator") || (lead.budget && lead.budget.includes("(Calculated)"));
+  let tableHeader = ["TECHNICAL SPECIFICATION CATEGORY", "SELECTED SOLUTION & SCOPE", "DELIVERY ALLOCATION"];
 
-  specLines.forEach(line => {
-    if (line.includes(":") && !line.startsWith("http") && !line.toLowerCase().includes("message")) {
-      const parts = line.split(":");
-      const key = parts[0].trim();
-      const val = parts.slice(1).join(":").trim();
-      if (key && val && !key.toLowerCase().includes("whatsapp") && !key.toLowerCase().includes("phone") && !key.toLowerCase().includes("email")) {
-        specItems.push([key, val, "Included in scope"]);
-        hasSpecs = true;
+  if (isCalculator) {
+    tableHeader = ["TECHNICAL SPECIFICATION CATEGORY", "SELECTED SOLUTION & SCOPE", "PRICE (INR)"];
+    const specLines = lead.message.split("\n");
+    specLines.forEach(line => {
+      let cleanLine = line.replace(/^[-*]\s+/, "").trim();
+      
+      if (cleanLine.startsWith("Website Type:")) {
+        const match = cleanLine.match(/Website Type:\s*(.*?)\s*\(Base:\s*₹?([0-9,]+)\)/);
+        if (match) {
+          specItems.push(["Website Type Tier", match[1].trim(), `INR ${match[2].trim()}`]);
+        } else {
+          const parts = cleanLine.split(":");
+          specItems.push(["Website Type Tier", parts.slice(1).join(":").trim(), "Included"]);
+        }
+      } 
+      else if (cleanLine.startsWith("Page Count:")) {
+        const match = cleanLine.match(/Page Count:\s*(.*?)\s*\(\+₹?([0-9,]+)\)/);
+        if (match) {
+          const priceVal = match[2].trim();
+          const displayPrice = (priceVal === "0" || priceVal === "") ? "Included" : `INR ${priceVal}`;
+          specItems.push(["Scale & Page Count", match[1].trim(), displayPrice]);
+        } else {
+          const parts = cleanLine.split(":");
+          specItems.push(["Scale & Page Count", parts.slice(1).join(":").trim(), "Included"]);
+        }
       }
-    }
-  });
+      else if (cleanLine.startsWith("Design Level:")) {
+        const match = cleanLine.match(/Design Level:\s*(.*?)\s*\(\+₹?([0-9,]+)\)/);
+        if (match) {
+          const priceVal = match[2].trim();
+          const displayPrice = (priceVal === "0" || priceVal === "") ? "Included" : `INR ${priceVal}`;
+          specItems.push(["UI/UX Design Level", match[1].trim(), displayPrice]);
+        } else {
+          const parts = cleanLine.split(":");
+          specItems.push(["UI/UX Design Level", parts.slice(1).join(":").trim(), "Included"]);
+        }
+      }
+      else if (cleanLine.startsWith("Support Plan:")) {
+        const match = cleanLine.match(/Support Plan:\s*(.*?)\s*\(\+₹?([0-9,]+)\)/);
+        if (match) {
+          const priceVal = match[2].trim();
+          const displayPrice = (priceVal === "0" || priceVal === "") ? "Included" : `INR ${priceVal}`;
+          specItems.push(["Support & SLA Maintenance", match[1].trim(), displayPrice]);
+        } else {
+          const parts = cleanLine.split(":");
+          specItems.push(["Support & SLA Maintenance", parts.slice(1).join(":").trim(), "Included"]);
+        }
+      }
+      else if (cleanLine.startsWith("Addon Features:")) {
+        const content = cleanLine.replace("Addon Features:", "").trim();
+        if (content && content !== "None" && content !== "None (+₹0)") {
+          const addons = content.split(/\),\s*/);
+          addons.forEach(addonStr => {
+            if (!addonStr.trim()) return;
+            let formattedAddon = addonStr.trim();
+            if (!formattedAddon.endsWith(")")) {
+              formattedAddon += ")";
+            }
+            const match = formattedAddon.match(/(.*?)\s*\(\+₹?([0-9,]+)\)/);
+            if (match) {
+              specItems.push([`Addon Feature: ${match[1].trim()}`, "Advanced Integration", `INR ${match[2].trim()}`]);
+            }
+          });
+        }
+      }
+    });
+  }
 
-  // If no specs found, render custom message card
-  if (!hasSpecs) {
-    const cleanMsg = lead.message.replace(/Website URL:.*|WhatsApp Number:.*/g, "").trim();
-    specItems.push(["Custom Consultation Inquiry", cleanMsg || "Requesting custom estimate.", "TBD on Discovery Call"]);
+  // If no specs found or not calculator, fall back to parsing or custom consultation
+  if (specItems.length === 0) {
+    const specLines = lead.message.split("\n");
+    let hasSpecs = false;
+    specLines.forEach(line => {
+      if (line.includes(":") && !line.startsWith("http") && !line.toLowerCase().includes("message")) {
+        const parts = line.split(":");
+        const key = parts[0].trim();
+        const val = parts.slice(1).join(":").trim();
+        if (key && val && !key.toLowerCase().includes("whatsapp") && !key.toLowerCase().includes("phone") && !key.toLowerCase().includes("email")) {
+          specItems.push([key, val, "Included in scope"]);
+          hasSpecs = true;
+        }
+      }
+    });
+    if (!hasSpecs) {
+      const cleanMsg = lead.message.replace(/Website URL:.*|WhatsApp Number:.*/g, "").trim();
+      specItems.push(["Custom Consultation Inquiry", cleanMsg || "Requesting custom estimate.", "TBD on Discovery Call"]);
+    }
   }
 
   // Render Table
   (doc as any).autoTable({
     startY: 53,
     margin: { left: 20, right: 15 },
-    head: [["TECHNICAL SPECIFICATION CATEGORY", "SELECTED SOLUTION & SCOPE", "DELIVERY ALLOCATION"]],
+    head: [tableHeader],
     body: specItems,
     theme: "grid",
     headStyles: {
@@ -429,7 +500,7 @@ export async function generateProposalPDFBuffer(lead: { name: string; email: str
   doc.setTextColor(255, 255, 255);
   doc.setFont("helvetica", "bold");
   doc.setFontSize(16);
-  const budgetText = lead.budget ? lead.budget.replace(" (Calculated)", "") : "Open discussion";
+  const budgetText = lead.budget ? lead.budget.replace(" (Calculated)", "").replace("₹", "INR ") : "Open discussion";
   doc.text(`${budgetText}*`, 190, finalY + 14, { align: "right" });
 
   // --- NEGOTIABLE WARNING BOX (PURPLE BORDER) ---
