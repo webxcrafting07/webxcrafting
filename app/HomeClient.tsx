@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
@@ -346,6 +346,56 @@ export default function HomeClient() {
   const [blogs, setBlogs] = useState<any[]>([])
   const [selectedService, setSelectedService] = useState<any>(null)
 
+  // Free SEO & Performance Audit lead capture states
+  const [auditName, setAuditName] = useState('')
+  const [auditUrl, setAuditUrl] = useState('')
+  const [auditEmail, setAuditEmail] = useState('')
+  const [auditPhone, setAuditPhone] = useState('')
+  const [auditLoading, setAuditLoading] = useState(false)
+  const [auditSuccess, setAuditSuccess] = useState(false)
+  const [auditError, setAuditError] = useState('')
+
+  const handleAuditSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setAuditLoading(true)
+    setAuditError('')
+    setAuditSuccess(false)
+
+    if (!auditName || !auditUrl || !auditEmail || !auditPhone) {
+      setAuditError('Please fill out all fields so we can deliver the audit!')
+      setAuditLoading(false)
+      return
+    }
+
+    try {
+      const res = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: `${auditName} (Audit Request)`,
+          email: auditEmail,
+          budget: 'Free Audit Program',
+          message: `Requesting a FREE Technical SEO & PageSpeed Audit for: ${auditUrl}.\nContact WhatsApp / Mobile: ${auditPhone}.\nPlease perform Lighthouse score diagnostics, metadata headers checks, and mobile-responsiveness evaluation.`
+        })
+      })
+
+      const data = await res.json()
+      if (data.success) {
+        setAuditSuccess(true)
+        setAuditName('')
+        setAuditUrl('')
+        setAuditEmail('')
+        setAuditPhone('')
+      } else {
+        setAuditError(data.message || 'Something went wrong. Please try again.')
+      }
+    } catch {
+      setAuditError('Failed to connect to the server. Please check your internet connection.')
+    } finally {
+      setAuditLoading(false)
+    }
+  }
+
   useEffect(() => {
     // Fetch live data from MongoDB
     fetch('/api/services')
@@ -684,6 +734,198 @@ export default function HomeClient() {
             <Link href="/services" className="btn-outline">View All Services →</Link>
           </div>
         </FadeUp>
+      </section>
+
+      {/* ─── FREE SEO & PERFORMANCE WEBSITE AUDIT SECTION (LEAD MAGNET) ─── */}
+      <section 
+        className="mobile-p-6"
+        style={{ 
+          padding: '80px 24px', 
+          maxWidth: 1200, 
+          margin: '0 auto', 
+          position: 'relative', 
+          zIndex: 10,
+          width: '100%',
+          boxSizing: 'border-box'
+        }}
+      >
+        <div 
+          className="glass-strong mobile-grid-1"
+          style={{
+            background: "linear-gradient(135deg, rgba(79,111,255,0.08), rgba(162,89,255,0.04))",
+            border: "1px solid rgba(79,111,255,0.22)",
+            borderRadius: 28,
+            padding: "clamp(24px, 6vw, 56px)",
+            display: "grid",
+            gridTemplateColumns: "1.25fr 1fr",
+            gap: 40,
+            alignItems: "center"
+          }}
+        >
+          {/* Left Column: Form / Success Card */}
+          <div>
+            <div className="section-label" style={{ marginBottom: 16 }}>Lead Magnet Program</div>
+            <h2 style={{ fontFamily: "Syne", fontSize: "clamp(26px, 3.5vw, 42px)", fontWeight: 800, fontStyle: "italic", lineHeight: 1.15, marginBottom: 16 }}>
+              Is Your Competitor Outranking You? <span className="grad-text">Get a Free 5-Min Audit!</span>
+            </h2>
+            <p style={{ color: "#7b82a8", fontSize: 14.5, lineHeight: 1.65, marginBottom: 28 }}>
+              Slow load times and bad mobile SEO kill over 80% of sales opportunities in India. Enter your URL and WhatsApp details—our core engineering team will manually run a comprehensive Lighthouse audit and send you a detailed diagnostic report on WhatsApp absolutely FREE!
+            </p>
+
+            <AnimatePresence mode="wait">
+              {auditSuccess ? (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  style={{
+                    background: "rgba(0, 230, 118, 0.08)",
+                    border: "1px solid rgba(0, 230, 118, 0.3)",
+                    borderRadius: 20,
+                    padding: 28,
+                    textAlign: "center"
+                  }}
+                >
+                  <div style={{ fontSize: 44, color: "#00e676", marginBottom: 16 }}>🚀</div>
+                  <h4 style={{ fontFamily: "Syne", fontSize: 18, fontWeight: 700, color: "#e8eaf6", marginBottom: 10 }}>
+                    Audit Request Logged Successfully!
+                  </h4>
+                  <p style={{ color: "#b0b8d8", fontSize: 13.5, lineHeight: 1.6 }}>
+                    Our developers are running Lighthouse and Core Web Vitals diagnostics on your website right now. We will compile the results and WhatsApp your comprehensive PDF report to your phone within 2 hours!
+                  </p>
+                </motion.div>
+              ) : (
+                <motion.form
+                  onSubmit={handleAuditSubmit}
+                  style={{ display: "grid", gap: 16 }}
+                >
+                  {auditError && (
+                    <div style={{ color: "#ff1744", fontSize: 13, background: "rgba(255,23,68,0.08)", padding: "10px 16px", borderRadius: 10, border: "1px solid rgba(255,23,68,0.2)" }}>
+                      ⚠️ {auditError}
+                    </div>
+                  )}
+
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }} className="mobile-grid-1">
+                    <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                      <label style={{ fontSize: 12, color: "#7b82a8", fontWeight: 600 }}>Your Name *</label>
+                      <input 
+                        type="text" 
+                        value={auditName}
+                        onChange={(e) => setAuditName(e.target.value)}
+                        placeholder="e.g. Rahul Sharma"
+                        className="form-input" 
+                        required
+                        style={{ height: 48, background: "rgba(10,14,28,0.6)", borderRadius: 12, border: "1px solid rgba(255,255,255,0.08)", padding: "0 16px", color: "#fff", outline: "none" }}
+                      />
+                    </div>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                      <label style={{ fontSize: 12, color: "#7b82a8", fontWeight: 600 }}>Business Email *</label>
+                      <input 
+                        type="email" 
+                        value={auditEmail}
+                        onChange={(e) => setAuditEmail(e.target.value)}
+                        placeholder="e.g. contact@company.in"
+                        className="form-input" 
+                        required
+                        style={{ height: 48, background: "rgba(10,14,28,0.6)", borderRadius: 12, border: "1px solid rgba(255,255,255,0.08)", padding: "0 16px", color: "#fff", outline: "none" }}
+                      />
+                    </div>
+                  </div>
+
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }} className="mobile-grid-1">
+                    <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                      <label style={{ fontSize: 12, color: "#7b82a8", fontWeight: 600 }}>Current Website URL *</label>
+                      <input 
+                        type="url" 
+                        value={auditUrl}
+                        onChange={(e) => setAuditUrl(e.target.value)}
+                        placeholder="e.g. https://mycompany.com"
+                        className="form-input" 
+                        required
+                        style={{ height: 48, background: "rgba(10,14,28,0.6)", borderRadius: 12, border: "1px solid rgba(255,255,255,0.08)", padding: "0 16px", color: "#fff", outline: "none" }}
+                      />
+                    </div>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                      <label style={{ fontSize: 12, color: "#7b82a8", fontWeight: 600 }}>WhatsApp Number *</label>
+                      <input 
+                        type="tel" 
+                        value={auditPhone}
+                        onChange={(e) => setAuditPhone(e.target.value)}
+                        placeholder="e.g. +91 9999999999"
+                        className="form-input" 
+                        required
+                        style={{ height: 48, background: "rgba(10,14,28,0.6)", borderRadius: 12, border: "1px solid rgba(255,255,255,0.08)", padding: "0 16px", color: "#fff", outline: "none" }}
+                      />
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={auditLoading}
+                    className="btn-primary"
+                    style={{
+                      height: 52,
+                      marginTop: 10,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: 8,
+                      cursor: auditLoading ? "not-allowed" : "pointer",
+                      opacity: auditLoading ? 0.7 : 1
+                    }}
+                  >
+                    {auditLoading ? (
+                      <>Analyzing Domain...</>
+                    ) : (
+                      <>Get My Free SEO & Speed Report <FaArrowRight size={11} /></>
+                    )}
+                  </button>
+                </motion.form>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Right Column: Diagnostic Features checklist */}
+          <div
+            style={{
+              background: "rgba(10,14,28,0.75)",
+              border: "1px solid rgba(255,255,255,0.05)",
+              borderRadius: 22,
+              padding: 30,
+              boxShadow: "0 20px 40px rgba(0,0,0,0.3)"
+            }}
+          >
+            <h4 style={{ fontFamily: "Syne", fontSize: 16, fontWeight: 700, marginBottom: 20, color: "#e8eaf6" }}>
+              What Your Report Includes:
+            </h4>
+            <div style={{ display: "grid", gap: 16 }}>
+              <div style={{ display: "flex", gap: 14 }}>
+                <div style={{ color: "#4f6fff", fontSize: 18, marginTop: 2 }}>✓</div>
+                <div>
+                  <div style={{ fontWeight: 700, color: "#e8eaf6", fontSize: 14 }}>Core Web Vitals & Loading Diagnostics</div>
+                  <div style={{ color: "#7b82a8", fontSize: 12, marginTop: 2 }}>Breakdown of Largest Contentful Paint (LCP) and visual shift (CLS) performance metrics.</div>
+                </div>
+              </div>
+              <div style={{ display: "flex", gap: 14 }}>
+                <div style={{ color: "#a259ff", fontSize: 18, marginTop: 2 }}>✓</div>
+                <div>
+                  <div style={{ fontWeight: 700, color: "#e8eaf6", fontSize: 14 }}>On-Page SEO & Hierarchy Verification</div>
+                  <div style={{ color: "#7b82a8", fontSize: 12, marginTop: 2 }}>Verification of missing h1 elements, broken links, and metadata keyword efficiency.</div>
+                </div>
+              </div>
+              <div style={{ display: "flex", gap: 14 }}>
+                <div style={{ color: "#00e5ff", fontSize: 18, marginTop: 2 }}>✓</div>
+                <div>
+                  <div style={{ fontWeight: 700, color: "#e8eaf6", fontSize: 14 }}>Mobile UI Scaling & Viewport Check</div>
+                  <div style={{ color: "#7b82a8", fontSize: 12, marginTop: 2 }}>Scanning responsive tap targets and layouts for seamless usability on Indian smartphones.</div>
+                </div>
+              </div>
+            </div>
+            <div style={{ background: "rgba(255,255,255,0.03)", borderRadius: 10, padding: 12, fontSize: 11, color: "#7b82a8", marginTop: 24, textAlign: "center", border: "1px solid rgba(255,255,255,0.04)" }}>
+              🔒 Your data is fully encrypted and never shared with third parties.
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* ─── PORTFOLIO ───────────────────────────── */}
