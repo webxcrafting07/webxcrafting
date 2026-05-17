@@ -83,5 +83,40 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   const relatedBlogs = JSON.parse(JSON.stringify(relatedBlogsObj))
 
-  return <BlogPostClient blog={blog} relatedBlogs={relatedBlogs} fullUrl={fullUrl} />
+  // Dynamic Article Structured Data Schema for search engines
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": blog.title,
+    "image": blog.coverImage || `${baseUrl}/logo-wxc.png`,
+    "author": {
+      "@type": "Person",
+      "name": blog.author || "WebXCrafting Team"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "WebXCrafting",
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${baseUrl}/logo-wxc.png`
+      }
+    },
+    "datePublished": blog.publishDate || blog.createdAt,
+    "dateModified": blog.updatedAt || blog.createdAt,
+    "description": blog.metaDescription || blog.excerpt,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": fullUrl
+    }
+  }
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
+      <BlogPostClient blog={blog} relatedBlogs={relatedBlogs} fullUrl={fullUrl} />
+    </>
+  )
 }

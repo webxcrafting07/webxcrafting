@@ -27,6 +27,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: route === '' ? 1 : (route === '/blog' || route === '/services') ? 0.9 : 0.8,
   }))
 
+  // Pre-generate location city routes for maximum index visibility
+  const cities = ['bangalore', 'mumbai', 'delhi-ncr', 'pune', 'hyderabad', 'ahmedabad']
+  const locationRoutes: MetadataRoute.Sitemap = cities.map((city) => ({
+    url: `${baseUrl}/locations/web-development-company-in-${city}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly',
+    priority: 0.8,
+  }))
+
   // Fetch published blog slugs for dynamic routes using direct DB connection for robustness
   let blogRoutes: MetadataRoute.Sitemap = []
   try {
@@ -53,5 +62,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error('Sitemap DB fetch error:', error)
   }
 
-  return [...staticRoutes, ...blogRoutes]
+  return [...staticRoutes, ...locationRoutes, ...blogRoutes]
 }
