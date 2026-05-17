@@ -21,6 +21,7 @@ const quickLinks = [
   { label: "Services", href: "/services" },
   { label: "Portfolio", href: "/portfolio" },
   { label: "Blog", href: "/blog" },
+  { label: "Cost Calculator", href: "/website-cost-calculator" },
   { label: "Contact", href: "/contact" },
 ];
 

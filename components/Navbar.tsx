@@ -113,6 +113,13 @@ export default function Navbar() {
           style={{ display: "flex", gap: 12, alignItems: "center" }}
         >
           <Link
+            href="/website-cost-calculator"
+            className="btn-outline"
+            style={{ padding: "9px 18px", fontSize: 14, textDecoration: "none" }}
+          >
+            Cost Calculator
+          </Link>
+          <Link
             href="/contact"
             className="btn-primary"
             style={{ padding: "9px 22px", fontSize: 14 }}
@@ -184,6 +191,27 @@ export default function Navbar() {
                 </Link>
               </motion.div>
             ))}
+            <motion.div
+              initial={{ opacity: 0, x: -16 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: navLinks.length * 0.06 }}
+            >
+              <Link
+                href="/website-cost-calculator"
+                style={{
+                  display: "block",
+                  padding: "14px 0",
+                  fontFamily: "Syne",
+                  fontWeight: 600,
+                  fontSize: 22,
+                  textDecoration: "none",
+                  color: pathname === "/website-cost-calculator" ? "#4f6fff" : "#e8eaf6",
+                  borderBottom: "1px solid rgba(99,120,255,0.08)",
+                }}
+              >
+                Cost Calculator
+              </Link>
+            </motion.div>
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
