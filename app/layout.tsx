@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import TawkChat from "@/components/TawkChat";
@@ -79,6 +79,13 @@ export const metadata: Metadata = {
     shortcut: "/logo-wxc.png",
     apple: "/logo-wxc.png",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({
@@ -183,8 +190,10 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <TawkChat />
-        {children}
+        <div style={{ overflowX: "hidden", width: "100%", position: "relative" }}>
+          <TawkChat />
+          {children}
+        </div>
         <Toaster
           position="bottom-right"
           toastOptions={{
