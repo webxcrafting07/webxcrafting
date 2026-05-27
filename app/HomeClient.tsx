@@ -736,6 +736,117 @@ export default function HomeClient() {
         </FadeUp>
       </section>
 
+      {/* ─── PORTFOLIO ───────────────────────────── */}
+      <section style={{ padding: '80px 32px', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
+        <FadeUp style={{ textAlign: 'center', marginBottom: 56 }}>
+          <div className="section-label" style={{ margin: '0 auto 20px' }}>Portfolio</div>
+          <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(28px,4vw,48px)', fontWeight: 800, fontStyle: 'italic' }}>
+            Featured <span className="grad-text">Projects</span>
+          </h2>
+        </FadeUp>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 24 }}>
+          {projects.map((p: any, i) => (
+            <FadeUp key={i} delay={i * 0.1}>
+              <ProjectCard {...p} />
+            </FadeUp>
+          ))}
+        </div>
+        <FadeUp delay={0.3}>
+          <div style={{ textAlign: 'center', marginTop: 40 }}>
+            <Link href="/portfolio" className="btn-outline">View All Projects →</Link>
+          </div>
+        </FadeUp>
+      </section>
+      
+      {/* ─── LATEST BLOGS ────────────────────────── */}
+      {blogs.length > 0 && (
+        <section style={{ padding: '80px 32px', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
+          <FadeUp style={{ textAlign: 'center', marginBottom: 56 }}>
+            <div className="section-label" style={{ margin: '0 auto 20px' }}>Insights</div>
+            <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(28px,4vw,48px)', fontWeight: 800, fontStyle: 'italic' }}>
+              Latest <span className="grad-text">Articles</span>
+            </h2>
+          </FadeUp>
+
+          <div className="scroll-container">
+            {blogs.map((blog: any, i: number) => (
+              <FadeUp key={blog._id} delay={i * 0.05} className="blog-scroll-item">
+                <motion.div
+                  whileHover={{ y: -8, boxShadow: '0 24px 64px rgba(0,0,0,0.45)' }}
+                  transition={{ type: 'spring', stiffness: 300 }}
+                  style={{
+                    borderRadius: 20,
+                    overflow: 'hidden',
+                    background: 'rgba(10,14,28,0.65)',
+                    backdropFilter: 'blur(20px)',
+                    border: '1px solid rgba(99,120,255,0.15)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: '100%',
+                  }}
+                >
+                  <Link href={`/blog/${blog.slug}`} style={{ textDecoration: 'none' }}>
+                    <div style={{ 
+                      height: 180, 
+                      background: blog.coverImage ? `url(${blog.coverImage}) center/cover no-repeat` : 'linear-gradient(135deg,rgba(79,111,255,0.1),rgba(162,89,255,0.15))',
+                      position: 'relative',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}>
+                      {!blog.coverImage && <div style={{ fontSize: 40, opacity: 0.3 }}>📝</div>}
+                      <div style={{
+                        position: 'absolute', top: 14, left: 14, padding: '4px 14px', borderRadius: 20, fontSize: 11, fontWeight: 700,
+                        background: 'rgba(3,5,10,0.75)', backdropFilter: 'blur(10px)', color: '#4f6fff', border: '1px solid rgba(79,111,255,0.3)'
+                      }}>{blog.category}</div>
+                    </div>
+                  </Link>
+                  <div style={{ padding: 22, flex: 1, display: 'flex', flexDirection: 'column' }}>
+                    <div style={{ display: 'flex', gap: 14, marginBottom: 10, color: '#7b82a8', fontSize: 12 }}>
+                      <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><FaCalendarAlt size={11} /> {new Date(blog.publishDate || blog.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}</span>
+                      <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><FaClock size={11} /> {blog.readTime} min</span>
+                    </div>
+                    <Link href={`/blog/${blog.slug}`} style={{ textDecoration: 'none' }}>
+                      <h3 style={{ 
+                        fontFamily: 'Syne', fontWeight: 700, fontSize: 18, marginBottom: 12, fontStyle: 'italic', color: '#e8eaf6',
+                        lineHeight: 1.3, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden'
+                      }}>{blog.title}</h3>
+                    </Link>
+                    <p style={{ color: '#7b82a8', fontSize: 14, lineHeight: 1.6, marginBottom: 20, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{blog.excerpt}</p>
+                    <Link href={`/blog/${blog.slug}`} style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: '#4f6fff', fontWeight: 600, textDecoration: 'none' }}>
+                      Read More <FaArrowRight size={12} />
+                    </Link>
+                  </div>
+                </motion.div>
+              </FadeUp>
+            ))}
+          </div>
+
+          <FadeUp delay={0.3}>
+            <div style={{ textAlign: 'center', marginTop: 40 }}>
+              <Link href="/blog" className="btn-outline">View All Insights →</Link>
+            </div>
+          </FadeUp>
+        </section>
+      )}
+
+      {/* ─── TESTIMONIALS ────────────────────────── */}
+      <section style={{ padding: '80px 32px', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
+        <FadeUp style={{ textAlign: 'center', marginBottom: 56 }}>
+          <div className="section-label" style={{ margin: '0 auto 20px' }}>Testimonials</div>
+          <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(28px,4vw,48px)', fontWeight: 800, fontStyle: 'italic' }}>
+            What Clients <span className="grad-text">Say</span>
+          </h2>
+        </FadeUp>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24 }}>
+          {testimonials.map((t, i) => (
+            <FadeUp key={i} delay={i * 0.1}>
+              <TestimonialCard {...t} />
+            </FadeUp>
+          ))}
+        </div>
+      </section>
+
       {/* ─── FREE SEO & PERFORMANCE WEBSITE AUDIT SECTION (LEAD MAGNET) ─── */}
       <section 
         className="mobile-p-6"
@@ -925,117 +1036,6 @@ export default function HomeClient() {
               🔒 Your data is fully encrypted and never shared with third parties.
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* ─── PORTFOLIO ───────────────────────────── */}
-      <section style={{ padding: '80px 32px', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
-        <FadeUp style={{ textAlign: 'center', marginBottom: 56 }}>
-          <div className="section-label" style={{ margin: '0 auto 20px' }}>Portfolio</div>
-          <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(28px,4vw,48px)', fontWeight: 800, fontStyle: 'italic' }}>
-            Featured <span className="grad-text">Projects</span>
-          </h2>
-        </FadeUp>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 24 }}>
-          {projects.map((p: any, i) => (
-            <FadeUp key={i} delay={i * 0.1}>
-              <ProjectCard {...p} />
-            </FadeUp>
-          ))}
-        </div>
-        <FadeUp delay={0.3}>
-          <div style={{ textAlign: 'center', marginTop: 40 }}>
-            <Link href="/portfolio" className="btn-outline">View All Projects →</Link>
-          </div>
-        </FadeUp>
-      </section>
-      
-      {/* ─── LATEST BLOGS ────────────────────────── */}
-      {blogs.length > 0 && (
-        <section style={{ padding: '80px 32px', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
-          <FadeUp style={{ textAlign: 'center', marginBottom: 56 }}>
-            <div className="section-label" style={{ margin: '0 auto 20px' }}>Insights</div>
-            <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(28px,4vw,48px)', fontWeight: 800, fontStyle: 'italic' }}>
-              Latest <span className="grad-text">Articles</span>
-            </h2>
-          </FadeUp>
-
-          <div className="scroll-container">
-            {blogs.map((blog: any, i: number) => (
-              <FadeUp key={blog._id} delay={i * 0.05} className="blog-scroll-item">
-                <motion.div
-                  whileHover={{ y: -8, boxShadow: '0 24px 64px rgba(0,0,0,0.45)' }}
-                  transition={{ type: 'spring', stiffness: 300 }}
-                  style={{
-                    borderRadius: 20,
-                    overflow: 'hidden',
-                    background: 'rgba(10,14,28,0.65)',
-                    backdropFilter: 'blur(20px)',
-                    border: '1px solid rgba(99,120,255,0.15)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: '100%',
-                  }}
-                >
-                  <Link href={`/blog/${blog.slug}`} style={{ textDecoration: 'none' }}>
-                    <div style={{ 
-                      height: 180, 
-                      background: blog.coverImage ? `url(${blog.coverImage}) center/cover no-repeat` : 'linear-gradient(135deg,rgba(79,111,255,0.1),rgba(162,89,255,0.15))',
-                      position: 'relative',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}>
-                      {!blog.coverImage && <div style={{ fontSize: 40, opacity: 0.3 }}>📝</div>}
-                      <div style={{
-                        position: 'absolute', top: 14, left: 14, padding: '4px 14px', borderRadius: 20, fontSize: 11, fontWeight: 700,
-                        background: 'rgba(3,5,10,0.75)', backdropFilter: 'blur(10px)', color: '#4f6fff', border: '1px solid rgba(79,111,255,0.3)'
-                      }}>{blog.category}</div>
-                    </div>
-                  </Link>
-                  <div style={{ padding: 22, flex: 1, display: 'flex', flexDirection: 'column' }}>
-                    <div style={{ display: 'flex', gap: 14, marginBottom: 10, color: '#7b82a8', fontSize: 12 }}>
-                      <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><FaCalendarAlt size={11} /> {new Date(blog.publishDate || blog.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}</span>
-                      <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><FaClock size={11} /> {blog.readTime} min</span>
-                    </div>
-                    <Link href={`/blog/${blog.slug}`} style={{ textDecoration: 'none' }}>
-                      <h3 style={{ 
-                        fontFamily: 'Syne', fontWeight: 700, fontSize: 18, marginBottom: 12, fontStyle: 'italic', color: '#e8eaf6',
-                        lineHeight: 1.3, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden'
-                      }}>{blog.title}</h3>
-                    </Link>
-                    <p style={{ color: '#7b82a8', fontSize: 14, lineHeight: 1.6, marginBottom: 20, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{blog.excerpt}</p>
-                    <Link href={`/blog/${blog.slug}`} style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: '#4f6fff', fontWeight: 600, textDecoration: 'none' }}>
-                      Read More <FaArrowRight size={12} />
-                    </Link>
-                  </div>
-                </motion.div>
-              </FadeUp>
-            ))}
-          </div>
-
-          <FadeUp delay={0.3}>
-            <div style={{ textAlign: 'center', marginTop: 40 }}>
-              <Link href="/blog" className="btn-outline">View All Insights →</Link>
-            </div>
-          </FadeUp>
-        </section>
-      )}
-
-      {/* ─── TESTIMONIALS ────────────────────────── */}
-      <section style={{ padding: '80px 32px', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
-        <FadeUp style={{ textAlign: 'center', marginBottom: 56 }}>
-          <div className="section-label" style={{ margin: '0 auto 20px' }}>Testimonials</div>
-          <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(28px,4vw,48px)', fontWeight: 800, fontStyle: 'italic' }}>
-            What Clients <span className="grad-text">Say</span>
-          </h2>
-        </FadeUp>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24 }}>
-          {testimonials.map((t, i) => (
-            <FadeUp key={i} delay={i * 0.1}>
-              <TestimonialCard {...t} />
-            </FadeUp>
-          ))}
         </div>
       </section>
 
