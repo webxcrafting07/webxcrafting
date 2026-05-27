@@ -75,10 +75,9 @@ export async function POST(req: NextRequest) {
               </div>
               <div class="footer">
                 <div class="social-icons">
-                  <a href="#" target="_blank"><img src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook"/></a>
-                  <a href="#" target="_blank"><img src="https://img.icons8.com/fluency/48/000000/instagram-new.png" alt="Instagram"/></a>
-                  <a href="#" target="_blank"><img src="https://img.icons8.com/color/48/000000/linkedin.png" alt="LinkedIn"/></a>
-                  <a href="#" target="_blank"><img src="https://img.icons8.com/color/48/000000/twitter--v1.png" alt="Twitter"/></a>
+                  <a href="https://www.facebook.com/profile.php?id=61570712849063" target="_blank"><img src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook"/></a>
+                  <a href="https://www.instagram.com/webxcrafting" target="_blank"><img src="https://img.icons8.com/fluency/48/000000/instagram-new.png" alt="Instagram"/></a>
+                  <a href="https://www.linkedin.com/in/webx-crafting-a1a875402/" target="_blank"><img src="https://img.icons8.com/color/48/000000/linkedin.png" alt="LinkedIn"/></a>
                 </div>
                 <p style="margin: 0 0 8px 0;">© ${new Date().getFullYear()} WebXCrafting. Premium Digital Solutions.</p>
                 <p style="margin: 0;"><a href="https://www.webxcrafting.in">www.webxcrafting.in</a> | <a href="mailto:webxcrafting@gmail.com">webxcrafting@gmail.com</a></p>
