@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { connectDB } from '@/lib/db'
 import Lead from '@/models/Lead'
 import { isAdminAuthenticated } from '@/lib/auth'
-import { sendLeadNotification, sendClientAutoReply } from '@/lib/email'
+import { sendLeadNotification, sendClientAutoReply, sendAuditAutoReply } from '@/lib/email'
 
 // POST /api/leads — public (contact form)
 export async function POST(req: NextRequest) {
@@ -22,10 +22,22 @@ export async function POST(req: NextRequest) {
     
     // Send email notifications
     try {
-      await Promise.all([
-        sendLeadNotification({ name, email, budget, message }),
-        sendClientAutoReply(email, name, budget, message)
-      ])
+      if (budget === 'Free Audit Program') {
+        // Extract website URL and phone from audit message
+        const urlMatch = message.match(/https?:\/\/[^\s.]+(?:\.[^\s]+)+/)
+        const phoneMatch = message.match(/(?:\+91|91)?[6-9]\d{9}/)
+        const websiteUrl = urlMatch ? urlMatch[0].replace(/\.$/, '') : 'your website'
+        const phone = phoneMatch ? phoneMatch[0] : 'your number'
+        await Promise.all([
+          sendLeadNotification({ name, email, budget, message }),
+          sendAuditAutoReply(email, name.replace(' (Audit Request)', ''), websiteUrl, phone)
+        ])
+      } else {
+        await Promise.all([
+          sendLeadNotification({ name, email, budget, message }),
+          sendClientAutoReply(email, name, budget, message)
+        ])
+      }
     } catch (err) {
       console.error('Email notification sequence failed:', err)
       // We don't return error to user here as the lead was already created in DB

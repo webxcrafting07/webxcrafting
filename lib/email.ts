@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
   greetingTimeout: 10000,
 })
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://webxcrafting.in'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.webxcrafting.in'
 
 export async function sendLeadNotification(lead: { name: string; email: string; budget?: string; message: string }) {
   const notificationEmail = process.env.NOTIFICATION_EMAIL || process.env.SMTP_USER
@@ -174,6 +174,9 @@ export async function sendClientAutoReply(clientEmail: string, clientName: strin
               <a href="https://www.webxcrafting.in" style="text-decoration: none;">
                 <img src="https://img.icons8.com/color/48/domain.png" alt="Website" width="24" height="24" style="display: block; border: 0; width: 24px; height: 24px;">
               </a>
+              <a href="https://www.facebook.com/profile.php?id=61589165532607" style="text-decoration: none;">
+                <img src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook" width="24" height="24" style="display: block; border: 0; width: 24px; height: 24px;">
+              </a>
               <a href="https://www.linkedin.com/in/webx-crafting-a1a875402/" style="text-decoration: none;">
                 <img src="https://img.icons8.com/color/48/linkedin-circled--v1.png" alt="LinkedIn" width="24" height="24" style="display: block; border: 0; width: 24px; height: 24px;">
               </a>
@@ -275,6 +278,9 @@ export async function sendInvoiceEmail(bill: any) {
               <a href="https://www.webxcrafting.in" style="text-decoration: none;">
                 <img src="https://img.icons8.com/color/48/domain.png" alt="Website" width="32" height="32" style="display: block; border: 0;">
               </a>
+              <a href="https://www.facebook.com/profile.php?id=61589165532607" style="text-decoration: none;">
+                <img src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook" width="32" height="32" style="display: block; border: 0;">
+              </a>
               <a href="https://www.linkedin.com/in/webx-crafting-a1a875402/" style="text-decoration: none;">
                 <img src="https://img.icons8.com/color/48/linkedin-circled--v1.png" alt="LinkedIn" width="32" height="32" style="display: block; border: 0;">
               </a>
@@ -348,6 +354,9 @@ export async function sendCustomReply(toEmail: string, toName: string, message: 
               <a href="https://www.webxcrafting.in" style="text-decoration: none;">
                 <img src="https://img.icons8.com/color/48/domain.png" alt="Website" width="24" height="24" style="display: block; border: 0; width: 24px; height: 24px;">
               </a>
+              <a href="https://www.facebook.com/profile.php?id=61589165532607" style="text-decoration: none;">
+                <img src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook" width="24" height="24" style="display: block; border: 0; width: 24px; height: 24px;">
+              </a>
               <a href="https://www.linkedin.com/in/webx-crafting-a1a875402/" style="text-decoration: none;">
                 <img src="https://img.icons8.com/color/48/linkedin-circled--v1.png" alt="LinkedIn" width="24" height="24" style="display: block; border: 0; width: 24px; height: 24px;">
               </a>
@@ -373,5 +382,96 @@ export async function sendCustomReply(toEmail: string, toName: string, message: 
   } catch (error) {
     console.error('Error sending custom reply email:', error)
     return false
+  }
+}
+
+export async function sendAuditAutoReply(clientEmail: string, clientName: string, websiteUrl: string, phone: string) {
+  if (!process.env.SMTP_USER || !process.env.SMTP_PASS || process.env.SMTP_PASS === 'your_app_password_here') {
+    console.warn('SMTP credentials missing. Skipping audit auto-reply.')
+    return
+  }
+
+  const mailOptions = {
+    from: `"WebXCrafting Team" <${process.env.SMTP_USER}>`,
+    to: clientEmail,
+    subject: `✅ Your Free SEO & Speed Audit Request is Confirmed! — WebXCrafting`,
+    html: `
+      <div style="font-family: 'Inter', 'Segoe UI', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; color: #1e293b; border-radius: 24px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); border: 1px solid #e2e8f0;">
+        <div style="background: #030510; padding: 40px 30px; text-align: center;">
+          <div style="margin-bottom: 16px;">
+            <img src="${SITE_URL}/logo-wxc.png" alt="WebXCrafting" width="48" height="48" style="width: 48px; height: 48px; margin: 0 auto; display: block;">
+          </div>
+          <h1 style="color: white; margin: 0; font-size: 26px; font-weight: 800; letter-spacing: -1px; line-height: 1.2;">Your Free <span style="color: #00e676;">Audit Request</span> is Confirmed! 🚀</h1>
+          <p style="color: #94a3b8; margin: 10px 0 0; font-size: 14px;">Our engineering team is on it.</p>
+        </div>
+
+        <div style="padding: 40px 35px;">
+          <p style="font-size: 17px; margin-bottom: 16px; color: #0f172a;">Hi <strong>${clientName}</strong>,</p>
+          <p style="color: #475569; font-size: 15px; line-height: 1.7; margin-bottom: 28px;">
+            Thank you for submitting your website for a <strong>FREE SEO &amp; Performance Audit</strong>! We have successfully received your request for:
+          </p>
+
+          <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 14px; padding: 20px 24px; margin-bottom: 28px;">
+            <p style="color: #166534; margin: 0; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">Website Under Audit</p>
+            <a href="${websiteUrl}" style="color: #16a34a; font-size: 16px; font-weight: 700; text-decoration: none; word-break: break-all;">${websiteUrl}</a>
+          </div>
+
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 25px; margin-bottom: 32px;">
+            <h3 style="color: #4f6fff; margin-top: 0; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px;">What We Are Auditing</h3>
+            <div style="display: flex; margin-bottom: 14px;">
+              <span style="color: #00e676; font-weight: 700; margin-right: 10px; font-size: 16px;">✓</span>
+              <p style="margin: 0; color: #334155; font-size: 14px; line-height: 1.5;"><strong>Core Web Vitals:</strong> Largest Contentful Paint (LCP), Cumulative Layout Shift (CLS), and First Input Delay (FID).</p>
+            </div>
+            <div style="display: flex; margin-bottom: 14px;">
+              <span style="color: #00e676; font-weight: 700; margin-right: 10px; font-size: 16px;">✓</span>
+              <p style="margin: 0; color: #334155; font-size: 14px; line-height: 1.5;"><strong>On-Page SEO:</strong> Missing H1 tags, broken links, and metadata keyword efficiency.</p>
+            </div>
+            <div style="display: flex;">
+              <span style="color: #00e676; font-weight: 700; margin-right: 10px; font-size: 16px;">✓</span>
+              <p style="margin: 0; color: #334155; font-size: 14px; line-height: 1.5;"><strong>Mobile Responsiveness:</strong> Tap target sizing and viewport scaling for Indian smartphones.</p>
+            </div>
+          </div>
+
+          <div style="background: linear-gradient(135deg, rgba(79,111,255,0.06), rgba(162,89,255,0.04)); border: 1px solid rgba(79,111,255,0.2); border-radius: 14px; padding: 20px 24px; margin-bottom: 32px; text-align: center;">
+            <p style="color: #4f6fff; font-size: 14px; font-weight: 700; margin: 0 0 6px;">⏱ Expected Delivery</p>
+            <p style="color: #334155; font-size: 15px; margin: 0;">Your detailed diagnostic report will be sent to your <strong>WhatsApp (${phone})</strong> within <strong>2–4 hours</strong> during business hours (Mon–Sat, 9AM–7PM IST).</p>
+          </div>
+
+          <div style="text-align: center; margin-bottom: 20px;">
+            <a href="https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919102615343'}" style="display: inline-block; padding: 14px 32px; background-color: #25d366; color: white; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 15px;">💬 Chat with Us on WhatsApp</a>
+          </div>
+
+          <div style="text-align: center; border-top: 1px solid #f1f5f9; padding-top: 28px;">
+            <p style="color: #94a3b8; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px;">Connect With Us</p>
+            <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+              <a href="https://www.webxcrafting.in" style="text-decoration: none;">
+                <img src="https://img.icons8.com/color/48/domain.png" alt="Website" width="24" height="24" style="display: block; border: 0;">
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=61589165532607" style="text-decoration: none;">
+                <img src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook" width="24" height="24" style="display: block; border: 0;">
+              </a>
+              <a href="https://www.linkedin.com/in/webx-crafting-a1a875402/" style="text-decoration: none;">
+                <img src="https://img.icons8.com/color/48/linkedin-circled--v1.png" alt="LinkedIn" width="24" height="24" style="display: block; border: 0;">
+              </a>
+              <a href="https://www.instagram.com/webxcrafting" style="text-decoration: none;">
+                <img src="https://img.icons8.com/color/48/instagram-new--v1.png" alt="Instagram" width="24" height="24" style="display: block; border: 0;">
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div style="padding: 28px 35px; text-align: center; background-color: #f8fafc; border-top: 1px solid #f1f5f9;">
+          <p style="color: #94a3b8; font-size: 12px; margin: 0;">© ${new Date().getFullYear()} WebXCrafting. All rights reserved.</p>
+          <p style="color: #4f6fff; font-size: 11px; margin-top: 6px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;">Free Audit Program • Powered by WebXCrafting</p>
+        </div>
+      </div>
+    `
+  }
+
+  try {
+    await transporter.sendMail(mailOptions)
+    console.log('Audit auto-reply email sent successfully.')
+  } catch (error) {
+    console.error('Error sending audit auto-reply email:', error)
   }
 }
