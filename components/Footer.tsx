@@ -3,6 +3,7 @@ import Link from "next/link";
 import {
   FaLinkedin,
   FaInstagram,
+  FaFacebook,
   FaEnvelope,
   FaPhone,
   FaClock,
@@ -33,6 +34,11 @@ const legalLinks = [
   { label: "Refund Policy", href: "/refund-policy" },
 ];
 const socials = [
+  {
+    icon: FaFacebook,
+    href: "https://www.facebook.com/profile.php?id=61589165532607",
+    label: "Facebook",
+  },
   {
     icon: FaLinkedin,
     href: "https://www.linkedin.com/in/webx-crafting-a1a875402/",
