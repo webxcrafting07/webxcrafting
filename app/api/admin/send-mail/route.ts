@@ -41,52 +41,91 @@ export async function POST(req: NextRequest) {
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>${subject}</title>
       <style>
-        body { font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #050505; color: #ededed; margin: 0; padding: 0; width: 100%; -webkit-text-size-adjust: 100%; }
-        .wrapper { padding: 40px; background-color: #050505; }
-        .container { max-width: 800px; margin: 0 auto; }
-        .header { padding: 20px 0 30px 0; border-bottom: 1px solid #222; text-align: left; }
-        .header img { max-width: 120px; height: auto; display: block; margin: 0; }
-        .content { padding: 40px 0; line-height: 1.8; color: #d1d5db; font-size: 16px; text-align: left; }
-        .content h2, .content h3 { color: #ffffff; font-weight: 600; margin-top: 0; }
-        .content p { margin-top: 0; margin-bottom: 20px; }
-        .footer { padding: 30px 0; font-size: 13px; color: #6b7280; border-top: 1px solid #222; text-align: left; }
-        .footer a { color: #4f6fff; text-decoration: none; transition: color 0.2s; }
-        .footer a:hover { color: #a259ff; }
-        .social-icons { margin: 0 0 20px 0; }
-        .social-icons a { display: inline-block; margin: 0 16px 0 0; text-decoration: none; }
-        .social-icons img { width: 22px; height: 22px; opacity: 0.6; filter: grayscale(100%); transition: all 0.3s ease; }
-        .social-icons a:hover img { opacity: 1; filter: grayscale(0%); }
-        @media only screen and (max-width: 620px) {
-          .wrapper { padding: 20px; }
-          .content { padding: 30px 0; font-size: 15px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0ece8; color: #1a1a1a; -webkit-text-size-adjust: 100%; }
+        .outer { padding: 32px 16px; background-color: #f0ece8; }
+        .card { max-width: 580px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+
+        /* Banner */
+        .banner { position: relative; background: linear-gradient(135deg, #111827 0%, #1e3a5f 60%, #2d6a4f 100%); padding: 28px 32px; display: flex; align-items: center; justify-content: space-between; overflow: hidden; }
+        .banner::after { content: ''; position: absolute; right: -20px; top: -20px; width: 200px; height: 130px; background: rgba(255,255,255,0.06); border-radius: 50%; }
+        .banner-logo { display: flex; align-items: center; gap: 10px; z-index: 1; }
+        .banner-logo img { width: 40px; height: 40px; object-fit: contain; border-radius: 6px; }
+        .banner-logo-text { color: #ffffff; font-size: 20px; font-weight: 700; letter-spacing: 0.5px; }
+        .banner-tagline { color: rgba(255,255,255,0.6); font-size: 12px; margin-top: 2px; letter-spacing: 0.3px; }
+
+        /* Body */
+        .body { padding: 36px 32px; line-height: 1.75; font-size: 15px; color: #333333; }
+        .body p { margin-bottom: 18px; }
+        .body a { color: #d97706; text-decoration: none; border-bottom: 1px solid #d97706; }
+
+        /* Footer */
+        .footer-note { padding: 16px 32px; font-size: 11px; color: #888888; line-height: 1.6; border-top: 1px solid #eeeeee; background: #fafafa; }
+        .footer-note a { color: #d97706; text-decoration: none; }
+        .footer-dark { background: #1a1a1a; padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+        .footer-dark-text { color: #9ca3af; font-size: 11px; }
+        .social-row { display: flex; gap: 12px; align-items: center; }
+        .social-row a img { width: 20px; height: 20px; opacity: 0.65; display: block; }
+
+        @media only screen and (max-width: 600px) {
+          .outer { padding: 16px 8px; }
+          .banner { padding: 22px 20px; }
+          .body { padding: 28px 20px; font-size: 14px; }
+          .footer-note { padding: 14px 20px; }
+          .footer-dark { padding: 18px 20px; }
+          .banner-logo-text { font-size: 17px; }
         }
       </style>
     </head>
     <body>
-      <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #000000;">
-        <tr>
-          <td align="center" class="wrapper">
-            <div class="container">
-              <div class="header">
-                <img src="https://www.webxcrafting.in/logo-wxc.png" alt="WebXCrafting Logo" />
-              </div>
-              <div class="content">
-                ${message.replace(/\n/g, '<br>')}
-              </div>
-              <div class="footer">
-                <div class="social-icons">
-                  <a href="https://www.facebook.com/profile.php?id=61570712849063" target="_blank"><img src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook"/></a>
-                  <a href="https://www.instagram.com/webxcrafting" target="_blank"><img src="https://img.icons8.com/fluency/48/000000/instagram-new.png" alt="Instagram"/></a>
-                  <a href="https://www.linkedin.com/in/webx-crafting-a1a875402/" target="_blank"><img src="https://img.icons8.com/color/48/000000/linkedin.png" alt="LinkedIn"/></a>
-                </div>
-                <p style="margin: 0 0 8px 0;">© ${new Date().getFullYear()} WebXCrafting. Premium Digital Solutions.</p>
-                <p style="margin: 0;"><a href="https://www.webxcrafting.in">www.webxcrafting.in</a> | <a href="mailto:webxcrafting@gmail.com">webxcrafting@gmail.com</a></p>
-                <p style="margin: 20px 0 0 0; font-size: 11px; opacity: 0.5;">You are receiving this email because you are a valued client of WebXCrafting.</p>
+      <div class="outer">
+        <div class="card">
+
+          <!-- Banner Header -->
+          <div class="banner">
+            <div class="banner-logo">
+              <img src="https://www.webxcrafting.in/logo-wxc.png" alt="WebXCrafting Logo" />
+              <div>
+                <div class="banner-logo-text">WebXCrafting</div>
+                <div class="banner-tagline">Build your digital future with us</div>
               </div>
             </div>
-          </td>
-        </tr>
-      </table>
+          </div>
+
+          <!-- Email Body -->
+          <div class="body">
+            ${message.replace(/\n/g, '<br>')}
+            <br>
+            <p style="margin-top: 24px; color: #555;">Kind regards,<br><strong style="color: #111827;">WebXCrafting Team</strong></p>
+          </div>
+
+          <!-- Disclaimer Note -->
+          <div class="footer-note">
+            This email was sent to you because you are a valued client or contact of WebXCrafting. 
+            If you have any queries, contact us at <a href="mailto:webxcrafting@gmail.com">webxcrafting@gmail.com</a>.
+          </div>
+
+          <!-- Dark Footer -->
+          <div class="footer-dark">
+            <div class="footer-dark-text">
+              Copyright WebXCrafting ${new Date().getFullYear()}. All rights reserved.<br>
+              <a href="https://www.webxcrafting.in" style="color: #d97706; text-decoration: none;">www.webxcrafting.in</a>
+            </div>
+            <div class="social-row">
+              <a href="https://www.facebook.com/profile.php?id=61570712849063" target="_blank">
+                <img src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook"/>
+              </a>
+              <a href="https://www.instagram.com/webxcrafting" target="_blank">
+                <img src="https://img.icons8.com/fluency/48/000000/instagram-new.png" alt="Instagram"/>
+              </a>
+              <a href="https://www.linkedin.com/in/webx-crafting-a1a875402/" target="_blank">
+                <img src="https://img.icons8.com/color/48/000000/linkedin.png" alt="LinkedIn"/>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </body>
     </html>
     `
