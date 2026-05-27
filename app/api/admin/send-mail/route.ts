@@ -41,26 +41,24 @@ export async function POST(req: NextRequest) {
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>${subject}</title>
       <style>
-        body { font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #000000; color: #ededed; margin: 0; padding: 0; width: 100%; -webkit-text-size-adjust: 100%; }
-        .wrapper { padding: 40px 20px; background-color: #000000; }
-        .container { max-width: 600px; margin: 0 auto; background-color: #0a0a0a; border-radius: 12px; overflow: hidden; border: 1px solid #1f1f1f; }
-        .header { background-color: #0a0a0a; padding: 40px 40px 20px 40px; text-align: center; border-bottom: 1px solid #1f1f1f; }
-        .header img { max-width: 120px; height: auto; display: block; margin: 0 auto; }
-        .content { padding: 40px; line-height: 1.7; color: #a1a1aa; font-size: 15px; }
+        body { font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #050505; color: #ededed; margin: 0; padding: 0; width: 100%; -webkit-text-size-adjust: 100%; }
+        .wrapper { padding: 40px; background-color: #050505; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .header { padding: 20px 0 30px 0; border-bottom: 1px solid #222; text-align: left; }
+        .header img { max-width: 120px; height: auto; display: block; margin: 0; }
+        .content { padding: 40px 0; line-height: 1.8; color: #d1d5db; font-size: 16px; text-align: left; }
         .content h2, .content h3 { color: #ffffff; font-weight: 600; margin-top: 0; }
         .content p { margin-top: 0; margin-bottom: 20px; }
-        .footer { background-color: #050505; padding: 30px 40px; text-align: center; font-size: 12px; color: #71717a; border-top: 1px solid #1f1f1f; }
+        .footer { padding: 30px 0; font-size: 13px; color: #6b7280; border-top: 1px solid #222; text-align: left; }
         .footer a { color: #4f6fff; text-decoration: none; transition: color 0.2s; }
         .footer a:hover { color: #a259ff; }
         .social-icons { margin: 0 0 20px 0; }
-        .social-icons a { display: inline-block; margin: 0 8px; text-decoration: none; }
-        .social-icons img { width: 24px; height: 24px; opacity: 0.6; filter: grayscale(100%); transition: all 0.3s ease; }
+        .social-icons a { display: inline-block; margin: 0 16px 0 0; text-decoration: none; }
+        .social-icons img { width: 22px; height: 22px; opacity: 0.6; filter: grayscale(100%); transition: all 0.3s ease; }
         .social-icons a:hover img { opacity: 1; filter: grayscale(0%); }
         @media only screen and (max-width: 620px) {
-          .wrapper { padding: 20px 10px; }
-          .content { padding: 30px 20px; font-size: 14px; }
-          .header { padding: 30px 20px 20px 20px; }
-          .footer { padding: 30px 20px; }
+          .wrapper { padding: 20px; }
+          .content { padding: 30px 0; font-size: 15px; }
         }
       </style>
     </head>
