@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 import Link from 'next/link'
 import { jsPDF } from 'jspdf'
 import autoTable from 'jspdf-autotable'
-import { FaChartBar, FaFolder, FaEnvelope, FaCog, FaFileInvoice, FaCheckCircle, FaFire, FaPen, FaTrash, FaComments, FaFileAlt, FaSignOutAlt, FaBars, FaEye, FaEyeSlash, FaCheck, FaGlobe, FaHourglass, FaNewspaper, FaImage, FaCloudUploadAlt, FaLink, FaSync } from 'react-icons/fa'
+import { FaChartBar, FaFolder, FaEnvelope, FaCog, FaFileInvoice, FaCheckCircle, FaFire, FaPen, FaTrash, FaComments, FaFileAlt, FaSignOutAlt, FaBars, FaEye, FaEyeSlash, FaCheck, FaGlobe, FaHourglass, FaNewspaper, FaImage, FaCloudUploadAlt, FaLink, FaSync, FaPaperPlane } from 'react-icons/fa'
 import { SERVICE_ICONS, getServiceIcon } from '@/lib/icons'
 
 /* ── helpers ── */
@@ -33,6 +33,7 @@ const sidebarTabs = [
   { key: 'overview', label: 'Overview', icon: FaChartBar },
   { key: 'projects', label: 'Projects', icon: FaFolder },
   { key: 'leads', label: 'Leads', icon: FaEnvelope },
+  { key: 'marketing', label: 'Marketing', icon: FaPaperPlane },
   { key: 'services', label: 'Services', icon: FaCog },
   { key: 'invoices', label: 'Invoices', icon: FaFileInvoice },
   { key: 'blog', label: 'Blog', icon: FaNewspaper },
@@ -54,6 +55,8 @@ export default function DashboardClient() {
   const [uploading, setUploading] = useState(false)
   const [imageMode, setImageMode] = useState<'upload' | 'link'>('upload')
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [marketingForm, setMarketingForm] = useState({ recipients: '', subject: '', message: '' })
+  const [sendingEmail, setSendingEmail] = useState(false)
 
   /* ── auth check ── */
   useEffect(() => {
@@ -590,6 +593,32 @@ export default function DashboardClient() {
     window.open(`https://wa.me/${bill.clientPhone.replace(/\D/g,'')}?text=${encodeURIComponent(text)}`, '_blank')
   }
 
+  const sendBulkEmail = async () => {
+    if (!marketingForm.recipients || !marketingForm.subject || !marketingForm.message) {
+      toast.error('All fields are required');
+      return;
+    }
+    setSendingEmail(true);
+    try {
+      const res = await fetch('/api/admin/send-mail', {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify(marketingForm)
+      });
+      const data = await res.json();
+      if (data.success) {
+        toast.success(`Sent emails successfully!`);
+        setMarketingForm({ recipients: '', subject: '', message: '' });
+      } else {
+        toast.error(data.message || 'Failed to send emails');
+      }
+    } catch (e) {
+      toast.error('Error sending emails');
+    } finally {
+      setSendingEmail(false);
+    }
+  }
+
   /* ── computed stats ── */
   const completed = projects.filter((p) => p.status === 'completed').length
   const ongoing = projects.filter((p) => p.status === 'ongoing').length
@@ -718,6 +747,57 @@ export default function DashboardClient() {
                   </div>
                 </div>
               </div>
+            )}
+
+            {/* ── MARKETING ── */}
+            {tab === 'marketing' && (
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                <div style={{ marginBottom: 32 }}>
+                  <h2 style={{ fontFamily: 'Syne', fontWeight: 800, fontSize: 28 }}>Marketing & Campaigns</h2>
+                  <p style={{ color: '#7b82a8', fontSize: 14, marginTop: 4 }}>Send premium HTML emails to multiple clients at once.</p>
+                </div>
+
+                <div className="glass mobile-p-4" style={{ padding: 32, borderRadius: 16 }}>
+                  <div style={{ marginBottom: 20 }}>
+                    <label style={lbl}>Recipients (comma or newline separated emails)</label>
+                    <textarea 
+                      style={{ ...inp, resize: 'vertical', minHeight: 80 }} 
+                      value={marketingForm.recipients}
+                      onChange={(e) => setMarketingForm({ ...marketingForm, recipients: e.target.value })}
+                      placeholder="client1@example.com, client2@example.com" 
+                    />
+                  </div>
+                  
+                  <div style={{ marginBottom: 20 }}>
+                    <label style={lbl}>Subject</label>
+                    <input 
+                      style={inp} 
+                      value={marketingForm.subject}
+                      onChange={(e) => setMarketingForm({ ...marketingForm, subject: e.target.value })}
+                      placeholder="Exclusive Offer from WebXCrafting" 
+                    />
+                  </div>
+
+                  <div style={{ marginBottom: 24 }}>
+                    <label style={lbl}>Message Content</label>
+                    <textarea 
+                      style={{ ...inp, resize: 'vertical', minHeight: 200 }} 
+                      value={marketingForm.message}
+                      onChange={(e) => setMarketingForm({ ...marketingForm, message: e.target.value })}
+                      placeholder="Write your email content here. It will be wrapped in our premium WebXCrafting email template..." 
+                    />
+                  </div>
+
+                  <button 
+                    className="btn-primary" 
+                    style={{ width: '100%', display: 'flex', justifyContent: 'center', gap: 10, padding: 14, fontSize: 15 }} 
+                    onClick={sendBulkEmail}
+                    disabled={sendingEmail}
+                  >
+                    {sendingEmail ? <><div className="spinner" /> Sending...</> : <><FaPaperPlane size={16} /> Send Bulk Email</>}
+                  </button>
+                </div>
+              </motion.div>
             )}
 
             {/* ── PROJECTS ── */}
