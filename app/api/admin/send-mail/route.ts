@@ -41,35 +41,36 @@ export async function POST(req: NextRequest) {
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>${subject}</title>
       <style>
-        body { font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #03050a; color: #e8eaf6; margin: 0; padding: 0; width: 100%; -webkit-text-size-adjust: 100%; }
-        .container { max-width: 600px; margin: 40px auto; background-color: #0a0e1c; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid rgba(99,120,255,0.2); }
-        .header { background: linear-gradient(135deg, #4f6fff, #a259ff); padding: 30px; text-align: center; }
-        .header img { max-width: 180px; height: auto; margin-bottom: 12px; }
-        .header h1 { color: #ffffff; margin: 0; font-size: 24px; font-weight: 800; letter-spacing: 1px; display: none; } /* Hidden as we use logo now */
-        .content { padding: 40px 30px; line-height: 1.8; color: #b0b8d8; font-size: 16px; }
-        .content h2, .content h3 { color: #e8eaf6; }
-        .button { display: inline-block; padding: 14px 28px; background: linear-gradient(135deg, #4f6fff, #a259ff); color: #ffffff !important; text-decoration: none; border-radius: 8px; font-weight: bold; margin-top: 20px; box-shadow: 0 4px 15px rgba(79, 111, 255, 0.4); }
-        .footer { background-color: #050811; padding: 30px 20px; text-align: center; font-size: 13px; color: #7b82a8; border-top: 1px solid rgba(99,120,255,0.1); }
-        .footer a { color: #4f6fff; text-decoration: none; }
-        .social-icons { margin: 20px 0; }
-        .social-icons a { display: inline-block; margin: 0 10px; text-decoration: none; }
-        .social-icons img { width: 32px; height: 32px; opacity: 0.85; transition: opacity 0.3s; }
-        .social-icons a:hover img { opacity: 1; }
+        body { font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #000000; color: #ededed; margin: 0; padding: 0; width: 100%; -webkit-text-size-adjust: 100%; }
+        .wrapper { padding: 40px 20px; background-color: #000000; }
+        .container { max-width: 600px; margin: 0 auto; background-color: #0a0a0a; border-radius: 12px; overflow: hidden; border: 1px solid #1f1f1f; }
+        .header { background-color: #0a0a0a; padding: 40px 40px 20px 40px; text-align: center; border-bottom: 1px solid #1f1f1f; }
+        .header img { max-width: 120px; height: auto; display: block; margin: 0 auto; }
+        .content { padding: 40px; line-height: 1.7; color: #a1a1aa; font-size: 15px; }
+        .content h2, .content h3 { color: #ffffff; font-weight: 600; margin-top: 0; }
+        .content p { margin-top: 0; margin-bottom: 20px; }
+        .footer { background-color: #050505; padding: 30px 40px; text-align: center; font-size: 12px; color: #71717a; border-top: 1px solid #1f1f1f; }
+        .footer a { color: #4f6fff; text-decoration: none; transition: color 0.2s; }
+        .footer a:hover { color: #a259ff; }
+        .social-icons { margin: 0 0 20px 0; }
+        .social-icons a { display: inline-block; margin: 0 8px; text-decoration: none; }
+        .social-icons img { width: 24px; height: 24px; opacity: 0.6; filter: grayscale(100%); transition: all 0.3s ease; }
+        .social-icons a:hover img { opacity: 1; filter: grayscale(0%); }
         @media only screen and (max-width: 620px) {
-          .container { margin: 20px; border-radius: 12px; }
-          .content { padding: 30px 20px; font-size: 15px; }
-          .header { padding: 25px; }
+          .wrapper { padding: 20px 10px; }
+          .content { padding: 30px 20px; font-size: 14px; }
+          .header { padding: 30px 20px 20px 20px; }
+          .footer { padding: 30px 20px; }
         }
       </style>
     </head>
     <body>
-      <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #03050a;">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #000000;">
         <tr>
-          <td align="center">
+          <td align="center" class="wrapper">
             <div class="container">
               <div class="header">
                 <img src="https://www.webxcrafting.in/logo-wxc.png" alt="WebXCrafting Logo" />
-                <h1>WebXCrafting</h1>
               </div>
               <div class="content">
                 ${message.replace(/\n/g, '<br>')}
@@ -81,9 +82,9 @@ export async function POST(req: NextRequest) {
                   <a href="#" target="_blank"><img src="https://img.icons8.com/color/48/000000/linkedin.png" alt="LinkedIn"/></a>
                   <a href="#" target="_blank"><img src="https://img.icons8.com/color/48/000000/twitter--v1.png" alt="Twitter"/></a>
                 </div>
-                <p style="margin-bottom: 8px;">© ${new Date().getFullYear()} WebXCrafting. Premium Digital Solutions.</p>
-                <p><a href="https://www.webxcrafting.in">www.webxcrafting.in</a> | <a href="mailto:webxcrafting@gmail.com">webxcrafting@gmail.com</a></p>
-                <p style="margin-top: 15px; font-size: 11px; opacity: 0.6;">You are receiving this email because you are a valued client of WebXCrafting.</p>
+                <p style="margin: 0 0 8px 0;">© ${new Date().getFullYear()} WebXCrafting. Premium Digital Solutions.</p>
+                <p style="margin: 0;"><a href="https://www.webxcrafting.in">www.webxcrafting.in</a> | <a href="mailto:webxcrafting@gmail.com">webxcrafting@gmail.com</a></p>
+                <p style="margin: 20px 0 0 0; font-size: 11px; opacity: 0.5;">You are receiving this email because you are a valued client of WebXCrafting.</p>
               </div>
             </div>
           </td>
