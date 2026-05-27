@@ -107,7 +107,7 @@ export default function RootLayout({
         "sameAs": [
           "https://www.linkedin.com/in/webx-crafting-a1a875402/",
           "https://www.instagram.com/webxcrafting",
-          "https://www.facebook.com/profile.php?id=61570712849063"
+          "https://www.facebook.com/profile.php?id=61589165532607"
         ]
       },
       {

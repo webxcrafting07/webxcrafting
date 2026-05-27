@@ -112,7 +112,7 @@ export async function POST(req: NextRequest) {
               <a href="https://www.webxcrafting.in" style="color: #d97706; text-decoration: none;">www.webxcrafting.in</a>
             </div>
             <div class="social-row">
-              <a href="https://www.facebook.com/profile.php?id=61570712849063" target="_blank">
+              <a href="https://www.facebook.com/profile.php?id=61589165532607" target="_blank">
                 <img src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook"/>
               </a>
               <a href="https://www.instagram.com/webxcrafting" target="_blank">

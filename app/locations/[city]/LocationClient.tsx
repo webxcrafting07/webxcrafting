@@ -86,7 +86,7 @@ export default function LocationClient({ cityKey, cityInfo }: LocationClientProp
     },
     "sameAs": [
       "https://www.instagram.com/webxcrafting",
-      "https://www.facebook.com/profile.php?id=61570712849063",
+      "https://www.facebook.com/profile.php?id=61589165532607",
       "https://www.linkedin.com/in/webx-crafting-a1a875402/"
     ]
   };
