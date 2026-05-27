@@ -750,14 +750,14 @@ export default function HomeClient() {
         }}
       >
         <div 
-          className="glass-strong mobile-grid-1"
+          className="glass-strong"
           style={{
             background: "linear-gradient(135deg, rgba(79,111,255,0.08), rgba(162,89,255,0.04))",
             border: "1px solid rgba(79,111,255,0.22)",
             borderRadius: 28,
             padding: "clamp(24px, 6vw, 56px)",
             display: "grid",
-            gridTemplateColumns: "1.25fr 1fr",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 380px), 1fr))",
             gap: 40,
             alignItems: "center"
           }}
