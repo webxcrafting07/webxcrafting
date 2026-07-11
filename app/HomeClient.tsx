@@ -981,7 +981,7 @@ export default function HomeClient() {
               Featured <span className="grad-text">Projects</span>
             </h2>
           </div>
-          <div style={{ display: 'flex', gap: 12 }}>
+          <div style={{ display: 'flex', gap: 12, marginLeft: 'auto' }}>
             <button 
               onClick={() => scrollProjects('left')}
               style={{ width: 48, height: 48, borderRadius: '50%', background: 'rgba(10,14,28,0.7)', border: '1px solid rgba(99,120,255,0.3)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', backdropFilter: 'blur(10px)', transition: 'all 0.3s' }}
@@ -1025,7 +1025,7 @@ export default function HomeClient() {
                 Latest <span className="grad-text">Articles</span>
               </h2>
             </div>
-            <div style={{ display: 'flex', gap: 12 }}>
+            <div style={{ display: 'flex', gap: 12, marginLeft: 'auto' }}>
               <button 
                 onClick={() => scrollBlogs('left')}
                 style={{ width: 48, height: 48, borderRadius: '50%', background: 'rgba(10,14,28,0.7)', border: '1px solid rgba(99,120,255,0.3)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', backdropFilter: 'blur(10px)', transition: 'all 0.3s' }}
