@@ -15,7 +15,8 @@ import {
   FaMapMarkerAlt, 
   FaArrowRight, 
   FaStar,
-  FaCheck
+  FaCheck,
+  FaPhone
 } from "react-icons/fa";
 
 interface LocationClientProps {
@@ -185,58 +186,155 @@ export default function LocationClient({ cityKey, cityInfo }: LocationClientProp
         </div>
       </section>
 
-      {/* Core Local Service Focus */}
-      <section className="mobile-p-6" style={{ position: "relative", zIndex: 10, padding: "60px 24px", maxWidth: 1200, margin: "0 auto" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 30 }}>
+      {/* Expanded Services Section for Lead Gen */}
+      <section className="mobile-p-6" style={{ position: "relative", zIndex: 10, padding: "80px 24px", maxWidth: 1200, margin: "0 auto" }}>
+        <div style={{ textAlign: "center", marginBottom: 50 }}>
+          <div className="section-label" style={{ margin: "0 auto 16px" }}>Our Services</div>
+          <h2 style={{ fontFamily: "Syne", fontSize: "clamp(28px, 4vw, 42px)", fontWeight: 800, fontStyle: "italic", marginBottom: 16 }}>
+            What We Offer In <span className="grad-text">{name}</span>
+          </h2>
+          <p style={{ color: "#7b82a8", fontSize: 16, maxWidth: 600, margin: "0 auto" }}>
+            From simple landing pages to complex e-commerce ecosystems, we provide end-to-end digital solutions to help your business dominate the {name} market.
+          </p>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 30 }}>
+          {/* Service 1 */}
           <div
             className="glass"
-            style={{
-              padding: 36,
-              borderRadius: 22,
-              border: "1px solid rgba(255,255,255,0.04)"
-            }}
+            style={{ padding: 40, borderRadius: 24, border: "1px solid rgba(255,255,255,0.04)", transition: "transform 0.3s" }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-5px)"}
+            onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}
           >
-            <div style={{ width: 48, height: 48, borderRadius: 10, background: "rgba(79,111,255,0.1)", display: "flex", alignItems: "center", justifyItems: "center", justifyContent: "center", color: "#4f6fff", fontSize: 20, marginBottom: 24 }}>
+            <div style={{ width: 54, height: 54, borderRadius: 12, background: "rgba(79,111,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#4f6fff", fontSize: 24, marginBottom: 24 }}>
               <FaLaptopCode />
             </div>
-            <h3 style={{ fontFamily: "Syne", fontSize: 20, fontWeight: 700, marginBottom: 14 }}>Premium Custom Coding</h3>
-            <p style={{ color: "#7b82a8", fontSize: 14, lineHeight: 1.6 }}>
-              We write clean, efficient JavaScript without using templates. Every business in {name} deserves a tailored layout optimized specifically for their industry and clients.
+            <h3 style={{ fontFamily: "Syne", fontSize: 22, fontWeight: 700, marginBottom: 14 }}>Business Websites</h3>
+            <p style={{ color: "#7b82a8", fontSize: 14, lineHeight: 1.6, marginBottom: 20 }}>
+              Professional, ultra-fast websites designed to build trust and capture local leads in {name}. Perfect for agencies, clinics, and local services.
             </p>
+            <ul style={{ color: "#e8eaf6", fontSize: 13, display: "grid", gap: 10 }}>
+              <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> Responsive Design</li>
+              <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> SEO Optimized</li>
+              <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> Lead Capture Forms</li>
+            </ul>
           </div>
-
+          {/* Service 2 */}
           <div
             className="glass"
-            style={{
-              padding: 36,
-              borderRadius: 22,
-              border: "1px solid rgba(255,255,255,0.04)"
-            }}
+            style={{ padding: 40, borderRadius: 24, border: "1px solid rgba(255,255,255,0.04)", transition: "transform 0.3s" }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-5px)"}
+            onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}
           >
-            <div style={{ width: 48, height: 48, borderRadius: 10, background: "rgba(162,89,255,0.1)", display: "flex", alignItems: "center", justifyItems: "center", justifyContent: "center", color: "#a259ff", fontSize: 20, marginBottom: 24 }}>
+            <div style={{ width: 54, height: 54, borderRadius: 12, background: "rgba(162,89,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#a259ff", fontSize: 24, marginBottom: 24 }}>
               <FaRocket />
             </div>
-            <h3 style={{ fontFamily: "Syne", fontSize: 20, fontWeight: 700, marginBottom: 14 }}>Blazing Dynamic Speed</h3>
-            <p style={{ color: "#7b82a8", fontSize: 14, lineHeight: 1.6 }}>
-              Page speed determines conversion rates. Next.js server-rendered code delivers instant paint results, reducing user bounce rates to virtually zero in high-speed markets like {name}.
+            <h3 style={{ fontFamily: "Syne", fontSize: 22, fontWeight: 700, marginBottom: 14 }}>E-Commerce Stores</h3>
+            <p style={{ color: "#7b82a8", fontSize: 14, lineHeight: 1.6, marginBottom: 20 }}>
+              Sell your products online 24/7. We build robust e-commerce platforms with secure payment gateways and easy inventory management.
             </p>
+            <ul style={{ color: "#e8eaf6", fontSize: 13, display: "grid", gap: 10 }}>
+              <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> Payment Gateway Setup</li>
+              <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> Product Management</li>
+              <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> Order Tracking</li>
+            </ul>
           </div>
-
+          {/* Service 3 */}
           <div
             className="glass"
-            style={{
-              padding: 36,
-              borderRadius: 22,
-              border: "1px solid rgba(255,255,255,0.04)"
-            }}
+            style={{ padding: 40, borderRadius: 24, border: "1px solid rgba(255,255,255,0.04)", transition: "transform 0.3s" }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-5px)"}
+            onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}
           >
-            <div style={{ width: 48, height: 48, borderRadius: 10, background: "rgba(0,229,255,0.1)", display: "flex", alignItems: "center", justifyItems: "center", justifyContent: "center", color: "#00e5ff", fontSize: 20, marginBottom: 24 }}>
+            <div style={{ width: 54, height: 54, borderRadius: 12, background: "rgba(0,229,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#00e5ff", fontSize: 24, marginBottom: 24 }}>
               <FaShieldAlt />
             </div>
-            <h3 style={{ fontFamily: "Syne", fontSize: 20, fontWeight: 700, marginBottom: 14 }}>Integrated Local Authority</h3>
-            <p style={{ color: "#7b82a8", fontSize: 14, lineHeight: 1.6 }}>
-              Your page is structured with dynamic LocalBusiness schemas, structured JSON breadcrumbs, and keyword-rich tags, giving your brand immediate local map presence.
+            <h3 style={{ fontFamily: "Syne", fontSize: 22, fontWeight: 700, marginBottom: 14 }}>Custom Web Apps</h3>
+            <p style={{ color: "#7b82a8", fontSize: 14, lineHeight: 1.6, marginBottom: 20 }}>
+              Need something unique? We develop complex web applications, booking systems, CRMs, and LMS platforms tailored to your business logic.
             </p>
+            <ul style={{ color: "#e8eaf6", fontSize: 13, display: "grid", gap: 10 }}>
+              <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> Custom Databases</li>
+              <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> API Integrations</li>
+              <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> User Dashboards</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Direct Lead Form Section */}
+      <section className="mobile-p-6" style={{ position: "relative", zIndex: 10, padding: "20px 24px 80px", maxWidth: 1100, margin: "0 auto" }}>
+        <div 
+          className="glass-strong mobile-grid-1"
+          style={{
+            borderRadius: 30,
+            overflow: "hidden",
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            border: "1px solid rgba(99,120,255,0.2)"
+          }}
+        >
+          <div style={{ padding: "clamp(40px, 5vw, 60px)", background: "linear-gradient(135deg, rgba(79,111,255,0.1), rgba(10,14,28,0))" }}>
+            <h2 style={{ fontFamily: "Syne", fontSize: "clamp(28px, 4vw, 38px)", fontWeight: 800, fontStyle: "italic", marginBottom: 20 }}>
+              Ready to Grow Your Business in {name}?
+            </h2>
+            <p style={{ color: "#7b82a8", fontSize: 16, lineHeight: 1.6, marginBottom: 36 }}>
+              Don't let your competitors steal your local customers. Get a high-converting website today. Fill out the form or contact us directly for a free consultation and project estimate.
+            </p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+              <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
+                <div style={{ width: 48, height: 48, borderRadius: "50%", background: "rgba(79,111,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#4f6fff" }}>
+                  <FaPhone size={18} />
+                </div>
+                <div>
+                  <div style={{ fontSize: 13, color: "#7b82a8", marginBottom: 4 }}>Call Us Directly</div>
+                  <a href="tel:+919102615343" style={{ fontSize: 18, fontWeight: 700, color: "#e8eaf6", textDecoration: "none" }}>+91 9102615343</a>
+                </div>
+              </div>
+              <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
+                <div style={{ width: 48, height: 48, borderRadius: "50%", background: "rgba(0,230,118,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#00e676" }}>
+                  <FaMapMarkerAlt size={18} />
+                </div>
+                <div>
+                  <div style={{ fontSize: 13, color: "#7b82a8", marginBottom: 4 }}>Service Area</div>
+                  <div style={{ fontSize: 16, fontWeight: 700, color: "#e8eaf6" }}>{name}, {state}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div style={{ padding: "clamp(30px, 4vw, 50px)", background: "rgba(3,5,10,0.5)" }}>
+            <h3 style={{ fontSize: 22, fontWeight: 700, marginBottom: 24, fontFamily: "Syne", fontStyle: "italic" }}>Request a Free Quote</h3>
+            <form 
+              onSubmit={(e) => {
+                e.preventDefault();
+                const fd = new FormData(e.currentTarget);
+                const text = `Hi WebXCrafting, I need a website in ${name}.\nName: ${fd.get('name')}\nPhone: ${fd.get('phone')}\nRequirement: ${fd.get('req')}`;
+                window.open(`https://wa.me/919102615343?text=${encodeURIComponent(text)}`, '_blank');
+              }}
+              style={{ display: "flex", flexDirection: "column", gap: 18 }}
+            >
+              <div>
+                <label style={{ display: "block", fontSize: 13, color: "#8892b0", marginBottom: 8, fontWeight: 500 }}>Your Name</label>
+                <input required name="name" type="text" placeholder="John Doe" style={{ width: "100%", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.1)", padding: "14px 16px", borderRadius: 12, color: "#fff", outline: "none" }} />
+              </div>
+              <div>
+                <label style={{ display: "block", fontSize: 13, color: "#8892b0", marginBottom: 8, fontWeight: 500 }}>Phone Number</label>
+                <input required name="phone" type="tel" placeholder="+91 XXXXX XXXXX" style={{ width: "100%", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.1)", padding: "14px 16px", borderRadius: 12, color: "#fff", outline: "none" }} />
+              </div>
+              <div>
+                <label style={{ display: "block", fontSize: 13, color: "#8892b0", marginBottom: 8, fontWeight: 500 }}>What do you need?</label>
+                <select required name="req" style={{ width: "100%", background: "rgba(20,25,40,0.9)", border: "1px solid rgba(255,255,255,0.1)", padding: "14px 16px", borderRadius: 12, color: "#fff", outline: "none" }}>
+                  <option value="Business Website">Business Website</option>
+                  <option value="E-Commerce Store">E-Commerce Store</option>
+                  <option value="Custom Web App">Custom Web App</option>
+                  <option value="Landing Page">Landing Page</option>
+                  <option value="Other">Other / Unsure</option>
+                </select>
+              </div>
+              <button type="submit" className="btn-primary" style={{ padding: "16px", fontSize: 16, marginTop: 10, width: "100%", fontWeight: 600 }}>
+                Send Request via WhatsApp
+              </button>
+            </form>
           </div>
         </div>
       </section>
