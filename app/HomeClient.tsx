@@ -31,12 +31,13 @@ function StatCard({ number, label }: { number: string; label: string }) {
       whileHover={{ y: -5, boxShadow: '0 12px 32px rgba(79,111,255,0.2)' }}
       style={{ 
         textAlign: 'center', 
-        padding: '24px 32px', 
+        padding: '24px clamp(16px, 4vw, 32px)', 
         background: 'rgba(10,14,28,0.7)', 
         backdropFilter: 'blur(10px)',
         borderRadius: 20,
         border: '1px solid rgba(79,111,255,0.15)',
-        minWidth: 160
+        minWidth: 130,
+        flex: '1 1 130px'
       }}
     >
       <div
@@ -509,7 +510,7 @@ export default function HomeClient() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          padding: '130px 32px 80px',
+          padding: 'clamp(100px, 15vw, 130px) clamp(16px, 5vw, 32px) clamp(40px, 10vw, 80px)',
           textAlign: 'center',
           position: 'relative',
           zIndex: 10,
@@ -641,8 +642,8 @@ export default function HomeClient() {
       </section>
 
       {/* ─── LIGHTHOUSE SHOWCASE ─────────────────── */}
-      <section style={{ padding: '100px 32px', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
-        <div className="mobile-grid-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 60, alignItems: 'center' }}>
+      <section style={{ padding: 'clamp(40px, 10vw, 100px) clamp(16px, 5vw, 32px)', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
+        <div className="mobile-grid-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 350px), 1fr))', gap: 'clamp(32px, 8vw, 60px)', alignItems: 'center' }}>
           <div>
             <FadeUp>
               <div className="section-label" style={{ marginBottom: 20 }}>Core Web Vitals</div>
@@ -1193,7 +1194,7 @@ export default function HomeClient() {
                     </div>
                   )}
 
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }} className="mobile-grid-1">
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 250px), 1fr))", gap: 16 }} className="mobile-grid-1">
                     <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                       <label style={{ fontSize: 12, color: "#7b82a8", fontWeight: 600 }}>Your Name *</label>
                       <input 
@@ -1220,7 +1221,7 @@ export default function HomeClient() {
                     </div>
                   </div>
 
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }} className="mobile-grid-1">
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 250px), 1fr))", gap: 16 }} className="mobile-grid-1">
                     <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                       <label style={{ fontSize: 12, color: "#7b82a8", fontWeight: 600 }}>Current Website URL *</label>
                       <input 
