@@ -169,28 +169,31 @@ function ProjectCard({ title, description, category, status, image, liveLink }: 
   return (
     <motion.div
       onClick={() => liveLink && liveLink !== "#" && window.open(liveLink, "_blank")}
-      whileHover={{ y: -6 }}
+      whileHover={{ y: -8, boxShadow: '0 24px 64px rgba(79,111,255,0.2)' }}
       transition={{ type: 'spring', stiffness: 280 }}
       style={{
-        borderRadius: 20,
+        borderRadius: 24,
         overflow: 'hidden',
-        background: 'rgba(10,14,28,0.65)',
+        background: 'rgba(10,14,28,0.7)',
         backdropFilter: 'blur(20px)',
-        border: '1px solid rgba(99,120,255,.15)',
+        border: '1px solid rgba(99,120,255,.2)',
         cursor: liveLink && liveLink !== "#" ? 'pointer' : 'default',
+        position: 'relative'
       }}
     >
       <div
         style={{
-          height: 180,
+          height: 220,
           background: image 
             ? `url(${image}) center/cover no-repeat`
             : `linear-gradient(135deg,${catColors[category] || '#4f6fff'}22,${catColors[category] || '#a259ff'}44)`,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          fontSize: 56,
+          fontSize: 64,
           color: catColors[category] || '#4f6fff',
+          borderBottom: '1px solid rgba(255,255,255,0.05)',
+          transition: 'all 0.5s'
         }}
       >
         {!image && getCatIcon(category)}
@@ -216,6 +219,44 @@ function ProjectCard({ title, description, category, status, image, liveLink }: 
         <h3 style={{ fontFamily: 'Syne', fontWeight: 700, fontSize: 17, marginBottom: 8, fontStyle: 'italic' }}>{title}</h3>
         <p style={{ color: '#7b82a8', fontSize: 14, lineHeight: 1.65 }}>{description}</p>
       </div>
+    </motion.div>
+  )
+}
+
+/* ── FAQ item ── */
+function FAQItem({ q, a }: { q: string, a: string }) {
+  const [isOpen, setIsOpen] = useState(false)
+  return (
+    <motion.div 
+      className="glass"
+      style={{ 
+        padding: '24px 32px', 
+        borderRadius: 16, 
+        border: isOpen ? '1px solid rgba(79,111,255,0.4)' : '1px solid rgba(99,120,255,0.1)',
+        boxShadow: isOpen ? '0 12px 32px rgba(79,111,255,0.15)' : 'none',
+        cursor: 'pointer',
+        overflow: 'hidden'
+      }}
+      onClick={() => setIsOpen(!isOpen)}
+      whileHover={{ scale: 0.99 }}
+    >
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <h4 style={{ fontFamily: 'Syne', fontSize: 18, fontWeight: 700, margin: 0, color: isOpen ? '#4f6fff' : '#e8eaf6' }}>{q}</h4>
+        <div style={{ fontSize: 20, color: isOpen ? '#4f6fff' : '#7b82a8', transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'all 0.3s' }}>
+          ▼
+        </div>
+      </div>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0, marginTop: 0 }}
+            animate={{ height: 'auto', opacity: 1, marginTop: 16 }}
+            exit={{ height: 0, opacity: 0, marginTop: 0 }}
+          >
+            <p style={{ color: '#7b82a8', fontSize: 15, lineHeight: 1.6, margin: 0 }}>{a}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   )
 }
@@ -952,11 +993,11 @@ export default function HomeClient() {
                   whileHover={{ y: -8, boxShadow: '0 24px 64px rgba(0,0,0,0.45)' }}
                   transition={{ type: 'spring', stiffness: 300 }}
                   style={{
-                    borderRadius: 20,
+                    borderRadius: 24,
                     overflow: 'hidden',
-                    background: 'rgba(10,14,28,0.65)',
+                    background: 'rgba(10,14,28,0.7)',
                     backdropFilter: 'blur(20px)',
-                    border: '1px solid rgba(99,120,255,0.15)',
+                    border: '1px solid rgba(99,120,255,0.2)',
                     display: 'flex',
                     flexDirection: 'column',
                     height: '100%',
@@ -964,12 +1005,13 @@ export default function HomeClient() {
                 >
                   <Link href={`/blog/${blog.slug}`} style={{ textDecoration: 'none' }}>
                     <div style={{ 
-                      height: 180, 
+                      height: 220, 
                       background: blog.coverImage ? `url(${blog.coverImage}) center/cover no-repeat` : 'linear-gradient(135deg,rgba(79,111,255,0.1),rgba(162,89,255,0.15))',
                       position: 'relative',
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'center'
+                      justifyContent: 'center',
+                      borderBottom: '1px solid rgba(255,255,255,0.05)'
                     }}>
                       {!blog.coverImage && <div style={{ fontSize: 40, opacity: 0.3 }}>📝</div>}
                       <div style={{
@@ -1234,10 +1276,7 @@ export default function HomeClient() {
             { q: "Do you offer maintenance and support?", a: "Yes, we provide dedicated post-launch support and maintenance to ensure your website remains secure, updated, and performing at its best." }
           ].map((item, idx) => (
             <FadeUp key={idx} delay={idx * 0.05}>
-              <div className="glass" style={{ padding: '24px 32px', borderRadius: 16, border: '1px solid rgba(99,120,255,0.1)' }}>
-                <h4 style={{ fontFamily: 'Syne', fontSize: 18, fontWeight: 700, marginBottom: 12, color: '#e8eaf6' }}>{item.q}</h4>
-                <p style={{ color: '#7b82a8', fontSize: 15, lineHeight: 1.6 }}>{item.a}</p>
-              </div>
+              <FAQItem q={item.q} a={item.a} />
             </FadeUp>
           ))}
         </div>
