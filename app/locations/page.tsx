@@ -38,7 +38,7 @@ export default function LocationsDirectoryPage() {
           </p>
         </div>
 
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+        <div className="columns-1 md:columns-2 lg:columns-3 gap-8">
           {sortedStates.map((state) => {
             // Sort cities alphabetically within the state
             const cities = citiesByState[state].sort((a, b) => a.name.localeCompare(b.name))
@@ -46,7 +46,7 @@ export default function LocationsDirectoryPage() {
             return (
               <div 
                 key={state} 
-                className="break-inside-avoid inline-block w-full bg-[rgba(15,20,35,0.4)] border border-[rgba(99,120,255,0.15)] rounded-2xl p-6 backdrop-blur-sm hover:border-[rgba(99,120,255,0.3)] transition-colors shadow-lg"
+                className="break-inside-avoid inline-block w-full mb-8 bg-[rgba(15,20,35,0.4)] border border-[rgba(99,120,255,0.15)] rounded-2xl p-6 backdrop-blur-sm hover:border-[rgba(99,120,255,0.3)] transition-colors shadow-lg"
               >
                 <h2 className="text-xl font-bold text-white mb-6 pb-4 border-b border-[rgba(255,255,255,0.05)] font-syne">
                   {state}
