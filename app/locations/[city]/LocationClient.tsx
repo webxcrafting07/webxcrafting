@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
@@ -31,6 +32,10 @@ interface LocationClientProps {
 export default function LocationClient({ cityKey, cityInfo }: LocationClientProps) {
   const { name, state } = cityInfo;
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+
+  // Lead form states
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   // Predefined local FAQs
   const faqs = [
@@ -303,38 +308,89 @@ export default function LocationClient({ cityKey, cityInfo }: LocationClientProp
           </div>
           
           <div style={{ padding: "clamp(30px, 4vw, 50px)", background: "rgba(3,5,10,0.5)" }}>
-            <h3 style={{ fontSize: 22, fontWeight: 700, marginBottom: 24, fontFamily: "Syne", fontStyle: "italic" }}>Request a Free Quote</h3>
-            <form 
-              onSubmit={(e) => {
-                e.preventDefault();
-                const fd = new FormData(e.currentTarget);
-                const text = `Hi WebXCrafting, I need a website in ${name}.\nName: ${fd.get('name')}\nPhone: ${fd.get('phone')}\nRequirement: ${fd.get('req')}`;
-                window.open(`https://wa.me/919102615343?text=${encodeURIComponent(text)}`, '_blank');
-              }}
-              style={{ display: "flex", flexDirection: "column", gap: 18 }}
-            >
-              <div>
-                <label style={{ display: "block", fontSize: 13, color: "#8892b0", marginBottom: 8, fontWeight: 500 }}>Your Name</label>
-                <input required name="name" type="text" placeholder="John Doe" style={{ width: "100%", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.1)", padding: "14px 16px", borderRadius: 12, color: "#fff", outline: "none" }} />
+            {submitted ? (
+              <div style={{ textAlign: "center", padding: "40px 0" }}>
+                <div style={{ width: 64, height: 64, borderRadius: "50%", background: "rgba(0,230,118,0.1)", color: "#00e676", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px" }}>
+                  <FaCheck size={32} />
+                </div>
+                <h3 style={{ fontSize: 24, fontWeight: 700, marginBottom: 12, fontFamily: "Syne", fontStyle: "italic" }}>Request Sent!</h3>
+                <p style={{ color: "#7b82a8", fontSize: 15, lineHeight: 1.6 }}>Thank you for reaching out from {name}. Our team will review your request and get back to you shortly.</p>
               </div>
-              <div>
-                <label style={{ display: "block", fontSize: 13, color: "#8892b0", marginBottom: 8, fontWeight: 500 }}>Phone Number</label>
-                <input required name="phone" type="tel" placeholder="+91 XXXXX XXXXX" style={{ width: "100%", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.1)", padding: "14px 16px", borderRadius: 12, color: "#fff", outline: "none" }} />
-              </div>
-              <div>
-                <label style={{ display: "block", fontSize: 13, color: "#8892b0", marginBottom: 8, fontWeight: 500 }}>What do you need?</label>
-                <select required name="req" style={{ width: "100%", background: "rgba(20,25,40,0.9)", border: "1px solid rgba(255,255,255,0.1)", padding: "14px 16px", borderRadius: 12, color: "#fff", outline: "none" }}>
-                  <option value="Business Website">Business Website</option>
-                  <option value="E-Commerce Store">E-Commerce Store</option>
-                  <option value="Custom Web App">Custom Web App</option>
-                  <option value="Landing Page">Landing Page</option>
-                  <option value="Other">Other / Unsure</option>
-                </select>
-              </div>
-              <button type="submit" className="btn-primary" style={{ padding: "16px", fontSize: 16, marginTop: 10, width: "100%", fontWeight: 600 }}>
-                Send Request via WhatsApp
-              </button>
-            </form>
+            ) : (
+              <>
+                <h3 style={{ fontSize: 22, fontWeight: 700, marginBottom: 24, fontFamily: "Syne", fontStyle: "italic" }}>Request a Free Quote</h3>
+                <form 
+                  onSubmit={async (e) => {
+                    e.preventDefault();
+                    const fd = new FormData(e.currentTarget);
+                    const nameInput = fd.get('name') as string;
+                    const emailInput = fd.get('email') as string;
+                    const phoneInput = fd.get('phone') as string;
+                    const reqInput = fd.get('req') as string;
+                    
+                    if (!nameInput || !emailInput || !phoneInput) {
+                      toast.error("Please fill in all required fields.");
+                      return;
+                    }
+
+                    setLoading(true);
+                    try {
+                      // Submit to API
+                      const res = await fetch("/api/leads", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                          name: nameInput,
+                          email: emailInput,
+                          budget: reqInput,
+                          message: `City: ${name}\nPhone: ${phoneInput}\nThey are looking for a ${reqInput}.`
+                        }),
+                      });
+                      const data = await res.json();
+                      if (data.success) {
+                        setSubmitted(true);
+                        // Also open WhatsApp as requested originally
+                        const text = `Hi WebXCrafting, I need a website in ${name}.\nName: ${nameInput}\nPhone: ${phoneInput}\nRequirement: ${reqInput}`;
+                        window.open(`https://wa.me/919102615343?text=${encodeURIComponent(text)}`, '_blank');
+                      } else {
+                        toast.error(data.message || "Failed to submit.");
+                      }
+                    } catch (err) {
+                      toast.error("Network error. Try again.");
+                    } finally {
+                      setLoading(false);
+                    }
+                  }}
+                  style={{ display: "flex", flexDirection: "column", gap: 18 }}
+                >
+                  <div>
+                    <label style={{ display: "block", fontSize: 13, color: "#8892b0", marginBottom: 8, fontWeight: 500 }}>Your Name *</label>
+                    <input required name="name" type="text" placeholder="John Doe" style={{ width: "100%", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.1)", padding: "14px 16px", borderRadius: 12, color: "#fff", outline: "none" }} />
+                  </div>
+                  <div>
+                    <label style={{ display: "block", fontSize: 13, color: "#8892b0", marginBottom: 8, fontWeight: 500 }}>Email Address *</label>
+                    <input required name="email" type="email" placeholder="john@example.com" style={{ width: "100%", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.1)", padding: "14px 16px", borderRadius: 12, color: "#fff", outline: "none" }} />
+                  </div>
+                  <div>
+                    <label style={{ display: "block", fontSize: 13, color: "#8892b0", marginBottom: 8, fontWeight: 500 }}>Phone Number *</label>
+                    <input required name="phone" type="tel" placeholder="+91 XXXXX XXXXX" style={{ width: "100%", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.1)", padding: "14px 16px", borderRadius: 12, color: "#fff", outline: "none" }} />
+                  </div>
+                  <div>
+                    <label style={{ display: "block", fontSize: 13, color: "#8892b0", marginBottom: 8, fontWeight: 500 }}>What do you need?</label>
+                    <select required name="req" style={{ width: "100%", background: "rgba(20,25,40,0.9)", border: "1px solid rgba(255,255,255,0.1)", padding: "14px 16px", borderRadius: 12, color: "#fff", outline: "none" }}>
+                      <option value="Business Website">Business Website</option>
+                      <option value="E-Commerce Store">E-Commerce Store</option>
+                      <option value="Custom Web App">Custom Web App</option>
+                      <option value="Landing Page">Landing Page</option>
+                      <option value="Other">Other / Unsure</option>
+                    </select>
+                  </div>
+                  <button type="submit" disabled={loading} className="btn-primary" style={{ padding: "16px", fontSize: 16, marginTop: 10, width: "100%", fontWeight: 600, opacity: loading ? 0.7 : 1 }}>
+                    {loading ? "Sending..." : "Send Request & Connect"}
+                  </button>
+                </form>
+              </>
+            )}
           </div>
         </div>
       </section>
