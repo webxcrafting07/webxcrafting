@@ -6,8 +6,8 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import DotBackground from '@/components/DotBackground'
 import WhatsAppButton from '@/components/WhatsAppButton'
-import { FaCheck, FaMoneyBillWave, FaClipboardList, FaInfoCircle, FaRocket, FaGlobe, FaShoppingCart, FaBriefcase, FaCog, FaCalendarAlt, FaClock, FaArrowRight, FaLaptopCode, FaStore, FaUserTie, FaDatabase } from 'react-icons/fa'
-import { SiReact, SiNextdotjs, SiNodedotjs, SiMongodb, SiAmazonwebservices, SiDocker, SiTailwindcss, SiFramer, SiPostgresql, SiRedis } from 'react-icons/si'
+import { FaCheck, FaMoneyBillWave, FaClipboardList, FaInfoCircle, FaRocket, FaGlobe, FaShoppingCart, FaBriefcase, FaCog, FaCalendarAlt, FaClock, FaArrowRight, FaLaptopCode, FaStore, FaUserTie, FaDatabase, FaAws } from 'react-icons/fa'
+import { SiReact, SiNextdotjs, SiNodedotjs, SiMongodb, SiDocker, SiTailwindcss, SiFramer, SiPostgresql, SiRedis } from 'react-icons/si'
 import { getServiceIcon } from '@/lib/icons'
 
 /* ── tiny fade-up wrapper ── */
@@ -551,7 +551,7 @@ export default function HomeClient() {
               { name: 'Next.js', icon: <SiNextdotjs /> },
               { name: 'Node.js', icon: <SiNodedotjs /> },
               { name: 'MongoDB', icon: <SiMongodb /> },
-              { name: 'AWS', icon: <SiAmazonwebservices /> },
+              { name: 'AWS', icon: <FaAws /> },
               { name: 'Docker', icon: <SiDocker /> },
               { name: 'Tailwind CSS', icon: <SiTailwindcss /> },
               { name: 'Framer Motion', icon: <SiFramer /> },
@@ -567,7 +567,7 @@ export default function HomeClient() {
               { name: 'Next.js', icon: <SiNextdotjs /> },
               { name: 'Node.js', icon: <SiNodedotjs /> },
               { name: 'MongoDB', icon: <SiMongodb /> },
-              { name: 'AWS', icon: <SiAmazonwebservices /> },
+              { name: 'AWS', icon: <FaAws /> },
               { name: 'Docker', icon: <SiDocker /> },
               { name: 'Tailwind CSS', icon: <SiTailwindcss /> },
               { name: 'Framer Motion', icon: <SiFramer /> },
