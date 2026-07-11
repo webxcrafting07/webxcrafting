@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -15,7 +15,12 @@ import {
   FaLaptopCode,
   FaStore,
   FaUserTie,
-  FaDatabase
+  FaDatabase,
+  FaSearch,
+  FaPalette,
+  FaCode,
+  FaChevronDown,
+  FaQuestionCircle
 } from "react-icons/fa";
 import { getServiceIcon } from "@/lib/icons";
 
@@ -120,6 +125,14 @@ const defaultServices = [
 export default function ServicesClient() {
   const [services, setServices] = useState(defaultServices);
   const [selectedService, setSelectedService] = useState<any>(null);
+  const [activeFaq, setActiveFaq] = useState<number | null>(null);
+
+  const faqs = [
+    { q: "How long does it take to build a website?", a: "A standard business website takes 7-14 days. Complex e-commerce or SaaS apps can take 4-8 weeks depending on requirements." },
+    { q: "Do you provide domain and hosting?", a: "Yes, we can handle domain registration and premium cloud hosting for you. These are usually billed separately based on your traffic needs." },
+    { q: "Will my website be mobile-friendly and SEO optimized?", a: "Absolutely. All our websites are 100% responsive and built with technical SEO best practices (schema, meta tags, fast LCP)." },
+    { q: "What is your payment structure?", a: "We typically require a 50% advance for smaller projects. For larger custom applications, we break it into milestone-based payments." }
+  ];
 
   useEffect(() => {
     fetch("/api/services")
@@ -153,22 +166,86 @@ export default function ServicesClient() {
           margin: "0 auto",
         }}
       >
+        {/* HERO SECTION */}
         <FadeUp>
-          <div style={{ textAlign: "center", marginBottom: 64 }}>
+          <div style={{ textAlign: "center", marginBottom: 100 }}>
             <div className="section-label" style={{ margin: "0 auto 20px" }}>
-              Pricing
+              Our Services
             </div>
             <h1
               style={{
                 fontFamily: "Syne",
-                fontSize: "clamp(32px,5vw,64px)",
+                fontSize: "clamp(36px,6vw,72px)",
+                fontWeight: 800,
+                fontStyle: "italic",
+                marginBottom: 24,
+                lineHeight: 1.1,
+                letterSpacing: "-1px"
+              }}
+            >
+              We Build Digital <br /><span className="grad-text">Masterpieces</span>
+            </h1>
+            <p
+              style={{
+                color: "#7b82a8",
+                fontSize: "clamp(16px, 2vw, 18px)",
+                maxWidth: 650,
+                margin: "0 auto",
+                lineHeight: 1.6
+              }}
+            >
+              From stunning portfolio websites to complex SaaS applications, we engineer ultra-fast, high-converting digital solutions tailored to your business needs.
+            </p>
+          </div>
+        </FadeUp>
+
+        {/* PROCESS SECTION */}
+        <FadeUp delay={0.1}>
+          <div style={{ marginBottom: 100 }}>
+            <div style={{ textAlign: "center", marginBottom: 50 }}>
+              <h2 style={{ fontFamily: "Syne", fontSize: "clamp(26px,4vw,40px)", fontWeight: 800, fontStyle: "italic" }}>
+                Our <span className="grad-text">Process</span>
+              </h2>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 24 }}>
+              {[
+                { step: "01", title: "Discovery", desc: "We understand your goals, target audience, and specific business needs.", icon: FaSearch, color: "#4f6fff" },
+                { step: "02", title: "Design", desc: "We craft stunning, premium UI/UX mockups for your approval.", icon: FaPalette, color: "#a259ff" },
+                { step: "03", title: "Develop", desc: "We code using Next.js/React ensuring blazing fast load speeds.", icon: FaCode, color: "#00e5ff" },
+                { step: "04", title: "Launch", desc: "We deploy, test, and hand over the complete optimized product.", icon: FaRocket, color: "#00e676" }
+              ].map((p, i) => (
+                <div key={i} className="glass" style={{ padding: 32, borderRadius: 24, position: "relative", overflow: "hidden" }}>
+                  <div style={{ position: "absolute", top: -20, right: -10, fontSize: 100, fontWeight: 900, color: "rgba(255,255,255,0.03)", fontFamily: "Syne", fontStyle: "italic" }}>
+                    {p.step}
+                  </div>
+                  <div style={{ width: 50, height: 50, borderRadius: 12, background: `rgba(${p.color === "#4f6fff" ? "79,111,255" : p.color === "#a259ff" ? "162,89,255" : p.color === "#00e5ff" ? "0,229,255" : "0,230,118"}, 0.1)`, display: "flex", alignItems: "center", justifyContent: "center", color: p.color, fontSize: 22, marginBottom: 20 }}>
+                    <p.icon />
+                  </div>
+                  <h3 style={{ fontFamily: "Syne", fontSize: 20, fontWeight: 700, marginBottom: 12 }}>{p.title}</h3>
+                  <p style={{ color: "#7b82a8", fontSize: 14, lineHeight: 1.6 }}>{p.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </FadeUp>
+
+        {/* PRICING SECTION */}
+        <FadeUp delay={0.2}>
+          <div style={{ textAlign: "center", marginBottom: 64 }}>
+            <div className="section-label" style={{ margin: "0 auto 20px" }}>
+              Pricing
+            </div>
+            <h2
+              style={{
+                fontFamily: "Syne",
+                fontSize: "clamp(28px,5vw,48px)",
                 fontWeight: 800,
                 fontStyle: "italic",
                 marginBottom: 16,
               }}
             >
               Transparent <span className="grad-text">Pricing Plans</span>
-            </h1>
+            </h2>
             <p
               style={{
                 color: "#7b82a8",
@@ -542,6 +619,41 @@ export default function ServicesClient() {
             </motion.div>
           </div>
         )}
+
+        {/* FAQ SECTION */}
+        <FadeUp delay={0.2}>
+          <div style={{ maxWidth: 800, margin: "0 auto 100px" }}>
+            <div style={{ textAlign: "center", marginBottom: 50 }}>
+              <h2 style={{ fontFamily: "Syne", fontSize: "clamp(26px,4vw,40px)", fontWeight: 800, fontStyle: "italic", display: "flex", alignItems: "center", justifyContent: "center", gap: 12 }}>
+                <FaQuestionCircle style={{ color: "#4f6fff" }} /> Service <span className="grad-text">FAQs</span>
+              </h2>
+            </div>
+            <div style={{ display: "grid", gap: 16 }}>
+              {faqs.map((faq, index) => {
+                const isOpen = activeFaq === index;
+                return (
+                  <div key={index} style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.05)", borderRadius: 16, overflow: "hidden" }}>
+                    <button onClick={() => setActiveFaq(isOpen ? null : index)} style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "24px", background: "none", border: "none", color: "#e8eaf6", textAlign: "left", cursor: "pointer" }}>
+                      <span style={{ fontWeight: 700, fontSize: 16, paddingRight: 20 }}>{faq.q}</span>
+                      <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.2 }} style={{ color: "#4f6fff" }}>
+                        <FaChevronDown size={14} />
+                      </motion.div>
+                    </button>
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} transition={{ duration: 0.25 }} style={{ overflow: "hidden" }}>
+                          <div style={{ padding: "0 24px 24px", color: "#7b82a8", fontSize: 15, lineHeight: 1.6, borderTop: "1px solid rgba(255,255,255,0.02)" }}>
+                            {faq.a}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </FadeUp>
 
         {/* Custom CTA */}
         <FadeUp delay={0.3}>
