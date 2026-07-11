@@ -1349,7 +1349,7 @@ export default function HomeClient() {
               borderRadius: 32,
               background: 'linear-gradient(135deg, rgba(79,111,255,0.25), rgba(162,89,255,0.2))',
               border: '1px solid rgba(162,89,255,0.4)',
-              padding: '80px 48px',
+              padding: 'clamp(40px, 10vw, 80px) clamp(20px, 5vw, 48px)',
               textAlign: 'center',
               position: 'relative',
               overflow: 'hidden',
@@ -1363,11 +1363,11 @@ export default function HomeClient() {
               Ready to Dominate <br />
               <span style={{ background: 'linear-gradient(135deg, #fff, #a259ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Your Market?</span>
             </h2>
-            <p style={{ color: '#e8eaf6', fontSize: 18, marginBottom: 48, maxWidth: 600, margin: '0 auto 48px', position: 'relative', lineHeight: 1.6 }}>
+            <p style={{ color: '#e8eaf6', fontSize: 'clamp(15px, 4vw, 18px)', marginBottom: 48, maxWidth: 600, margin: '0 auto 48px', position: 'relative', lineHeight: 1.6 }}>
               Stop losing customers to slow, outdated websites. Let's engineer a high-performance digital experience that scales your business.
             </p>
             <div style={{ position: 'relative', zIndex: 2 }}>
-              <Link href="/contact" className="btn-primary" style={{ height: 60, fontSize: 18, padding: '0 48px', boxShadow: '0 12px 32px rgba(79,111,255,0.4)' }}>
+              <Link href="/contact" className="btn-primary" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', height: 'clamp(48px, 6vw, 60px)', fontSize: 'clamp(14px, 4vw, 18px)', padding: '0 clamp(24px, 6vw, 48px)', boxShadow: '0 12px 32px rgba(79,111,255,0.4)', whiteSpace: 'nowrap' }}>
                 Start Your Project Today <FaArrowRight size={14} style={{ marginLeft: 8 }} />
               </Link>
             </div>
