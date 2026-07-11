@@ -199,6 +199,26 @@ export default function ServicesClient() {
           </div>
         </FadeUp>
 
+        {/* STATS MARQUEE */}
+        <FadeUp delay={0.05}>
+          <div style={{ marginBottom: 100, overflow: "hidden", display: "flex", gap: 32, padding: "20px 0", background: "rgba(79,111,255,0.05)", borderTop: "1px solid rgba(79,111,255,0.1)", borderBottom: "1px solid rgba(79,111,255,0.1)", whiteSpace: "nowrap" }}>
+            <motion.div
+              animate={{ x: [0, -1035] }}
+              transition={{ repeat: Infinity, ease: "linear", duration: 20 }}
+              style={{ display: "flex", gap: 64, alignItems: "center" }}
+            >
+              {[...Array(4)].map((_, i) => (
+                <div key={i} style={{ display: "flex", gap: 64, alignItems: "center" }}>
+                  <span style={{ fontSize: 16, fontWeight: 700, color: "#4f6fff", fontFamily: "Syne", fontStyle: "italic" }}>✦ 100% Client Satisfaction</span>
+                  <span style={{ fontSize: 16, fontWeight: 700, color: "#e8eaf6", fontFamily: "Syne", fontStyle: "italic" }}>✦ Next.js Performance</span>
+                  <span style={{ fontSize: 16, fontWeight: 700, color: "#a259ff", fontFamily: "Syne", fontStyle: "italic" }}>✦ Zero Template Code</span>
+                  <span style={{ fontSize: 16, fontWeight: 700, color: "#00e676", fontFamily: "Syne", fontStyle: "italic" }}>✦ Sub-Second Load Speeds</span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+        </FadeUp>
+
         {/* PROCESS SECTION */}
         <FadeUp delay={0.1}>
           <div style={{ marginBottom: 100 }}>
@@ -619,6 +639,32 @@ export default function ServicesClient() {
             </motion.div>
           </div>
         )}
+
+        {/* TECH STACK SECTION */}
+        <FadeUp delay={0.15}>
+          <div style={{ marginBottom: 100, textAlign: "center" }}>
+            <h2 style={{ fontFamily: "Syne", fontSize: "clamp(26px,4vw,40px)", fontWeight: 800, fontStyle: "italic", marginBottom: 20 }}>
+              Powered By <span className="grad-text">Premium Tech</span>
+            </h2>
+            <p style={{ color: "#7b82a8", fontSize: 16, maxWidth: 600, margin: "0 auto 40px" }}>
+              We don't use slow WordPress templates. We code your platform from scratch using industry-leading technologies.
+            </p>
+            <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 20, maxWidth: 800, margin: "0 auto" }}>
+              {[
+                { name: "React", color: "#61DAFB" },
+                { name: "Next.js", color: "#FFFFFF" },
+                { name: "TypeScript", color: "#3178C6" },
+                { name: "Tailwind CSS", color: "#38B2AC" },
+                { name: "Node.js", color: "#339933" },
+                { name: "MongoDB", color: "#47A248" }
+              ].map((tech) => (
+                <div key={tech.name} className="glass" style={{ padding: "16px 32px", borderRadius: 100, border: `1px solid rgba(255,255,255,0.05)`, color: tech.color, fontWeight: 700, fontSize: 16 }}>
+                  {tech.name}
+                </div>
+              ))}
+            </div>
+          </div>
+        </FadeUp>
 
         {/* FAQ SECTION */}
         <FadeUp delay={0.2}>
