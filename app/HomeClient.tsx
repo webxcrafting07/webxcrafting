@@ -402,6 +402,14 @@ export default function HomeClient() {
   const [projects, setProjects] = useState(defaultProjects)
   const [blogs, setBlogs] = useState<any[]>([])
   const [selectedService, setSelectedService] = useState<any>(null)
+  const blogScrollRef = useRef<HTMLDivElement>(null)
+
+  const scrollBlogs = (direction: 'left' | 'right') => {
+    if (blogScrollRef.current) {
+      const scrollAmount = direction === 'left' ? -340 : 340;
+      blogScrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  }
 
   // Free SEO & Performance Audit lead capture states
   const [auditName, setAuditName] = useState('')
@@ -979,14 +987,34 @@ export default function HomeClient() {
       {/* ─── LATEST BLOGS ────────────────────────── */}
       {blogs.length > 0 && (
         <section style={{ padding: '80px 32px', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
-          <FadeUp style={{ textAlign: 'center', marginBottom: 56 }}>
-            <div className="section-label" style={{ margin: '0 auto 20px' }}>Insights</div>
-            <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(28px,4vw,48px)', fontWeight: 800, fontStyle: 'italic' }}>
-              Latest <span className="grad-text">Articles</span>
-            </h2>
+          <FadeUp style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 40, flexWrap: 'wrap', gap: 20 }}>
+            <div>
+              <div className="section-label" style={{ marginBottom: 20 }}>Insights</div>
+              <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(28px,4vw,48px)', fontWeight: 800, fontStyle: 'italic', margin: 0 }}>
+                Latest <span className="grad-text">Articles</span>
+              </h2>
+            </div>
+            <div style={{ display: 'flex', gap: 12 }}>
+              <button 
+                onClick={() => scrollBlogs('left')}
+                style={{ width: 48, height: 48, borderRadius: '50%', background: 'rgba(10,14,28,0.7)', border: '1px solid rgba(99,120,255,0.3)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', backdropFilter: 'blur(10px)', transition: 'all 0.3s' }}
+                onMouseOver={(e) => e.currentTarget.style.background = 'rgba(79,111,255,0.2)'}
+                onMouseOut={(e) => e.currentTarget.style.background = 'rgba(10,14,28,0.7)'}
+              >
+                ←
+              </button>
+              <button 
+                onClick={() => scrollBlogs('right')}
+                style={{ width: 48, height: 48, borderRadius: '50%', background: 'rgba(10,14,28,0.7)', border: '1px solid rgba(99,120,255,0.3)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', backdropFilter: 'blur(10px)', transition: 'all 0.3s' }}
+                onMouseOver={(e) => e.currentTarget.style.background = 'rgba(79,111,255,0.2)'}
+                onMouseOut={(e) => e.currentTarget.style.background = 'rgba(10,14,28,0.7)'}
+              >
+                →
+              </button>
+            </div>
           </FadeUp>
 
-          <div className="scroll-container">
+          <div className="scroll-container" ref={blogScrollRef} style={{ scrollBehavior: 'smooth' }}>
             {blogs.map((blog: any, i: number) => (
               <FadeUp key={blog._id} delay={i * 0.05} className="blog-scroll-item">
                 <motion.div
