@@ -43,8 +43,6 @@ const topCities = [
   { label: "Mumbai", href: "/locations/web-development-company-in-mumbai" },
 ];
 
-
-
 const socials = [
   {
     icon: FaFacebook,
@@ -64,24 +62,58 @@ const socials = [
 ];
 
 export default function Footer() {
+  const headerStyle: React.CSSProperties = {
+    fontWeight: 700,
+    marginBottom: 24,
+    fontSize: 13,
+    textTransform: "uppercase",
+    letterSpacing: "1.5px",
+    color: "#fff",
+    opacity: 0.9,
+  };
+
+  const linkStyle: React.CSSProperties = {
+    display: "block",
+    color: "#8892b0",
+    textDecoration: "none",
+    fontSize: 14,
+    marginBottom: 16,
+    transition: "all 0.3s ease",
+    position: "relative",
+  };
+
+  const linkHover = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.currentTarget.style.color = "#ffffff";
+    e.currentTarget.style.transform = "translateX(5px)";
+  };
+
+  const linkLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.currentTarget.style.color = "#8892b0";
+    e.currentTarget.style.transform = "translateX(0)";
+  };
+
   return (
     <footer
       className="mobile-p-6"
       style={{
-        borderTop: "1px solid rgba(99,120,255,0.1)",
-        padding: "60px 32px 32px",
+        borderTop: "1px solid rgba(99,120,255,0.15)",
+        background: "linear-gradient(180deg, rgba(3,5,10,0) 0%, rgba(10,14,28,0.8) 100%)",
+        padding: "80px 4% 40px",
         position: "relative",
         zIndex: 10,
-        marginTop: 40,
+        marginTop: 60,
       }}
     >
-      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+      {/* Decorative top glow */}
+      <div style={{ position: "absolute", top: 0, left: "20%", right: "20%", height: 1, background: "linear-gradient(90deg, transparent, rgba(99,120,255,0.5), transparent)", boxShadow: "0 0 20px rgba(99,120,255,0.3)" }} />
+
+      <div style={{ maxWidth: 1350, margin: "0 auto" }}>
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
-            gap: 24,
-            marginBottom: 48,
+            gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))",
+            gap: 40,
+            marginBottom: 60,
           }}
         >
           {/* Brand */}
@@ -97,30 +129,28 @@ export default function Footer() {
                 alignItems: "center",
                 gap: 12,
                 textDecoration: "none",
-                marginBottom: 16,
+                marginBottom: 20,
                 flexWrap: "wrap",
                 whiteSpace: "nowrap",
                 width: "fit-content",
-                maxWidth: 240,
               }}
             >
               <img
                 src="/logo-wxc.png"
                 alt="WebXCrafting"
                 style={{
-                  width: 42,
-                  height: 42,
+                  width: 46,
+                  height: 46,
                   objectFit: "contain",
+                  filter: "drop-shadow(0px 0px 8px rgba(99,120,255,0.4))",
                 }}
               />
               <span
                 style={{
                   fontFamily: "Syne",
                   fontWeight: 800,
-                  fontSize: 16,
+                  fontSize: 18,
                   color: "#e8eaf6",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
                 }}
               >
                 WebX<span className="grad-text">Crafting</span>
@@ -128,45 +158,50 @@ export default function Footer() {
             </Link>
             <p
               style={{
-                color: "#7b82a8",
+                color: "#8892b0",
                 fontSize: 14,
-                lineHeight: 1.75,
-                marginBottom: 20,
+                lineHeight: 1.8,
+                marginBottom: 24,
+                maxWidth: 260,
               }}
             >
-              Building premium websites at affordable prices. Proudly serving clients Pan India. Your digital
-              success is our mission.
+              Building premium, high-performance websites at affordable prices. Proudly serving clients globally.
             </p>
-            <div style={{ display: "flex", gap: 10 }}>
+            <div style={{ display: "flex", gap: 12 }}>
               {socials.map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
                   href={href}
                   aria-label={label}
                   style={{
-                    width: 36,
-                    height: 36,
-                    borderRadius: 8,
-                    border: "1px solid rgba(99,120,255,0.2)",
+                    width: 40,
+                    height: 40,
+                    borderRadius: "50%",
+                    border: "1px solid rgba(99,120,255,0.25)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    color: "#7b82a8",
+                    color: "#8892b0",
                     textDecoration: "none",
-                    transition: "all 0.2s",
+                    transition: "all 0.3s ease",
+                    background: "rgba(10,14,28,0.5)",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(79,111,255,0.6)";
-                    e.currentTarget.style.color = "#4f6fff";
-                    e.currentTarget.style.background = "rgba(79,111,255,0.08)";
+                    e.currentTarget.style.borderColor = "rgba(79,111,255,0.8)";
+                    e.currentTarget.style.color = "#ffffff";
+                    e.currentTarget.style.background = "rgba(79,111,255,0.15)";
+                    e.currentTarget.style.transform = "translateY(-3px)";
+                    e.currentTarget.style.boxShadow = "0 5px 15px rgba(79,111,255,0.2)";
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(99,120,255,0.2)";
-                    e.currentTarget.style.color = "#7b82a8";
-                    e.currentTarget.style.background = "transparent";
+                    e.currentTarget.style.borderColor = "rgba(99,120,255,0.25)";
+                    e.currentTarget.style.color = "#8892b0";
+                    e.currentTarget.style.background = "rgba(10,14,28,0.5)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow = "none";
                   }}
                 >
-                  <Icon size={15} />
+                  <Icon size={16} />
                 </a>
               ))}
             </div>
@@ -174,31 +209,14 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div className="mobile-center">
-            <h4
-              style={{
-                fontFamily: "Syne",
-                fontWeight: 700,
-                marginBottom: 20,
-                fontSize: 16,
-                fontStyle: "italic",
-              }}
-            >
-              Quick Links
-            </h4>
+            <h4 style={headerStyle}>Quick Links</h4>
             {quickLinks.map((l) => (
               <Link
                 key={l.href}
                 href={l.href}
-                style={{
-                  display: "block",
-                  color: "#7b82a8",
-                  textDecoration: "none",
-                  fontSize: 14,
-                  marginBottom: 10,
-                  transition: "color 0.2s",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#e8eaf6")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#7b82a8")}
+                style={linkStyle}
+                onMouseEnter={linkHover}
+                onMouseLeave={linkLeave}
               >
                 {l.label}
               </Link>
@@ -207,31 +225,14 @@ export default function Footer() {
 
           {/* Services */}
           <div className="mobile-center">
-            <h4
-              style={{
-                fontFamily: "Syne",
-                fontWeight: 700,
-                marginBottom: 20,
-                fontSize: 16,
-                fontStyle: "italic",
-              }}
-            >
-              Services
-            </h4>
+            <h4 style={headerStyle}>Services</h4>
             {services.map((s) => (
               <Link
                 key={s}
                 href="/services"
-                style={{
-                  display: "block",
-                  color: "#7b82a8",
-                  textDecoration: "none",
-                  fontSize: 14,
-                  marginBottom: 10,
-                  transition: "color 0.2s",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#e8eaf6")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#7b82a8")}
+                style={linkStyle}
+                onMouseEnter={linkHover}
+                onMouseLeave={linkLeave}
               >
                 {s}
               </Link>
@@ -240,31 +241,14 @@ export default function Footer() {
 
           {/* Top Cities */}
           <div className="mobile-center">
-            <h4
-              style={{
-                fontFamily: "Syne",
-                fontWeight: 700,
-                marginBottom: 20,
-                fontSize: 16,
-                fontStyle: "italic",
-              }}
-            >
-              Top Cities
-            </h4>
+            <h4 style={headerStyle}>Top Cities</h4>
             {topCities.map((city) => (
               <Link
                 key={city.label}
                 href={city.href}
-                style={{
-                  display: "block",
-                  color: "#7b82a8",
-                  textDecoration: "none",
-                  fontSize: 14,
-                  marginBottom: 10,
-                  transition: "color 0.2s",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#e8eaf6")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#7b82a8")}
+                style={linkStyle}
+                onMouseEnter={linkHover}
+                onMouseLeave={linkLeave}
               >
                 {city.label}
               </Link>
@@ -272,34 +256,36 @@ export default function Footer() {
             <Link
               href="/locations"
               style={{
-                display: "inline-block",
-                color: "#4f6fff",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 6,
+                color: "#6378ff",
                 textDecoration: "none",
-                fontSize: 14,
+                fontSize: 13,
                 fontWeight: 600,
-                marginTop: 8,
-                transition: "color 0.2s",
+                marginTop: 10,
+                padding: "8px 16px",
+                borderRadius: 20,
+                background: "rgba(99,120,255,0.1)",
+                border: "1px solid rgba(99,120,255,0.2)",
+                transition: "all 0.3s ease",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#6378ff")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "#4f6fff")}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "rgba(99,120,255,0.2)";
+                e.currentTarget.style.transform = "translateY(-2px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "rgba(99,120,255,0.1)";
+                e.currentTarget.style.transform = "translateY(0)";
+              }}
             >
-              View All 200+ Locations →
+              View All 700+ Locations →
             </Link>
           </div>
 
           {/* Contact */}
           <div className="mobile-center">
-            <h4
-              style={{
-                fontFamily: "Syne",
-                fontWeight: 700,
-                marginBottom: 20,
-                fontSize: 16,
-                fontStyle: "italic",
-              }}
-            >
-              Contact
-            </h4>
+            <h4 style={headerStyle}>Contact</h4>
             {[
               { icon: FaEnvelope, text: "webxcrafting@gmail.com", href: "mailto:webxcrafting@gmail.com" },
               { icon: FaPhone, text: "+91 9102615343\n+91 7974579107", href: "tel:+919102615343" },
@@ -314,17 +300,24 @@ export default function Footer() {
                   className="mobile-center"
                   style={{
                     display: "flex",
-                    gap: 10,
-                    marginBottom: 12,
-                    alignItems: "center",
+                    gap: 12,
+                    marginBottom: 16,
+                    alignItems: "flex-start",
                     textDecoration: "none",
-                    cursor: href ? "pointer" : "default"
+                    cursor: href ? "pointer" : "default",
+                    transition: "all 0.3s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (href) e.currentTarget.style.transform = "translateX(5px)";
+                  }}
+                  onMouseLeave={(e) => {
+                    if (href) e.currentTarget.style.transform = "translateX(0)";
                   }}
                 >
-                  <span style={{ fontSize: 14, minWidth: 20, color: "#4f6fff" }}>
+                  <span style={{ fontSize: 14, minWidth: 20, color: "#6378ff", marginTop: 2 }}>
                     <Icon size={14} />
                   </span>
-                  <span style={{ color: "#7b82a8", fontSize: 14, whiteSpace: "pre-line", textAlign: "left" }}>{text}</span>
+                  <span style={{ color: "#8892b0", fontSize: 14, whiteSpace: "pre-line", textAlign: "left", lineHeight: 1.5 }}>{text}</span>
                 </Tag>
               );
             })}
@@ -332,31 +325,14 @@ export default function Footer() {
 
           {/* Legal */}
           <div className="mobile-center">
-            <h4
-              style={{
-                fontFamily: "Syne",
-                fontWeight: 700,
-                marginBottom: 20,
-                fontSize: 16,
-                fontStyle: "italic",
-              }}
-            >
-              Legal
-            </h4>
+            <h4 style={headerStyle}>Legal</h4>
             {legalLinks.map((l) => (
               <Link
                 key={l.href}
                 href={l.href}
-                style={{
-                  display: "block",
-                  color: "#7b82a8",
-                  textDecoration: "none",
-                  fontSize: 14,
-                  marginBottom: 10,
-                  transition: "color 0.2s",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#e8eaf6")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#7b82a8")}
+                style={linkStyle}
+                onMouseEnter={linkHover}
+                onMouseLeave={linkLeave}
               >
                 {l.label}
               </Link>
@@ -368,19 +344,19 @@ export default function Footer() {
         <div
           className="mobile-stack"
           style={{
-            borderTop: "1px solid rgba(99,120,255,0.08)",
-            paddingTop: 24,
+            borderTop: "1px solid rgba(255,255,255,0.05)",
+            paddingTop: 32,
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
             flexWrap: "wrap",
-            gap: 12,
+            gap: 16,
             textAlign: "center",
           }}
         >
           <p
             style={{
-              color: "#7b82a8",
+              color: "#8892b0",
               fontSize: 13,
               display: "flex",
               gap: 8,
@@ -390,18 +366,18 @@ export default function Footer() {
             }}
           >
             <span>
-              © {new Date().getFullYear()} WebxCrafting. Crafted with precision
+              © {new Date().getFullYear()} WebXCrafting. Crafted with precision
               for a seamless digital experience
               <Link
                 href="/admin/login"
                 style={{
-                  color: "#7b82a8",
+                  color: "#8892b0",
                   textDecoration: "none",
                   transition: "opacity 0.2s",
                   cursor: "default",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#e8eaf6")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#7b82a8")}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#ffffff")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#8892b0")}
               >
                 .
               </Link>
