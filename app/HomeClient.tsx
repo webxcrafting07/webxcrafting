@@ -515,7 +515,17 @@ export default function HomeClient() {
           </h2>
         </FadeUp>
         {services.length > 4 ? (
-          <div className="marquee-container">
+          <div 
+            className="marquee-container"
+            style={{
+              width: "100vw",
+              position: "relative",
+              left: "50%",
+              right: "50%",
+              marginLeft: "-50vw",
+              marginRight: "-50vw"
+            }}
+          >
             <div className="marquee-content" style={{ gap: 24 }}>
               {[...services, ...services].map((s: any, i) => (
                 <div key={i} className="service-marquee-item">
