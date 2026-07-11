@@ -7,6 +7,7 @@ import Footer from '@/components/Footer'
 import DotBackground from '@/components/DotBackground'
 import WhatsAppButton from '@/components/WhatsAppButton'
 import { FaCheck, FaMoneyBillWave, FaClipboardList, FaInfoCircle, FaRocket, FaGlobe, FaShoppingCart, FaBriefcase, FaCog, FaCalendarAlt, FaClock, FaArrowRight, FaLaptopCode, FaStore, FaUserTie, FaDatabase } from 'react-icons/fa'
+import { SiReact, SiNextdotjs, SiNodedotjs, SiMongodb, SiAmazonwebservices, SiDocker, SiTailwindcss, SiFramer, SiPostgresql, SiRedis } from 'react-icons/si'
 import { getServiceIcon } from '@/lib/icons'
 
 /* ── tiny fade-up wrapper ── */
@@ -545,9 +546,36 @@ export default function HomeClient() {
         <div style={{ textAlign: 'center', fontSize: 12, fontWeight: 700, color: '#7b82a8', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 24 }}>Powered By Enterprise Tech Stack</div>
         <div className="marquee-container" style={{ width: "100vw", position: "relative", left: "50%", right: "50%", marginLeft: "-50vw", marginRight: "-50vw" }}>
           <div className="marquee-content" style={{ gap: 60, opacity: 0.6 }}>
-            {['React.js', 'Next.js', 'Node.js', 'MongoDB', 'AWS', 'Docker', 'Tailwind CSS', 'Framer Motion', 'PostgreSQL', 'Redis', 'React.js', 'Next.js', 'Node.js', 'MongoDB', 'AWS', 'Docker', 'Tailwind CSS', 'Framer Motion', 'PostgreSQL', 'Redis'].map((tech, i) => (
-              <div key={i} style={{ fontSize: 24, fontWeight: 800, fontFamily: 'Syne', color: '#b0b8d8', whiteSpace: 'nowrap' }}>
-                {tech}
+            {[
+              { name: 'React.js', icon: <SiReact /> },
+              { name: 'Next.js', icon: <SiNextdotjs /> },
+              { name: 'Node.js', icon: <SiNodedotjs /> },
+              { name: 'MongoDB', icon: <SiMongodb /> },
+              { name: 'AWS', icon: <SiAmazonwebservices /> },
+              { name: 'Docker', icon: <SiDocker /> },
+              { name: 'Tailwind CSS', icon: <SiTailwindcss /> },
+              { name: 'Framer Motion', icon: <SiFramer /> },
+              { name: 'PostgreSQL', icon: <SiPostgresql /> },
+              { name: 'Redis', icon: <SiRedis /> },
+            ].map((tech, i) => (
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 24, fontWeight: 800, fontFamily: 'Syne', color: '#b0b8d8', whiteSpace: 'nowrap' }}>
+                <span style={{ fontSize: 28, color: '#4f6fff' }}>{tech.icon}</span> {tech.name}
+              </div>
+            ))}
+            {[
+              { name: 'React.js', icon: <SiReact /> },
+              { name: 'Next.js', icon: <SiNextdotjs /> },
+              { name: 'Node.js', icon: <SiNodedotjs /> },
+              { name: 'MongoDB', icon: <SiMongodb /> },
+              { name: 'AWS', icon: <SiAmazonwebservices /> },
+              { name: 'Docker', icon: <SiDocker /> },
+              { name: 'Tailwind CSS', icon: <SiTailwindcss /> },
+              { name: 'Framer Motion', icon: <SiFramer /> },
+              { name: 'PostgreSQL', icon: <SiPostgresql /> },
+              { name: 'Redis', icon: <SiRedis /> },
+            ].map((tech, i) => (
+              <div key={i + 10} style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 24, fontWeight: 800, fontFamily: 'Syne', color: '#b0b8d8', whiteSpace: 'nowrap' }}>
+                <span style={{ fontSize: 28, color: '#4f6fff' }}>{tech.icon}</span> {tech.name}
               </div>
             ))}
           </div>
