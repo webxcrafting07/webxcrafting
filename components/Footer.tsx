@@ -33,6 +33,18 @@ const legalLinks = [
   { label: "Disclaimer", href: "/disclaimer" },
   { label: "Refund Policy", href: "/refund-policy" },
 ];
+
+const topCities = [
+  { label: "Bhopal", href: "/locations/web-development-company-in-bhopal" },
+  { label: "Kanpur", href: "/locations/web-development-company-in-kanpur" },
+  { label: "Indore", href: "/locations/web-development-company-in-indore" },
+  { label: "Jaipur", href: "/locations/web-development-company-in-jaipur" },
+  { label: "Bangalore", href: "/locations/web-development-company-in-bangalore" },
+  { label: "Mumbai", href: "/locations/web-development-company-in-mumbai" },
+];
+
+
+
 const socials = [
   {
     icon: FaFacebook,
@@ -224,6 +236,55 @@ export default function Footer() {
                 {s}
               </Link>
             ))}
+          </div>
+
+          {/* Top Cities */}
+          <div className="mobile-center">
+            <h4
+              style={{
+                fontFamily: "Syne",
+                fontWeight: 700,
+                marginBottom: 20,
+                fontSize: 16,
+                fontStyle: "italic",
+              }}
+            >
+              Top Cities
+            </h4>
+            {topCities.map((city) => (
+              <Link
+                key={city.label}
+                href={city.href}
+                style={{
+                  display: "block",
+                  color: "#7b82a8",
+                  textDecoration: "none",
+                  fontSize: 14,
+                  marginBottom: 10,
+                  transition: "color 0.2s",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#e8eaf6")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#7b82a8")}
+              >
+                {city.label}
+              </Link>
+            ))}
+            <Link
+              href="/locations"
+              style={{
+                display: "inline-block",
+                color: "#4f6fff",
+                textDecoration: "none",
+                fontSize: 14,
+                fontWeight: 600,
+                marginTop: 8,
+                transition: "color 0.2s",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#6378ff")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "#4f6fff")}
+            >
+              View All 200+ Locations →
+            </Link>
           </div>
 
           {/* Contact */}

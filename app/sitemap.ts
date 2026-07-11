@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next'
+import { CITIES_CONFIG } from '@/lib/citiesConfig'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const envUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.webxcrafting.in'
@@ -28,16 +29,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }))
 
   // Pre-generate location city routes for maximum index visibility
-  const cities = [
-    'bangalore', 'mumbai', 'delhi-ncr', 'pune', 'hyderabad', 'ahmedabad',
-    'chennai', 'kolkata', 'jaipur', 'lucknow', 'surat', 'nagpur',
-    'indore', 'chandigarh', 'patna', 'bhopal', 'vadodara', 'ludhiana',
-    'agra', 'nashik', 'kochi', 'thiruvananthapuram', 'visakhapatnam',
-    'coimbatore', 'kanpur', 'guwahati', 'gurgaon', 'noida', 'dehradun',
-    'bhubaneswar', 'ranchi', 'rajkot', 'jodhpur', 'mysore', 'madurai',
-    'mangalore', 'udaipur', 'jalandhar', 'amritsar', 'faridabad',
-    'ghaziabad', 'navi-mumbai', 'thane', 'raipur', 'gwalior', 'jabalpur'
-  ]
+  const cities = Object.keys(CITIES_CONFIG)
   const locationRoutes: MetadataRoute.Sitemap = cities.map((city) => ({
     url: `${baseUrl}/locations/web-development-company-in-${city}`,
     lastModified: new Date(),
