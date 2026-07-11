@@ -201,7 +201,23 @@ export default function ServicesClient() {
 
         {/* STATS MARQUEE */}
         <FadeUp delay={0.05}>
-          <div style={{ marginBottom: 100, overflow: "hidden", display: "flex", gap: 32, padding: "20px 0", background: "rgba(79,111,255,0.05)", borderTop: "1px solid rgba(79,111,255,0.1)", borderBottom: "1px solid rgba(79,111,255,0.1)", whiteSpace: "nowrap" }}>
+          <div style={{ 
+            marginBottom: 100, 
+            overflow: "hidden", 
+            display: "flex", 
+            gap: 32, 
+            padding: "20px 0", 
+            background: "rgba(79,111,255,0.05)", 
+            borderTop: "1px solid rgba(79,111,255,0.1)", 
+            borderBottom: "1px solid rgba(79,111,255,0.1)", 
+            whiteSpace: "nowrap",
+            width: "100vw",
+            position: "relative",
+            left: "50%",
+            right: "50%",
+            marginLeft: "-50vw",
+            marginRight: "-50vw"
+          }}>
             <motion.div
               animate={{ x: [0, -1035] }}
               transition={{ repeat: Infinity, ease: "linear", duration: 20 }}
