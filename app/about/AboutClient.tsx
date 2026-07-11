@@ -71,17 +71,48 @@ export default function AboutClient() {
       <Navbar />
 
       <div className="mobile-p-6" style={{ position: 'relative', zIndex: 10, padding: '130px 32px 80px', maxWidth: 1200, margin: '0 auto' }}>
-        <FadeUp>
-          <div className="section-label" style={{ marginBottom: 20 }}>About Us</div>
-          <h1 style={{ fontFamily: 'Syne', fontSize: 'clamp(32px,5vw,64px)', fontWeight: 800, fontStyle: 'italic', marginBottom: 20, maxWidth: 720, lineHeight: 1.1 }}>
-            Passionate About{' '}
-            <span className="grad-text">Digital Craftsmanship</span>
-          </h1>
-          <p style={{ color: '#7b82a8', fontSize: 18, lineHeight: 1.8, maxWidth: 640, marginBottom: 60 }}>
-            WebXCrafting is a boutique agency focused on delivering premium,
-            high-performance websites at prices that make sense for any business.
-          </p>
-        </FadeUp>
+        <div style={{ textAlign: "center", marginBottom: 80 }}>
+          <FadeUp>
+            <div className="section-label" style={{ margin: '0 auto 20px' }}>About Us</div>
+            <h1 style={{ fontFamily: 'Syne', fontSize: 'clamp(36px,6vw,72px)', fontWeight: 800, fontStyle: 'italic', marginBottom: 24, lineHeight: 1.1, letterSpacing: '-1px' }}>
+              Passionate About <br />
+              <span className="grad-text">Digital Craftsmanship</span>
+            </h1>
+            <p style={{ color: '#7b82a8', fontSize: 'clamp(16px, 2vw, 18px)', maxWidth: 650, margin: '0 auto 40px', lineHeight: 1.6 }}>
+              WebXCrafting is a premium digital agency focused on engineering high-performance, conversion-optimized websites that help businesses dominate their market.
+            </p>
+          </FadeUp>
+          
+          <FadeUp delay={0.1}>
+            <div style={{ 
+              display: 'flex', 
+              flexWrap: 'wrap', 
+              gap: 40, 
+              justifyContent: 'center', 
+              padding: '30px 40px', 
+              background: 'rgba(79,111,255,0.05)', 
+              borderRadius: 24, 
+              border: '1px solid rgba(79,111,255,0.1)',
+              maxWidth: 900,
+              margin: '0 auto'
+            }}>
+              <div style={{ textAlign: 'center', flex: 1, minWidth: 150 }}>
+                <div style={{ fontSize: 'clamp(32px, 4vw, 48px)', fontWeight: 800, color: '#e8eaf6', fontFamily: 'Syne' }}>50+</div>
+                <div style={{ color: '#4f6fff', fontWeight: 600, fontSize: 14, letterSpacing: 1, textTransform: 'uppercase' }}>Projects Delivered</div>
+              </div>
+              <div style={{ width: 1, background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent)' }}></div>
+              <div style={{ textAlign: 'center', flex: 1, minWidth: 150 }}>
+                <div style={{ fontSize: 'clamp(32px, 4vw, 48px)', fontWeight: 800, color: '#e8eaf6', fontFamily: 'Syne' }}>15+</div>
+                <div style={{ color: '#a259ff', fontWeight: 600, fontSize: 14, letterSpacing: 1, textTransform: 'uppercase' }}>Cities Covered</div>
+              </div>
+              <div style={{ width: 1, background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent)' }}></div>
+              <div style={{ textAlign: 'center', flex: 1, minWidth: 150 }}>
+                <div style={{ fontSize: 'clamp(32px, 4vw, 48px)', fontWeight: 800, color: '#e8eaf6', fontFamily: 'Syne' }}>99%</div>
+                <div style={{ color: '#00e676', fontWeight: 600, fontSize: 14, letterSpacing: 1, textTransform: 'uppercase' }}>Client Satisfaction</div>
+              </div>
+            </div>
+          </FadeUp>
+        </div>
 
         <div className="mobile-grid-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 72, alignItems: 'start' }}>
           <div>
@@ -102,10 +133,26 @@ export default function AboutClient() {
               <h3 style={{ fontFamily: 'Syne', fontWeight: 700, fontStyle: 'italic', marginBottom: 24, fontSize: 22 }}>Why Choose Us?</h3>
               <div className="mobile-grid-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
                 {whyUs.map(({ icon: Icon, title, desc }) => (
-                  <motion.div key={title} whileHover={{ y: -4 }} className="glass" style={{ padding: 20, borderRadius: 14 }}>
-                    <div style={{ fontSize: 26, marginBottom: 10, color: '#4f6fff' }}><Icon size={26} /></div>
-                    <div style={{ fontWeight: 600, fontSize: 14, marginBottom: 4 }}>{title}</div>
-                    <div style={{ color: '#7b82a8', fontSize: 13, lineHeight: 1.6 }}>{desc}</div>
+                  <motion.div 
+                    key={title} 
+                    whileHover={{ y: -6, boxShadow: "0 12px 32px rgba(79,111,255,0.2)" }} 
+                    className="glass" 
+                    style={{ 
+                      padding: 24, 
+                      borderRadius: 16, 
+                      border: '1px solid rgba(79,111,255,0.1)',
+                      transition: 'all 0.3s'
+                    }}
+                  >
+                    <div style={{ 
+                      width: 48, height: 48, borderRadius: 12, background: 'rgba(79,111,255,0.1)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      fontSize: 22, marginBottom: 16, color: '#4f6fff' 
+                    }}>
+                      <Icon />
+                    </div>
+                    <div style={{ fontWeight: 700, fontSize: 16, marginBottom: 6, fontFamily: 'Syne' }}>{title}</div>
+                    <div style={{ color: '#7b82a8', fontSize: 14, lineHeight: 1.6 }}>{desc}</div>
                   </motion.div>
                 ))}
               </div>
@@ -126,24 +173,34 @@ export default function AboutClient() {
 
             <FadeUp delay={0.25}>
               <h3 style={{ fontFamily: 'Syne', fontWeight: 700, fontStyle: 'italic', marginBottom: 24, fontSize: 22 }}>Our Journey</h3>
+              <div style={{ padding: '32px', background: 'rgba(162,89,255,0.05)', borderRadius: 24, border: '1px solid rgba(162,89,255,0.1)', marginBottom: 52 }}>
+                <h4 style={{ fontFamily: 'Syne', fontSize: 18, fontWeight: 700, color: '#a259ff', marginBottom: 12 }}>Our Mission</h4>
+                <p style={{ color: '#e8eaf6', fontSize: 15, lineHeight: 1.7, fontStyle: 'italic' }}>
+                  "To democratize premium digital experiences by providing enterprise-level software engineering and stunning designs to businesses of all sizes."
+                </p>
+              </div>
+
+              <h3 style={{ fontFamily: 'Syne', fontWeight: 700, fontStyle: 'italic', marginBottom: 24, fontSize: 22 }}>Our Journey</h3>
               {timeline.map((t, i) => (
-                <div key={i} style={{ display: 'flex', gap: 20, marginBottom: 28 }}>
+                <div key={i} style={{ display: 'flex', gap: 24, marginBottom: 32 }}>
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <motion.div whileHover={{ scale: 1.1 }} style={{
-                      width: 48, height: 48, borderRadius: '50%', minWidth: 48,
+                    <motion.div whileHover={{ scale: 1.1, boxShadow: '0 0 20px rgba(79,111,255,0.5)' }} style={{
+                      width: 54, height: 54, borderRadius: '50%', minWidth: 54,
                       background: 'linear-gradient(135deg,#4f6fff,#a259ff)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      fontSize: 12, fontWeight: 700, fontFamily: 'Syne',
+                      fontSize: 13, fontWeight: 800, fontFamily: 'Syne', color: '#fff',
+                      boxShadow: '0 8px 24px rgba(79,111,255,0.3)',
+                      border: '2px solid rgba(255,255,255,0.1)'
                     }}>
                       {t.year}
                     </motion.div>
                     {i < timeline.length - 1 && (
-                      <div style={{ width: 2, height: 36, background: 'linear-gradient(#4f6fff,rgba(79,111,255,0))', margin: '8px 0' }} />
+                      <div style={{ width: 2, height: 48, background: 'linear-gradient(to bottom, #a259ff, rgba(79,111,255,0.1))', margin: '12px 0' }} />
                     )}
                   </div>
-                  <div style={{ paddingTop: 10 }}>
-                    <div style={{ fontWeight: 600, fontSize: 16, marginBottom: 6 }}>{t.title}</div>
-                    <div style={{ color: '#7b82a8', fontSize: 14, lineHeight: 1.65 }}>{t.desc}</div>
+                  <div style={{ paddingTop: 14 }}>
+                    <div style={{ fontWeight: 700, fontSize: 18, marginBottom: 8, fontFamily: 'Syne' }}>{t.title}</div>
+                    <div style={{ color: '#7b82a8', fontSize: 15, lineHeight: 1.6 }}>{t.desc}</div>
                   </div>
                 </div>
               ))}
@@ -169,7 +226,7 @@ export default function AboutClient() {
             {team.map((member, i) => (
               <FadeUp key={member.name} delay={i * 0.15}>
                 <motion.div 
-                  whileHover={{ y: -8, boxShadow: '0 24px 64px rgba(0,0,0,0.45)' }}
+                  whileHover={{ y: -8, boxShadow: '0 24px 64px rgba(79,111,255,0.2)' }}
                   className="glass" 
                   style={{ 
                     padding: '48px 32px', 
@@ -177,15 +234,20 @@ export default function AboutClient() {
                     textAlign: 'center', 
                     position: 'relative', 
                     overflow: 'hidden',
-                    border: '1px solid rgba(99,120,255,.15)',
-                    background: 'rgba(10,14,28,0.65)'
+                    border: '1px solid rgba(99,120,255,.2)',
+                    background: 'rgba(10,14,28,0.7)',
+                    backdropFilter: 'blur(30px)'
                   }}
                 >
+                  {/* Glowing background blob */}
+                  <div style={{ position: 'absolute', top: -50, left: '50%', transform: 'translateX(-50%)', width: 200, height: 200, background: 'radial-gradient(circle, rgba(79,111,255,0.15) 0%, rgba(0,0,0,0) 70%)', borderRadius: '50%', pointerEvents: 'none' }}></div>
+                  
                   <div style={{ 
-                    width: 86, height: 86, borderRadius: '50%', background: 'linear-gradient(135deg,#4f6fff,#a259ff)', 
+                    width: 90, height: 90, borderRadius: '50%', background: 'linear-gradient(135deg,#4f6fff,#a259ff)', 
                     margin: '0 auto 24px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: 28, fontWeight: 800, color: '#fff', fontFamily: 'Syne',
-                    boxShadow: '0 12px 32px rgba(79,111,255,0.3)'
+                    fontSize: 32, fontWeight: 800, color: '#fff', fontFamily: 'Syne',
+                    boxShadow: '0 12px 32px rgba(79,111,255,0.4)',
+                    position: 'relative', zIndex: 2
                   }}>
                     {member.initials}
                   </div>
