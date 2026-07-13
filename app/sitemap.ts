@@ -21,9 +21,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/disclaimer',
   ]
 
+  const staticLastMod = new Date('2026-07-01T00:00:00.000Z')
+
   const staticRoutes: MetadataRoute.Sitemap = routes.map((route) => ({
     url: `${baseUrl}${route}`,
-    lastModified: new Date(),
+    lastModified: staticLastMod,
     changeFrequency: route === '/blog' ? 'weekly' : 'monthly',
     priority: route === '' ? 1 : (route === '/blog' || route === '/services') ? 0.9 : 0.8,
   }))
@@ -32,7 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const cities = Object.keys(CITIES_CONFIG)
   const locationRoutes: MetadataRoute.Sitemap = cities.map((city) => ({
     url: `${baseUrl}/locations/web-development-company-in-${city}`,
-    lastModified: new Date(),
+    lastModified: staticLastMod,
     changeFrequency: 'monthly',
     priority: 0.8,
   }))

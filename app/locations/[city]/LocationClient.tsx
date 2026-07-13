@@ -37,25 +37,52 @@ export default function LocationClient({ cityKey, cityInfo }: LocationClientProp
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  // Predefined local FAQs
-  const faqs = [
-    {
-      q: `What is the cost of website development in ${name}?`,
-      a: `Website development costs in ${name} vary depending on features, page count, and complexity. A basic single-page landing page starts around ₹5,000, multi-page business sites range from ₹8,000 to ₹15,000, and full-scale e-commerce stores or dynamic custom web applications start from ₹20,000. You can get an instant, customized quote using our interactive Website Cost Calculator!`
-    },
-    {
-      q: `Why should our ${name}-based business choose WebXCrafting over local template designers?`,
-      a: `Unlike average agencies in ${name} that sell bloated, slow WordPress templates, WebXCrafting builds custom hand-coded websites using React and Next.js. This guarantees 100/100 performance scores, instant page loads, premium customized motion design, and robust automated SEO, ensuring you stand out and rank #1 locally.`
-    },
-    {
-      q: `How long does it take to deliver a custom website in ${name}?`,
-      a: `A landing page or small business website is typically completed in 5 to 7 days. More advanced custom platforms, LMS directories, or e-commerce shops take 2 to 4 weeks depending on the complexity of dynamic logic. We follow a strict agile development pipeline and provide you with live staging preview links throughout the process.`
-    },
-    {
-      q: `Do you provide post-launch support and local SEO services in ${name}?`,
-      a: `Yes! Every website we launch in ${name} includes 1 month of free premium support, schema markup integrations, sitemap configurations, and search console setup. We also offer extended priority maintenance plans to keep your platform updated, fast, and continuously optimized for high-volume local searches.`
-    }
+  // Simple deterministic hash for the city name to pick variations consistently
+  const hash = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  const vIndex = hash % 3; // We will have 3 variations
+
+  // Hero Descriptions
+  const heroDescriptions = [
+    `We craft ultra-fast, premium hand-coded React & Next.js websites specifically engineered to help startups and local businesses in ${name} dominate search results and capture hot sales leads.`,
+    `Looking for top-tier digital growth in ${name}? Our expert team builds high-performance, visually stunning web applications and e-commerce stores designed to scale your local brand.`,
+    `Elevate your online presence in ${name} with our custom web development services. We focus on lightning-fast speeds, SEO-driven architecture, and conversion-optimized designs.`
   ];
+
+  // Service Subtitles
+  const serviceSubtitles = [
+    `From simple landing pages to complex e-commerce ecosystems, we provide end-to-end digital solutions to help your business dominate the ${name} market.`,
+    `Whether you need a sleek business portfolio or a massive online store, our tailored web services in ${name} are built for ultimate performance and security.`,
+    `Explore our comprehensive digital solutions in ${name}. We engineer everything from fast local landing pages to robust SaaS platforms tailored to your specific needs.`
+  ];
+
+  // FAQ Sets
+  const faqSets = [
+    // Set 1 (original)
+    [
+      { q: `What is the cost of website development in ${name}?`, a: `Website development costs in ${name} vary depending on features, page count, and complexity. A basic single-page landing page starts around ₹5,000, multi-page business sites range from ₹8,000 to ₹15,000, and full-scale e-commerce stores or dynamic custom web applications start from ₹20,000. You can get an instant, customized quote using our interactive Website Cost Calculator!` },
+      { q: `Why should our ${name}-based business choose WebXCrafting over local template designers?`, a: `Unlike average agencies in ${name} that sell bloated, slow WordPress templates, WebXCrafting builds custom hand-coded websites using React and Next.js. This guarantees 100/100 performance scores, instant page loads, premium customized motion design, and robust automated SEO, ensuring you stand out and rank #1 locally.` },
+      { q: `How long does it take to deliver a custom website in ${name}?`, a: `A landing page or small business website is typically completed in 5 to 7 days. More advanced custom platforms, LMS directories, or e-commerce shops take 2 to 4 weeks depending on the complexity of dynamic logic. We follow a strict agile development pipeline and provide you with live staging preview links throughout the process.` },
+      { q: `Do you provide post-launch support and local SEO services in ${name}?`, a: `Yes! Every website we launch in ${name} includes 1 month of free premium support, schema markup integrations, sitemap configurations, and search console setup. We also offer extended priority maintenance plans to keep your platform updated, fast, and continuously optimized for high-volume local searches.` }
+    ],
+    // Set 2
+    [
+      { q: `How much should I budget for a new website in ${name}?`, a: `In ${name}, prices scale based on functionality. Simple lead-generation sites begin at ₹5,000, standard company portfolios average ₹8,000 to ₹15,000, while complex digital stores or web apps start at ₹20,000. Use our online pricing tool for a precise quote.` },
+      { q: `What makes your web design agency stand out in ${name}?`, a: `We skip the slow, generic templates used by many local freelancers. Instead, we code lightning-fast Next.js applications that achieve perfect Core Web Vitals, driving more traffic and keeping your ${name} customers engaged longer.` },
+      { q: `What is the typical timeline for web development in ${name}?`, a: `Basic sites can be live in just a week! Larger e-commerce builds or custom SaaS dashboards generally require 2 to 4 weeks. Our transparent workflow keeps you in the loop with live previews every step of the way.` },
+      { q: `Will you help rank my business locally in ${name}?`, a: `Absolutely. Technical SEO is baked into our code. We configure all meta tags, schema data, and submit your site to Google so your ${name} business gets the visibility it deserves, backed by 1 month of free maintenance.` }
+    ],
+    // Set 3
+    [
+      { q: `Are web design services expensive in ${name}?`, a: `Our rates for ${name} clients are highly competitive. You can expect to invest about ₹5,000 for a starter landing page, up to ₹15,000 for a corporate site, and ₹20,000+ for robust e-commerce solutions. Check out our cost calculator for an exact figure.` },
+      { q: `Why are custom-coded sites better for my ${name} business?`, a: `Custom React/Next.js code ensures your site loads instantly, is highly secure, and is tailored exactly to your brand. Typical template-based sites used by other ${name} designers suffer from plugin bloat and slow speeds.` },
+      { q: `Can you build my ${name} website quickly?`, a: `Yes! Depending on your exact needs, rapid landing pages are deployed in 5-7 days. Comprehensive digital platforms or job directories may take up to a month, ensuring top-tier quality and rigorous testing.` },
+      { q: `Do you offer ongoing website maintenance in ${name}?`, a: `We provide a full month of premium support post-launch for all our ${name} clients. This covers essential SEO indexing, bug fixes, and minor updates to guarantee a flawless launch experience.` }
+    ]
+  ];
+
+  const heroDesc = heroDescriptions[vIndex];
+  const serviceSub = serviceSubtitles[vIndex];
+  const faqs = faqSets[vIndex];
 
   // Dynamic LocalBusiness Structured Schema
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.webxcrafting.in";
@@ -141,7 +168,7 @@ export default function LocationClient({ cityKey, cityInfo }: LocationClientProp
           Company In <span className="grad-text">{name}</span>
         </h1>
         <p style={{ color: "#7b82a8", fontSize: "clamp(15px, 2vw, 18px)", lineHeight: 1.6, maxWidth: 720, margin: "0 auto 36px" }}>
-          We craft ultra-fast, premium hand-coded React & Next.js websites specifically engineered to help startups and local businesses in {name} dominate search results and capture hot sales leads.
+          {heroDesc}
         </p>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 16, justifyContent: "center" }}>
           <Link href="/contact" className="btn-primary" style={{ padding: "14px 32px", fontSize: 15, textDecoration: "none" }}>
@@ -199,7 +226,7 @@ export default function LocationClient({ cityKey, cityInfo }: LocationClientProp
             What We Offer In <span className="grad-text">{name}</span>
           </h2>
           <p style={{ color: "#7b82a8", fontSize: 16, maxWidth: 600, margin: "0 auto" }}>
-            From simple landing pages to complex e-commerce ecosystems, we provide end-to-end digital solutions to help your business dominate the {name} market.
+            {serviceSub}
           </p>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 30 }}>

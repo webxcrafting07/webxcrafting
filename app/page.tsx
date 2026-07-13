@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import HomeClient from './HomeClient'
+import { connectDB } from '@/lib/db'
 
 export const metadata: Metadata = {
   title: "Premium Web Development & Digital Solutions | WebXCrafting",
@@ -9,7 +10,20 @@ export const metadata: Metadata = {
   },
 }
 
-export default function HomePage() {
+export default async function HomePage() {
+  let initialBlogs = []
+  try {
+    const Blog = (await import('@/models/Blog')).default
+    await connectDB()
+    const blogsObj = await Blog.find({
+      status: 'published',
+      publishDate: { $lte: new Date() }
+    }).sort({ publishDate: -1 }).limit(8).lean()
+    initialBlogs = JSON.parse(JSON.stringify(blogsObj))
+  } catch (error) {
+    console.error('Error fetching blogs server-side for homepage:', error)
+  }
+
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
@@ -107,7 +121,7 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <HomeClient />
+      <HomeClient initialBlogs={initialBlogs} />
     </>
   )
 }

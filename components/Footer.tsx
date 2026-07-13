@@ -32,6 +32,7 @@ const legalLinks = [
   { label: "Cookie Policy", href: "/cookie-policy" },
   { label: "Disclaimer", href: "/disclaimer" },
   { label: "Refund Policy", href: "/refund-policy" },
+  { label: "HTML Sitemap", href: "/sitemap" },
 ];
 
 const topCities = [

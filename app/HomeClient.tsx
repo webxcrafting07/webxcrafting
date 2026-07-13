@@ -399,10 +399,10 @@ const testimonials = [
   { name: 'Rahul Verma', role: 'Director, JobsIndia', text: 'Our job portal handles thousands of users daily. Zero downtime, blazing fast. Absolutely recommend!', initials: 'RV' },
 ]
 
-export default function HomeClient() {
+export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[] }) {
   const [services, setServices] = useState(defaultServices)
   const [projects, setProjects] = useState(defaultProjects)
-  const [blogs, setBlogs] = useState<any[]>([])
+  const [blogs, setBlogs] = useState<any[]>(initialBlogs)
   const [selectedService, setSelectedService] = useState<any>(null)
   const blogScrollRef = useRef<HTMLDivElement>(null)
   const projectScrollRef = useRef<HTMLDivElement>(null)
@@ -483,11 +483,13 @@ export default function HomeClient() {
       .then((d) => { if (d.success && d.data.length) setProjects(d.data.slice(0, 3)) })
       .catch(() => { })
 
-    fetch('/api/blogs?limit=8')
-      .then((r) => r.json())
-      .then((d) => { if (d.success && d.data.length) setBlogs(d.data) })
-      .catch(() => { })
-  }, [])
+    if (initialBlogs.length === 0) {
+      fetch('/api/blogs?limit=8')
+        .then((r) => r.json())
+        .then((d) => { if (d.success && d.data.length) setBlogs(d.data) })
+        .catch(() => { })
+    }
+  }, [initialBlogs])
 
   useEffect(() => {
     if (selectedService) {
