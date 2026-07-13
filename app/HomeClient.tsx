@@ -664,33 +664,47 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
               <Link href="/services" className="btn-primary">Explore Our Tech →</Link>
             </FadeUp>
           </div>
-          <FadeUp delay={0.2}>
+          <FadeUp delay={0.2} style={{ display: 'flex', justifyContent: 'center' }}>
             <div style={{ 
-              background: 'rgba(10,14,28,0.8)', 
-              borderRadius: 24, 
-              padding: 40, 
-              border: '1px solid rgba(0,230,118,0.3)', 
-              boxShadow: '0 0 80px rgba(0,230,118,0.15)',
-              position: 'relative'
+              background: 'linear-gradient(135deg, rgba(10,14,28,0.8) 0%, rgba(20,25,45,0.8) 100%)', 
+              borderRadius: 32, 
+              padding: '48px 32px', 
+              border: '1px solid rgba(0,230,118,0.2)', 
+              boxShadow: '0 20px 80px rgba(0,230,118,0.1), inset 0 0 40px rgba(0,230,118,0.05)',
+              position: 'relative',
+              backdropFilter: 'blur(20px)',
+              width: '100%',
+              maxWidth: '500px'
             }}>
-              <div style={{ display: 'flex', gap: 32, justifyContent: 'center', flexWrap: 'wrap' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '40px 24px', justifyItems: 'center' }}>
                 {[
                   { label: 'Performance', score: 100 },
                   { label: 'Accessibility', score: 100 },
                   { label: 'Best Practices', score: 100 },
                   { label: 'SEO', score: 100 }
                 ].map((stat, i) => (
-                  <div key={i} style={{ textAlign: 'center' }}>
-                    <div style={{ 
-                      width: 100, height: 100, borderRadius: '50%', 
-                      border: '6px solid #00e676', 
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      fontSize: 32, fontWeight: 800, color: '#00e676', marginBottom: 12,
-                      boxShadow: '0 0 20px rgba(0,230,118,0.4), inset 0 0 20px rgba(0,230,118,0.4)'
-                    }}>
-                      {stat.score}
+                  <div key={i} style={{ textAlign: 'center', position: 'relative' }}>
+                    <div style={{ position: 'relative', width: 120, height: 120, marginBottom: 16 }}>
+                      <svg width="120" height="120" viewBox="0 0 120 120" style={{ transform: 'rotate(-90deg)', filter: 'drop-shadow(0 0 12px rgba(0,230,118,0.4))' }}>
+                        <circle cx="60" cy="60" r="54" fill="none" stroke="rgba(0,230,118,0.1)" strokeWidth="6" />
+                        <motion.circle 
+                          cx="60" cy="60" r="54" fill="none" stroke="#00e676" strokeWidth="6" 
+                          strokeDasharray="339.29"
+                          initial={{ strokeDashoffset: 339.29 }}
+                          whileInView={{ strokeDashoffset: 0 }}
+                          transition={{ duration: 1.5, ease: "easeOut", delay: i * 0.2 }}
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                      <div style={{ 
+                        position: 'absolute', inset: 0, 
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        fontSize: 32, fontWeight: 900, color: '#00e676', fontFamily: 'Syne'
+                      }}>
+                        {stat.score}
+                      </div>
                     </div>
-                    <div style={{ color: '#e8eaf6', fontSize: 13, fontWeight: 700, fontFamily: 'Syne' }}>{stat.label}</div>
+                    <div style={{ color: '#e8eaf6', fontSize: 14, fontWeight: 700, fontFamily: 'Syne', letterSpacing: '0.5px' }}>{stat.label}</div>
                   </div>
                 ))}
               </div>
