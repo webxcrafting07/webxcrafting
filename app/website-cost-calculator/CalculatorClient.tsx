@@ -158,11 +158,31 @@ export default function CalculatorClient() {
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [hideSticky, setHideSticky] = useState(false);
 
   // Auto-scroll to top when step changes
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [step]);
+
+  // Hide sticky bar when reaching the quote summary
+  useEffect(() => {
+    const handleScroll = () => {
+      const summaryNode = document.getElementById('live-quote-summary-panel');
+      if (summaryNode) {
+        const rect = summaryNode.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 50) {
+          setHideSticky(true);
+        } else {
+          setHideSticky(false);
+        }
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Check initially
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Calculate dynamic pricing
   const basePrice = selectedType.basePrice;
@@ -1143,6 +1163,7 @@ export default function CalculatorClient() {
 
           {/* Right panel: Sticky Live Estimates Box */}
           <div
+            id="live-quote-summary-panel"
             style={{
               position: "sticky",
               top: 100,
@@ -1262,7 +1283,7 @@ export default function CalculatorClient() {
       </div>
 
       {/* Mobile Sticky Bottom Bar */}
-      <div className="mobile-only-sticky-bar" style={{
+      <div className={`mobile-only-sticky-bar ${!hideSticky ? 'visible' : ''}`} style={{
         position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 999999,
         background: 'rgba(10,14,28,0.95)', backdropFilter: 'blur(20px)',
         borderTop: '1px solid rgba(79,111,255,0.3)', padding: '16px 80px 16px 20px',
@@ -1282,7 +1303,7 @@ export default function CalculatorClient() {
 
       <style dangerouslySetInnerHTML={{__html: `
         @media (max-width: 900px) {
-          .mobile-only-sticky-bar { display: flex !important; }
+          .mobile-only-sticky-bar.visible { display: flex !important; }
         }
       `}} />
 
