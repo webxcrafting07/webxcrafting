@@ -1127,7 +1127,8 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
                 >
                   <Link href={`/blog/${blog.slug}`} style={{ textDecoration: 'none' }}>
                     <div style={{ 
-                      height: 220, 
+                      aspectRatio: '1200/630', 
+                      width: '100%',
                       background: blog.coverImage ? `url(${blog.coverImage}) center/cover no-repeat` : 'linear-gradient(135deg,rgba(79,111,255,0.1),rgba(162,89,255,0.15))',
                       position: 'relative',
                       display: 'flex',
