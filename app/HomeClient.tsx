@@ -749,21 +749,43 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
             { step: '04', title: 'Launch & Scale', desc: 'Rigorous QA testing, deployment, and ongoing SEO/support to ensure massive growth.' }
           ].map((item, i) => (
             <FadeUp key={i} delay={i * 0.1}>
-              <div 
-                className="glass" 
+              <motion.div 
+                whileHover={{ y: -10, scale: 1.02 }}
                 style={{ 
                   padding: 32, 
                   borderRadius: 24, 
                   height: '100%',
                   position: 'relative',
-                  borderTop: '2px solid rgba(79,111,255,0.3)',
-                  transition: 'all 0.3s'
+                  background: 'linear-gradient(135deg, rgba(15,20,35,0.7) 0%, rgba(5,10,20,0.9) 100%)',
+                  border: '1px solid rgba(79,111,255,0.1)',
+                  borderTop: `2px solid ${['#00e5ff', '#a259ff', '#00e676', '#ff59a2'][i]}`,
+                  boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
+                  overflow: 'hidden'
                 }}
               >
-                <div style={{ fontSize: 48, fontWeight: 800, fontFamily: 'Syne', color: 'rgba(79,111,255,0.2)', marginBottom: 16, lineHeight: 1 }}>{item.step}</div>
-                <h4 style={{ fontFamily: 'Syne', fontSize: 20, fontWeight: 700, color: '#e8eaf6', marginBottom: 12 }}>{item.title}</h4>
-                <p style={{ color: '#7b82a8', fontSize: 14, lineHeight: 1.6 }}>{item.desc}</p>
-              </div>
+                {/* Neon Glow overlay on hover */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileHover={{ opacity: 1 }}
+                  style={{
+                    position: 'absolute', inset: 0,
+                    background: `radial-gradient(circle at top right, ${['rgba(0,229,255,0.15)', 'rgba(162,89,255,0.15)', 'rgba(0,230,118,0.15)', 'rgba(255,89,162,0.15)'][i]}, transparent 70%)`,
+                    zIndex: 0,
+                    transition: 'opacity 0.3s ease'
+                  }}
+                />
+                
+                <div style={{ position: 'relative', zIndex: 1 }}>
+                  <motion.div 
+                    whileHover={{ scale: 1.1, color: ['#00e5ff', '#a259ff', '#00e676', '#ff59a2'][i], textShadow: `0 0 20px ${['#00e5ff', '#a259ff', '#00e676', '#ff59a2'][i]}` }}
+                    style={{ fontSize: 56, fontWeight: 900, fontFamily: 'Syne', color: 'rgba(255,255,255,0.08)', marginBottom: 20, lineHeight: 1, display: 'inline-block', transition: 'all 0.3s ease' }}
+                  >
+                    {item.step}
+                  </motion.div>
+                  <h4 style={{ fontFamily: 'Syne', fontSize: 22, fontWeight: 700, color: '#ffffff', marginBottom: 16 }}>{item.title}</h4>
+                  <p style={{ color: '#a0a8c0', fontSize: 15, lineHeight: 1.6 }}>{item.desc}</p>
+                </div>
+              </motion.div>
             </FadeUp>
           ))}
         </div>
