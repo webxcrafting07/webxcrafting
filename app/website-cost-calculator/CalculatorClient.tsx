@@ -752,7 +752,7 @@ export default function CalculatorClient() {
                           </div>
                           <div style={{ flex: 1 }}>
                             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
-                              <h4 style={{ fontWeight: 700, fontSize: 16, color: isSelected ? "#e8eaf6" : "#b0b8d8" }}>{type.title}</h4>
+                              <div style={{ fontFamily: 'system-ui, sans-serif', fontStyle: 'normal', fontWeight: 700, fontSize: 16, color: isSelected ? "#e8eaf6" : "#b0b8d8" }}>{type.title}</div>
                               <span style={{ fontWeight: 700, fontSize: 15, color: isSelected ? "#4f6fff" : "#7b82a8" }}>
                                 Base: ₹{type.basePrice.toLocaleString("en-IN")}
                               </span>
@@ -797,7 +797,7 @@ export default function CalculatorClient() {
                           }}
                         >
                           <div>
-                            <h4 style={{ fontWeight: 700, fontSize: 16, color: isSelected ? "#e8eaf6" : "#b0b8d8" }}>{pages.label}</h4>
+                            <div style={{ fontFamily: 'system-ui, sans-serif', fontStyle: 'normal', fontWeight: 700, fontSize: 16, color: isSelected ? "#e8eaf6" : "#b0b8d8" }}>{pages.label}</div>
                             <p style={{ color: "#7b82a8", fontSize: 12, marginTop: 3 }}>
                               {pages.id === "1" && "Single-page layouts."}
                               {pages.id === "5" && "Standard business overview structure."}
@@ -844,7 +844,7 @@ export default function CalculatorClient() {
                           }}
                         >
                           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
-                            <h4 style={{ fontWeight: 700, fontSize: 16, color: isSelected ? "#e8eaf6" : "#b0b8d8" }}>{design.label}</h4>
+                            <div style={{ fontFamily: 'system-ui, sans-serif', fontStyle: 'normal', fontWeight: 700, fontSize: 16, color: isSelected ? "#e8eaf6" : "#b0b8d8" }}>{design.label}</div>
                             <span style={{ fontWeight: 700, fontSize: 15, color: isSelected ? "#4f6fff" : "#7b82a8" }}>
                               {design.price === 0 ? "Included" : `+₹${design.price.toLocaleString("en-IN")}`}
                             </span>
@@ -891,7 +891,7 @@ export default function CalculatorClient() {
                         >
                           <div>
                             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
-                              <h4 style={{ fontWeight: 700, fontSize: 15, color: isSelected ? "#e8eaf6" : "#b0b8d8", marginRight: 8 }}>{addon.label}</h4>
+                              <div style={{ fontFamily: 'system-ui, sans-serif', fontStyle: 'normal', fontWeight: 700, fontSize: 15, color: isSelected ? "#e8eaf6" : "#b0b8d8", marginRight: 8 }}>{addon.label}</div>
                               <div style={{
                                 width: 18,
                                 height: 18,
@@ -948,7 +948,7 @@ export default function CalculatorClient() {
                           }}
                         >
                           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
-                            <h4 style={{ fontWeight: 700, fontSize: 16, color: isSelected ? "#e8eaf6" : "#b0b8d8" }}>{plan.label}</h4>
+                            <div style={{ fontFamily: 'system-ui, sans-serif', fontStyle: 'normal', fontWeight: 700, fontSize: 16, color: isSelected ? "#e8eaf6" : "#b0b8d8" }}>{plan.label}</div>
                             <span style={{ fontWeight: 700, fontSize: 15, color: isSelected ? "#4f6fff" : "#7b82a8" }}>
                               {plan.price === 0 ? "Included" : `+₹${plan.price.toLocaleString("en-IN")}`}
                             </span>
