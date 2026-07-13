@@ -763,22 +763,27 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
                   overflow: 'hidden'
                 }}
               >
-                {/* Neon Glow overlay on hover */}
+                {/* Neon Glow overlay on scroll & hover */}
                 <motion.div
                   initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
+                  whileInView={{ opacity: 1 }}
+                  whileHover={{ opacity: 1, filter: 'brightness(1.5)' }}
+                  viewport={{ margin: "-50px" }}
                   style={{
                     position: 'absolute', inset: 0,
                     background: `radial-gradient(circle at top right, ${['rgba(0,229,255,0.15)', 'rgba(162,89,255,0.15)', 'rgba(0,230,118,0.15)', 'rgba(255,89,162,0.15)'][i]}, transparent 70%)`,
                     zIndex: 0,
-                    transition: 'opacity 0.3s ease'
+                    transition: 'opacity 0.3s ease, filter 0.3s ease'
                   }}
                 />
                 
                 <div style={{ position: 'relative', zIndex: 1 }}>
                   <motion.div 
-                    whileHover={{ scale: 1.1, color: ['#00e5ff', '#a259ff', '#00e676', '#ff59a2'][i], textShadow: `0 0 20px ${['#00e5ff', '#a259ff', '#00e676', '#ff59a2'][i]}` }}
-                    style={{ fontSize: 56, fontWeight: 900, fontFamily: 'Syne', color: 'rgba(255,255,255,0.08)', marginBottom: 20, lineHeight: 1, display: 'inline-block', transition: 'all 0.3s ease' }}
+                    initial={{ color: 'rgba(255,255,255,0.08)', textShadow: 'none' }}
+                    whileInView={{ color: ['#00e5ff', '#a259ff', '#00e676', '#ff59a2'][i], textShadow: `0 0 20px ${['#00e5ff', '#a259ff', '#00e676', '#ff59a2'][i]}` }}
+                    whileHover={{ scale: 1.1 }}
+                    viewport={{ margin: "-50px" }}
+                    style={{ fontSize: 56, fontWeight: 900, fontFamily: 'Syne', marginBottom: 20, lineHeight: 1, display: 'inline-block', transition: 'all 0.3s ease' }}
                   >
                     {item.step}
                   </motion.div>
