@@ -1283,7 +1283,6 @@ export default function CalculatorClient() {
       <style dangerouslySetInnerHTML={{__html: `
         @media (max-width: 900px) {
           .mobile-only-sticky-bar { display: flex !important; }
-          .whatsapp-btn { bottom: 90px !important; }
         }
       `}} />
 

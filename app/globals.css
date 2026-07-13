@@ -430,7 +430,7 @@ h6 {
 /* ─── WhatsApp button ────────────────────────────── */
 .whatsapp-btn {
   position: fixed;
-  bottom: 28px;
+  bottom: 100px;
   right: 28px;
   z-index: 1000;
   width: 58px;
