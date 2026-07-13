@@ -232,8 +232,8 @@ function FAQItem({ q, a }: { q: string, a: string }) {
     <motion.div 
       className="glass"
       style={{ 
-        padding: '16px 24px', 
-        borderRadius: 16, 
+        padding: 'clamp(12px, 3vw, 16px) clamp(16px, 4vw, 24px)', 
+        borderRadius: 12, 
         border: isOpen ? '1px solid rgba(79,111,255,0.4)' : '1px solid rgba(99,120,255,0.1)',
         boxShadow: isOpen ? '0 12px 32px rgba(79,111,255,0.15)' : 'none',
         cursor: 'pointer',
@@ -243,8 +243,8 @@ function FAQItem({ q, a }: { q: string, a: string }) {
       whileHover={{ scale: 0.99 }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h4 style={{ fontSize: 16, fontWeight: 600, margin: 0, color: isOpen ? '#4f6fff' : '#e8eaf6', lineHeight: 1.4 }}>{q}</h4>
-        <div style={{ fontSize: 20, color: isOpen ? '#4f6fff' : '#7b82a8', transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'all 0.3s' }}>
+        <h4 style={{ fontFamily: 'Inter, sans-serif', fontStyle: 'normal', fontSize: 'clamp(14px, 3.5vw, 15px)', fontWeight: 600, margin: 0, color: isOpen ? '#4f6fff' : '#e8eaf6', lineHeight: 1.4 }}>{q}</h4>
+        <div style={{ fontSize: 16, color: isOpen ? '#4f6fff' : '#7b82a8', transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'all 0.3s' }}>
           ▼
         </div>
       </div>
