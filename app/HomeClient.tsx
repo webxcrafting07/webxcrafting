@@ -1127,16 +1127,22 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
                 >
                   <Link href={`/blog/${blog.slug}`} style={{ textDecoration: 'none' }}>
                     <div style={{ 
-                      aspectRatio: '1200/630', 
                       width: '100%',
-                      background: blog.coverImage ? `url(${blog.coverImage}) center/cover no-repeat` : 'linear-gradient(135deg,rgba(79,111,255,0.1),rgba(162,89,255,0.15))',
+                      background: 'linear-gradient(135deg,rgba(79,111,255,0.1),rgba(162,89,255,0.15))',
                       position: 'relative',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      borderBottom: '1px solid rgba(255,255,255,0.05)'
+                      borderBottom: '1px solid rgba(255,255,255,0.05)',
+                      overflow: 'hidden'
                     }}>
-                      {!blog.coverImage && <div style={{ fontSize: 40, opacity: 0.3 }}>📝</div>}
+                      {blog.coverImage ? (
+                        <img src={blog.coverImage} alt={blog.title} style={{ width: '100%', height: 'auto', display: 'block', aspectRatio: '1200/630' }} />
+                      ) : (
+                        <div style={{ height: 220, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          <div style={{ fontSize: 40, opacity: 0.3 }}>📝</div>
+                        </div>
+                      )}
                       <div style={{
                         position: 'absolute', top: 14, left: 14, padding: '4px 14px', borderRadius: 20, fontSize: 11, fontWeight: 700,
                         background: 'rgba(3,5,10,0.75)', backdropFilter: 'blur(10px)', color: '#4f6fff', border: '1px solid rgba(79,111,255,0.3)'
