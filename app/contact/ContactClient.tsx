@@ -135,48 +135,76 @@ export default function ContactClient() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
           >
-            {infoItems.map(({ icon: Icon, label, value, href }) => {
+            {infoItems.map(({ icon: Icon, label, value, href }, index) => {
               const Tag = href ? motion.a : motion.div;
               return (
                 <Tag
                   key={label}
                   href={href}
-                  whileHover={{ y: -4 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
+                  whileHover={{ 
+                    y: -5, 
+                    boxShadow: "0 10px 30px -10px rgba(79, 111, 255, 0.3)",
+                    borderColor: "rgba(79, 111, 255, 0.4)"
+                  }}
                   className="glass"
                   style={{
-                    padding: 20,
-                    marginBottom: 16,
+                    padding: "24px 28px",
+                    marginBottom: 20,
                     display: "flex",
-                    gap: 16,
+                    gap: 20,
                     alignItems: "center",
-                    borderRadius: 14,
+                    borderRadius: 20,
                     textDecoration: "none",
                     cursor: href ? "pointer" : "default",
-                    color: "inherit"
+                    color: "inherit",
+                    border: "1px solid rgba(255,255,255,0.05)",
+                    background: "linear-gradient(145deg, rgba(25,25,35,0.4) 0%, rgba(15,15,20,0.6) 100%)",
+                    backdropFilter: "blur(12px)",
+                    transition: "all 0.3s ease"
                   }}
                 >
-                  <div
+                  <motion.div
+                    whileHover={{ scale: 1.1, rotate: 5 }}
                     style={{
-                      fontSize: 28,
-                      minWidth: 36,
-                      textAlign: "center",
+                      width: 54,
+                      height: 54,
+                      borderRadius: 16,
+                      background: "linear-gradient(135deg, rgba(79, 111, 255, 0.15) 0%, rgba(79, 111, 255, 0.05) 100%)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                       color: "#4f6fff",
+                      boxShadow: "inset 0 0 20px rgba(79, 111, 255, 0.1)",
+                      border: "1px solid rgba(79, 111, 255, 0.2)"
                     }}
                   >
                     <Icon size={24} />
-                  </div>
+                  </motion.div>
                   <div>
                     <div
                       style={{
-                        color: "#7b82a8",
-                        fontSize: 12,
-                        marginBottom: 3,
-                        fontWeight: 500,
+                        color: "#8a94b5",
+                        fontSize: 13,
+                        marginBottom: 6,
+                        fontWeight: 600,
+                        textTransform: "uppercase",
+                        letterSpacing: "1px"
                       }}
                     >
                       {label}
                     </div>
-                    <div style={{ fontWeight: 600, fontSize: 15, color: "#e8eaf6", whiteSpace: "pre-line" }}>{value}</div>
+                    <div style={{ 
+                      fontWeight: 700, 
+                      fontSize: 16, 
+                      color: "#ffffff", 
+                      whiteSpace: "pre-line",
+                      lineHeight: 1.5
+                    }}>
+                      {value}
+                    </div>
                   </div>
                 </Tag>
               );
@@ -186,27 +214,28 @@ export default function ContactClient() {
               href={WA}
               target="_blank"
               rel="noopener noreferrer"
-              style={{ textDecoration: "none", display: "block", marginTop: 8 }}
+              style={{ textDecoration: "none", display: "block", marginTop: 12 }}
             >
               <motion.button
-                whileHover={{ scale: 1.02, y: -2 }}
+                whileHover={{ scale: 1.02, y: -2, boxShadow: "0 8px 32px rgba(37,211,102,.4)" }}
                 whileTap={{ scale: 0.98 }}
                 style={{
                   width: "100%",
-                  padding: "15px 24px",
-                  borderRadius: 12,
-                  border: "none",
+                  padding: "18px 24px",
+                  borderRadius: 20,
+                  border: "1px solid rgba(255,255,255,0.1)",
                   cursor: "pointer",
-                  background: "linear-gradient(135deg,#25d366,#128c7e)",
+                  background: "linear-gradient(135deg, #25d366 0%, #128c7e 100%)",
                   color: "#fff",
-                  fontFamily: "Inter",
-                  fontWeight: 600,
+                  fontFamily: "Inter, Syne, sans-serif",
+                  fontWeight: 700,
                   fontSize: 16,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  gap: 10,
-                  boxShadow: "0 4px 24px rgba(37,211,102,.35)",
+                  gap: 12,
+                  boxShadow: "0 4px 24px rgba(37,211,102,.25)",
+                  transition: "all 0.3s ease"
                 }}
               >
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
