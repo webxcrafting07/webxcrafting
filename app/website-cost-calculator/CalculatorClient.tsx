@@ -1263,19 +1263,19 @@ export default function CalculatorClient() {
 
       {/* Mobile Sticky Bottom Bar */}
       <div className="mobile-only-sticky-bar" style={{
-        position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 100,
+        position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 999999,
         background: 'rgba(10,14,28,0.95)', backdropFilter: 'blur(20px)',
-        borderTop: '1px solid rgba(79,111,255,0.3)', padding: '16px 24px',
+        borderTop: '1px solid rgba(79,111,255,0.3)', padding: '16px 80px 16px 20px',
         display: 'none', justifyContent: 'space-between', alignItems: 'center',
         boxShadow: '0 -10px 30px rgba(0,0,0,0.5)'
       }}>
         <div>
-          <div style={{ fontSize: 11, color: '#7b82a8', textTransform: 'uppercase', letterSpacing: 0.5, fontWeight: 600 }}>Total Estimate</div>
-          <motion.div key={totalPrice} initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} style={{ fontSize: 22, fontWeight: 800, color: '#fff' }}>
+          <div style={{ fontSize: 10, color: '#7b82a8', textTransform: 'uppercase', letterSpacing: 0.5, fontWeight: 600 }}>Estimate</div>
+          <motion.div key={totalPrice} initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} style={{ fontSize: 20, fontWeight: 800, color: '#fff' }}>
             ₹{totalPrice.toLocaleString("en-IN")}
           </motion.div>
         </div>
-        <button onClick={step < 6 ? nextStep : () => { window.scrollTo({top:0, behavior:'smooth'}) }} className="btn-primary" style={{ padding: '10px 20px', fontSize: 14 }}>
+        <button onClick={step < 6 ? nextStep : () => { window.scrollTo({top:0, behavior:'smooth'}) }} className="btn-primary" style={{ padding: '10px 16px', fontSize: 13, whiteSpace: 'nowrap' }}>
           {step < 6 ? 'Next Step' : 'Get Quote'}
         </button>
       </div>
@@ -1283,6 +1283,7 @@ export default function CalculatorClient() {
       <style dangerouslySetInnerHTML={{__html: `
         @media (max-width: 900px) {
           .mobile-only-sticky-bar { display: flex !important; }
+          .whatsapp-btn { bottom: 90px !important; }
         }
       `}} />
 
