@@ -1,7 +1,17 @@
 import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
+import fs from 'fs';
+import path from 'path';
 
-export const runtime = 'edge';
+// Read the logo synchronously so we have a guaranteed 100% reliable base64 string
+let logoBase64Url = '';
+try {
+  const logoPath = path.join(process.cwd(), 'public', 'logo-wxc.png');
+  const logoBuffer = fs.readFileSync(logoPath);
+  logoBase64Url = `data:image/png;base64,${logoBuffer.toString('base64')}`;
+} catch (e) {
+  console.error('Failed to load local logo for OG Image', e);
+}
 
 export async function GET(req: NextRequest) {
   try {
@@ -54,7 +64,7 @@ export async function GET(req: NextRequest) {
             display: 'flex',
             opacity: 0.1,
           }}>
-            <img src="https://www.webxcrafting.in/logo-wxc.png" width="800" height="800" />
+            {logoBase64Url && <img src={logoBase64Url} width="800" height="800" />}
           </div>
 
           {/* Main Layout: Left Content, Bottom Right Info */}
@@ -62,7 +72,7 @@ export async function GET(req: NextRequest) {
             
             {/* Top Bar: Logo & Brand */}
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '60px' }}>
-              <img src="https://www.webxcrafting.in/logo-wxc.png" width="64" height="64" style={{ marginRight: 20 }} />
+              {logoBase64Url && <img src={logoBase64Url} width="64" height="64" style={{ marginRight: 20 }} />}
               <div style={{ display: 'flex', fontSize: 40, fontWeight: 900, color: '#ffffff', letterSpacing: '-1px' }}>
                 WebX<span style={{ color: '#4f6fff' }}>Crafting</span>
               </div>
