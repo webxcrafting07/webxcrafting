@@ -1432,15 +1432,15 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
       </section>
 
       {/* ─── CTA BANNER ──────────────────────────── */}
-      <section style={{ padding: '100px 32px', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
+      <section style={{ padding: '60px 32px', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
         <FadeUp>
           <motion.div
             whileHover={{ y: -8, boxShadow: '0 32px 80px rgba(79,111,255,0.25)' }}
             style={{
-              borderRadius: 32,
+              borderRadius: 24,
               background: 'linear-gradient(135deg, rgba(79,111,255,0.25), rgba(162,89,255,0.2))',
               border: '1px solid rgba(162,89,255,0.4)',
-              padding: 'clamp(40px, 10vw, 80px) clamp(20px, 5vw, 48px)',
+              padding: 'clamp(32px, 6vw, 56px) clamp(20px, 4vw, 32px)',
               textAlign: 'center',
               position: 'relative',
               overflow: 'hidden',
@@ -1450,11 +1450,11 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
             <div style={{ position: 'absolute', top: -100, right: -50, width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle,rgba(79,111,255,.3),transparent 70%)', filter: 'blur(40px)' }} />
             <div style={{ position: 'absolute', bottom: -100, left: -50, width: 300, height: 300, borderRadius: '50%', background: 'radial-gradient(circle,rgba(162,89,255,.3),transparent 70%)', filter: 'blur(40px)' }} />
             
-            <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(32px,5vw,56px)', fontWeight: 800, fontStyle: 'italic', marginBottom: 20, position: 'relative', lineHeight: 1.1, color: '#fff' }}>
+            <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 800, fontStyle: 'italic', marginBottom: 16, position: 'relative', lineHeight: 1.1, color: '#fff' }}>
               Ready to Dominate <br />
               <span style={{ background: 'linear-gradient(135deg, #fff, #a259ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Your Market?</span>
             </h2>
-            <p style={{ color: '#e8eaf6', fontSize: 'clamp(15px, 4vw, 18px)', marginBottom: 48, maxWidth: 600, margin: '0 auto 48px', position: 'relative', lineHeight: 1.6 }}>
+            <p style={{ color: '#e8eaf6', fontSize: 'clamp(14px, 3vw, 16px)', marginBottom: 32, maxWidth: 600, margin: '0 auto 32px', position: 'relative', lineHeight: 1.6 }}>
               Stop losing customers to slow, outdated websites. Let's engineer a high-performance digital experience that scales your business.
             </p>
             <div style={{ position: 'relative', zIndex: 2 }}>
