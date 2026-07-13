@@ -1173,15 +1173,42 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
 
       {/* ─── TESTIMONIALS ────────────────────────── */}
       <section style={{ padding: '80px 32px', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
-        <FadeUp style={{ textAlign: 'center', marginBottom: 56 }}>
-          <div className="section-label" style={{ margin: '0 auto 20px' }}>Testimonials</div>
-          <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(28px,4vw,48px)', fontWeight: 800, fontStyle: 'italic' }}>
-            What Clients <span className="grad-text">Say</span>
-          </h2>
+        <FadeUp style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 56, flexWrap: 'wrap', gap: 20 }}>
+          <div>
+            <div className="section-label" style={{ marginBottom: 20 }}>Testimonials</div>
+            <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(28px,4vw,48px)', fontWeight: 800, fontStyle: 'italic', margin: 0 }}>
+              What Clients <span className="grad-text">Say</span>
+            </h2>
+          </div>
+          <div style={{ display: 'flex', gap: 12, marginLeft: 'auto' }}>
+            <button 
+              onClick={() => {
+                const el = document.getElementById('testi-scroll');
+                if(el) el.scrollBy({ left: -320, behavior: 'smooth' });
+              }}
+              style={{ width: 48, height: 48, borderRadius: '50%', background: 'rgba(10,14,28,0.7)', border: '1px solid rgba(99,120,255,0.3)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', backdropFilter: 'blur(10px)', transition: 'all 0.3s' }}
+              onMouseOver={(e) => e.currentTarget.style.background = 'rgba(79,111,255,0.2)'}
+              onMouseOut={(e) => e.currentTarget.style.background = 'rgba(10,14,28,0.7)'}
+            >
+              ←
+            </button>
+            <button 
+              onClick={() => {
+                const el = document.getElementById('testi-scroll');
+                if(el) el.scrollBy({ left: 320, behavior: 'smooth' });
+              }}
+              style={{ width: 48, height: 48, borderRadius: '50%', background: 'rgba(10,14,28,0.7)', border: '1px solid rgba(99,120,255,0.3)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', backdropFilter: 'blur(10px)', transition: 'all 0.3s' }}
+              onMouseOver={(e) => e.currentTarget.style.background = 'rgba(79,111,255,0.2)'}
+              onMouseOut={(e) => e.currentTarget.style.background = 'rgba(10,14,28,0.7)'}
+            >
+              →
+            </button>
+          </div>
         </FadeUp>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24 }}>
+        
+        <div id="testi-scroll" className="scroll-container" style={{ scrollBehavior: 'smooth', gap: 24, paddingBottom: 20 }}>
           {testimonials.map((t, i) => (
-            <FadeUp key={i} delay={i * 0.1}>
+            <FadeUp key={i} delay={i * 0.1} className="blog-scroll-item" style={{ minWidth: 'clamp(280px, 80vw, 360px)', flexShrink: 0 }}>
               <TestimonialCard {...t} />
             </FadeUp>
           ))}
