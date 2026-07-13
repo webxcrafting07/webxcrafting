@@ -687,9 +687,9 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
               </svg>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '48px 32px', justifyItems: 'center' }}>
                 {[
-                  { label: 'Performance', score: 100 },
+                  { label: 'Performance', score: 99 },
                   { label: 'Accessibility', score: 100 },
-                  { label: 'Best Practices', score: 100 },
+                  { label: 'Best Practices', score: 98 },
                   { label: 'SEO', score: 100 }
                 ].map((stat, i) => (
                   <div key={i} style={{ textAlign: 'center', position: 'relative' }}>
@@ -703,7 +703,7 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
                           cx="65" cy="65" r="58" fill="none" stroke="url(#score-grad)" strokeWidth="8" 
                           strokeDasharray="364.42"
                           initial={{ strokeDashoffset: 364.42 }}
-                          whileInView={{ strokeDashoffset: 0 }}
+                          whileInView={{ strokeDashoffset: 364.42 - (364.42 * (stat.score / 100)) }}
                           transition={{ duration: 2, ease: [0.25, 1, 0.5, 1], delay: i * 0.15 }}
                           strokeLinecap="round"
                           style={{ filter: 'drop-shadow(0 0 8px rgba(0,230,118,0.5))' }}
