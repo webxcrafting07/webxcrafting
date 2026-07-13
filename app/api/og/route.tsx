@@ -8,13 +8,13 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const title = searchParams.get('title') || 'Professional Web Development Services';
     
-    // Determine category based on keywords for a bit of dynamic text
+    // Determine category based on keywords
     let category = "INDUSTRY INSIGHTS";
     const lowerTitle = title.toLowerCase();
     if (lowerTitle.includes('seo') || lowerTitle.includes('ranking')) category = "SEO STRATEGY";
-    if (lowerTitle.includes('e-commerce')) category = "E-COMMERCE";
-    if (lowerTitle.includes('design')) category = "WEB DESIGN";
-    if (lowerTitle.includes('development') || lowerTitle.includes('react') || lowerTitle.includes('next.js')) category = "ENGINEERING";
+    if (lowerTitle.includes('e-commerce') || lowerTitle.includes('ecommerce')) category = "E-COMMERCE EXPERTISE";
+    if (lowerTitle.includes('design') || lowerTitle.includes('ui/ux')) category = "PREMIUM WEB DESIGN";
+    if (lowerTitle.includes('development') || lowerTitle.includes('react') || lowerTitle.includes('next.js')) category = "ENGINEERING EXCELLENCE";
 
     const protocol = req.headers.get('x-forwarded-proto') || (req.url.startsWith('https') ? 'https' : 'http');
     const host = req.headers.get('host') || 'localhost:3000';
@@ -27,139 +27,108 @@ export async function GET(req: NextRequest) {
             height: '100%',
             width: '100%',
             display: 'flex',
-            flexDirection: 'column',
-            backgroundColor: '#050510',
+            backgroundColor: '#020205',
             fontFamily: 'system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
             position: 'relative',
             overflow: 'hidden',
           }}
         >
-          {/* Abstract Glowing Orbs in Background */}
-          <div
-            style={{
-              position: 'absolute',
-              top: '-20%',
-              right: '-10%',
-              width: '60%',
-              height: '80%',
-              background: 'radial-gradient(circle, rgba(79, 111, 255, 0.4) 0%, rgba(0,0,0,0) 70%)',
-              borderRadius: '50%',
-            }}
-          />
-          <div
-            style={{
-              position: 'absolute',
-              bottom: '-30%',
-              left: '-20%',
-              width: '70%',
-              height: '90%',
-              background: 'radial-gradient(circle, rgba(162, 89, 255, 0.3) 0%, rgba(0,0,0,0) 70%)',
-              borderRadius: '50%',
-            }}
-          />
+          {/* Background Ambient Glows */}
+          <div style={{ position: 'absolute', top: -300, left: -200, width: 800, height: 800, background: 'radial-gradient(circle, rgba(62,115,255,0.4) 0%, rgba(0,0,0,0) 70%)', borderRadius: '50%' }} />
+          <div style={{ position: 'absolute', bottom: -400, right: -200, width: 900, height: 900, background: 'radial-gradient(circle, rgba(169,89,255,0.3) 0%, rgba(0,0,0,0) 70%)', borderRadius: '50%' }} />
 
-          {/* Grid overlay for a tech feel */}
+          {/* Dotted Grid Pattern */}
           <div
             style={{
               position: 'absolute',
               inset: 0,
-              backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)',
-              backgroundSize: '40px 40px',
+              backgroundImage: 'radial-gradient(rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px)',
+              backgroundSize: '36px 36px',
             }}
           />
 
-          {/* Main Content Container */}
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              flex: 1,
-              padding: '80px',
-              zIndex: 10,
-            }}
-          >
+          {/* Huge faded logo in background right */}
+          <div style={{
+            position: 'absolute',
+            right: -100,
+            top: '50%',
+            transform: 'translateY(-50%)',
+            display: 'flex',
+            opacity: 0.1,
+          }}>
+            <img src={logoUrl} width="800" height="800" />
+          </div>
+
+          {/* Main Layout: Left Content, Bottom Right Info */}
+          <div style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%', padding: '70px', zIndex: 10 }}>
+            
+            {/* Top Bar: Logo & Brand */}
+            <div style={{ display: 'flex', alignItems: 'center', marginBottom: '80px' }}>
+              <img src={logoUrl} width="64" height="64" style={{ marginRight: 20 }} />
+              <div style={{ display: 'flex', fontSize: 40, fontWeight: 900, color: '#ffffff', letterSpacing: '-1px' }}>
+                WebX<span style={{ color: '#4f6fff' }}>Crafting</span>
+              </div>
+            </div>
+
             {/* Category Pill */}
             <div
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                backgroundColor: 'rgba(79, 111, 255, 0.15)',
+                backgroundColor: 'rgba(79, 111, 255, 0.1)',
                 color: '#6378ff',
-                fontSize: 22,
+                fontSize: 20,
                 fontWeight: 800,
-                padding: '10px 24px',
-                borderRadius: '50px',
-                marginBottom: '30px',
-                letterSpacing: '3px',
+                padding: '12px 28px',
+                borderRadius: '8px',
+                marginBottom: '40px',
+                letterSpacing: '4px',
                 textTransform: 'uppercase',
-                border: '1px solid rgba(79, 111, 255, 0.3)',
+                borderLeft: '4px solid #6378ff',
                 alignSelf: 'flex-start',
               }}
             >
-              <div style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: '#6378ff', marginRight: 12 }}></div>
               {category}
             </div>
 
-            {/* Title */}
+            {/* Giant Title */}
             <div
               style={{
-                fontSize: 72,
+                display: 'flex',
+                fontSize: title.length > 50 ? 70 : 85,
                 fontWeight: 900,
                 color: '#ffffff',
-                lineHeight: 1.15,
-                maxWidth: '90%',
-                letterSpacing: '-1px',
-                marginBottom: '40px',
+                lineHeight: 1.1,
+                width: '75%',
+                letterSpacing: '-2px',
+                textShadow: '0 10px 30px rgba(0,0,0,0.8)',
               }}
             >
               {title}
             </div>
-          </div>
 
-          {/* Bottom Bar Container */}
-          <div
-            style={{
+            {/* Bottom Glassmorphism Contact Bar */}
+            <div style={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: '140px',
               display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
               alignItems: 'center',
-              padding: '40px 80px',
-              backgroundColor: 'rgba(10, 14, 28, 0.8)',
-              borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-              zIndex: 10,
-            }}
-          >
-            {/* Logo */}
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                fontSize: 42,
-                fontWeight: 900,
-                color: 'white',
-                letterSpacing: '-1.5px',
-              }}
-            >
-              <img src={logoUrl} width="64" height="64" style={{ marginRight: 16 }} />
-              WebX<span style={{ color: '#4f6fff' }}>Crafting</span>
-            </div>
-
-            {/* Contact Details */}
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                gap: '40px',
-              }}
-            >
+              justifyContent: 'space-between',
+              padding: '0 70px',
+              background: 'linear-gradient(to right, rgba(10, 15, 30, 0.95), rgba(20, 10, 30, 0.95))',
+              borderTop: '1px solid rgba(255,255,255,0.1)',
+              boxShadow: '0 -10px 40px rgba(0,0,0,0.5)'
+            }}>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <span style={{ color: '#7b82a8', fontSize: 16, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: 4 }}>Email Us</span>
-                <span style={{ color: '#ffffff', fontSize: 24, fontWeight: 500 }}>webxcrafting@gmail.com</span>
+                <span style={{ color: '#00e5ff', fontSize: 16, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '2px', marginBottom: 6 }}>Email For Enquiries</span>
+                <span style={{ color: '#ffffff', fontSize: 28, fontWeight: 500 }}>webxcrafting@gmail.com</span>
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <span style={{ color: '#7b82a8', fontSize: 16, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: 4 }}>Call Us</span>
-                <span style={{ color: '#ffffff', fontSize: 24, fontWeight: 500 }}>+91 9102615343 | +91 7974579107</span>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+                <span style={{ color: '#a259ff', fontSize: 16, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '2px', marginBottom: 6 }}>Call Us Direct</span>
+                <span style={{ color: '#ffffff', fontSize: 28, fontWeight: 500 }}>+91 9102615343 | +91 7974579107</span>
               </div>
             </div>
           </div>
