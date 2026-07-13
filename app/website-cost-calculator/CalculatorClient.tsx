@@ -1286,8 +1286,6 @@ export default function CalculatorClient() {
         }
       `}} />
 
-      <Footer />
-      <WhatsAppButton />
     </>
   );
 }

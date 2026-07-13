@@ -3,7 +3,7 @@ import CalculatorClient from './CalculatorClient'
 import Footer from '@/components/Footer'
 import DotBackground from '@/components/DotBackground'
 import Navbar from '@/components/Navbar'
-
+import WhatsAppButton from '@/components/WhatsAppButton'
 export const metadata: Metadata = {
   title: 'Website Cost Calculator India (2026) | Web Development Price Estimator',
   description: 'Calculate the exact cost of your website development instantly. Our transparent calculator provides a real-time price estimate for business, e-commerce, and custom websites in India. 100% accurate pricing.',
@@ -95,6 +95,8 @@ export default function CalculatorPage() {
           </div>
         </section>
       </div>
+      <Footer />
+      <WhatsAppButton />
     </>
   )
 }
