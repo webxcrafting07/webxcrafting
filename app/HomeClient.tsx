@@ -687,28 +687,40 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
               </svg>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '48px 32px', justifyItems: 'center' }}>
                 {[
-                  { label: 'Performance', score: 99 },
-                  { label: 'Accessibility', score: 100 },
-                  { label: 'Best Practices', score: 98 },
-                  { label: 'SEO', score: 100 }
+                  { label: 'Performance', score: 99, color1: '#00e5ff', color2: '#2979ff', shadow: 'rgba(0,229,255,0.4)' },
+                  { label: 'Accessibility', score: 100, color1: '#ff4081', color2: '#d500f9', shadow: 'rgba(213,0,249,0.4)' },
+                  { label: 'Best Practices', score: 98, color1: '#00e676', color2: '#1de9b6', shadow: 'rgba(0,230,118,0.4)' },
+                  { label: 'SEO', score: 100, color1: '#ff9100', color2: '#ff3d00', shadow: 'rgba(255,145,0,0.4)' }
                 ].map((stat, i) => (
                   <div key={i} style={{ textAlign: 'center', position: 'relative' }}>
                     <div style={{ position: 'relative', width: 130, height: 130, marginBottom: 20 }}>
-                      {/* Background Track */}
                       <svg width="130" height="130" viewBox="0 0 130 130" style={{ transform: 'rotate(-90deg)' }}>
+                        <defs>
+                          <linearGradient id={`grad-${i}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor={stat.color1} />
+                            <stop offset="100%" stopColor={stat.color2} />
+                          </linearGradient>
+                        </defs>
+                        {/* Background Track */}
                         <circle cx="65" cy="65" r="58" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="8" />
                         
                         {/* Animated Gradient Ring */}
                         <motion.circle 
-                          cx="65" cy="65" r="58" fill="none" stroke="url(#score-grad)" strokeWidth="8" 
+                          cx="65" cy="65" r="58" fill="none" stroke={`url(#grad-${i})`} strokeWidth="8" 
                           strokeDasharray="364.42"
                           initial={{ strokeDashoffset: 364.42 }}
                           whileInView={{ strokeDashoffset: 364.42 - (364.42 * (stat.score / 100)) }}
                           transition={{ duration: 2, ease: [0.25, 1, 0.5, 1], delay: i * 0.15 }}
                           strokeLinecap="round"
-                          style={{ filter: 'drop-shadow(0 0 8px rgba(0,230,118,0.5))' }}
+                          style={{ filter: `drop-shadow(0 0 12px ${stat.shadow})` }}
                         />
                       </svg>
+                      
+                      {/* Inner Glow */}
+                      <div style={{
+                        position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
+                        width: 80, height: 80, borderRadius: '50%', background: stat.color1, filter: 'blur(35px)', opacity: 0.15
+                      }} />
                       
                       {/* Score Text */}
                       <div style={{ 
@@ -722,7 +734,7 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
                     </div>
                     
                     {/* Label */}
-                    <div style={{ color: '#a0a8c0', fontSize: 14, fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase' }}>
+                    <div style={{ color: '#a0a8c0', fontSize: 13, fontWeight: 700, letterSpacing: '1.2px', textTransform: 'uppercase' }}>
                       {stat.label}
                     </div>
                   </div>
