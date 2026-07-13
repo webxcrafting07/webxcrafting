@@ -146,8 +146,8 @@ const SUPPORT_PLANS = [
 
 export default function CalculatorClient() {
   const [step, setStep] = useState(1);
-  const [selectedType, setSelectedType] = useState(WEBSITE_TYPES[1]); // Default to Business
-  const [selectedPages, setSelectedPages] = useState(PAGE_COUNTS[1]); // Default to Up to 5
+  const [selectedType, setSelectedType] = useState(WEBSITE_TYPES[0]); // Default to Landing Page
+  const [selectedPages, setSelectedPages] = useState(PAGE_COUNTS[0]); // Default to 1 Page
   const [selectedDesign, setSelectedDesign] = useState(DESIGN_LEVELS[0]); // Default to Standard
   const [selectedAddons, setSelectedAddons] = useState<any[]>([]);
   const [selectedSupport, setSelectedSupport] = useState(SUPPORT_PLANS[0]); // Default to 1 month free
