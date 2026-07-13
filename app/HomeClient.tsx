@@ -666,17 +666,26 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
           </div>
           <FadeUp delay={0.2} style={{ display: 'flex', justifyContent: 'center' }}>
             <div style={{ 
-              background: 'linear-gradient(135deg, rgba(10,14,28,0.8) 0%, rgba(20,25,45,0.8) 100%)', 
+              background: 'linear-gradient(145deg, rgba(30,40,60,0.4) 0%, rgba(10,15,30,0.6) 100%)', 
               borderRadius: 32, 
-              padding: '48px 32px', 
-              border: '1px solid rgba(0,230,118,0.2)', 
-              boxShadow: '0 20px 80px rgba(0,230,118,0.1), inset 0 0 40px rgba(0,230,118,0.05)',
+              padding: '56px 40px', 
+              border: '1px solid rgba(255,255,255,0.05)', 
+              boxShadow: '0 30px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1)',
               position: 'relative',
-              backdropFilter: 'blur(20px)',
+              backdropFilter: 'blur(30px)',
               width: '100%',
-              maxWidth: '500px'
+              maxWidth: '540px'
             }}>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '40px 24px', justifyItems: 'center' }}>
+              <svg width="0" height="0">
+                <defs>
+                  <linearGradient id="score-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#00e5ff" />
+                    <stop offset="50%" stopColor="#00e676" />
+                    <stop offset="100%" stopColor="#a259ff" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '48px 32px', justifyItems: 'center' }}>
                 {[
                   { label: 'Performance', score: 100 },
                   { label: 'Accessibility', score: 100 },
@@ -684,27 +693,38 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
                   { label: 'SEO', score: 100 }
                 ].map((stat, i) => (
                   <div key={i} style={{ textAlign: 'center', position: 'relative' }}>
-                    <div style={{ position: 'relative', width: 120, height: 120, marginBottom: 16 }}>
-                      <svg width="120" height="120" viewBox="0 0 120 120" style={{ transform: 'rotate(-90deg)', filter: 'drop-shadow(0 0 12px rgba(0,230,118,0.4))' }}>
-                        <circle cx="60" cy="60" r="54" fill="none" stroke="rgba(0,230,118,0.1)" strokeWidth="6" />
+                    <div style={{ position: 'relative', width: 130, height: 130, marginBottom: 20 }}>
+                      {/* Background Track */}
+                      <svg width="130" height="130" viewBox="0 0 130 130" style={{ transform: 'rotate(-90deg)' }}>
+                        <circle cx="65" cy="65" r="58" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="8" />
+                        
+                        {/* Animated Gradient Ring */}
                         <motion.circle 
-                          cx="60" cy="60" r="54" fill="none" stroke="#00e676" strokeWidth="6" 
-                          strokeDasharray="339.29"
-                          initial={{ strokeDashoffset: 339.29 }}
+                          cx="65" cy="65" r="58" fill="none" stroke="url(#score-grad)" strokeWidth="8" 
+                          strokeDasharray="364.42"
+                          initial={{ strokeDashoffset: 364.42 }}
                           whileInView={{ strokeDashoffset: 0 }}
-                          transition={{ duration: 1.5, ease: "easeOut", delay: i * 0.2 }}
+                          transition={{ duration: 2, ease: [0.25, 1, 0.5, 1], delay: i * 0.15 }}
                           strokeLinecap="round"
+                          style={{ filter: 'drop-shadow(0 0 8px rgba(0,230,118,0.5))' }}
                         />
                       </svg>
+                      
+                      {/* Score Text */}
                       <div style={{ 
                         position: 'absolute', inset: 0, 
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        fontSize: 32, fontWeight: 900, color: '#00e676', fontFamily: 'Syne'
+                        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
                       }}>
-                        {stat.score}
+                        <span style={{ fontSize: 42, fontWeight: 800, color: '#ffffff', fontFamily: 'system-ui, -apple-system, sans-serif', lineHeight: 1, letterSpacing: '-1px' }}>
+                          {stat.score}
+                        </span>
                       </div>
                     </div>
-                    <div style={{ color: '#e8eaf6', fontSize: 14, fontWeight: 700, fontFamily: 'Syne', letterSpacing: '0.5px' }}>{stat.label}</div>
+                    
+                    {/* Label */}
+                    <div style={{ color: '#a0a8c0', fontSize: 14, fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase' }}>
+                      {stat.label}
+                    </div>
                   </div>
                 ))}
               </div>
