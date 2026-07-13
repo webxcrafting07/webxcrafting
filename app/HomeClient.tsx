@@ -232,7 +232,7 @@ function FAQItem({ q, a }: { q: string, a: string }) {
     <motion.div 
       className="glass"
       style={{ 
-        padding: '24px 32px', 
+        padding: '16px 24px', 
         borderRadius: 16, 
         border: isOpen ? '1px solid rgba(79,111,255,0.4)' : '1px solid rgba(99,120,255,0.1)',
         boxShadow: isOpen ? '0 12px 32px rgba(79,111,255,0.15)' : 'none',
@@ -243,7 +243,7 @@ function FAQItem({ q, a }: { q: string, a: string }) {
       whileHover={{ scale: 0.99 }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h4 style={{ fontFamily: 'Syne', fontSize: 18, fontWeight: 700, margin: 0, color: isOpen ? '#4f6fff' : '#e8eaf6' }}>{q}</h4>
+        <h4 style={{ fontSize: 16, fontWeight: 600, margin: 0, color: isOpen ? '#4f6fff' : '#e8eaf6', lineHeight: 1.4 }}>{q}</h4>
         <div style={{ fontSize: 20, color: isOpen ? '#4f6fff' : '#7b82a8', transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'all 0.3s' }}>
           ▼
         </div>
@@ -1416,7 +1416,7 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
           </h2>
         </FadeUp>
         
-        <div style={{ display: 'grid', gap: 20 }}>
+        <div style={{ display: 'grid', gap: 12 }}>
           {[
             { q: "How much does a professional website cost in India?", a: "A basic professional business website starts from ₹8,000. For custom e-commerce or job portals, prices vary based on features, but we offer the most competitive premium pricing in India." },
             { q: "Do you provide SEO with website development?", a: "Yes, every website we build is SEO-optimized from the ground up, ensuring fast loading speeds, mobile responsiveness, and clean code structure to help you rank on Google." },
