@@ -1234,20 +1234,20 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
             background: "linear-gradient(135deg, rgba(79,111,255,0.08), rgba(162,89,255,0.04))",
             border: "1px solid rgba(79,111,255,0.22)",
             borderRadius: 28,
-            padding: "clamp(24px, 6vw, 56px)",
+            padding: "clamp(24px, 4vw, 40px)",
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 380px), 1fr))",
-            gap: 40,
+            gap: 32,
             alignItems: "center"
           }}
         >
           {/* Left Column: Form / Success Card */}
           <div>
             <div className="section-label" style={{ marginBottom: 16 }}>Lead Magnet Program</div>
-            <h2 style={{ fontFamily: "Syne", fontSize: "clamp(26px, 3.5vw, 42px)", fontWeight: 800, fontStyle: "italic", lineHeight: 1.15, marginBottom: 16 }}>
+            <h2 style={{ fontFamily: "Syne", fontSize: "clamp(24px, 3vw, 36px)", fontWeight: 800, fontStyle: "italic", lineHeight: 1.2, marginBottom: 12 }}>
               Is Your Competitor Outranking You? <span className="grad-text">Get a Free 5-Min Audit!</span>
             </h2>
-            <p style={{ color: "#7b82a8", fontSize: 14.5, lineHeight: 1.65, marginBottom: 28 }}>
+            <p style={{ color: "#7b82a8", fontSize: 14, lineHeight: 1.6, marginBottom: 24 }}>
               Slow load times and bad mobile SEO kill over 80% of sales opportunities in India. Enter your URL and WhatsApp details—our core engineering team will manually run a comprehensive Lighthouse audit and send you a detailed diagnostic report on WhatsApp absolutely FREE!
             </p>
 
