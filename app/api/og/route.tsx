@@ -16,24 +16,7 @@ export async function GET(req: NextRequest) {
     if (lowerTitle.includes('design') || lowerTitle.includes('ui/ux')) category = "PREMIUM WEB DESIGN";
     if (lowerTitle.includes('development') || lowerTitle.includes('react') || lowerTitle.includes('next.js')) category = "ENGINEERING EXCELLENCE";
 
-    // Fetch the logo locally to avoid external request blocking in Satori
-    let logoDataUrl = '';
-    try {
-      const res = await fetch(new URL('/logo-wxc.png', req.url));
-      if (res.ok) {
-        const arrayBuffer = await res.arrayBuffer();
-        
-        // Convert ArrayBuffer to Base64 manually for Edge runtime
-        let binary = '';
-        const bytes = new Uint8Array(arrayBuffer);
-        for (let i = 0; i < bytes.byteLength; i++) {
-          binary += String.fromCharCode(bytes[i]);
-        }
-        logoDataUrl = `data:image/png;base64,${btoa(binary)}`;
-      }
-    } catch (e) {
-      console.error('Error fetching logo:', e);
-    }
+
 
     return new ImageResponse(
       (
@@ -62,24 +45,28 @@ export async function GET(req: NextRequest) {
             }}
           />
 
-          {/* Huge faded logo in background right */}
-          <div style={{
-            position: 'absolute',
-            right: -100,
-            top: '50%',
-            transform: 'translateY(-50%)',
-            display: 'flex',
-            opacity: 0.1,
-          }}>
-            <img src={logoDataUrl} width="800" height="800" />
-          </div>
-
           {/* Main Layout: Left Content, Bottom Right Info */}
-          <div style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%', padding: '70px', zIndex: 10 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%', padding: '70px', paddingBottom: '210px', zIndex: 10 }}>
             
             {/* Top Bar: Logo & Brand */}
-            <div style={{ display: 'flex', alignItems: 'center', marginBottom: '80px' }}>
-              <img src={logoDataUrl} width="64" height="64" style={{ marginRight: 20 }} />
+            <div style={{ display: 'flex', alignItems: 'center', marginBottom: '60px' }}>
+              {/* CSS Premium Logo */}
+              <div style={{ 
+                width: 64, 
+                height: 64, 
+                borderRadius: '50%', 
+                background: 'linear-gradient(135deg, #00e5ff, #a259ff, #4f6fff)', 
+                marginRight: 20,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                fontSize: 32,
+                fontWeight: 900,
+                boxShadow: '0 0 20px rgba(79, 111, 255, 0.5)'
+              }}>
+                W
+              </div>
               <div style={{ display: 'flex', fontSize: 40, fontWeight: 900, color: '#ffffff', letterSpacing: '-1px' }}>
                 WebX<span style={{ color: '#4f6fff' }}>Crafting</span>
               </div>
@@ -92,11 +79,11 @@ export async function GET(req: NextRequest) {
                 alignItems: 'center',
                 backgroundColor: 'rgba(79, 111, 255, 0.1)',
                 color: '#6378ff',
-                fontSize: 20,
+                fontSize: 18,
                 fontWeight: 800,
-                padding: '12px 28px',
+                padding: '10px 24px',
                 borderRadius: '8px',
-                marginBottom: '40px',
+                marginBottom: '30px',
                 letterSpacing: '4px',
                 textTransform: 'uppercase',
                 borderLeft: '4px solid #6378ff',
@@ -106,17 +93,18 @@ export async function GET(req: NextRequest) {
               {category}
             </div>
 
-            {/* Giant Title */}
+            {/* Giant Title (constrained so it doesn't overlap) */}
             <div
               style={{
                 display: 'flex',
-                fontSize: title.length > 50 ? 70 : 85,
+                fontSize: title.length > 50 ? 60 : 75,
                 fontWeight: 900,
                 color: '#ffffff',
-                lineHeight: 1.1,
-                width: '75%',
+                lineHeight: 1.15,
+                width: '85%',
                 letterSpacing: '-2px',
                 textShadow: '0 10px 30px rgba(0,0,0,0.8)',
+                overflow: 'hidden',
               }}
             >
               {title}
