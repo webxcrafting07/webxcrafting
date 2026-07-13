@@ -16,6 +16,10 @@ export async function GET(req: NextRequest) {
     if (lowerTitle.includes('design')) category = "WEB DESIGN";
     if (lowerTitle.includes('development') || lowerTitle.includes('react') || lowerTitle.includes('next.js')) category = "ENGINEERING";
 
+    const protocol = req.headers.get('x-forwarded-proto') || (req.url.startsWith('https') ? 'https' : 'http');
+    const host = req.headers.get('host') || 'localhost:3000';
+    const logoUrl = `${protocol}://${host}/logo-wxc.png`;
+
     return new ImageResponse(
       (
         <div
@@ -137,20 +141,7 @@ export async function GET(req: NextRequest) {
                 letterSpacing: '-1.5px',
               }}
             >
-              <div style={{ 
-                width: 42, 
-                height: 42, 
-                borderRadius: '50%', 
-                background: 'linear-gradient(135deg, #4f6fff, #a259ff)', 
-                marginRight: 16,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'white',
-                fontSize: 20
-              }}>
-                W
-              </div>
+              <img src={logoUrl} width="64" height="64" style={{ marginRight: 16 }} />
               WebX<span style={{ color: '#4f6fff' }}>Crafting</span>
             </div>
 
