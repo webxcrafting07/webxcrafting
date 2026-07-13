@@ -95,7 +95,14 @@ export default function CalculatorPage() {
           </div>
         </section>
       </div>
-      <Footer />
+      <style dangerouslySetInnerHTML={{__html: `
+        @media (max-width: 900px) {
+          .calculator-footer-wrapper { padding-bottom: 90px; }
+        }
+      `}} />
+      <div className="calculator-footer-wrapper">
+        <Footer />
+      </div>
       <WhatsAppButton />
     </>
   )
