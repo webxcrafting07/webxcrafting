@@ -168,7 +168,7 @@ export async function GET(req: NextRequest) {
               </div>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <span style={{ color: '#7b82a8', fontSize: 16, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: 4 }}>Call Us</span>
-                <span style={{ color: '#ffffff', fontSize: 24, fontWeight: 500 }}>+91 9102615343</span>
+                <span style={{ color: '#ffffff', fontSize: 24, fontWeight: 500 }}>+91 9102615343 | +91 7974579107</span>
               </div>
             </div>
           </div>
