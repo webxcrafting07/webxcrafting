@@ -16,9 +16,24 @@ export async function GET(req: NextRequest) {
     if (lowerTitle.includes('design') || lowerTitle.includes('ui/ux')) category = "PREMIUM WEB DESIGN";
     if (lowerTitle.includes('development') || lowerTitle.includes('react') || lowerTitle.includes('next.js')) category = "ENGINEERING EXCELLENCE";
 
-    const protocol = req.headers.get('x-forwarded-proto') || (req.url.startsWith('https') ? 'https' : 'http');
-    const host = req.headers.get('host') || 'localhost:3000';
-    const logoUrl = `${protocol}://${host}/logo-wxc.png`;
+    // Fetch the logo locally to avoid external request blocking in Satori
+    let logoDataUrl = '';
+    try {
+      const res = await fetch(new URL('/logo-wxc.png', req.url));
+      if (res.ok) {
+        const arrayBuffer = await res.arrayBuffer();
+        
+        // Convert ArrayBuffer to Base64 manually for Edge runtime
+        let binary = '';
+        const bytes = new Uint8Array(arrayBuffer);
+        for (let i = 0; i < bytes.byteLength; i++) {
+          binary += String.fromCharCode(bytes[i]);
+        }
+        logoDataUrl = `data:image/png;base64,${btoa(binary)}`;
+      }
+    } catch (e) {
+      console.error('Error fetching logo:', e);
+    }
 
     return new ImageResponse(
       (
@@ -56,7 +71,7 @@ export async function GET(req: NextRequest) {
             display: 'flex',
             opacity: 0.1,
           }}>
-            <img src={logoUrl} width="800" height="800" />
+            <img src={logoDataUrl} width="800" height="800" />
           </div>
 
           {/* Main Layout: Left Content, Bottom Right Info */}
@@ -64,7 +79,7 @@ export async function GET(req: NextRequest) {
             
             {/* Top Bar: Logo & Brand */}
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '80px' }}>
-              <img src={logoUrl} width="64" height="64" style={{ marginRight: 20 }} />
+              <img src={logoDataUrl} width="64" height="64" style={{ marginRight: 20 }} />
               <div style={{ display: 'flex', fontSize: 40, fontWeight: 900, color: '#ffffff', letterSpacing: '-1px' }}>
                 WebX<span style={{ color: '#4f6fff' }}>Crafting</span>
               </div>
