@@ -45,28 +45,24 @@ export async function GET(req: NextRequest) {
             }}
           />
 
+          {/* Huge faded logo in background right */}
+          <div style={{
+            position: 'absolute',
+            right: -100,
+            top: '50%',
+            transform: 'translateY(-50%)',
+            display: 'flex',
+            opacity: 0.1,
+          }}>
+            <img src="https://www.webxcrafting.in/logo-wxc.png" width="800" height="800" />
+          </div>
+
           {/* Main Layout: Left Content, Bottom Right Info */}
           <div style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%', padding: '70px', paddingBottom: '210px', zIndex: 10 }}>
             
             {/* Top Bar: Logo & Brand */}
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '60px' }}>
-              {/* CSS Premium Logo */}
-              <div style={{ 
-                width: 64, 
-                height: 64, 
-                borderRadius: '50%', 
-                background: 'linear-gradient(135deg, #00e5ff, #a259ff, #4f6fff)', 
-                marginRight: 20,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'white',
-                fontSize: 32,
-                fontWeight: 900,
-                boxShadow: '0 0 20px rgba(79, 111, 255, 0.5)'
-              }}>
-                W
-              </div>
+              <img src="https://www.webxcrafting.in/logo-wxc.png" width="64" height="64" style={{ marginRight: 20 }} />
               <div style={{ display: 'flex', fontSize: 40, fontWeight: 900, color: '#ffffff', letterSpacing: '-1px' }}>
                 WebX<span style={{ color: '#4f6fff' }}>Crafting</span>
               </div>
