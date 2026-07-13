@@ -237,9 +237,12 @@ export default function BlogClient({ initialBlogs }: BlogClientProps) {
                 >
                   {/* Cover Image */}
                   <Link href={`/blog/${blog.slug}`} style={{ textDecoration: 'none' }}>
-                    <div
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
                       style={{
                         height: 200,
+                        width: '100%',
                         background: blog.coverImage
                           ? `url(${blog.coverImage}) center/cover no-repeat`
                           : `linear-gradient(135deg, ${catColors[blog.category] || '#4f6fff'}22, ${catColors[blog.category] || '#a259ff'}44)`,
@@ -248,6 +251,7 @@ export default function BlogClient({ initialBlogs }: BlogClientProps) {
                         justifyContent: 'center',
                         position: 'relative',
                         overflow: 'hidden',
+                        transformOrigin: 'center center',
                       }}
                     >
                       {!blog.coverImage && (
@@ -271,7 +275,7 @@ export default function BlogClient({ initialBlogs }: BlogClientProps) {
                       >
                         {blog.category}
                       </div>
-                    </div>
+                    </motion.div>
                   </Link>
 
                   {/* Content */}
