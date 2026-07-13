@@ -20,7 +20,13 @@ import {
   FaEnvelope,
   FaUser,
   FaFilePdf,
-  FaPhone
+  FaPhone,
+  FaNewspaper,
+  FaGraduationCap,
+  FaPaintBrush,
+  FaPen,
+  FaComments,
+  FaShareAlt
 } from "react-icons/fa";
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
@@ -36,6 +42,20 @@ const WEBSITE_TYPES = [
     description: "Ideal for startups, product launches, or basic lead generation."
   },
   {
+    id: "portfolio",
+    title: "Portfolio / Resume",
+    icon: FaUser,
+    basePrice: 4000,
+    description: "Personal website to showcase your work, CV, and achievements."
+  },
+  {
+    id: "blog",
+    title: "Blog / News Portal",
+    icon: FaNewspaper,
+    basePrice: 12000,
+    description: "Content-heavy site with dynamic CMS, categories, and author profiles."
+  },
+  {
     id: "business",
     title: "Business Website",
     icon: FaBriefcase,
@@ -48,6 +68,13 @@ const WEBSITE_TYPES = [
     icon: FaStore,
     basePrice: 20000,
     description: "Full online store with Razorpay/Stripe, inventory, and order tracking."
+  },
+  {
+    id: "lms",
+    title: "Educational / LMS",
+    icon: FaGraduationCap,
+    basePrice: 25000,
+    description: "Sell courses online with student dashboards, videos, and quizzes."
   },
   {
     id: "portal",
@@ -99,7 +126,11 @@ const DESIGN_LEVELS = [
 // Step 4: Addon Features (Multi-Select)
 const ADDON_FEATURES = [
   { id: "seo", label: "Advanced SEO Optimization", description: "Meta setup, Schema markup, search sitemap registration.", price: 1500 },
+  { id: "branding", label: "Logo & Brand Identity", description: "Professional logo design, color palette, and brand guidelines.", price: 3000 },
+  { id: "content", label: "Professional Copywriting", description: "High-converting, SEO-optimized content written by experts.", price: 4000 },
   { id: "payment", label: "Payment Gateway Integration", description: "Razorpay, Stripe, or custom UPI payment link setup.", price: 3000 },
+  { id: "chat", label: "Live Chat / WhatsApp Bot", description: "Instant customer support integration directly on the website.", price: 1500 },
+  { id: "social", label: "Social Media Integration", description: "Feed embedding and seamless social sharing functionality.", price: 2000 },
   { id: "admin", label: "Admin Control Dashboard", description: "Protected panel to manage leads, blogs, and portfolio.", price: 4000 },
   { id: "auth", label: "User Login & Accounts", description: "Secure customer/client authentication portals.", price: 5000 },
   { id: "cms", label: "Blog / CMS Integration", description: "Allows you to write, edit, and schedule blog articles.", price: 2000 },
@@ -1189,9 +1220,9 @@ export default function CalculatorClient() {
                 <div style={{ fontSize: 12, color: "#7b82a8", textTransform: "uppercase", letterSpacing: 0.5, fontWeight: 600, marginBottom: 4 }}>
                   Estimated Price
                 </div>
-                <div style={{ fontSize: 28, fontWeight: 800, background: "linear-gradient(135deg, #4f6fff, #a259ff)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                <motion.div key={totalPrice} initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} style={{ fontSize: 28, fontWeight: 800, background: "linear-gradient(135deg, #4f6fff, #a259ff)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                   ₹{totalPrice.toLocaleString("en-IN")}
-                </div>
+                </motion.div>
                 <div style={{ fontSize: 11, color: "#545975", marginTop: 4 }}>
                   *Excludes third-party API / domain / hosting costs.
                 </div>
@@ -1227,8 +1258,34 @@ export default function CalculatorClient() {
               </div>
             </div>
           </div>
+          </div>
         </div>
       </div>
+
+      {/* Mobile Sticky Bottom Bar */}
+      <div className="mobile-only-sticky-bar" style={{
+        position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 100,
+        background: 'rgba(10,14,28,0.95)', backdropFilter: 'blur(20px)',
+        borderTop: '1px solid rgba(79,111,255,0.3)', padding: '16px 24px',
+        display: 'none', justifyContent: 'space-between', alignItems: 'center',
+        boxShadow: '0 -10px 30px rgba(0,0,0,0.5)'
+      }}>
+        <div>
+          <div style={{ fontSize: 11, color: '#7b82a8', textTransform: 'uppercase', letterSpacing: 0.5, fontWeight: 600 }}>Total Estimate</div>
+          <motion.div key={totalPrice} initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} style={{ fontSize: 22, fontWeight: 800, color: '#fff' }}>
+            ₹{totalPrice.toLocaleString("en-IN")}
+          </motion.div>
+        </div>
+        <button onClick={step < 6 ? nextStep : () => { window.scrollTo({top:0, behavior:'smooth'}) }} className="btn-primary" style={{ padding: '10px 20px', fontSize: 14 }}>
+          {step < 6 ? 'Next Step' : 'Get Quote'}
+        </button>
+      </div>
+
+      <style dangerouslySetInnerHTML={{__html: `
+        @media (max-width: 900px) {
+          .mobile-only-sticky-bar { display: flex !important; }
+        }
+      `}} />
 
       <Footer />
       <WhatsAppButton />
