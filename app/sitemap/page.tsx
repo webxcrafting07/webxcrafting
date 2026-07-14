@@ -4,7 +4,7 @@ import Footer from '@/components/Footer'
 import DotBackground from '@/components/DotBackground'
 import { CITIES_CONFIG } from '@/lib/citiesConfig'
 import type { Metadata } from 'next'
-import connectDB from '@/lib/db'
+import { connectDB } from '@/lib/db'
 import Blog from '@/models/Blog'
 
 export const metadata: Metadata = {
