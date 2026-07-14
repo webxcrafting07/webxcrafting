@@ -4,6 +4,8 @@ import Footer from '@/components/Footer'
 import DotBackground from '@/components/DotBackground'
 import { CITIES_CONFIG } from '@/lib/citiesConfig'
 import type { Metadata } from 'next'
+import connectDB from '@/lib/db'
+import Blog from '@/models/Blog'
 
 export const metadata: Metadata = {
   title: 'HTML Sitemap | WebXCrafting',
@@ -13,7 +15,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default function HTMLSitemap() {
+export default async function HTMLSitemap() {
   const corePages = [
     { label: 'Home', path: '/' },
     { label: 'About Us', path: '/about' },
@@ -34,6 +36,18 @@ export default function HTMLSitemap() {
 
   const cities = Object.keys(CITIES_CONFIG).sort()
 
+  // Fetch blogs
+  let blogs: any[] = []
+  try {
+    await connectDB()
+    blogs = await Blog.find({ 
+      status: 'published',
+      publishDate: { $lte: new Date() }
+    }).select('slug title').lean()
+  } catch (error) {
+    console.error('Error fetching blogs for HTML sitemap:', error)
+  }
+
   return (
     <>
       <DotBackground />
@@ -50,7 +64,7 @@ export default function HTMLSitemap() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             <div className="bg-[rgba(15,20,35,0.4)] border border-[rgba(99,120,255,0.15)] rounded-2xl p-8 backdrop-blur-sm shadow-lg">
               <h2 className="text-2xl font-bold text-white mb-6 font-syne border-b border-[rgba(255,255,255,0.05)] pb-4">Core Pages</h2>
               <ul className="space-y-4">
@@ -75,6 +89,23 @@ export default function HTMLSitemap() {
                   </li>
                 ))}
               </ul>
+            </div>
+
+            <div className="bg-[rgba(15,20,35,0.4)] border border-[rgba(99,120,255,0.15)] rounded-2xl p-8 backdrop-blur-sm shadow-lg">
+              <h2 className="text-2xl font-bold text-white mb-6 font-syne border-b border-[rgba(255,255,255,0.05)] pb-4">Latest Blog Posts</h2>
+              {blogs && blogs.length > 0 ? (
+                <ul className="space-y-4">
+                  {blogs.map(blog => (
+                    <li key={blog.slug}>
+                      <Link href={`/blog/${blog.slug}`} className="text-[#a2b0e8] hover:text-white transition-colors flex items-center gap-2 text-sm leading-tight">
+                        <span className="text-[#4f6fff] text-xs flex-shrink-0">▶</span> {blog.title || blog.slug}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-[#7b82a8] text-sm">No blog posts available.</p>
+              )}
             </div>
           </div>
 
