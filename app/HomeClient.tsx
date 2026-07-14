@@ -185,9 +185,10 @@ function ProjectCard({ title, description, category, status, image, liveLink }: 
     >
       <div
         style={{
-          height: 220,
+          aspectRatio: "16/9",
+          width: "100%",
           background: image 
-            ? `url(${image}) center/cover no-repeat`
+            ? `url("${image}") center/cover no-repeat`
             : `linear-gradient(135deg,${catColors[category] || '#4f6fff'}22,${catColors[category] || '#a259ff'}44)`,
           display: 'flex',
           alignItems: 'center',

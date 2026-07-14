@@ -277,9 +277,10 @@ export default function PortfolioClient() {
                       {/* Project Cover Block */}
                       <div
                         style={{
-                          height: 200,
+                          aspectRatio: "16/9",
+                          width: "100%",
                           background: project.image 
-                            ? `url(${project.image}) center/cover no-repeat` 
+                            ? `url("${project.image}") center/cover no-repeat` 
                             : `linear-gradient(135deg,${catColors[project.category] || "#4f6fff"}22,${catColors[project.category] || "#a259ff"}44)`,
                           position: "relative",
                           display: "flex",
@@ -446,9 +447,11 @@ export default function PortfolioClient() {
               {/* Cover Image in Modal */}
               <div
                 style={{
-                  height: 260,
+                  aspectRatio: "16/9",
+                  width: "100%",
+                  maxHeight: 400,
                   background: selectedProject.image 
-                    ? `url(${selectedProject.image}) center/cover no-repeat` 
+                    ? `url("${selectedProject.image}") center/cover no-repeat` 
                     : `linear-gradient(135deg, ${catColors[selectedProject.category]}15, ${catColors[selectedProject.category]}30)`,
                   position: "relative",
                   display: "flex",
