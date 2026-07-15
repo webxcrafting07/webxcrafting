@@ -253,18 +253,36 @@ export default function LocationClient({ cityKey, cityInfo, nearbyCities = [] }:
 
       {/* Trust Badges */}
       <section style={{ position: "relative", zIndex: 10, padding: "0 24px 60px", maxWidth: 1000, margin: "0 auto" }}>
-        <div
-          className="glass"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-            gap: 24,
-            padding: "24px 30px",
-            borderRadius: 20,
-            textAlign: "center",
-            border: "1px solid rgba(255,255,255,0.04)"
-          }}
-        >
+        <style>{`
+          .trust-badges-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            padding: 24px 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.04);
+          }
+          .trust-badge-middle {
+            border-left: 1px solid rgba(255,255,255,0.06);
+            border-right: 1px solid rgba(255,255,255,0.06);
+          }
+          @media (max-width: 768px) {
+            .trust-badges-grid {
+              grid-template-columns: 1fr;
+              gap: 24px;
+              padding: 30px 20px;
+            }
+            .trust-badge-middle {
+              border-left: none;
+              border-right: none;
+              border-top: 1px solid rgba(255,255,255,0.06);
+              border-bottom: 1px solid rgba(255,255,255,0.06);
+              padding: 24px 0;
+            }
+          }
+        `}</style>
+        <div className="glass trust-badges-grid">
           <div>
             <div style={{ display: "flex", justifyContent: "center", gap: 3, color: "#ffb300", marginBottom: 6 }}>
               {[...Array(5)].map((_, i) => <FaStar key={i} size={13} />)}
@@ -272,7 +290,7 @@ export default function LocationClient({ cityKey, cityInfo, nearbyCities = [] }:
             <div style={{ fontWeight: 700, color: "#e8eaf6", fontSize: 15 }}>100% Client Satisfaction</div>
             <div style={{ color: "#7b82a8", fontSize: 12, marginTop: 2 }}>Highly Rated in {name}</div>
           </div>
-          <div style={{ borderLeft: "1px solid rgba(255,255,255,0.06)", borderRight: "1px solid rgba(255,255,255,0.06)" }} className="hide-mobile">
+          <div className="trust-badge-middle">
             <div style={{ fontSize: 22, fontWeight: 800, color: "#4f6fff", fontFamily: "Syne", fontStyle: "italic", marginBottom: 3 }}>Next.js / React</div>
             <div style={{ fontWeight: 700, color: "#e8eaf6", fontSize: 15 }}>High Performance Tech</div>
             <div style={{ color: "#7b82a8", fontSize: 12, marginTop: 2 }}>Sub-second Loading Speed</div>
