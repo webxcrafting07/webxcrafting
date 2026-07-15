@@ -467,7 +467,9 @@ export default function ContactClient() {
                     >
                       <option value="">Select a service</option>
                       <option>Web Development</option>
-                      <option>Local SEO / GMB</option>
+                      <option>Digital Marketing</option>
+                      <option>Google My Business (GMB) Creation</option>
+                      <option>Local SEO</option>
                       <option>E-commerce Solution</option>
                       <option>UI/UX Design</option>
                       <option>Mobile App Development</option>
