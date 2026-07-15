@@ -754,7 +754,24 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
             How We <span className="grad-text">Build Success</span>
           </h2>
         </FadeUp>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 32 }}>
+        <style>{`
+          .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+          }
+          @media (max-width: 1024px) {
+            .process-grid {
+              grid-template-columns: repeat(2, 1fr);
+            }
+          }
+          @media (max-width: 600px) {
+            .process-grid {
+              grid-template-columns: 1fr;
+            }
+          }
+        `}</style>
+        <div className="process-grid">
           {[
             { step: '01', title: 'Discovery', desc: 'We analyze your business goals, target audience, and competition to create a winning strategy.' },
             { step: '02', title: 'Design', desc: 'Our UI/UX experts craft stunning, conversion-optimized wireframes and high-fidelity mockups.' },
