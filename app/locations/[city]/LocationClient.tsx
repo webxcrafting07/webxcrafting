@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import DotBackground from "@/components/DotBackground";
@@ -33,6 +34,7 @@ interface LocationClientProps {
 }
 
 export default function LocationClient({ cityKey, cityInfo, nearbyCities = [] }: LocationClientProps) {
+  const router = useRouter();
   const { name, state } = cityInfo;
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
@@ -336,9 +338,10 @@ export default function LocationClient({ cityKey, cityInfo, nearbyCities = [] }:
                 {/* Service 1 */}
                 <div
                   className="glass marquee-card"
-                  style={{ padding: 40, borderRadius: 24, border: "1px solid rgba(255,255,255,0.04)", transition: "transform 0.3s" }}
+                  style={{ padding: 40, borderRadius: 24, border: "1px solid rgba(255,255,255,0.04)", transition: "transform 0.3s", cursor: "pointer" }}
                   onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-5px)"}
                   onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}
+                  onClick={() => router.push("/services?service=Business Website")}
                 >
                   <div style={{ width: 54, height: 54, borderRadius: 12, background: "rgba(79,111,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#4f6fff", fontSize: 24, marginBottom: 24 }}>
                     <FaLaptopCode />
@@ -357,9 +360,10 @@ export default function LocationClient({ cityKey, cityInfo, nearbyCities = [] }:
                 {/* Service 2 */}
                 <div
                   className="glass marquee-card"
-                  style={{ padding: 40, borderRadius: 24, border: "1px solid rgba(255,255,255,0.04)", transition: "transform 0.3s" }}
+                  style={{ padding: 40, borderRadius: 24, border: "1px solid rgba(255,255,255,0.04)", transition: "transform 0.3s", cursor: "pointer" }}
                   onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-5px)"}
                   onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}
+                  onClick={() => router.push("/services?service=E-Commerce")}
                 >
                   <div style={{ width: 54, height: 54, borderRadius: 12, background: "rgba(162,89,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#a259ff", fontSize: 24, marginBottom: 24 }}>
                     <FaRocket />
@@ -378,9 +382,10 @@ export default function LocationClient({ cityKey, cityInfo, nearbyCities = [] }:
                 {/* Service 3 */}
                 <div
                   className="glass marquee-card"
-                  style={{ padding: 40, borderRadius: 24, border: "1px solid rgba(255,255,255,0.04)", transition: "transform 0.3s" }}
+                  style={{ padding: 40, borderRadius: 24, border: "1px solid rgba(255,255,255,0.04)", transition: "transform 0.3s", cursor: "pointer" }}
                   onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-5px)"}
                   onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}
+                  onClick={() => router.push("/services?service=Custom")}
                 >
                   <div style={{ width: 54, height: 54, borderRadius: 12, background: "rgba(0,229,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#00e5ff", fontSize: 24, marginBottom: 24 }}>
                     <FaShieldAlt />
@@ -399,9 +404,10 @@ export default function LocationClient({ cityKey, cityInfo, nearbyCities = [] }:
                 {/* Service 4: Digital Marketing */}
                 <div
                   className="glass marquee-card"
-                  style={{ padding: 40, borderRadius: 24, border: "1px solid rgba(255,255,255,0.04)", transition: "transform 0.3s" }}
+                  style={{ padding: 40, borderRadius: 24, border: "1px solid rgba(255,255,255,0.04)", transition: "transform 0.3s", cursor: "pointer" }}
                   onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-5px)"}
                   onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}
+                  onClick={() => router.push("/services?service=Digital Marketing")}
                 >
                   <div style={{ width: 54, height: 54, borderRadius: 12, background: "rgba(255,179,0,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#ffb300", fontSize: 24, marginBottom: 24 }}>
                     <FaBullhorn />
@@ -420,9 +426,10 @@ export default function LocationClient({ cityKey, cityInfo, nearbyCities = [] }:
                 {/* Service 5: GMB Setup */}
                 <div
                   className="glass marquee-card"
-                  style={{ padding: 40, borderRadius: 24, border: "1px solid rgba(255,255,255,0.04)", transition: "transform 0.3s" }}
+                  style={{ padding: 40, borderRadius: 24, border: "1px solid rgba(255,255,255,0.04)", transition: "transform 0.3s", cursor: "pointer" }}
                   onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-5px)"}
                   onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}
+                  onClick={() => router.push("/services?service=Google My Business")}
                 >
                   <div style={{ width: 54, height: 54, borderRadius: 12, background: "rgba(255,82,82,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#ff5252", fontSize: 24, marginBottom: 24 }}>
                     <FaMapMarkedAlt />

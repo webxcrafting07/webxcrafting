@@ -166,7 +166,17 @@ export default function ServicesClient() {
     fetch("/api/services")
       .then((r) => r.json())
       .then((d) => {
-        if (d.success && d.data.length) setServices(d.data);
+        const loadedServices = (d.success && d.data.length) ? d.data : defaultServices;
+        setServices(loadedServices);
+
+        if (typeof window !== "undefined") {
+          const params = new URLSearchParams(window.location.search);
+          const serviceQuery = params.get('service');
+          if (serviceQuery) {
+            const found = loadedServices.find((s:any) => s.title.toLowerCase().includes(serviceQuery.toLowerCase()));
+            if (found) setSelectedService(found);
+          }
+        }
       })
       .catch(() => { });
   }, []);
