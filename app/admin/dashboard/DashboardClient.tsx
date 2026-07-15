@@ -866,10 +866,14 @@ export default function DashboardClient() {
                           toast.error('No leads to export');
                           return;
                         }
-                        const headers = ['Name', 'Email', 'Budget', 'Message', 'Status', 'Date'];
+                        const headers = ['Name', 'Email', 'Phone', 'Company', 'URL', 'Service', 'Budget', 'Message', 'Status', 'Date'];
                         const rows = leads.map(l => [
                           `"${l.name}"`,
                           `"${l.email}"`,
+                          `"${l.phone || 'N/A'}"`,
+                          `"${l.company || 'N/A'}"`,
+                          `"${l.url || 'N/A'}"`,
+                          `"${l.service || 'N/A'}"`,
                           `"${l.budget || 'Not specified'}"`,
                           `"${(l.message || '').replace(/"/g, '""')}"`,
                           `"${l.status}"`,
@@ -901,9 +905,15 @@ export default function DashboardClient() {
                     <motion.div key={l._id} layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="glass" style={{ padding: 24, borderRadius: 14 }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16, marginBottom: 12 }}>
                         <div>
-                          <div style={{ fontWeight: 600, fontSize: 16 }}>{l.name}</div>
-                          <div style={{ color: '#7b82a8', fontSize: 13, marginTop: 3 }}>
-                            {l.email} · Budget: <span style={{ color: '#e8eaf6' }}>{l.budget || 'Not specified'}</span>
+                          <div style={{ fontWeight: 600, fontSize: 16 }}>
+                            {l.name} {l.company && <span style={{ color: '#7b82a8', fontWeight: 500 }}>· {l.company}</span>}
+                          </div>
+                          <div style={{ color: '#7b82a8', fontSize: 13, marginTop: 4, display: 'flex', flexWrap: 'wrap', gap: '8px 12px' }}>
+                            <span>📧 {l.email}</span>
+                            {l.phone && <span>📞 {l.phone}</span>}
+                            {l.url && <span>🌐 <a href={l.url.startsWith('http') ? l.url : `https://${l.url}`} target="_blank" style={{color: '#4f6fff'}}>Link</a></span>}
+                            <span>💰 {l.budget || 'Not specified'}</span>
+                            {l.service && <span style={{ color: '#a259ff' }}>⚙️ {l.service}</span>}
                           </div>
                         </div>
                         <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>

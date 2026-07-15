@@ -3,6 +3,10 @@ import mongoose, { Schema, Document, Model } from 'mongoose'
 export interface ILead extends Document {
   name: string
   email: string
+  phone?: string
+  company?: string
+  url?: string
+  service?: string
   budget: string
   message: string
   status: 'new' | 'contacted' | 'closed'
@@ -24,6 +28,22 @@ const LeadSchema = new Schema<ILead>(
       lowercase: true,
       trim: true,
       match: [/^\S+@\S+\.\S+$/, 'Please enter a valid email'],
+    },
+    phone: {
+      type: String,
+      trim: true,
+    },
+    company: {
+      type: String,
+      trim: true,
+    },
+    url: {
+      type: String,
+      trim: true,
+    },
+    service: {
+      type: String,
+      trim: true,
     },
     budget: {
       type: String,

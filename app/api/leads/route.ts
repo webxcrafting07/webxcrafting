@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
   try {
     await connectDB()
     const body = await req.json()
-    const { name, email, budget, message } = body
+    const { name, email, phone, company, url, service, budget, message } = body
 
     if (!name || !email || !message) {
       return NextResponse.json(
@@ -18,7 +18,17 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    const lead = await Lead.create({ name, email, budget, message })
+    const lead = await Lead.create({ name, email, phone, company, url, service, budget, message })
+    
+    const extendedMessage = `
+Phone: ${phone || 'N/A'}
+Company: ${company || 'N/A'}
+URL: ${url || 'N/A'}
+Service: ${service || 'N/A'}
+
+Message:
+${message}
+    `.trim()
     
     // Send email notifications
     try {
@@ -34,7 +44,7 @@ export async function POST(req: NextRequest) {
         ])
       } else {
         await Promise.all([
-          sendLeadNotification({ name, email, budget, message }),
+          sendLeadNotification({ name, email, budget, message: extendedMessage }),
           sendClientAutoReply(email, name, budget, message)
         ])
       }

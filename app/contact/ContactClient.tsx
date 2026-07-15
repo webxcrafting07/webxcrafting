@@ -29,6 +29,10 @@ export default function ContactClient() {
   const [form, setForm] = useState({
     name: "",
     email: "",
+    phone: "",
+    company: "",
+    url: "",
+    service: "",
     budget: "",
     message: "",
   });
@@ -58,7 +62,7 @@ export default function ContactClient() {
       if (data.success) {
         setUserName(form.name);
         setSubmitted(true);
-        setForm({ name: "", email: "", budget: "", message: "" });
+        setForm({ name: "", email: "", phone: "", company: "", url: "", service: "", budget: "", message: "" });
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         toast.error(data.message || "Something went wrong. Please try again.");
@@ -361,6 +365,114 @@ export default function ContactClient() {
                       value={form.email}
                       onChange={(e) => set("email", e.target.value)}
                     />
+                  </div>
+                </div>
+
+                <div
+                  className="mobile-grid-1"
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr",
+                    gap: 20,
+                    marginBottom: 20,
+                  }}
+                >
+                  <div>
+                    <label
+                      style={{
+                        display: "block",
+                        fontSize: 13,
+                        color: "#7b82a8",
+                        marginBottom: 7,
+                        fontWeight: 500,
+                      }}
+                    >
+                      Phone / WhatsApp
+                    </label>
+                    <input
+                      className="form-input"
+                      type="tel"
+                      placeholder="+91 9876543210"
+                      value={form.phone}
+                      onChange={(e) => set("phone", e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <label
+                      style={{
+                        display: "block",
+                        fontSize: 13,
+                        color: "#7b82a8",
+                        marginBottom: 7,
+                        fontWeight: 500,
+                      }}
+                    >
+                      Company Name
+                    </label>
+                    <input
+                      className="form-input"
+                      type="text"
+                      placeholder="Your Business Name"
+                      value={form.company}
+                      onChange={(e) => set("company", e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <div
+                  className="mobile-grid-1"
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr",
+                    gap: 20,
+                    marginBottom: 20,
+                  }}
+                >
+                  <div>
+                    <label
+                      style={{
+                        display: "block",
+                        fontSize: 13,
+                        color: "#7b82a8",
+                        marginBottom: 7,
+                        fontWeight: 500,
+                      }}
+                    >
+                      Current Website (Optional)
+                    </label>
+                    <input
+                      className="form-input"
+                      type="url"
+                      placeholder="https://yourwebsite.com"
+                      value={form.url}
+                      onChange={(e) => set("url", e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <label
+                      style={{
+                        display: "block",
+                        fontSize: 13,
+                        color: "#7b82a8",
+                        marginBottom: 7,
+                        fontWeight: 500,
+                      }}
+                    >
+                      Services Required
+                    </label>
+                    <select
+                      className="form-input"
+                      value={form.service}
+                      onChange={(e) => set("service", e.target.value)}
+                    >
+                      <option value="">Select a service</option>
+                      <option>Web Development</option>
+                      <option>Local SEO / GMB</option>
+                      <option>E-commerce Solution</option>
+                      <option>UI/UX Design</option>
+                      <option>Mobile App Development</option>
+                      <option>Other / Not Sure</option>
+                    </select>
                   </div>
                 </div>
 
