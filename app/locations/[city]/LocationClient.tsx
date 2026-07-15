@@ -27,9 +27,10 @@ interface LocationClientProps {
     state: string;
     description: string;
   };
+  nearbyCities?: { key: string, name: string }[];
 }
 
-export default function LocationClient({ cityKey, cityInfo }: LocationClientProps) {
+export default function LocationClient({ cityKey, cityInfo, nearbyCities = [] }: LocationClientProps) {
   const { name, state } = cityInfo;
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
@@ -37,27 +38,34 @@ export default function LocationClient({ cityKey, cityInfo }: LocationClientProp
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  // Simple deterministic hash for the city name to pick variations consistently
+  // Advanced deterministic hashing for programmatic SEO (Spintax)
   const hash = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-  const vIndex = hash % 3; // We will have 3 variations
+  const heroIndex = hash % 5; 
+  const serviceIndex = (hash * 3) % 5;
+  const faqIndex = (hash * 7) % 5;
+  const layoutStyleIndex = hash % 3; // For future visual layout permutations
 
-  // Hero Descriptions
+  // Hero Descriptions (5 Variations)
   const heroDescriptions = [
     `We craft ultra-fast, premium hand-coded React & Next.js websites specifically engineered to help startups and local businesses in ${name} dominate search results and capture hot sales leads.`,
     `Looking for top-tier digital growth in ${name}? Our expert team builds high-performance, visually stunning web applications and e-commerce stores designed to scale your local brand.`,
-    `Elevate your online presence in ${name} with our custom web development services. We focus on lightning-fast speeds, SEO-driven architecture, and conversion-optimized designs.`
+    `Elevate your online presence in ${name} with our custom web development services. We focus on lightning-fast speeds, SEO-driven architecture, and conversion-optimized designs.`,
+    `Transform your ${name} business with a cutting-edge digital platform. We specialize in creating high-converting, fully customized websites that outshine local competitors.`,
+    `As a leading web agency serving ${name}, we engineer bespoke digital solutions. From striking landing pages to complex SaaS architectures, we deliver exceptional quality and speed.`
   ];
 
-  // Service Subtitles
+  // Service Subtitles (5 Variations)
   const serviceSubtitles = [
     `From simple landing pages to complex e-commerce ecosystems, we provide end-to-end digital solutions to help your business dominate the ${name} market.`,
     `Whether you need a sleek business portfolio or a massive online store, our tailored web services in ${name} are built for ultimate performance and security.`,
-    `Explore our comprehensive digital solutions in ${name}. We engineer everything from fast local landing pages to robust SaaS platforms tailored to your specific needs.`
+    `Explore our comprehensive digital solutions in ${name}. We engineer everything from fast local landing pages to robust SaaS platforms tailored to your specific needs.`,
+    `Our tech stack guarantees superiority. Discover how our specialized web development services can empower your ${name} brand to attract and convert more local clients.`,
+    `We don't just build websites; we build digital assets. See how our targeted web solutions can drive measurable growth for your operations in ${name}.`
   ];
 
-  // FAQ Sets
+  // FAQ Sets (5 Variations)
   const faqSets = [
-    // Set 1 (original)
+    // Set 1
     [
       { q: `What is the cost of website development in ${name}?`, a: `Website development costs in ${name} vary depending on features, page count, and complexity. A basic single-page landing page starts around ₹5,000, multi-page business sites range from ₹8,000 to ₹15,000, and full-scale e-commerce stores or dynamic custom web applications start from ₹20,000. You can get an instant, customized quote using our interactive Website Cost Calculator!` },
       { q: `Why should our ${name}-based business choose WebXCrafting over local template designers?`, a: `Unlike average agencies in ${name} that sell bloated, slow WordPress templates, WebXCrafting builds custom hand-coded websites using React and Next.js. This guarantees 100/100 performance scores, instant page loads, premium customized motion design, and robust automated SEO, ensuring you stand out and rank #1 locally.` },
@@ -77,22 +85,38 @@ export default function LocationClient({ cityKey, cityInfo }: LocationClientProp
       { q: `Why are custom-coded sites better for my ${name} business?`, a: `Custom React/Next.js code ensures your site loads instantly, is highly secure, and is tailored exactly to your brand. Typical template-based sites used by other ${name} designers suffer from plugin bloat and slow speeds.` },
       { q: `Can you build my ${name} website quickly?`, a: `Yes! Depending on your exact needs, rapid landing pages are deployed in 5-7 days. Comprehensive digital platforms or job directories may take up to a month, ensuring top-tier quality and rigorous testing.` },
       { q: `Do you offer ongoing website maintenance in ${name}?`, a: `We provide a full month of premium support post-launch for all our ${name} clients. This covers essential SEO indexing, bug fixes, and minor updates to guarantee a flawless launch experience.` }
+    ],
+    // Set 4
+    [
+      { q: `What is the average price for web development in ${name}?`, a: `Pricing in ${name} depends on your requirements. Single landing pages are around ₹5,000. Full corporate websites range from ₹8k-₹15k, and e-commerce/custom portals start around ₹20,000. We recommend using our instant cost calculator to get a clear picture.` },
+      { q: `Why hire you instead of a local ${name} freelancer?`, a: `Freelancers often rely on templates that are slow and vulnerable to hacking. We deliver enterprise-grade React architectures that load in under a second, giving your ${name} business an undeniable edge in both user experience and SEO.` },
+      { q: `How fast can you launch my project in ${name}?`, a: `For standard business websites, we typically launch within a week. Highly complex applications or stores can take 2-4 weeks. We prioritize speed without sacrificing quality for our ${name} clients.` },
+      { q: `Is SEO included for businesses in ${name}?`, a: `Yes. Core technical SEO, including sitemap generation and schema tagging, is included standard. We ensure your new site is perfectly readable by search engines so you can start attracting local ${name} traffic immediately.` }
+    ],
+    // Set 5
+    [
+      { q: `Can I afford a custom website in ${name}?`, a: `Yes, we offer high-end solutions at accessible rates for ${name} businesses. Starter packages begin at just ₹5,000, scaling up for complex e-commerce setups. Use our calculator for transparent, instant pricing.` },
+      { q: `What tech do you use for ${name} clients?`, a: `We exclusively use Next.js and React—the same technology powering the world's biggest brands. This ensures your ${name} website is incredibly fast, secure, and future-proof, leaving competitors behind.` },
+      { q: `What is the process for building a site in ${name}?`, a: `We start with a strategy call, followed by UI/UX design, development, and a strict QA phase. You'll have staging access throughout the 1-4 week timeline, ensuring the final product perfectly aligns with your ${name} business goals.` },
+      { q: `Do you manage the website after it goes live in ${name}?`, a: `We offer 30 days of complementary post-launch support for peace of mind. After that, ${name} clients can opt into our affordable maintenance packages for continuous optimization and updates.` }
     ]
   ];
 
-  const heroDesc = heroDescriptions[vIndex];
-  const serviceSub = serviceSubtitles[vIndex];
-  const faqs = faqSets[vIndex];
+  const heroDesc = heroDescriptions[heroIndex];
+  const serviceSub = serviceSubtitles[serviceIndex];
+  const faqs = faqSets[faqIndex];
 
   // Dynamic LocalBusiness Structured Schema
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.webxcrafting.in";
+  const locationUrl = `${baseUrl}/locations/web-development-company-in-${cityKey}`;
+
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     "name": `WebXCrafting - Web Development Company in ${name}`,
     "image": `${baseUrl}/logo-wxc.png`,
-    "@id": `${baseUrl}/locations/web-development-company-in-${cityKey}`,
-    "url": `${baseUrl}/locations/web-development-company-in-${cityKey}`,
+    "@id": locationUrl,
+    "url": locationUrl,
     "telephone": "+91 9102615343",
     "priceRange": "₹₹",
     "address": {
@@ -101,10 +125,9 @@ export default function LocationClient({ cityKey, cityInfo }: LocationClientProp
       "addressRegion": state,
       "addressCountry": "IN"
     },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": name === "Bangalore" ? "12.9716" : name === "Mumbai" ? "19.0760" : name === "Delhi NCR" ? "28.7041" : name === "Pune" ? "18.5204" : name === "Hyderabad" ? "17.3850" : "23.0225",
-      "longitude": name === "Bangalore" ? "77.5946" : name === "Mumbai" ? "72.8777" : name === "Delhi NCR" ? "77.1025" : name === "Pune" ? "73.8567" : name === "Hyderabad" ? "78.4867" : "72.5714"
+    "areaServed": {
+      "@type": "City",
+      "name": name
     },
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
@@ -124,12 +147,37 @@ export default function LocationClient({ cityKey, cityInfo }: LocationClientProp
     ]
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": baseUrl
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Locations",
+        "item": `${baseUrl}/locations`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": `Web Development in ${name}`,
+        "item": locationUrl
+      }
+    ]
+  };
+
   return (
     <>
       {/* Inject Structured Local Schema */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([localBusinessSchema, breadcrumbSchema]) }}
       />
 
       <DotBackground />
@@ -149,6 +197,14 @@ export default function LocationClient({ cityKey, cityInfo }: LocationClientProp
           textAlign: "center"
         }}
       >
+        <nav style={{ fontSize: 13, color: "#7b82a8", marginBottom: 30, display: "flex", justifyContent: "center", gap: 8 }}>
+          <Link href="/" style={{ color: "#7b82a8", textDecoration: "none" }} className="hover:text-white transition-colors">Home</Link>
+          <span>/</span>
+          <Link href="/locations" style={{ color: "#7b82a8", textDecoration: "none" }} className="hover:text-white transition-colors">Locations</Link>
+          <span>/</span>
+          <span style={{ color: "#e8eaf6" }}>Web Development in {name}</span>
+        </nav>
+
         <div className="section-label" style={{ margin: "0 auto 20px", display: "flex", alignItems: "center", gap: 8, width: "fit-content" }}>
           <FaMapMarkerAlt size={12} style={{ color: "#4f6fff" }} />
           Local SEO Hub: {name}, {state}
@@ -164,8 +220,15 @@ export default function LocationClient({ cityKey, cityInfo }: LocationClientProp
             letterSpacing: "-0.5px"
           }}
         >
-          Web Development <br />
-          Company In <span className="grad-text">{name}</span>
+          {layoutStyleIndex === 0 && (
+            <>Web Development <br /> Company In <span className="grad-text">{name}</span></>
+          )}
+          {layoutStyleIndex === 1 && (
+            <><span className="grad-text">Top</span> Web Development <br /> Agency In {name}</>
+          )}
+          {layoutStyleIndex === 2 && (
+            <>Expert Web Development <br /> Services In <span className="grad-text">{name}</span></>
+          )}
         </h1>
         <p style={{ color: "#7b82a8", fontSize: "clamp(15px, 2vw, 18px)", lineHeight: 1.6, maxWidth: 720, margin: "0 auto 36px" }}>
           {heroDesc}
@@ -562,6 +625,37 @@ export default function LocationClient({ cityKey, cityInfo }: LocationClientProp
           })}
         </div>
       </section>
+
+      {/* Nearby Locations */}
+      {nearbyCities && nearbyCities.length > 0 && (
+        <section className="mobile-p-6" style={{ position: "relative", zIndex: 10, padding: "0 24px 80px", maxWidth: 1000, margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: 30 }}>
+            <h3 style={{ fontFamily: "Syne", fontSize: 24, fontStyle: "italic", fontWeight: 700 }}>
+              Nearby Service Areas in {state}
+            </h3>
+          </div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center" }}>
+            {nearbyCities.map((c) => (
+              <Link 
+                key={c.key} 
+                href={`/locations/web-development-company-in-${c.key}`}
+                className="glass"
+                style={{
+                  padding: "10px 20px",
+                  borderRadius: 100,
+                  fontSize: 14,
+                  color: "#e8eaf6",
+                  textDecoration: "none",
+                  border: "1px solid rgba(255,255,255,0.05)",
+                  transition: "all 0.2s"
+                }}
+              >
+                {c.name}
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
       <Footer />
       <WhatsAppButton />

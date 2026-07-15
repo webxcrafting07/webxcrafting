@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import TawkChat from "@/components/TawkChat";
+import OfferBar from "@/components/OfferBar";
+import SeoAuditWidget from "@/components/SeoAuditWidget";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.webxcrafting.in"),
@@ -190,7 +192,8 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <div style={{ overflowX: "hidden", width: "100%", position: "relative" }}>
+        <div style={{ overflowX: "hidden", width: "100%", position: "relative", display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+          <OfferBar />
           <TawkChat />
           {children}
         </div>
@@ -222,6 +225,7 @@ export default function RootLayout({
             },
           }}
         />
+        <SeoAuditWidget />
       </body>
     </html>
   );

@@ -51,5 +51,15 @@ export default async function LocationPage({ params }: PageProps) {
     notFound()
   }
 
-  return <LocationClient cityKey={cityKey} cityInfo={cityInfo} />
+  // Find nearby cities in the same state (up to 6)
+  const allCityKeys = Object.keys(CITIES_CONFIG);
+  const nearbyCities = allCityKeys
+    .filter(k => k !== cityKey && CITIES_CONFIG[k].state === cityInfo.state)
+    .slice(0, 6)
+    .map(k => ({
+      key: k,
+      name: CITIES_CONFIG[k].name
+    }));
+
+  return <LocationClient cityKey={cityKey} cityInfo={cityInfo} nearbyCities={nearbyCities} />
 }

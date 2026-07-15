@@ -859,9 +859,41 @@ export default function DashboardClient() {
                     <h2 style={{ fontFamily: 'Syne', fontWeight: 800, fontSize: 28 }}>Lead Management</h2>
                     <p style={{ color: '#7b82a8', fontSize: 14, marginTop: 4 }}>{leads.length} leads · {newLeads} new</p>
                   </div>
-                  <button className="btn-primary" onClick={fetchAll} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 20px', borderRadius: 10 }}>
-                    <FaSync size={13} /> Refresh Leads
-                  </button>
+                  <div style={{ display: 'flex', gap: 12 }}>
+                    <button 
+                      onClick={() => {
+                        if (leads.length === 0) {
+                          toast.error('No leads to export');
+                          return;
+                        }
+                        const headers = ['Name', 'Email', 'Budget', 'Message', 'Status', 'Date'];
+                        const rows = leads.map(l => [
+                          `"${l.name}"`,
+                          `"${l.email}"`,
+                          `"${l.budget || 'Not specified'}"`,
+                          `"${(l.message || '').replace(/"/g, '""')}"`,
+                          `"${l.status}"`,
+                          `"${new Date(l.createdAt).toLocaleDateString()}"`
+                        ]);
+                        const csvContent = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+                        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                        const url = URL.createObjectURL(blob);
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.setAttribute('download', `leads_export_${new Date().toISOString().split('T')[0]}.csv`);
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        toast.success('Leads exported successfully');
+                      }}
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 20px', borderRadius: 10, background: 'rgba(0, 230, 118, 0.1)', color: '#00e676', border: '1px solid rgba(0, 230, 118, 0.3)', cursor: 'pointer', fontWeight: 600, fontSize: 14 }}
+                    >
+                      <FaFileAlt size={13} /> Export to Excel
+                    </button>
+                    <button className="btn-primary" onClick={fetchAll} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 20px', borderRadius: 10 }}>
+                      <FaSync size={13} /> Refresh Leads
+                    </button>
+                  </div>
                 </div>
 
                 <div style={{ display: 'grid', gap: 14 }}>
