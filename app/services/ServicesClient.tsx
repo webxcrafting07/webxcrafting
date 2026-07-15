@@ -350,14 +350,25 @@ export default function ServicesClient() {
           </div>
         </FadeUp>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
-            gap: 24,
-            marginBottom: 64,
-          }}
-        >
+        <style>{`
+          .services-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 64px;
+          }
+          @media (max-width: 1024px) {
+            .services-cards-grid {
+              grid-template-columns: repeat(2, 1fr);
+            }
+          }
+          @media (max-width: 768px) {
+            .services-cards-grid {
+              grid-template-columns: 1fr;
+            }
+          }
+        `}</style>
+        <div className="services-cards-grid">
           {services.map((s: any, i) => (
             <FadeUp key={s._id || i} delay={i * 0.09}>
               <motion.div
