@@ -17,7 +17,9 @@ import {
   FaArrowRight, 
   FaStar,
   FaCheck,
-  FaPhone
+  FaPhone,
+  FaBullhorn,
+  FaMapMarkedAlt
 } from "react-icons/fa";
 
 interface LocationClientProps {
@@ -292,66 +294,151 @@ export default function LocationClient({ cityKey, cityInfo, nearbyCities = [] }:
             {serviceSub}
           </p>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 30 }}>
-          {/* Service 1 */}
-          <div
-            className="glass"
-            style={{ padding: 40, borderRadius: 24, border: "1px solid rgba(255,255,255,0.04)", transition: "transform 0.3s" }}
-            onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-5px)"}
-            onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}
-          >
-            <div style={{ width: 54, height: 54, borderRadius: 12, background: "rgba(79,111,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#4f6fff", fontSize: 24, marginBottom: 24 }}>
-              <FaLaptopCode />
-            </div>
-            <h3 style={{ fontFamily: "Syne", fontSize: 22, fontWeight: 700, marginBottom: 14 }}>Business Websites</h3>
-            <p style={{ color: "#7b82a8", fontSize: 14, lineHeight: 1.6, marginBottom: 20 }}>
-              Professional, ultra-fast websites designed to build trust and capture local leads in {name}. Perfect for agencies, clinics, and local services.
-            </p>
-            <ul style={{ color: "#e8eaf6", fontSize: 13, display: "grid", gap: 10 }}>
-              <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> Responsive Design</li>
-              <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> SEO Optimized</li>
-              <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> Lead Capture Forms</li>
-            </ul>
-          </div>
-          {/* Service 2 */}
-          <div
-            className="glass"
-            style={{ padding: 40, borderRadius: 24, border: "1px solid rgba(255,255,255,0.04)", transition: "transform 0.3s" }}
-            onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-5px)"}
-            onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}
-          >
-            <div style={{ width: 54, height: 54, borderRadius: 12, background: "rgba(162,89,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#a259ff", fontSize: 24, marginBottom: 24 }}>
-              <FaRocket />
-            </div>
-            <h3 style={{ fontFamily: "Syne", fontSize: 22, fontWeight: 700, marginBottom: 14 }}>E-Commerce Stores</h3>
-            <p style={{ color: "#7b82a8", fontSize: 14, lineHeight: 1.6, marginBottom: 20 }}>
-              Sell your products online 24/7. We build robust e-commerce platforms with secure payment gateways and easy inventory management.
-            </p>
-            <ul style={{ color: "#e8eaf6", fontSize: 13, display: "grid", gap: 10 }}>
-              <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> Payment Gateway Setup</li>
-              <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> Product Management</li>
-              <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> Order Tracking</li>
-            </ul>
-          </div>
-          {/* Service 3 */}
-          <div
-            className="glass"
-            style={{ padding: 40, borderRadius: 24, border: "1px solid rgba(255,255,255,0.04)", transition: "transform 0.3s" }}
-            onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-5px)"}
-            onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}
-          >
-            <div style={{ width: 54, height: 54, borderRadius: 12, background: "rgba(0,229,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#00e5ff", fontSize: 24, marginBottom: 24 }}>
-              <FaShieldAlt />
-            </div>
-            <h3 style={{ fontFamily: "Syne", fontSize: 22, fontWeight: 700, marginBottom: 14 }}>Custom Web Apps</h3>
-            <p style={{ color: "#7b82a8", fontSize: 14, lineHeight: 1.6, marginBottom: 20 }}>
-              Need something unique? We develop complex web applications, booking systems, CRMs, and LMS platforms tailored to your business logic.
-            </p>
-            <ul style={{ color: "#e8eaf6", fontSize: 13, display: "grid", gap: 10 }}>
-              <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> Custom Databases</li>
-              <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> API Integrations</li>
-              <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> User Dashboards</li>
-            </ul>
+        <style>{`
+          @keyframes scrollRightToLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          .service-marquee-container {
+            overflow: hidden;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            padding: 20px 0;
+            display: flex;
+          }
+          .service-marquee-track {
+            display: flex;
+            width: max-content;
+            animation: scrollRightToLeft 25s linear infinite;
+          }
+          .service-marquee-track:hover {
+            animation-play-state: paused;
+          }
+          .marquee-card {
+            width: 350px;
+            margin: 0 15px;
+            flex-shrink: 0;
+            white-space: normal;
+          }
+          @media (max-width: 768px) {
+            .marquee-card {
+              width: 300px;
+              margin: 0 10px;
+            }
+          }
+        `}</style>
+        
+        <div className="service-marquee-container">
+          <div className="service-marquee-track">
+            {/* We duplicate the array 2 times to create a seamless infinite loop effect */}
+            {[...Array(2)].map((_, loopIdx) => (
+              <React.Fragment key={loopIdx}>
+                {/* Service 1 */}
+                <div
+                  className="glass marquee-card"
+                  style={{ padding: 40, borderRadius: 24, border: "1px solid rgba(255,255,255,0.04)", transition: "transform 0.3s" }}
+                  onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-5px)"}
+                  onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}
+                >
+                  <div style={{ width: 54, height: 54, borderRadius: 12, background: "rgba(79,111,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#4f6fff", fontSize: 24, marginBottom: 24 }}>
+                    <FaLaptopCode />
+                  </div>
+                  <h3 style={{ fontFamily: "Syne", fontSize: 22, fontWeight: 700, marginBottom: 14 }}>Business Websites</h3>
+                  <p style={{ color: "#7b82a8", fontSize: 14, lineHeight: 1.6, marginBottom: 20 }}>
+                    Professional, ultra-fast websites designed to build trust and capture local leads in {name}. Perfect for agencies, clinics, and local services.
+                  </p>
+                  <ul style={{ color: "#e8eaf6", fontSize: 13, display: "grid", gap: 10 }}>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> Responsive Design</li>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> SEO Optimized</li>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> Lead Capture Forms</li>
+                  </ul>
+                </div>
+
+                {/* Service 2 */}
+                <div
+                  className="glass marquee-card"
+                  style={{ padding: 40, borderRadius: 24, border: "1px solid rgba(255,255,255,0.04)", transition: "transform 0.3s" }}
+                  onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-5px)"}
+                  onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}
+                >
+                  <div style={{ width: 54, height: 54, borderRadius: 12, background: "rgba(162,89,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#a259ff", fontSize: 24, marginBottom: 24 }}>
+                    <FaRocket />
+                  </div>
+                  <h3 style={{ fontFamily: "Syne", fontSize: 22, fontWeight: 700, marginBottom: 14 }}>E-Commerce Stores</h3>
+                  <p style={{ color: "#7b82a8", fontSize: 14, lineHeight: 1.6, marginBottom: 20 }}>
+                    Sell your products online 24/7. We build robust e-commerce platforms with secure payment gateways and easy inventory management.
+                  </p>
+                  <ul style={{ color: "#e8eaf6", fontSize: 13, display: "grid", gap: 10 }}>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> Payment Gateway Setup</li>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> Product Management</li>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> Order Tracking</li>
+                  </ul>
+                </div>
+
+                {/* Service 3 */}
+                <div
+                  className="glass marquee-card"
+                  style={{ padding: 40, borderRadius: 24, border: "1px solid rgba(255,255,255,0.04)", transition: "transform 0.3s" }}
+                  onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-5px)"}
+                  onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}
+                >
+                  <div style={{ width: 54, height: 54, borderRadius: 12, background: "rgba(0,229,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#00e5ff", fontSize: 24, marginBottom: 24 }}>
+                    <FaShieldAlt />
+                  </div>
+                  <h3 style={{ fontFamily: "Syne", fontSize: 22, fontWeight: 700, marginBottom: 14 }}>Custom Web Apps</h3>
+                  <p style={{ color: "#7b82a8", fontSize: 14, lineHeight: 1.6, marginBottom: 20 }}>
+                    Need something unique? We develop complex web applications, booking systems, CRMs, and LMS platforms tailored to your business logic.
+                  </p>
+                  <ul style={{ color: "#e8eaf6", fontSize: 13, display: "grid", gap: 10 }}>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> Custom Databases</li>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> API Integrations</li>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> User Dashboards</li>
+                  </ul>
+                </div>
+
+                {/* Service 4: Digital Marketing */}
+                <div
+                  className="glass marquee-card"
+                  style={{ padding: 40, borderRadius: 24, border: "1px solid rgba(255,255,255,0.04)", transition: "transform 0.3s" }}
+                  onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-5px)"}
+                  onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}
+                >
+                  <div style={{ width: 54, height: 54, borderRadius: 12, background: "rgba(255,179,0,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#ffb300", fontSize: 24, marginBottom: 24 }}>
+                    <FaBullhorn />
+                  </div>
+                  <h3 style={{ fontFamily: "Syne", fontSize: 22, fontWeight: 700, marginBottom: 14 }}>Digital Marketing</h3>
+                  <p style={{ color: "#7b82a8", fontSize: 14, lineHeight: 1.6, marginBottom: 20 }}>
+                    Boost your online visibility and drive targeted traffic to your business. We cover everything from technical SEO to social media campaigns.
+                  </p>
+                  <ul style={{ color: "#e8eaf6", fontSize: 13, display: "grid", gap: 10 }}>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> On-Page & Off-Page SEO</li>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> Social Media Marketing</li>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> Monthly Reports</li>
+                  </ul>
+                </div>
+
+                {/* Service 5: GMB Setup */}
+                <div
+                  className="glass marquee-card"
+                  style={{ padding: 40, borderRadius: 24, border: "1px solid rgba(255,255,255,0.04)", transition: "transform 0.3s" }}
+                  onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-5px)"}
+                  onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}
+                >
+                  <div style={{ width: 54, height: 54, borderRadius: 12, background: "rgba(255,82,82,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#ff5252", fontSize: 24, marginBottom: 24 }}>
+                    <FaMapMarkedAlt />
+                  </div>
+                  <h3 style={{ fontFamily: "Syne", fontSize: 22, fontWeight: 700, marginBottom: 14 }}>GMB Setup & Local SEO</h3>
+                  <p style={{ color: "#7b82a8", fontSize: 14, lineHeight: 1.6, marginBottom: 20 }}>
+                    Dominate local search results. We will create, verify, and fully optimize your Google My Business profile so local customers can easily find you.
+                  </p>
+                  <ul style={{ color: "#e8eaf6", fontSize: 13, display: "grid", gap: 10 }}>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> Profile Creation & Verification</li>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> Map Ranking Strategy</li>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><FaCheck color="#00e676" size={12}/> Review Management</li>
+                  </ul>
+                </div>
+              </React.Fragment>
+            ))}
           </div>
         </div>
         <div style={{ textAlign: "center", marginTop: 40 }}>
