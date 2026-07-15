@@ -120,6 +120,34 @@ const defaultServices = [
     requirements: ["Product List", "Category Data", "Supplier Info", "Tax Configuration"],
     detailedDescription: "Take control of your shop's inventory with our premium POS solution. Track every sale, monitor stock levels in real-time, and generate daily/monthly sales reports to grow your business efficiently. Designed for speed and accuracy in retail environments."
   },
+  {
+    _id: "7",
+    icon: "FaSearch",
+    title: "Digital Marketing & SEO",
+    description: "End-to-end digital marketing and Search Engine Optimization to grow your traffic and leads.",
+    price: 12000,
+    originalPrice: 18000,
+    popular: true,
+    features: ["On-Page SEO", "Off-Page SEO", "Social Media Marketing", "Content Strategy", "Monthly Reports"],
+    paymentTerms: "Monthly Retainer",
+    additionalCharges: "Ad budgets (Google Ads, Meta Ads) are separate",
+    requirements: ["Website Access", "Google Analytics Access", "Social Media Accounts"],
+    detailedDescription: "Boost your online visibility and drive targeted traffic to your business. Our digital marketing strategies cover everything from technical SEO and keyword optimization to engaging social media campaigns, ensuring maximum ROI."
+  },
+  {
+    _id: "8",
+    icon: "FaStore",
+    title: "Google My Business (GMB) Setup",
+    description: "Complete setup and optimization of your Google Business Profile for local visibility.",
+    price: 3500,
+    originalPrice: 5000,
+    popular: false,
+    features: ["Profile Creation", "Keyword Optimization", "Map Verification", "Service/Product Listing", "Review Strategy"],
+    paymentTerms: "100% Advance Payment",
+    additionalCharges: "None",
+    requirements: ["Business Details", "Logo & Photos", "Verification OTP/Video"],
+    detailedDescription: "Dominate local search results. We will create, verify, and fully optimize your Google My Business profile so local customers can easily find you on Google Search and Maps when they need your services."
+  },
 ];
 
 export default function ServicesClient() {
