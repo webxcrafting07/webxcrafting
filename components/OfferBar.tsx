@@ -25,6 +25,7 @@ export default function OfferBar() {
 
   return (
     <div
+      id="wxc-offer-bar"
       style={{
         position: "relative",
         zIndex: 100,
@@ -35,6 +36,7 @@ export default function OfferBar() {
         fontSize: "14px",
         fontWeight: 500,
         display: "flex",
+        flexWrap: "wrap",
         alignItems: "center",
         justifyContent: "center",
         gap: "12px",

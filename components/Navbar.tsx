@@ -18,11 +18,36 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+  const [offerOffset, setOfferOffset] = useState(0);
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 30);
+    const handler = () => {
+      setScrolled(window.scrollY > 30);
+      const offerBar = document.getElementById("wxc-offer-bar");
+      if (offerBar) {
+        const barHeight = offerBar.offsetHeight;
+        const newOffset = Math.max(0, barHeight - window.scrollY);
+        setOfferOffset(newOffset);
+      } else {
+        setOfferOffset(0);
+      }
+    };
+    
+    // Initial check
+    handler();
+    
     window.addEventListener("scroll", handler);
-    return () => window.removeEventListener("scroll", handler);
+    window.addEventListener("resize", handler);
+    
+    // Observe DOM mutations in case the OfferBar mounts asynchronously
+    const observer = new MutationObserver(handler);
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      window.removeEventListener("scroll", handler);
+      window.removeEventListener("resize", handler);
+      observer.disconnect();
+    };
   }, []);
 
   // Close menu on route change
@@ -33,7 +58,7 @@ export default function Navbar() {
       <nav
         style={{
           position: "fixed",
-          top: 0,
+          top: offerOffset,
           left: 0,
           right: 0,
           zIndex: 500,
