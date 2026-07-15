@@ -258,47 +258,54 @@ export default function LocationClient({ cityKey, cityInfo, nearbyCities = [] }:
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 24px;
-            padding: 24px 30px;
-            border-radius: 20px;
+            padding: 24px;
+            border-radius: 24px;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.04);
+            background: rgba(10, 14, 28, 0.4);
+            border: 1px solid rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
           }
-          .trust-badge-middle {
-            border-left: 1px solid rgba(255,255,255,0.06);
-            border-right: 1px solid rgba(255,255,255,0.06);
+          .trust-badge-item {
+            padding: 24px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: all 0.3s ease;
+          }
+          .trust-badge-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
           }
           @media (max-width: 768px) {
             .trust-badges-grid {
               grid-template-columns: 1fr;
-              gap: 24px;
-              padding: 30px 20px;
-            }
-            .trust-badge-middle {
-              border-left: none;
-              border-right: none;
-              border-top: 1px solid rgba(255,255,255,0.06);
-              border-bottom: 1px solid rgba(255,255,255,0.06);
-              padding: 24px 0;
+              gap: 16px;
+              padding: 20px;
             }
           }
         `}</style>
-        <div className="glass trust-badges-grid">
-          <div>
-            <div style={{ display: "flex", justifyContent: "center", gap: 3, color: "#ffb300", marginBottom: 6 }}>
-              {[...Array(5)].map((_, i) => <FaStar key={i} size={13} />)}
+        <div className="trust-badges-grid">
+          <div className="trust-badge-item">
+            <div style={{ display: "flex", justifyContent: "center", gap: 4, color: "#ffb300", marginBottom: 12 }}>
+              {[...Array(5)].map((_, i) => <FaStar key={i} size={18} />)}
             </div>
-            <div style={{ fontWeight: 700, color: "#e8eaf6", fontSize: 15 }}>100% Client Satisfaction</div>
-            <div style={{ color: "#7b82a8", fontSize: 12, marginTop: 2 }}>Highly Rated in {name}</div>
+            <div style={{ fontWeight: 800, color: "#ffffff", fontSize: 18, marginBottom: 4 }}>100% Satisfaction</div>
+            <div style={{ color: "#a0a8cc", fontSize: 13, lineHeight: 1.5 }}>Trusted & Highly Rated by businesses in {name}</div>
           </div>
-          <div className="trust-badge-middle">
-            <div style={{ fontSize: 22, fontWeight: 800, color: "#4f6fff", fontFamily: "Syne", fontStyle: "italic", marginBottom: 3 }}>Next.js / React</div>
-            <div style={{ fontWeight: 700, color: "#e8eaf6", fontSize: 15 }}>High Performance Tech</div>
-            <div style={{ color: "#7b82a8", fontSize: 12, marginTop: 2 }}>Sub-second Loading Speed</div>
+          <div className="trust-badge-item" style={{ position: 'relative', overflow: 'hidden' }}>
+            <div style={{ position: 'absolute', top: -20, right: -20, width: 80, height: 80, background: 'radial-gradient(circle, rgba(79,111,255,0.2) 0%, transparent 70%)' }}></div>
+            <div style={{ fontSize: 24, fontWeight: 800, fontFamily: "Syne", fontStyle: "italic", marginBottom: 8, background: 'linear-gradient(135deg, #4f6fff, #00e5ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Next.js / React</div>
+            <div style={{ fontWeight: 800, color: "#ffffff", fontSize: 18, marginBottom: 4 }}>High Performance</div>
+            <div style={{ color: "#a0a8cc", fontSize: 13, lineHeight: 1.5 }}>Sub-second loading speed for better conversions</div>
           </div>
-          <div>
-            <div style={{ fontSize: 22, fontWeight: 800, color: "#a259ff", fontFamily: "Syne", fontStyle: "italic", marginBottom: 3 }}>100% Google LCP</div>
-            <div style={{ fontWeight: 700, color: "#e8eaf6", fontSize: 15 }}>SEO Engineered Coding</div>
-            <div style={{ color: "#7b82a8", fontSize: 12, marginTop: 2 }}>Guaranteed Search Boost</div>
+          <div className="trust-badge-item" style={{ position: 'relative', overflow: 'hidden' }}>
+            <div style={{ position: 'absolute', top: -20, left: -20, width: 80, height: 80, background: 'radial-gradient(circle, rgba(162,89,255,0.2) 0%, transparent 70%)' }}></div>
+            <div style={{ fontSize: 24, fontWeight: 800, fontFamily: "Syne", fontStyle: "italic", marginBottom: 8, background: 'linear-gradient(135deg, #a259ff, #ff5252)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>100% Google LCP</div>
+            <div style={{ fontWeight: 800, color: "#ffffff", fontSize: 18, marginBottom: 4 }}>SEO Engineered</div>
+            <div style={{ color: "#a0a8cc", fontSize: 13, lineHeight: 1.5 }}>Guaranteed search ranking boost & visibility</div>
           </div>
         </div>
       </section>
