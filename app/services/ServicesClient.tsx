@@ -281,7 +281,24 @@ export default function ServicesClient() {
                 Our <span className="grad-text">Process</span>
               </h2>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 24 }}>
+            <style>{`
+              .process-grid-services {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 24px;
+              }
+              @media (max-width: 1024px) {
+                .process-grid-services {
+                  grid-template-columns: repeat(2, 1fr);
+                }
+              }
+              @media (max-width: 600px) {
+                .process-grid-services {
+                  grid-template-columns: 1fr;
+                }
+              }
+            `}</style>
+            <div className="process-grid-services">
               {[
                 { step: "01", title: "Discovery", desc: "We understand your goals, target audience, and specific business needs.", icon: FaSearch, color: "#4f6fff" },
                 { step: "02", title: "Design", desc: "We craft stunning, premium UI/UX mockups for your approval.", icon: FaPalette, color: "#a259ff" },
