@@ -836,6 +836,37 @@ export default function ServicesClient() {
           </div>
         </FadeUp>
       </div>
+
+      {/* ─── SEO POPULAR SEARCHES ──────────────────────── */}
+      <section className="mobile-p-6" style={{ position: "relative", zIndex: 10, padding: "0 24px 60px", maxWidth: 1000, margin: "0 auto" }}>
+        <div style={{ textAlign: "center", marginBottom: 30 }}>
+          <h3 style={{ fontFamily: "Syne", fontSize: 24, fontStyle: "italic", fontWeight: 700, color: "#8892b0" }}>
+            Popular Searches
+          </h3>
+        </div>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 10, justifyContent: "center" }}>
+          {[
+            "Web Development Services", "Custom E-commerce Websites", "SaaS Application Development", 
+            "Enterprise Web Portal", "React UI/UX Agency", "Next.js Web Developers", 
+            "Affordable Business Websites", "Shopify Setup Experts", "Web App Maintenance", 
+            "SEO Optimized Web Design", "Custom Software Solutions", "Startup Website Builder"
+          ].map((keyword, i) => (
+            <div 
+              key={i} 
+              style={{
+                padding: "8px 16px",
+                borderRadius: 100,
+                fontSize: 12,
+                color: "#7b82a8",
+                background: "rgba(255,255,255,0.02)",
+                border: "1px solid rgba(255,255,255,0.04)"
+              }}
+            >
+              {keyword}
+            </div>
+          ))}
+        </div>
+      </section>
       <Footer />
       <WhatsAppButton />
     </>

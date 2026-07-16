@@ -5,6 +5,7 @@ import { connectDB } from '@/lib/db'
 export const metadata: Metadata = {
   title: "Premium Web Development & Digital Solutions | WebXCrafting",
   description: "WebXCrafting is a leading global web development agency. We deliver high-performance business websites, premium E-commerce stores, and custom software solutions worldwide.",
+  keywords: "web development company, top web design agency, ecommerce website developers, custom software development, react nextjs developers, affordable web design, digital marketing agency, shopify developers, UI/UX design agency, website maintenance, webx crafting",
   alternates: {
     canonical: "/",
   },
@@ -112,15 +113,52 @@ export default async function HomePage() {
     ]
   }
 
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Web Development",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "WebXCrafting"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "India"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Global Web Development Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Business Website Development"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "E-commerce Website Development"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Custom Web Applications"
+          }
+        }
+      ]
+    }
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([localBusinessSchema, faqSchema, serviceSchema]) }}
       />
       <HomeClient initialBlogs={initialBlogs} />
     </>

@@ -1468,6 +1468,37 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
         </div>
       </section>
 
+      {/* ─── SEO POPULAR SEARCHES ──────────────────────── */}
+      <section className="mobile-p-6" style={{ position: "relative", zIndex: 10, padding: "0 24px 60px", maxWidth: 1000, margin: "0 auto" }}>
+        <div style={{ textAlign: "center", marginBottom: 30 }}>
+          <h3 style={{ fontFamily: "Syne", fontSize: 24, fontStyle: "italic", fontWeight: 700, color: "#8892b0" }}>
+            Popular Searches
+          </h3>
+        </div>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 10, justifyContent: "center" }}>
+          {[
+            "Best Web Design Agency", "E-commerce Website Developers", "Custom Software Development", 
+            "SEO Services", "Mobile App Development Company", "React Next.js Developers", 
+            "Digital Marketing Agency", "Shopify Developers", "Local Business Website", 
+            "Top IT Companies", "Affordable Web Design", "UI/UX Design Agency", "Website Maintenance"
+          ].map((keyword, i) => (
+            <div 
+              key={i} 
+              style={{
+                padding: "8px 16px",
+                borderRadius: 100,
+                fontSize: 12,
+                color: "#7b82a8",
+                background: "rgba(255,255,255,0.02)",
+                border: "1px solid rgba(255,255,255,0.04)"
+              }}
+            >
+              {keyword}
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* ─── CTA BANNER ──────────────────────────── */}
       <section style={{ padding: '60px 32px', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
         <FadeUp>
