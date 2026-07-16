@@ -846,10 +846,14 @@ export default function ServicesClient() {
         </div>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 10, justifyContent: "center" }}>
           {[
-            "Web Development Services", "Custom E-commerce Websites", "SaaS Application Development", 
-            "Enterprise Web Portal", "React UI/UX Agency", "Next.js Web Developers", 
-            "Affordable Business Websites", "Shopify Setup Experts", "Web App Maintenance", 
-            "SEO Optimized Web Design", "Custom Software Solutions", "Startup Website Builder"
+            "Best Web Development Agency", "Top E-commerce Website Developers", "Custom Software Development Services", 
+            "Responsive Website Design Company", "SEO and Digital Marketing Agency", "Mobile App Development Experts", 
+            "React & Next.js Developers", "Shopify Store Development", "WordPress Website Redesign", 
+            "SaaS Application Development", "Enterprise Web Portals", "Real Estate Website Development", 
+            "Hospital & Healthcare Web Design", "Restaurant & Food Delivery App Development", "Travel & Booking Website Developers", 
+            "Custom CRM/ERP Solutions", "Local SEO Optimization Services", "UI/UX Design Agency", 
+            "Affordable Business Websites", "Website Maintenance & Support", "High-Performance Web Apps", 
+            "B2B Website Development", "Landing Page Design & Optimization"
           ].map((keyword, i) => (
             <div 
               key={i} 

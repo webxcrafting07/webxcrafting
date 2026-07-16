@@ -113,19 +113,29 @@ export default function LocationClient({ cityKey, cityInfo, nearbyCities = [] }:
   // Dynamic LSI Keywords for On-Page SEO
   const baseKeywords = cityInfo.description ? cityInfo.description.toLowerCase().split(' ').filter(w => w.length > 5).slice(0, 5) : [];
   const seoKeywords = [
-    `Best Web Design Agency in ${name}`,
-    `E-commerce Website Developers ${name}`,
-    `Custom Software Development ${name}`,
-    `SEO Services in ${name}`,
-    `Mobile App Development Company ${name}`,
-    `React Next.js Developers ${name}`,
-    `Digital Marketing Agency ${name}`,
-    `Shopify Developers in ${name}`,
-    `Local Business Website ${name}`,
-    `Top IT Companies in ${name}`,
-    `Affordable Web Design ${name}`,
+    `Best Web Development Agency in ${name}`,
+    `Top E-commerce Website Developers ${name}`,
+    `Custom Software Development Services ${name}`,
+    `Responsive Website Design Company ${name}`,
+    `SEO and Digital Marketing Agency ${name}`,
+    `Mobile App Development Experts ${name}`,
+    `React & Next.js Developers ${name}`,
+    `Shopify Store Development ${name}`,
+    `WordPress Website Redesign ${name}`,
+    `SaaS Application Development ${name}`,
+    `Enterprise Web Portals ${name}`,
+    `Real Estate Website Development ${name}`,
+    `Hospital & Healthcare Web Design ${name}`,
+    `Restaurant & Food Delivery App Development ${name}`,
+    `Travel & Booking Website Developers ${name}`,
+    `Custom CRM/ERP Solutions ${name}`,
+    `Local SEO Optimization Services ${name}`,
     `UI/UX Design Agency ${name}`,
-    `Website Maintenance ${name}`
+    `Affordable Business Websites ${name}`,
+    `Website Maintenance & Support ${name}`,
+    `High-Performance Web Apps ${name}`,
+    `B2B Website Development ${name}`,
+    `Landing Page Design & Optimization ${name}`
   ];
 
   // Dynamic LocalBusiness Structured Schema

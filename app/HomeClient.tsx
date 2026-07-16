@@ -1477,10 +1477,14 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
         </div>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 10, justifyContent: "center" }}>
           {[
-            "Best Web Design Agency", "E-commerce Website Developers", "Custom Software Development", 
-            "SEO Services", "Mobile App Development Company", "React Next.js Developers", 
-            "Digital Marketing Agency", "Shopify Developers", "Local Business Website", 
-            "Top IT Companies", "Affordable Web Design", "UI/UX Design Agency", "Website Maintenance"
+            "Best Web Development Agency", "Top E-commerce Website Developers", "Custom Software Development Services", 
+            "Responsive Website Design Company", "SEO and Digital Marketing Agency", "Mobile App Development Experts", 
+            "React & Next.js Developers", "Shopify Store Development", "WordPress Website Redesign", 
+            "SaaS Application Development", "Enterprise Web Portals", "Real Estate Website Development", 
+            "Hospital & Healthcare Web Design", "Restaurant & Food Delivery App Development", "Travel & Booking Website Developers", 
+            "Custom CRM/ERP Solutions", "Local SEO Optimization Services", "UI/UX Design Agency", 
+            "Affordable Business Websites", "Website Maintenance & Support", "High-Performance Web Apps", 
+            "B2B Website Development", "Landing Page Design & Optimization"
           ].map((keyword, i) => (
             <div 
               key={i} 
