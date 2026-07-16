@@ -220,7 +220,7 @@ function ProjectCard({ title, description, category, status, image, liveLink }: 
           </span>
         </div>
         <h3 style={{ fontFamily: 'Syne', fontWeight: 700, fontSize: 17, marginBottom: 8, fontStyle: 'italic' }}>{title}</h3>
-        <p style={{ color: '#7b82a8', fontSize: 14, lineHeight: 1.65 }}>{description}</p>
+        <p style={{ color: '#7b82a8', fontSize: 14, lineHeight: 1.65, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{description}</p>
       </div>
     </motion.div>
   )
