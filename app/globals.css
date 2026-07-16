@@ -675,8 +675,8 @@ h6 {
   .service-scroll-item { flex: 0 0 calc(50% - 12px); }
 }
 @media (max-width: 600px) {
-  .blog-scroll-item { flex: 0 0 280px; min-width: 0; }
-  .service-scroll-item { flex: 0 0 280px; min-width: 0; }
+  .blog-scroll-item { flex: 0 0 100%; min-width: 0; }
+  .service-scroll-item { flex: 0 0 100%; min-width: 0; }
 }
 
 .services-grid {
