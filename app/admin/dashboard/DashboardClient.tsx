@@ -698,7 +698,7 @@ export default function DashboardClient() {
                   <h1 style={{ fontFamily: 'Syne', fontWeight: 800, fontSize: 30, marginBottom: 6 }}>Dashboard Overview</h1>
                   <p style={{ color: '#7b82a8', fontSize: 14 }}>Welcome back, Admin 👋</p>
                 </div>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(180px,1fr))', gap: 18, marginBottom: 36 }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%, 180px),1fr))', gap: 18, marginBottom: 36 }}>
                   <StatCard icon={FaFolder} value={projects.length} label="Total Projects" color="#4f6fff" />
                   <StatCard icon={FaCheckCircle} value={completed} label="Completed" color="#00e676" />
                   <StatCard icon={FaHourglass} value={ongoing} label="Ongoing" color="#ffb74d" />
@@ -953,7 +953,7 @@ export default function DashboardClient() {
                   <button className="btn-primary" onClick={() => openAdd('service')}>+ Add Service</button>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(280px,1fr))', gap: 20 }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(min(100%, 280px),1fr))', gap: 20 }}>
                   {services.map((s) => (
                     <motion.div key={s._id} whileHover={{ y: -4 }} className="glass" style={{ padding: 26, borderRadius: 18, position: 'relative' }}>
                       {s.popular && <div style={{ position: 'absolute', top: 14, right: 14, background: 'linear-gradient(135deg,#4f6fff,#a259ff)', borderRadius: 20, padding: '3px 10px', fontSize: 10, fontWeight: 700 }}>POPULAR</div>}

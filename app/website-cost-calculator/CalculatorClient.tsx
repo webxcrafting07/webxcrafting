@@ -888,7 +888,7 @@ export default function CalculatorClient() {
                   <h3 style={{ fontFamily: "Syne", fontSize: 22, fontStyle: "italic", fontWeight: 700, marginBottom: 24 }}>
                     Integrate Extra Features & Addons
                   </h3>
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16 }}>
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 240px), 1fr))", gap: 16 }}>
                     {ADDON_FEATURES.map((addon) => {
                       const isSelected = selectedAddons.some((a) => a.id === addon.id);
                       return (

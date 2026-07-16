@@ -222,7 +222,7 @@ export default function AboutClient() {
             </div>
           </FadeUp>
           
-          <div className="mobile-grid-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 32, maxWidth: 860, margin: '0 auto' }}>
+          <div className="mobile-grid-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: 32, maxWidth: 860, margin: '0 auto' }}>
             {team.map((member, i) => (
               <FadeUp key={member.name} delay={i * 0.15}>
                 <motion.div 

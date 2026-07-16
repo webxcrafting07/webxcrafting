@@ -242,7 +242,7 @@ export default function PortfolioClient() {
             layout
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 320px), 1fr))",
               gap: 30,
             }}
           >
@@ -560,7 +560,7 @@ export default function PortfolioClient() {
                 </p>
 
                 {/* Grid info: Tech stack & Features developed */}
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 30, marginBottom: 40 }}>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 260px), 1fr))", gap: 30, marginBottom: 40 }}>
                   
                   {/* Tech stack list */}
                   <div>

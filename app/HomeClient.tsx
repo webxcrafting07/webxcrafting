@@ -747,7 +747,7 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
       </section>
 
       {/* ─── HOW WE WORK ─────────────────────────── */}
-      <section style={{ padding: '80px 32px', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
+      <section style={{ padding: 'clamp(40px, 8vw, 80px) clamp(16px, 5vw, 32px)', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
         <FadeUp style={{ textAlign: 'center', marginBottom: 64 }}>
           <div className="section-label" style={{ margin: '0 auto 20px' }}>Our Process</div>
           <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(28px,4vw,48px)', fontWeight: 800, fontStyle: 'italic' }}>
@@ -826,7 +826,7 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
         </div>
       </section>
 
-      <section style={{ padding: '80px 32px', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
+      <section style={{ padding: 'clamp(40px, 8vw, 80px) clamp(16px, 5vw, 32px)', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
         <FadeUp style={{ textAlign: 'center', marginBottom: 56 }}>
           <div className="section-label" style={{ margin: '0 auto 20px' }}>Premium Solutions</div>
           <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(28px,4vw,48px)', fontWeight: 800, fontStyle: 'italic' }}>
@@ -975,7 +975,7 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
                   </div>
                 </div>
 
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "clamp(20px, 5vw, 40px)" }}>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 260px), 1fr))", gap: "clamp(20px, 5vw, 40px)" }}>
                   {/* Left Column */}
                   <div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
@@ -1066,7 +1066,7 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
       </section>
 
       {/* ─── PORTFOLIO ───────────────────────────── */}
-      <section style={{ padding: '80px 32px', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
+      <section style={{ padding: 'clamp(40px, 8vw, 80px) clamp(16px, 5vw, 32px)', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
         <FadeUp style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 40, flexWrap: 'wrap', gap: 20 }}>
           <div>
             <div className="section-label" style={{ marginBottom: 20 }}>Portfolio</div>
@@ -1110,7 +1110,7 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
       
       {/* ─── LATEST BLOGS ────────────────────────── */}
       {blogs.length > 0 && (
-        <section style={{ padding: '80px 32px', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
+        <section style={{ padding: 'clamp(40px, 8vw, 80px) clamp(16px, 5vw, 32px)', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
           <FadeUp style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 40, flexWrap: 'wrap', gap: 20 }}>
             <div>
               <div className="section-label" style={{ marginBottom: 20 }}>Insights</div>
@@ -1209,7 +1209,7 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
       )}
 
       {/* ─── TESTIMONIALS ────────────────────────── */}
-      <section style={{ padding: '80px 32px', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
+      <section style={{ padding: 'clamp(40px, 8vw, 80px) clamp(16px, 5vw, 32px)', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
         <FadeUp style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 56, flexWrap: 'wrap', gap: 20 }}>
           <div>
             <div className="section-label" style={{ marginBottom: 20 }}>Testimonials</div>
@@ -1445,7 +1445,7 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
       </section>
 
       {/* ─── FAQ SECTION (SEO BOOST) ───────────────── */}
-      <section style={{ padding: '80px 32px', maxWidth: 1000, margin: '0 auto', position: 'relative', zIndex: 10 }}>
+      <section style={{ padding: 'clamp(40px, 8vw, 80px) clamp(16px, 5vw, 32px)', maxWidth: 1000, margin: '0 auto', position: 'relative', zIndex: 10 }}>
         <FadeUp style={{ textAlign: 'center', marginBottom: 56 }}>
           <div className="section-label" style={{ margin: '0 auto 20px' }}>Questions</div>
           <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(28px,4vw,42px)', fontWeight: 800, fontStyle: 'italic' }}>
@@ -1488,7 +1488,7 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
       </section>
 
       {/* ─── CTA BANNER ──────────────────────────── */}
-      <section style={{ padding: '60px 32px', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
+      <section style={{ padding: 'clamp(40px, 6vw, 60px) clamp(16px, 5vw, 32px)', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
         <FadeUp>
           <motion.div
             whileHover={{ y: -8, boxShadow: '0 32px 80px rgba(79,111,255,0.25)' }}
