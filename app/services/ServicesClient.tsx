@@ -837,14 +837,10 @@ export default function ServicesClient() {
         </FadeUp>
       </div>
 
-      {/* ─── SEO POPULAR SEARCHES ──────────────────────── */}
-      <section className="mobile-p-6" style={{ position: "relative", zIndex: 10, padding: "0 24px 60px", maxWidth: 1000, margin: "0 auto" }}>
-        <div style={{ textAlign: "center", marginBottom: 30 }}>
-          <h3 style={{ fontFamily: "Syne", fontSize: 24, fontStyle: "italic", fontWeight: 700, color: "#8892b0" }}>
-            Popular Searches
-          </h3>
-        </div>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 10, justifyContent: "center" }}>
+      {/* ─── SEO POPULAR SEARCHES (Visually Hidden for SEO) ──────────────────────── */}
+      <section style={{ position: "absolute", width: "1px", height: "1px", padding: 0, margin: "-1px", overflow: "hidden", clip: "rect(0, 0, 0, 0)", whiteSpace: "nowrap", border: 0 }}>
+        <h3>Popular Searches</h3>
+        <div>
           {[
             "Best Web Development Agency", "Top E-commerce Website Developers", "Custom Software Development Services", 
             "Responsive Website Design Company", "SEO and Digital Marketing Agency", "Mobile App Development Experts", 
@@ -855,19 +851,7 @@ export default function ServicesClient() {
             "Affordable Business Websites", "Website Maintenance & Support", "High-Performance Web Apps", 
             "B2B Website Development", "Landing Page Design & Optimization"
           ].map((keyword, i) => (
-            <div 
-              key={i} 
-              style={{
-                padding: "8px 16px",
-                borderRadius: 100,
-                fontSize: 12,
-                color: "#7b82a8",
-                background: "rgba(255,255,255,0.02)",
-                border: "1px solid rgba(255,255,255,0.04)"
-              }}
-            >
-              {keyword}
-            </div>
+            <span key={i}>{keyword}, </span>
           ))}
         </div>
       </section>
