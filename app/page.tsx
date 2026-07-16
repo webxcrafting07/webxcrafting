@@ -60,6 +60,7 @@ export default async function HomePage() {
       "closes": "21:00"
     },
     "sameAs": [
+      "https://share.google/VzYfELZuWlsGAhFX0",
       "https://wa.me/919102615343"
     ]
   }

@@ -114,6 +114,7 @@ export default function RootLayout({
           "availableLanguage": ["en", "Hindi"]
         },
         "sameAs": [
+          "https://share.google/VzYfELZuWlsGAhFX0",
           "https://www.linkedin.com/in/webx-crafting-a1a875402/",
           "https://www.instagram.com/webxcrafting",
           "https://www.facebook.com/profile.php?id=61589165532607"

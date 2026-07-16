@@ -8,6 +8,7 @@ import {
   FaPhone,
   FaClock,
   FaMapMarkerAlt,
+  FaGoogle,
 } from "react-icons/fa";
 
 const services = [
@@ -59,6 +60,11 @@ const socials = [
     icon: FaInstagram,
     href: "https://www.instagram.com/webxcrafting",
     label: "Instagram",
+  },
+  {
+    icon: FaGoogle,
+    href: "https://share.google/VzYfELZuWlsGAhFX0",
+    label: "Google Profile",
   },
 ];
 

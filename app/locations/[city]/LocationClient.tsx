@@ -145,6 +145,7 @@ export default function LocationClient({ cityKey, cityInfo, nearbyCities = [] }:
       "reviewCount": name === "Bangalore" ? "124" : name === "Mumbai" ? "98" : name === "Delhi NCR" ? "112" : "85"
     },
     "sameAs": [
+      "https://share.google/VzYfELZuWlsGAhFX0",
       "https://www.instagram.com/webxcrafting",
       "https://www.facebook.com/profile.php?id=61589165532607",
       "https://www.linkedin.com/in/webx-crafting-a1a875402/"
