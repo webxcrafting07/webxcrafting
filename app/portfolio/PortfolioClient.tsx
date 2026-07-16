@@ -121,14 +121,16 @@ export default function PortfolioClient() {
       .then((d) => {
         if (d.success && d.data.length) {
           // Merge API data with extra local spec fields for premium display
-          const merged = d.data.map((proj: any, idx: number) => {
-            const defaultMatch = defaultProjects.find(p => p.title === proj.title) || defaultProjects[idx % 6];
-            return {
-              ...defaultMatch,
-              ...proj
-            };
+          const allProjects = [...defaultProjects];
+          d.data.forEach((proj: any) => {
+            const existingIdx = allProjects.findIndex(p => p.title === proj.title);
+            if (existingIdx >= 0) {
+              allProjects[existingIdx] = { ...allProjects[existingIdx], ...proj };
+            } else {
+              allProjects.unshift(proj);
+            }
           });
-          setProjects(merged);
+          setProjects(allProjects);
         }
       })
       .catch(() => {})

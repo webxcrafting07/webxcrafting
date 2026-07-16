@@ -479,9 +479,22 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
       .then((d) => { if (d.success && d.data.length) setServices(d.data) })
       .catch(() => { })
 
-    fetch('/api/projects?limit=3')
+    fetch('/api/projects')
       .then((r) => r.json())
-      .then((d) => { if (d.success && d.data.length) setProjects(d.data.slice(0, 3)) })
+      .then((d) => {
+        if (d.success && d.data.length) {
+          const allProjects = [...defaultProjects];
+          d.data.forEach((proj: any) => {
+            const existingIdx = allProjects.findIndex(p => p.title === proj.title);
+            if (existingIdx >= 0) {
+              allProjects[existingIdx] = { ...allProjects[existingIdx], ...proj };
+            } else {
+              allProjects.unshift(proj);
+            }
+          });
+          setProjects(allProjects.slice(0, 3));
+        }
+      })
       .catch(() => { })
 
     if (initialBlogs.length === 0) {
