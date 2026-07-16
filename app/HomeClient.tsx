@@ -561,17 +561,8 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
     fetch('/api/projects')
       .then((r) => r.json())
       .then((d) => {
-        if (d.success && d.data.length) {
-          const allProjects = [...defaultProjects];
-          d.data.forEach((proj: any) => {
-            const existingIdx = allProjects.findIndex(p => p.title === proj.title);
-            if (existingIdx >= 0) {
-              allProjects[existingIdx] = { ...allProjects[existingIdx], ...proj };
-            } else {
-              allProjects.unshift(proj);
-            }
-          });
-          setProjects(allProjects.slice(0, 3));
+        if (d.success && d.data.length > 0) {
+          setProjects(d.data.slice(0, 3));
         }
       })
       .catch(() => { })
@@ -1184,7 +1175,7 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
 
         <div className="scroll-container" ref={projectScrollRef} style={{ scrollBehavior: 'smooth' }}>
           {projects.map((p: any, i) => (
-            <FadeUp key={i} delay={i * 0.1} className="shrink-0 w-full min-w-full md:min-w-[calc(50%-12px)] md:w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] lg:w-[calc(33.333%-16px)] snap-start">
+            <FadeUp key={i} delay={i * 0.1} className="shrink-0 w-[100%] min-w-[100%] md:min-w-[calc(50%-12px)] md:w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] lg:w-[calc(33.333%-16px)] snap-start">
               <ProjectCard {...p} />
             </FadeUp>
           ))}
