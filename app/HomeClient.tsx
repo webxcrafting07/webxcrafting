@@ -150,8 +150,9 @@ function ServiceCard({ icon, title, description, price, originalPrice, popular, 
   )
 }
 
-/* ── project card ── */
-function ProjectCard({ title, description, category, status, image, liveLink }: any) {
+function ProjectCard(project: any) {
+  const { title, description, subtitle, category, status, image, liveLink, techStack } = project;
+  const isOngoing = status !== "completed";
   const catColors: Record<string, string> = {
     Business: '#4f6fff',
     'E-commerce': '#a259ff',
@@ -166,75 +167,112 @@ function ProjectCard({ title, description, category, status, image, liveLink }: 
       'Job Portal': FaBriefcase,
     }
     const Icon = iconMap[category] || FaGlobe
-    return <Icon size={56} />
+    return <Icon size={52} />
   }
+
   return (
     <motion.div
       onClick={() => liveLink && liveLink !== "#" && window.open(liveLink, "_blank")}
-      whileHover={{ y: -8, boxShadow: '0 24px 64px rgba(79,111,255,0.2)' }}
+      whileHover={{ y: -6, boxShadow: '0 24px 64px rgba(79,111,255,0.2)' }}
       transition={{ type: 'spring', stiffness: 280 }}
       style={{
-        borderRadius: 24,
-        overflow: 'hidden',
-        background: 'rgba(10,14,28,0.7)',
-        backdropFilter: 'blur(20px)',
-        border: '1px solid rgba(99,120,255,.2)',
+        borderRadius: 22,
+        overflow: "hidden",
+        background: "rgba(10,14,28,0.65)",
+        backdropFilter: "blur(20px)",
+        border: "1px solid rgba(99,120,255,.12)",
         cursor: liveLink && liveLink !== "#" ? 'pointer' : 'default',
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        height: "100%",
+        boxSizing: "border-box",
         position: 'relative'
       }}
     >
-      <div
-        style={{
-          aspectRatio: "16/9",
-          width: "100%",
-          background: image 
-            ? `url("${image}") center/cover no-repeat`
-            : `linear-gradient(135deg,${catColors[category] || '#4f6fff'}22,${catColors[category] || '#a259ff'}44)`,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: 64,
-          color: catColors[category] || '#4f6fff',
-          borderBottom: '1px solid rgba(255,255,255,0.05)',
-          transition: 'all 0.5s',
-          position: 'relative'
-        }}
-      >
-        {!image && getCatIcon(category)}
-        
-        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '40%', background: 'linear-gradient(to top, rgba(10,14,28,0.9), transparent)' }} />
-        
-        <div style={{ position: 'absolute', bottom: 12, left: 16, right: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-          <span
-            className="tag"
-            style={{
-              fontSize: 11,
-              padding: '4px 12px',
-              borderRadius: 20,
-              background: `rgba(10,14,28,0.85)`,
-              backdropFilter: 'blur(10px)',
-              color: catColors[category] || '#4f6fff',
-              border: `1px solid ${catColors[category] || '#4f6fff'}35`,
-            }}
-          >
-            {category}
-          </span>
-          <span className={`tag ${status === 'completed' ? 'tag-green' : 'tag-orange'}`} style={{ fontSize: 11, padding: '4px 12px', borderRadius: 20, display: 'flex', alignItems: 'center', gap: 4, background: status === 'completed' ? 'rgba(0,230,118,0.1)' : 'rgba(255,152,0,0.1)', border: `1px solid ${status === 'completed' ? 'rgba(0,230,118,0.3)' : 'rgba(255,152,0,0.3)'}`, color: status === 'completed' ? '#00e676' : '#ff9800', backdropFilter: 'blur(10px)' }}>
-            {status === 'completed' ? <><FaCheck size={10} /> Completed</> : <>⟳ Ongoing</>}
-          </span>
+      <div>
+        <div
+          style={{
+            aspectRatio: "16/9",
+            width: "100%",
+            background: image 
+              ? `url("${image}") center/cover no-repeat` 
+              : `linear-gradient(135deg,${catColors[category] || "#4f6fff"}22,${catColors[category] || "#a259ff"}44)`,
+            position: "relative",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            overflow: "hidden",
+            color: catColors[category] || "#4f6fff",
+          }}
+        >
+          {!image && getCatIcon(category)}
+          
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, transparent 40%, rgba(3,5,10,0.95))" }} />
+          
+          <div style={{ position: "absolute", bottom: 16, left: 20, right: 20, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <span
+              className="tag"
+              style={{
+                fontSize: 11,
+                padding: "3px 10px",
+                background: `${catColors[category] || "#4f6fff"}18`,
+                color: catColors[category] || "#4f6fff",
+                borderColor: `${catColors[category] || "#4f6fff"}35`,
+              }}
+            >
+              {category}
+            </span>
+            <span
+              className={`tag ${!isOngoing ? "tag-green" : "tag-orange"}`}
+              style={{ fontSize: 11, padding: "3px 10px" }}
+            >
+              {!isOngoing ? "✓ Completed" : "⟳ Ongoing"}
+            </span>
+          </div>
+        </div>
+
+        <div style={{ padding: 24 }}>
+          <h3 style={{ fontFamily: "Syne", fontWeight: 700, fontSize: 19, fontStyle: "italic", marginBottom: 8, color: "#e8eaf6" }}>
+            {title}
+          </h3>
+          <p style={{ color: "#7b82a8", fontSize: 13.5, lineHeight: 1.6, marginBottom: 20, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+            {subtitle || description}
+          </p>
+
+          {techStack && (
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+              {techStack.slice(0, 3).map((tech: string) => (
+                <span
+                  key={tech}
+                  style={{
+                    fontSize: 11,
+                    color: "#7b82a8",
+                    background: "rgba(255,255,255,0.03)",
+                    padding: "3px 8px",
+                    borderRadius: 6,
+                    border: "1px solid rgba(255,255,255,0.05)"
+                  }}
+                >
+                  {tech}
+                </span>
+              ))}
+              {techStack.length > 3 && (
+                <span style={{ fontSize: 11, color: "#4f6fff", alignSelf: "center", fontWeight: 600 }}>
+                  +{techStack.length - 3} more
+                </span>
+              )}
+            </div>
+          )}
         </div>
       </div>
-      <div style={{ padding: '24px 20px' }}>
-        <h3 style={{ fontFamily: 'Syne', fontWeight: 800, fontSize: 18, marginBottom: 12, fontStyle: 'italic', color: '#ffffff' }}>{title}</h3>
-        <p style={{ color: '#7b82a8', fontSize: 14, lineHeight: 1.6, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{description}</p>
-        
-        <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.05)', margin: '20px 0' }} />
-        
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: 12, color: '#596184' }}>Click to explore</span>
-          <span style={{ fontSize: 13, color: '#4f6fff', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 6 }}>
+
+      <div style={{ padding: "0 24px 24px" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px solid rgba(255,255,255,0.05)", paddingTop: 16 }}>
+          <span style={{ fontSize: 12, color: "#545975", fontWeight: 600 }}>Click to explore</span>
+          <div style={{ color: "#4f6fff", display: "flex", alignItems: "center", gap: 6, fontSize: 13, fontWeight: 700 }}>
             Details <FaArrowRight size={10} />
-          </span>
+          </div>
         </div>
       </div>
     </motion.div>
