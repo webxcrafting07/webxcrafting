@@ -110,6 +110,24 @@ export default function LocationClient({ cityKey, cityInfo, nearbyCities = [] }:
   const serviceSub = serviceSubtitles[serviceIndex];
   const faqs = faqSets[faqIndex];
 
+  // Dynamic LSI Keywords for On-Page SEO
+  const baseKeywords = cityInfo.description ? cityInfo.description.toLowerCase().split(' ').filter(w => w.length > 5).slice(0, 5) : [];
+  const seoKeywords = [
+    `Best Web Design Agency in ${name}`,
+    `E-commerce Website Developers ${name}`,
+    `Custom Software Development ${name}`,
+    `SEO Services in ${name}`,
+    `Mobile App Development Company ${name}`,
+    `React Next.js Developers ${name}`,
+    `Digital Marketing Agency ${name}`,
+    `Shopify Developers in ${name}`,
+    `Local Business Website ${name}`,
+    `Top IT Companies in ${name}`,
+    `Affordable Web Design ${name}`,
+    `UI/UX Design Agency ${name}`,
+    `Website Maintenance ${name}`
+  ];
+
   // Dynamic LocalBusiness Structured Schema
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.webxcrafting.in";
   const locationUrl = `${baseUrl}/locations/web-development-company-in-${cityKey}`;
@@ -177,12 +195,66 @@ export default function LocationClient({ cityKey, cityInfo, nearbyCities = [] }:
     ]
   };
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.a
+      }
+    }))
+  };
+
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Web Development",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": `WebXCrafting - Web Development Company in ${name}`
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": name
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Web Development Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Business Website Development"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "E-commerce Website Development"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Custom Web Applications"
+          }
+        }
+      ]
+    }
+  };
+
   return (
     <>
       {/* Inject Structured Local Schema */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([localBusinessSchema, breadcrumbSchema]) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([localBusinessSchema, breadcrumbSchema, faqSchema, serviceSchema]) }}
       />
 
       <DotBackground />
@@ -743,6 +815,32 @@ export default function LocationClient({ cityKey, cityInfo, nearbyCities = [] }:
               </div>
             );
           })}
+        </div>
+      </section>
+
+      {/* SEO Popular Searches (Keywords) */}
+      <section className="mobile-p-6" style={{ position: "relative", zIndex: 10, padding: "0 24px 60px", maxWidth: 1000, margin: "0 auto" }}>
+        <div style={{ textAlign: "center", marginBottom: 30 }}>
+          <h3 style={{ fontFamily: "Syne", fontSize: 24, fontStyle: "italic", fontWeight: 700, color: "#8892b0" }}>
+            Popular Searches in {name}
+          </h3>
+        </div>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 10, justifyContent: "center" }}>
+          {seoKeywords.map((keyword, i) => (
+            <div 
+              key={i} 
+              style={{
+                padding: "8px 16px",
+                borderRadius: 100,
+                fontSize: 12,
+                color: "#7b82a8",
+                background: "rgba(255,255,255,0.02)",
+                border: "1px solid rgba(255,255,255,0.04)"
+              }}
+            >
+              {keyword}
+            </div>
+          ))}
         </div>
       </section>
 

@@ -24,13 +24,31 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: 'Not Found' }
   }
 
-  const title = `Best Web Development Company in ${cityInfo.name} | WebXCrafting`
-  const description = cityInfo.description
+  const title = `Top Web Development & App Design Company in ${cityInfo.name} | WebXCrafting`
+  const description = `${cityInfo.description} We offer premium e-commerce solutions, custom web applications, digital marketing, and local SEO services tailored for businesses in ${cityInfo.name}.`
+
+  // Generate extended LSI keywords based on the city
+  const baseKeywords = cityInfo.keywords.split(',').map(k => k.trim())
+  const extendedKeywords = [
+    `best web design agency in ${cityInfo.name}`,
+    `e-commerce website developers in ${cityInfo.name}`,
+    `custom software development ${cityInfo.name}`,
+    `seo services in ${cityInfo.name}`,
+    `mobile app development company ${cityInfo.name}`,
+    `react nextjs developers ${cityInfo.name}`,
+    `digital marketing agency ${cityInfo.name}`,
+    `shopify developers in ${cityInfo.name}`,
+    `local business website ${cityInfo.name}`,
+    `top it companies in ${cityInfo.name}`,
+    `affordable web design ${cityInfo.name}`
+  ]
+
+  const allKeywords = Array.from(new Set([...baseKeywords, ...extendedKeywords])).join(', ')
 
   return {
     title,
     description,
-    keywords: cityInfo.keywords,
+    keywords: allKeywords,
     alternates: {
       canonical: `/locations/web-development-company-in-${cityKey}`,
     },
