@@ -1173,9 +1173,28 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
           </div>
         </FadeUp>
 
+        <style dangerouslySetInnerHTML={{__html: `
+          .project-card-wrapper {
+            flex: 0 0 100%;
+            min-width: 100%;
+            scroll-snap-align: start;
+          }
+          @media (min-width: 768px) {
+            .project-card-wrapper {
+              flex: 0 0 calc(50% - 12px);
+              min-width: calc(50% - 12px);
+            }
+          }
+          @media (min-width: 1024px) {
+            .project-card-wrapper {
+              flex: 0 0 calc(33.333% - 16px);
+              min-width: calc(33.333% - 16px);
+            }
+          }
+        `}} />
         <div className="scroll-container" ref={projectScrollRef} style={{ scrollBehavior: 'smooth' }}>
           {projects.map((p: any, i) => (
-            <FadeUp key={i} delay={i * 0.1} className="shrink-0 w-full min-w-full md:min-w-[calc(50%-12px)] md:w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] lg:w-[calc(33.333%-16px)] snap-start">
+            <FadeUp key={i} delay={i * 0.1} className="project-card-wrapper">
               <ProjectCard {...p} />
             </FadeUp>
           ))}
