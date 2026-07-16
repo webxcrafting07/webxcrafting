@@ -442,11 +442,37 @@ const defaultServices = [
 ]
 
 const defaultProjects = [
-  { title: 'TechStart Landing', description: 'Animated landing page with lead capture & blog for a tech startup.', category: 'Business', status: 'completed' },
-  { title: 'FashionHub Store', description: 'E-commerce with 500+ products, Razorpay integration, and inventory mgmt.', category: 'E-commerce', status: 'completed' },
-  { title: 'JobsIndia Portal', description: 'Job listing platform with employer/candidate dashboards and notifications.', category: 'Job Portal', status: 'ongoing' },
+  {
+    _id: "1",
+    title: "TechStart Landing",
+    subtitle: "Next-Gen SaaS & Business Lead Generation",
+    description: "A high-conversion landing page with glassmorphism layout, automated lead capture forms, local database logging, and ultra-fast sub-second LCP loading speed.",
+    category: "Business",
+    status: "completed",
+    liveLink: "https://www.webxcrafting.in",
+    techStack: ["Next.js", "React", "Framer Motion", "Tailwind CSS", "Mongoose"],
+  },
+  {
+    _id: "2",
+    title: "FashionHub Store",
+    subtitle: "Luxury Fashion E-Commerce Platform",
+    description: "An elegant online fashion catalog processing 10,000+ orders, equipped with dynamic cart systems, Razorpay payment gateway integration, and stock inventory notifications.",
+    category: "E-commerce",
+    status: "completed",
+    liveLink: "https://www.webxcrafting.in/services",
+    techStack: ["React.js", "Node.js", "Express", "MongoDB", "Razorpay API"],
+  },
+  {
+    _id: "3",
+    title: "JobsIndia Portal",
+    subtitle: "Automated Recruitment & Job Directory",
+    description: "Pan-India job directory platform connecting candidate profiles with verified recruiters, equipped with automatic resume upload parsing and customized SMS alert reminders.",
+    category: "Job Portal",
+    status: "ongoing",
+    liveLink: "",
+    techStack: ["Next.js", "React", "MongoDB", "Nodemailer SMTP", "JWT Auth"],
+  },
 ]
-
 const testimonials = [
   { name: 'Arjun Mehta', role: 'Founder, TechStart', text: 'WebXCrafting delivered a stunning e-commerce site in just 2 weeks. Sales went up 40% in the first month!', initials: 'AM' },
   { name: 'Priya Sharma', role: 'CEO, FashionHub', text: 'Incredible work! The design is exactly what I wanted — modern, fast, and converts like crazy.', initials: 'PS' },
