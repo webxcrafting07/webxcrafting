@@ -196,31 +196,46 @@ function ProjectCard({ title, description, category, status, image, liveLink }: 
           fontSize: 64,
           color: catColors[category] || '#4f6fff',
           borderBottom: '1px solid rgba(255,255,255,0.05)',
-          transition: 'all 0.5s'
+          transition: 'all 0.5s',
+          position: 'relative'
         }}
       >
         {!image && getCatIcon(category)}
-      </div>
-      <div style={{ padding: 24 }}>
-        <div style={{ display: 'flex', gap: 8, marginBottom: 12, flexWrap: 'wrap' }}>
-          <span className={`tag ${status === 'completed' ? 'tag-green' : 'tag-orange'}`} style={{ fontSize: 11, padding: '3px 10px', display: 'flex', alignItems: 'center', gap: 4 }}>
-            {status === 'completed' ? <><FaCheck size={10} /> Completed</> : <>⟳ Ongoing</>}
-          </span>
+        
+        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '40%', background: 'linear-gradient(to top, rgba(10,14,28,0.9), transparent)' }} />
+        
+        <div style={{ position: 'absolute', bottom: 12, left: 16, right: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
           <span
             className="tag"
             style={{
               fontSize: 11,
-              padding: '3px 10px',
-              background: `${catColors[category] || '#4f6fff'}18`,
+              padding: '4px 12px',
+              borderRadius: 20,
+              background: `rgba(10,14,28,0.85)`,
+              backdropFilter: 'blur(10px)',
               color: catColors[category] || '#4f6fff',
-              borderColor: `${catColors[category] || '#4f6fff'}35`,
+              border: `1px solid ${catColors[category] || '#4f6fff'}35`,
             }}
           >
             {category}
           </span>
+          <span className={`tag ${status === 'completed' ? 'tag-green' : 'tag-orange'}`} style={{ fontSize: 11, padding: '4px 12px', borderRadius: 20, display: 'flex', alignItems: 'center', gap: 4, background: status === 'completed' ? 'rgba(0,230,118,0.1)' : 'rgba(255,152,0,0.1)', border: `1px solid ${status === 'completed' ? 'rgba(0,230,118,0.3)' : 'rgba(255,152,0,0.3)'}`, color: status === 'completed' ? '#00e676' : '#ff9800', backdropFilter: 'blur(10px)' }}>
+            {status === 'completed' ? <><FaCheck size={10} /> Completed</> : <>⟳ Ongoing</>}
+          </span>
         </div>
-        <h3 style={{ fontFamily: 'Syne', fontWeight: 700, fontSize: 17, marginBottom: 8, fontStyle: 'italic' }}>{title}</h3>
-        <p style={{ color: '#7b82a8', fontSize: 14, lineHeight: 1.65, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{description}</p>
+      </div>
+      <div style={{ padding: '24px 20px' }}>
+        <h3 style={{ fontFamily: 'Syne', fontWeight: 800, fontSize: 18, marginBottom: 12, fontStyle: 'italic', color: '#ffffff' }}>{title}</h3>
+        <p style={{ color: '#7b82a8', fontSize: 14, lineHeight: 1.6, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{description}</p>
+        
+        <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.05)', margin: '20px 0' }} />
+        
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span style={{ fontSize: 12, color: '#596184' }}>Click to explore</span>
+          <span style={{ fontSize: 13, color: '#4f6fff', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 6 }}>
+            Details <FaArrowRight size={10} />
+          </span>
+        </div>
       </div>
     </motion.div>
   )
