@@ -12,10 +12,14 @@ import {
 } from "react-icons/fa";
 
 const services = [
-  "Business Website",
-  "E-commerce",
-  "Job Portal",
-  "Custom Website",
+  "Business Website Development",
+  "E-commerce Stores",
+  "Custom Web Applications",
+  "React & Next.js Development",
+  "SEO & Digital Marketing",
+  "Website Redesign",
+  "UI/UX Design",
+  "SaaS Development",
 ];
 const quickLinks = [
   { label: "Home", href: "/" },
