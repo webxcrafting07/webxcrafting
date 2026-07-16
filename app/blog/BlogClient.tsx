@@ -213,9 +213,8 @@ export default function BlogClient({ initialBlogs }: BlogClientProps) {
           </FadeUp>
         ) : (
           <div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
               gap: 28,
             }}
           >
