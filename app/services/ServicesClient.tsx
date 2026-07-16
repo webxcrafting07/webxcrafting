@@ -248,13 +248,8 @@ export default function ServicesClient() {
             background: "rgba(79,111,255,0.05)", 
             borderTop: "1px solid rgba(79,111,255,0.1)", 
             borderBottom: "1px solid rgba(79,111,255,0.1)", 
-            whiteSpace: "nowrap",
-            width: "100vw",
-            position: "relative",
-            left: "50%",
-            right: "50%",
-            marginLeft: "-50vw",
-            marginRight: "-50vw"
+            width: "100%",
+            position: "relative"
           }}>
             <motion.div
               animate={{ x: [0, -1035] }}

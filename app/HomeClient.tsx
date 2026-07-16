@@ -606,7 +606,7 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
       {/* ─── TECH STACK MARQUEE ──────────────────── */}
       <section style={{ padding: '40px 0', borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)', background: 'rgba(79,111,255,0.03)', position: 'relative', zIndex: 10, overflow: 'hidden' }}>
         <div style={{ textAlign: 'center', fontSize: 12, fontWeight: 700, color: '#7b82a8', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 24 }}>Powered By Enterprise Tech Stack</div>
-        <div className="marquee-container" style={{ width: "100vw", position: "relative", left: "50%", right: "50%", marginLeft: "-50vw", marginRight: "-50vw" }}>
+        <div className="marquee-container" style={{ width: "100%", position: "relative" }}>
           <div className="marquee-content" style={{ gap: 60, opacity: 0.6 }}>
             {[
               { name: 'React.js', icon: <SiReact /> },
@@ -837,12 +837,8 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
           <div 
             className="marquee-container"
             style={{
-              width: "100vw",
-              position: "relative",
-              left: "50%",
-              right: "50%",
-              marginLeft: "-50vw",
-              marginRight: "-50vw"
+              width: "100%",
+              position: "relative"
             }}
           >
             <div className="marquee-content" style={{ gap: 24 }}>

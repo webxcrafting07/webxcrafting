@@ -411,8 +411,7 @@ export default function LocationClient({ cityKey, cityInfo, nearbyCities = [] }:
           }
           .service-marquee-container {
             overflow: hidden;
-            width: 100vw;
-            margin-left: calc(-50vw + 50%);
+            width: 100%;
             padding: 20px 0;
             display: flex;
           }
