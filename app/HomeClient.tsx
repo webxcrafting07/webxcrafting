@@ -1175,7 +1175,7 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
 
         <div className="scroll-container" ref={projectScrollRef} style={{ scrollBehavior: 'smooth' }}>
           {projects.map((p: any, i) => (
-            <FadeUp key={i} delay={i * 0.1} className="shrink-0 w-[100%] min-w-[100%] md:min-w-[calc(50%-12px)] md:w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] lg:w-[calc(33.333%-16px)] snap-start">
+            <FadeUp key={i} delay={i * 0.1} className="shrink-0 w-full min-w-full md:min-w-[calc(50%-12px)] md:w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] lg:w-[calc(33.333%-16px)] snap-start">
               <ProjectCard {...p} />
             </FadeUp>
           ))}
