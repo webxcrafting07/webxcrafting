@@ -1173,9 +1173,9 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
           </div>
         </FadeUp>
 
-        <div className="scroll-container" ref={projectScrollRef} style={{ scrollBehavior: 'smooth' }}>
+        <div className="scroll-container" ref={projectScrollRef} style={{ scrollBehavior: 'smooth', padding: '10px 16px 40px' }}>
           {projects.map((p: any, i) => (
-            <FadeUp key={i} delay={i * 0.1} className="project-scroll-item">
+            <FadeUp key={i} delay={i * 0.1} className="project-scroll-item" style={{ flex: '0 0 auto', width: '85vw', maxWidth: '350px', minWidth: '0' }}>
               <ProjectCard {...p} />
             </FadeUp>
           ))}
@@ -1217,9 +1217,9 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
             </div>
           </FadeUp>
 
-          <div className="scroll-container" ref={blogScrollRef} style={{ scrollBehavior: 'smooth' }}>
+          <div className="scroll-container" ref={blogScrollRef} style={{ scrollBehavior: 'smooth', padding: '10px 16px 40px' }}>
             {blogs.map((blog: any, i: number) => (
-              <FadeUp key={blog._id} delay={i * 0.05} className="blog-scroll-item">
+              <FadeUp key={blog._id} delay={i * 0.05} className="blog-scroll-item" style={{ flex: '0 0 auto', width: '85vw', maxWidth: '350px', minWidth: '0' }}>
                 <motion.div
                   whileHover={{ y: -8, boxShadow: '0 24px 64px rgba(0,0,0,0.45)' }}
                   transition={{ type: 'spring', stiffness: 300 }}
