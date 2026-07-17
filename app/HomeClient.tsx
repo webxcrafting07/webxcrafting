@@ -749,7 +749,7 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
             </FadeUp>
           </div>
           <FadeUp delay={0.2} style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{ 
+            <div className="mobile-p-4" style={{ 
               background: 'linear-gradient(145deg, rgba(30,40,60,0.4) 0%, rgba(10,15,30,0.6) 100%)', 
               borderRadius: 32, 
               padding: '56px 40px', 
@@ -769,7 +769,7 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
                   </linearGradient>
                 </defs>
               </svg>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '48px 32px', justifyItems: 'center' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'clamp(24px, 5vw, 48px) clamp(16px, 4vw, 32px)', justifyItems: 'center' }}>
                 {[
                   { label: 'Performance', score: 99, color1: '#00e5ff', color2: '#2979ff', shadow: 'rgba(0,229,255,0.4)' },
                   { label: 'Accessibility', score: 100, color1: '#ff4081', color2: '#d500f9', shadow: 'rgba(213,0,249,0.4)' },
