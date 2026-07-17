@@ -1179,29 +1179,11 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
                 Latest <span className="grad-text">Articles</span>
               </h2>
             </div>
-            <div style={{ display: 'flex', gap: 12, marginLeft: 'auto' }}>
-              <button 
-                onClick={() => scrollBlogs('left')}
-                style={{ width: 48, height: 48, borderRadius: '50%', background: 'rgba(10,14,28,0.7)', border: '1px solid rgba(99,120,255,0.3)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', backdropFilter: 'blur(10px)', transition: 'all 0.3s' }}
-                onMouseOver={(e) => e.currentTarget.style.background = 'rgba(79,111,255,0.2)'}
-                onMouseOut={(e) => e.currentTarget.style.background = 'rgba(10,14,28,0.7)'}
-              >
-                ←
-              </button>
-              <button 
-                onClick={() => scrollBlogs('right')}
-                style={{ width: 48, height: 48, borderRadius: '50%', background: 'rgba(10,14,28,0.7)', border: '1px solid rgba(99,120,255,0.3)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', backdropFilter: 'blur(10px)', transition: 'all 0.3s' }}
-                onMouseOver={(e) => e.currentTarget.style.background = 'rgba(79,111,255,0.2)'}
-                onMouseOut={(e) => e.currentTarget.style.background = 'rgba(10,14,28,0.7)'}
-              >
-                →
-              </button>
-            </div>
           </FadeUp>
 
-          <div className="scroll-container" ref={blogScrollRef} style={{ scrollBehavior: 'smooth', padding: '10px 16px 40px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: 30 }}>
             {blogs.map((blog: any, i: number) => (
-              <FadeUp key={blog._id} delay={i * 0.05} className="blog-scroll-item" style={{ flex: '0 0 auto', width: '85vw', maxWidth: '350px', minWidth: '0' }}>
+              <FadeUp key={blog._id} delay={i * 0.05} style={{ height: '100%' }}>
                 <motion.div
                   whileHover={{ y: -8, boxShadow: '0 24px 64px rgba(0,0,0,0.45)' }}
                   transition={{ type: 'spring', stiffness: 300 }}
