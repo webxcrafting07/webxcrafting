@@ -202,6 +202,8 @@ export default function ServicesClient() {
           padding: "130px 32px 80px",
           maxWidth: 1200,
           margin: "0 auto",
+          width: "100%",
+          overflow: "hidden"
         }}
       >
         {/* HERO SECTION */}
