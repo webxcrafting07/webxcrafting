@@ -1260,35 +1260,11 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
               What Clients <span className="grad-text">Say</span>
             </h2>
           </div>
-          <div style={{ display: 'flex', gap: 12, marginLeft: 'auto' }}>
-            <button 
-              onClick={() => {
-                const el = document.getElementById('testi-scroll');
-                if(el) el.scrollBy({ left: -320, behavior: 'smooth' });
-              }}
-              style={{ width: 48, height: 48, borderRadius: '50%', background: 'rgba(10,14,28,0.7)', border: '1px solid rgba(99,120,255,0.3)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', backdropFilter: 'blur(10px)', transition: 'all 0.3s' }}
-              onMouseOver={(e) => e.currentTarget.style.background = 'rgba(79,111,255,0.2)'}
-              onMouseOut={(e) => e.currentTarget.style.background = 'rgba(10,14,28,0.7)'}
-            >
-              ←
-            </button>
-            <button 
-              onClick={() => {
-                const el = document.getElementById('testi-scroll');
-                if(el) el.scrollBy({ left: 320, behavior: 'smooth' });
-              }}
-              style={{ width: 48, height: 48, borderRadius: '50%', background: 'rgba(10,14,28,0.7)', border: '1px solid rgba(99,120,255,0.3)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', backdropFilter: 'blur(10px)', transition: 'all 0.3s' }}
-              onMouseOver={(e) => e.currentTarget.style.background = 'rgba(79,111,255,0.2)'}
-              onMouseOut={(e) => e.currentTarget.style.background = 'rgba(10,14,28,0.7)'}
-            >
-              →
-            </button>
-          </div>
         </FadeUp>
         
-        <div id="testi-scroll" className="scroll-container" style={{ scrollBehavior: 'smooth', gap: 24, paddingBottom: 20 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: 30 }}>
           {testimonials.map((t, i) => (
-            <FadeUp key={i} delay={i * 0.1} className="blog-scroll-item" style={{ minWidth: 'clamp(280px, 80vw, 360px)', flexShrink: 0 }}>
+            <FadeUp key={i} delay={i * 0.1} style={{ height: '100%' }}>
               <TestimonialCard {...t} />
             </FadeUp>
           ))}
