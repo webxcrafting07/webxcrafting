@@ -789,4 +789,22 @@ h6 {
   .hide-desktop {
     display: block;
   }
+  .hide-mobile {
+    display: none !important;
+  }
+  .show-mobile {
+    display: block !important;
+  }
+  .mobile-grid-1 {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+  .mobile-p-6 {
+    padding: 100px 24px 60px !important;
+    width: 100% !important;
+    overflow: hidden !important;
+  }
+  .mobile-p-4 {
+    padding: 24px 20px !important;
+  }
 }
