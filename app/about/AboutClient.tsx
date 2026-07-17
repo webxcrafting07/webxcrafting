@@ -74,7 +74,7 @@ export default function AboutClient() {
         <div style={{ textAlign: "center", marginBottom: 80 }}>
           <FadeUp>
             <div className="section-label" style={{ margin: '0 auto 20px' }}>About Us</div>
-            <h1 style={{ fontFamily: 'Syne', fontSize: 'clamp(36px,6vw,72px)', fontWeight: 800, fontStyle: 'italic', marginBottom: 24, lineHeight: 1.1, letterSpacing: '-1px' }}>
+            <h1 style={{ fontFamily: 'Syne', fontSize: 'clamp(30px, 8vw, 72px)', fontWeight: 800, fontStyle: 'italic', marginBottom: 24, lineHeight: 1.1, letterSpacing: '-1px', wordBreak: 'break-word', overflowWrap: 'break-word' }}>
               Passionate About <br />
               <span className="grad-text">Digital Craftsmanship</span>
             </h1>
