@@ -215,14 +215,12 @@ export default function ServicesClient() {
             <h1
               style={{
                 fontFamily: "Syne",
-                fontSize: "clamp(30px, 8vw, 72px)",
+                fontSize: "clamp(24px, 8vw, 72px)",
                 fontWeight: 800,
                 fontStyle: "italic",
                 marginBottom: 24,
                 lineHeight: 1.1,
-                letterSpacing: "-1px",
-                wordBreak: "break-word",
-                overflowWrap: "break-word"
+                letterSpacing: "-1px"
               }}
             >
               We Build Digital <br /><span className="grad-text">Masterpieces</span>
