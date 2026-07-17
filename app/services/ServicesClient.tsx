@@ -244,8 +244,6 @@ export default function ServicesClient() {
           <div style={{ 
             marginBottom: 100, 
             overflow: "hidden", 
-            display: "flex", 
-            gap: 32, 
             padding: "20px 0", 
             background: "rgba(79,111,255,0.05)", 
             borderTop: "1px solid rgba(79,111,255,0.1)", 
@@ -256,14 +254,14 @@ export default function ServicesClient() {
             <motion.div
               animate={{ x: [0, -1035] }}
               transition={{ repeat: Infinity, ease: "linear", duration: 20 }}
-              style={{ display: "flex", gap: 64, alignItems: "center" }}
+              style={{ display: "flex", gap: 64, alignItems: "center", width: "max-content" }}
             >
               {[...Array(4)].map((_, i) => (
                 <div key={i} style={{ display: "flex", gap: 64, alignItems: "center" }}>
-                  <span style={{ fontSize: 16, fontWeight: 700, color: "#4f6fff", fontFamily: "Syne", fontStyle: "italic" }}>✦ 100% Client Satisfaction</span>
-                  <span style={{ fontSize: 16, fontWeight: 700, color: "#e8eaf6", fontFamily: "Syne", fontStyle: "italic" }}>✦ Next.js Performance</span>
-                  <span style={{ fontSize: 16, fontWeight: 700, color: "#a259ff", fontFamily: "Syne", fontStyle: "italic" }}>✦ Zero Template Code</span>
-                  <span style={{ fontSize: 16, fontWeight: 700, color: "#00e676", fontFamily: "Syne", fontStyle: "italic" }}>✦ Sub-Second Load Speeds</span>
+                  <span style={{ fontSize: 16, fontWeight: 700, color: "#4f6fff", fontFamily: "Syne", fontStyle: "italic", whiteSpace: "nowrap" }}>✦ 100% Client Satisfaction</span>
+                  <span style={{ fontSize: 16, fontWeight: 700, color: "#e8eaf6", fontFamily: "Syne", fontStyle: "italic", whiteSpace: "nowrap" }}>✦ Next.js Performance</span>
+                  <span style={{ fontSize: 16, fontWeight: 700, color: "#a259ff", fontFamily: "Syne", fontStyle: "italic", whiteSpace: "nowrap" }}>✦ Zero Template Code</span>
+                  <span style={{ fontSize: 16, fontWeight: 700, color: "#00e676", fontFamily: "Syne", fontStyle: "italic", whiteSpace: "nowrap" }}>✦ Sub-Second Load Speeds</span>
                 </div>
               ))}
             </motion.div>
