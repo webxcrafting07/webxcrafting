@@ -84,10 +84,10 @@ export default function AboutClient() {
           </FadeUp>
           
           <FadeUp delay={0.1}>
-            <div style={{ 
+            <div className="mobile-p-4" style={{ 
               display: 'flex', 
               flexWrap: 'wrap', 
-              gap: 40, 
+              gap: 'clamp(24px, 4vw, 40px)', 
               justifyContent: 'center', 
               padding: '30px 40px', 
               background: 'rgba(79,111,255,0.05)', 
@@ -96,17 +96,17 @@ export default function AboutClient() {
               maxWidth: 900,
               margin: '0 auto'
             }}>
-              <div style={{ textAlign: 'center', flex: 1, minWidth: 150 }}>
+              <div style={{ textAlign: 'center', flex: 1, minWidth: 140 }}>
                 <div style={{ fontSize: 'clamp(32px, 4vw, 48px)', fontWeight: 800, color: '#e8eaf6', fontFamily: 'Syne' }}>50+</div>
                 <div style={{ color: '#4f6fff', fontWeight: 600, fontSize: 14, letterSpacing: 1, textTransform: 'uppercase' }}>Projects Delivered</div>
               </div>
-              <div style={{ width: 1, background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent)' }}></div>
-              <div style={{ textAlign: 'center', flex: 1, minWidth: 150 }}>
+              <div className="hide-mobile" style={{ width: 1, background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent)' }}></div>
+              <div style={{ textAlign: 'center', flex: 1, minWidth: 140 }}>
                 <div style={{ fontSize: 'clamp(32px, 4vw, 48px)', fontWeight: 800, color: '#e8eaf6', fontFamily: 'Syne' }}>15+</div>
                 <div style={{ color: '#a259ff', fontWeight: 600, fontSize: 14, letterSpacing: 1, textTransform: 'uppercase' }}>Cities Covered</div>
               </div>
-              <div style={{ width: 1, background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent)' }}></div>
-              <div style={{ textAlign: 'center', flex: 1, minWidth: 150 }}>
+              <div className="hide-mobile" style={{ width: 1, background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent)' }}></div>
+              <div style={{ textAlign: 'center', flex: 1, minWidth: 140 }}>
                 <div style={{ fontSize: 'clamp(32px, 4vw, 48px)', fontWeight: 800, color: '#e8eaf6', fontFamily: 'Syne' }}>99%</div>
                 <div style={{ color: '#00e676', fontWeight: 600, fontSize: 14, letterSpacing: 1, textTransform: 'uppercase' }}>Client Satisfaction</div>
               </div>
