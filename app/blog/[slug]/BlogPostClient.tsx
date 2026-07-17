@@ -311,7 +311,8 @@ export default function BlogPostClient({ blog, relatedBlogs, fullUrl }: { blog: 
                     >
                       <div
                         style={{
-                          height: 160,
+                          aspectRatio: '1200/630',
+                          width: '100%',
                           background: !rb.coverImage ? `linear-gradient(135deg, ${catColors[rb.category] || '#4f6fff'}22, ${catColors[rb.category] || '#a259ff'}44)` : 'transparent',
                           display: 'flex',
                           alignItems: 'center',

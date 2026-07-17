@@ -241,7 +241,7 @@ export default function BlogClient({ initialBlogs }: BlogClientProps) {
                       whileHover={{ scale: 1.05 }}
                       transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
                       style={{
-                        height: 200,
+                        aspectRatio: '1200/630',
                         width: '100%',
                         background: !blog.coverImage
                           ? `linear-gradient(135deg, ${catColors[blog.category] || '#4f6fff'}22, ${catColors[blog.category] || '#a259ff'}44)`
