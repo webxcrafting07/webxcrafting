@@ -112,9 +112,9 @@ export default function RefundPolicy() {
                 </li>
               </ul>
               <p className="mt-4">
-                <strong>Example:</strong> If a $10,000 project is 50% complete
-                when cancelled, the client pays $5,000 for completed work + $750
-                cancellation fee = $5,750 total.
+                <strong>Example:</strong> If a 10,000 project is 50% complete
+                when cancelled, the client pays 5,000 for completed work + 750
+                cancellation fee = 5,750 total.
               </p>
 
               <h3 className="text-xl font-semibold text-white mt-6 mb-3">
