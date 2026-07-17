@@ -28,7 +28,7 @@ export default function OfferBar() {
       id="wxc-offer-bar"
       style={{
         position: "relative",
-        zIndex: 100,
+        zIndex: 1000,
         background: "linear-gradient(90deg, #4f6fff 0%, #8250ff 100%)",
         color: "#ffffff",
         padding: "10px 40px",
