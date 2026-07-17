@@ -43,7 +43,7 @@ function StatCard({ number, label }: { number: string; label: string }) {
       <div
         style={{
           fontFamily: 'Syne',
-          fontSize: 44,
+          fontSize: 'clamp(28px, 8vw, 44px)',
           fontWeight: 800,
           background: 'linear-gradient(135deg,#4f6fff,#a259ff)',
           WebkitBackgroundClip: 'text',
