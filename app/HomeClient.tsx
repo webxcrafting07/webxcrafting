@@ -918,7 +918,7 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
         </FadeUp>
         {services.length > 4 ? (
           <div 
-            className="marquee-container"
+            className="marquee-wrapper"
             style={{
               width: "100%",
               position: "relative"

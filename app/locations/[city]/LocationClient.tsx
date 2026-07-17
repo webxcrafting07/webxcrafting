@@ -437,8 +437,8 @@ export default function LocationClient({ cityKey, cityInfo, nearbyCities = [] }:
           }
         `}</style>
         
-        <div className="service-marquee-container">
-          <div className="service-marquee-track">
+        <div className="marquee-wrapper">
+          <div className="marquee-content">
             {/* We duplicate the array 2 times to create a seamless infinite loop effect */}
             {[...Array(2)].map((_, loopIdx) => (
               <React.Fragment key={loopIdx}>
