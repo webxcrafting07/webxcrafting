@@ -687,8 +687,8 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
       </section>
 
       {/* ─── TECH STACK MARQUEE ──────────────────── */}
-      <section style={{ padding: '20px 0', borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)', background: 'rgba(79,111,255,0.03)', position: 'relative', zIndex: 10, overflow: 'hidden' }}>
-        <div style={{ textAlign: 'center', fontSize: 12, fontWeight: 700, color: '#7b82a8', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 16 }}>Powered By Enterprise Tech Stack</div>
+      <section style={{ padding: '10px 0', borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)', background: 'rgba(79,111,255,0.03)', position: 'relative', zIndex: 10, overflow: 'hidden' }}>
+        <div style={{ textAlign: 'center', fontSize: 11, fontWeight: 700, color: '#7b82a8', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 10 }}>Powered By Enterprise Tech Stack</div>
         <div className="marquee-container" style={{ width: "100%", position: "relative" }}>
           <div className="marquee-content" style={{ gap: 60, opacity: 0.6 }}>
             {[
