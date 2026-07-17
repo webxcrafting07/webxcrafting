@@ -255,7 +255,7 @@ export default function BlogClient({ initialBlogs }: BlogClientProps) {
                       }}
                     >
                       {blog.coverImage && (
-                        <Image src={blog.coverImage} alt={blog.title} fill sizes="(max-width: 768px) 100vw, 400px" style={{ objectFit: 'cover' }} />
+                        <Image src={blog.coverImage} alt={blog.title} fill sizes="(max-width: 768px) 100vw, 400px" style={{ objectFit: 'cover' }} unoptimized={blog.coverImage?.startsWith('/api/og')} />
                       )}
                       {!blog.coverImage && (
                         <div style={{ fontSize: 56, opacity: 0.3 }}>📝</div>

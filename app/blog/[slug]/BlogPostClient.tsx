@@ -184,6 +184,7 @@ export default function BlogPostClient({ blog, relatedBlogs, fullUrl }: { blog: 
               priority
               sizes="(max-width: 860px) 100vw, 860px"
               style={{ objectFit: 'cover', display: 'block' }}
+              unoptimized={blog.coverImage?.startsWith('/api/og')}
             />
           </motion.div>
         )}
@@ -321,7 +322,7 @@ export default function BlogPostClient({ blog, relatedBlogs, fullUrl }: { blog: 
                           position: 'relative'
                         }}
                       >
-                        {rb.coverImage && <Image src={rb.coverImage} alt={rb.title} fill sizes="(max-width: 768px) 100vw, 300px" style={{ objectFit: 'cover' }} />}
+                        {rb.coverImage && <Image src={rb.coverImage} alt={rb.title} fill sizes="(max-width: 768px) 100vw, 300px" style={{ objectFit: 'cover' }} unoptimized={rb.coverImage?.startsWith('/api/og')} />}
                         {!rb.coverImage && <div style={{ fontSize: 40, opacity: 0.3 }}>📝</div>}
                       </div>
                       <div style={{ padding: 20 }}>
