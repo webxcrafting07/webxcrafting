@@ -916,31 +916,13 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
             Professional <span className="grad-text">Web Services</span> for Modern Businesses
           </h2>
         </FadeUp>
-        {services.length > 4 ? (
-          <div 
-            className="marquee-wrapper"
-            style={{
-              width: "100%",
-              position: "relative"
-            }}
-          >
-            <div className="marquee-content" style={{ gap: 24 }}>
-              {[...services, ...services].map((s: any, i) => (
-                <div key={i} className="service-marquee-item">
-                  <ServiceCard {...s} onClick={() => setSelectedService(s)} />
-                </div>
-              ))}
-            </div>
-          </div>
-        ) : (
-          <div className="services-grid">
-            {services.map((s: any, i) => (
-              <FadeUp key={i} delay={i * 0.08}>
-                <ServiceCard {...s} onClick={() => setSelectedService(s)} />
-              </FadeUp>
-            ))}
-          </div>
-        )}
+        <div className="services-grid">
+          {services.map((s: any, i) => (
+            <FadeUp key={i} delay={i * 0.08}>
+              <ServiceCard {...s} onClick={() => setSelectedService(s)} />
+            </FadeUp>
+          ))}
+        </div>
 
         {selectedService && (
           <div
