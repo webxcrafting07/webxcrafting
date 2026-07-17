@@ -1262,12 +1262,14 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
           </div>
         </FadeUp>
         
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: 30 }}>
-          {testimonials.map((t, i) => (
-            <FadeUp key={i} delay={i * 0.1} style={{ height: '100%' }}>
-              <TestimonialCard {...t} />
-            </FadeUp>
-          ))}
+        <div className="marquee-wrapper">
+          <div className="marquee-content">
+            {[...testimonials, ...testimonials].map((t, i) => (
+              <div key={i} style={{ width: 'clamp(280px, 80vw, 360px)', flexShrink: 0 }}>
+                <TestimonialCard {...t} />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

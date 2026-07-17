@@ -679,6 +679,32 @@ h6 {
   .service-scroll-item { flex: 0 0 calc(100% - 32px) !important; width: calc(100% - 32px) !important; max-width: calc(100% - 32px) !important; min-width: 0 !important; }
 }
 
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-wrapper {
+  overflow: hidden;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  display: flex;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+.marquee-content {
+  display: flex;
+  gap: 30px;
+  width: max-content;
+  animation: scroll-left 40s linear infinite;
+  padding-right: 30px;
+}
+.marquee-content:hover {
+  animation-play-state: paused;
+}
+
 .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
