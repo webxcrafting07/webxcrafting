@@ -1,6 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import DotBackground from '@/components/DotBackground'
@@ -170,18 +171,19 @@ export default function BlogPostClient({ blog, relatedBlogs, fullUrl }: { blog: 
               overflow: 'hidden',
               marginBottom: 48,
               border: '1px solid rgba(99,120,255,0.12)',
+              position: 'relative',
+              width: '100%',
+              aspectRatio: '16/9',
+              maxHeight: 460
             }}
           >
-            <img
+            <Image
               src={blog.coverImage}
               alt={blog.title}
-              style={{
-                width: '100%',
-                height: 'auto',
-                maxHeight: 460,
-                objectFit: 'cover',
-                display: 'block',
-              }}
+              fill
+              priority
+              sizes="(max-width: 860px) 100vw, 860px"
+              style={{ objectFit: 'cover', display: 'block' }}
             />
           </motion.div>
         )}
@@ -312,14 +314,14 @@ export default function BlogPostClient({ blog, relatedBlogs, fullUrl }: { blog: 
                       <div
                         style={{
                           height: 160,
-                          background: rb.coverImage
-                            ? `url(${rb.coverImage}) center/cover no-repeat`
-                            : `linear-gradient(135deg, ${catColors[rb.category] || '#4f6fff'}22, ${catColors[rb.category] || '#a259ff'}44)`,
+                          background: !rb.coverImage ? `linear-gradient(135deg, ${catColors[rb.category] || '#4f6fff'}22, ${catColors[rb.category] || '#a259ff'}44)` : 'transparent',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
+                          position: 'relative'
                         }}
                       >
+                        {rb.coverImage && <Image src={rb.coverImage} alt={rb.title} fill sizes="(max-width: 768px) 100vw, 300px" style={{ objectFit: 'cover' }} />}
                         {!rb.coverImage && <div style={{ fontSize: 40, opacity: 0.3 }}>📝</div>}
                       </div>
                       <div style={{ padding: 20 }}>

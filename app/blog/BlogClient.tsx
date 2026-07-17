@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import DotBackground from '@/components/DotBackground'
@@ -242,9 +243,9 @@ export default function BlogClient({ initialBlogs }: BlogClientProps) {
                       style={{
                         height: 200,
                         width: '100%',
-                        background: blog.coverImage
-                          ? `url(${blog.coverImage}) center/cover no-repeat`
-                          : `linear-gradient(135deg, ${catColors[blog.category] || '#4f6fff'}22, ${catColors[blog.category] || '#a259ff'}44)`,
+                        background: !blog.coverImage
+                          ? `linear-gradient(135deg, ${catColors[blog.category] || '#4f6fff'}22, ${catColors[blog.category] || '#a259ff'}44)`
+                          : 'transparent',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -253,6 +254,9 @@ export default function BlogClient({ initialBlogs }: BlogClientProps) {
                         transformOrigin: 'center center',
                       }}
                     >
+                      {blog.coverImage && (
+                        <Image src={blog.coverImage} alt={blog.title} fill sizes="(max-width: 768px) 100vw, 400px" style={{ objectFit: 'cover' }} />
+                      )}
                       {!blog.coverImage && (
                         <div style={{ fontSize: 56, opacity: 0.3 }}>📝</div>
                       )}
