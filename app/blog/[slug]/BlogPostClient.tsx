@@ -171,19 +171,16 @@ export default function BlogPostClient({ blog, relatedBlogs, fullUrl }: { blog: 
               overflow: 'hidden',
               marginBottom: 48,
               border: '1px solid rgba(99,120,255,0.12)',
-              position: 'relative',
-              width: '100%',
-              aspectRatio: '16/9',
-              maxHeight: 460
             }}
           >
             <Image
               src={blog.coverImage}
               alt={blog.title}
-              fill
+              width={1200}
+              height={630}
               priority
               sizes="(max-width: 860px) 100vw, 860px"
-              style={{ objectFit: 'cover', display: 'block' }}
+              style={{ width: '100%', height: 'auto', display: 'block' }}
               unoptimized={blog.coverImage?.startsWith('/api/og')}
             />
           </motion.div>
