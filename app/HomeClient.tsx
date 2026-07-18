@@ -741,8 +741,8 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
               { name: 'PostgreSQL', icon: <SiPostgresql /> },
               { name: 'Redis', icon: <SiRedis /> },
             ].map((tech, i) => (
-              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 24, fontWeight: 800, fontFamily: 'Syne', color: '#b0b8d8', whiteSpace: 'nowrap' }}>
-                <span style={{ fontSize: 28, color: '#4f6fff' }}>{tech.icon}</span> {tech.name}
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 20, fontWeight: 600, fontFamily: 'Inter, sans-serif', color: '#b0b8d8', whiteSpace: 'nowrap' }}>
+                <span style={{ fontSize: 24, color: '#4f6fff' }}>{tech.icon}</span> {tech.name}
               </div>
             ))}
             {[
@@ -757,8 +757,8 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
               { name: 'PostgreSQL', icon: <SiPostgresql /> },
               { name: 'Redis', icon: <SiRedis /> },
             ].map((tech, i) => (
-              <div key={i + 10} style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 24, fontWeight: 800, fontFamily: 'Syne', color: '#b0b8d8', whiteSpace: 'nowrap' }}>
-                <span style={{ fontSize: 28, color: '#4f6fff' }}>{tech.icon}</span> {tech.name}
+              <div key={i + 10} style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 20, fontWeight: 600, fontFamily: 'Inter, sans-serif', color: '#b0b8d8', whiteSpace: 'nowrap' }}>
+                <span style={{ fontSize: 24, color: '#4f6fff' }}>{tech.icon}</span> {tech.name}
               </div>
             ))}
           </div>
