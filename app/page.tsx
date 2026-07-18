@@ -19,7 +19,7 @@ export default async function HomePage() {
     const blogsObj = await Blog.find({
       status: 'published',
       publishDate: { $lte: new Date() }
-    }).sort({ publishDate: -1 }).limit(4).lean()
+    }).sort({ publishDate: -1 }).limit(3).lean()
     initialBlogs = JSON.parse(JSON.stringify(blogsObj))
   } catch (error) {
     console.error('Error fetching blogs server-side for homepage:', error)
