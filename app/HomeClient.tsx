@@ -28,32 +28,48 @@ const FadeUp = ({ children, delay = 0, className = '', style }: any) => (
 function StatCard({ number, label }: { number: string; label: string }) {
   return (
     <motion.div 
-      whileHover={{ y: -5, boxShadow: '0 12px 32px rgba(79,111,255,0.2)' }}
+      whileHover={{ y: -8, scale: 1.03 }}
+      transition={{ type: 'spring', stiffness: 400, damping: 25 }}
       style={{ 
+        position: 'relative',
         textAlign: 'center', 
-        padding: '24px clamp(16px, 4vw, 32px)', 
-        background: 'rgba(10,14,28,0.7)', 
-        backdropFilter: 'blur(10px)',
-        borderRadius: 20,
-        border: '1px solid rgba(79,111,255,0.15)',
-        minWidth: 130,
-        flex: '1 1 130px'
+        padding: '36px 24px', 
+        background: 'linear-gradient(180deg, rgba(20,25,45,0.6) 0%, rgba(10,14,28,0.9) 100%)', 
+        backdropFilter: 'blur(20px)',
+        borderRadius: 24,
+        border: '1px solid rgba(79,111,255,0.2)',
+        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.05), 0 20px 40px rgba(0,0,0,0.3)',
+        minWidth: 160,
+        flex: '1 1 160px',
+        overflow: 'hidden'
       }}
     >
+      <div style={{ position: 'absolute', top: 0, left: '20%', right: '20%', height: 2, background: 'linear-gradient(90deg, transparent, #4f6fff, transparent)', opacity: 0.5 }} />
       <div
         style={{
-          fontFamily: 'Syne',
-          fontSize: 'clamp(28px, 8vw, 44px)',
+          fontFamily: 'Inter, sans-serif',
+          fontSize: 'clamp(32px, 5vw, 48px)',
           fontWeight: 800,
-          background: 'linear-gradient(135deg,#4f6fff,#a259ff)',
+          letterSpacing: '-1px',
+          background: 'linear-gradient(135deg, #fff 0%, #a2b0ff 100%)',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text',
+          marginBottom: 12,
+          filter: 'drop-shadow(0 4px 8px rgba(79,111,255,0.2))'
         }}
       >
         {number}
       </div>
-      <div style={{ color: '#7b82a8', fontSize: 14, marginTop: 4, fontWeight: 600, letterSpacing: 0.5, textTransform: 'uppercase' }}>{label}</div>
+      <div style={{ 
+        color: '#4f6fff', 
+        fontSize: 12, 
+        fontWeight: 700, 
+        letterSpacing: 1.5, 
+        textTransform: 'uppercase' 
+      }}>
+        {label}
+      </div>
     </motion.div>
   )
 }
