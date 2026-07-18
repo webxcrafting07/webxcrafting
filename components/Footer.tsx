@@ -109,7 +109,7 @@ export default function Footer() {
       style={{
         borderTop: "1px solid rgba(99,120,255,0.15)",
         background: "linear-gradient(180deg, rgba(3,5,10,0) 0%, rgba(10,14,28,0.8) 100%)",
-        padding: "80px 4% 120px",
+        padding: "80px 4% 40px",
         position: "relative",
         zIndex: 10,
         marginTop: 60,
@@ -358,7 +358,7 @@ export default function Footer() {
             borderTop: "1px solid rgba(255,255,255,0.05)",
             paddingTop: 32,
             display: "flex",
-            justifyContent: "space-between",
+            justifyContent: "center",
             alignItems: "center",
             flexWrap: "wrap",
             gap: 16,
