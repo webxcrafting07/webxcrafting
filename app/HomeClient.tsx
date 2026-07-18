@@ -484,6 +484,23 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
   const [projects, setProjects] = useState(defaultProjects)
   const [blogs, setBlogs] = useState<any[]>(initialBlogs)
   const [selectedService, setSelectedService] = useState<any>(null)
+  
+  const slogans = [
+    "Premium Quality. Freelance Agility. Budget Friendly.",
+    "Big Agency Results at Freelance Rates. We Understand Your Hustle.",
+    "Crafting Elite Digital Experiences, Without the Premium Price Tag.",
+    "Your Vision, Our Code. Affordable Web Solutions Tailored to You.",
+    "Elite Web Development Built for Your Budget. We Solve Problems."
+  ];
+  const [currentSlogan, setCurrentSlogan] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlogan((prev) => (prev + 1) % slogans.length);
+    }, 3500);
+    return () => clearInterval(timer);
+  }, []);
+
   const blogScrollRef = useRef<HTMLDivElement>(null)
   const projectScrollRef = useRef<HTMLDivElement>(null)
 
@@ -646,20 +663,29 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
             Digital Experiences
           </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.25 }}
-            style={{
-              color: '#7b82a8',
-              fontSize: 'clamp(16px, 2vw, 20px)',
-              lineHeight: 1.7,
-              maxWidth: 720,
-              margin: '0 auto 48px',
-            }}
-          >
-            We are an elite digital agency crafting lightning-fast, conversion-optimized e-commerce stores, SaaS platforms, and enterprise web applications. 
-          </motion.p>
+          <div style={{ height: '80px', marginBottom: '48px', position: 'relative', maxWidth: 720, margin: '0 auto 48px' }}>
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={currentSlogan}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.5 }}
+                style={{
+                  color: '#7b82a8',
+                  fontSize: 'clamp(16px, 2vw, 20px)',
+                  lineHeight: 1.7,
+                  position: 'absolute',
+                  width: '100%',
+                  top: 0,
+                  left: 0,
+                  margin: 0
+                }}
+              >
+                {slogans[currentSlogan]}
+              </motion.p>
+            </AnimatePresence>
+          </div>
 
           <motion.div
             initial={{ opacity: 0, y: 16 }}
