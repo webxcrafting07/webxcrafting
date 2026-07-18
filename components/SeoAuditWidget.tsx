@@ -73,8 +73,8 @@ export default function SeoAuditWidget() {
         className="glass"
         style={{
           position: "fixed",
-          bottom: "30px",
-          left: "30px",
+          bottom: "100px",
+          right: "30px",
           zIndex: 999,
           padding: "16px",
           borderRadius: "50%",
@@ -100,8 +100,8 @@ export default function SeoAuditWidget() {
         <div
           style={{
             position: "fixed",
-            bottom: "30px",
-            left: "30px",
+            bottom: "100px",
+            right: "30px",
             zIndex: 1000,
             width: "320px",
             background: "rgba(10, 14, 28, 0.85)",
@@ -111,7 +111,7 @@ export default function SeoAuditWidget() {
             padding: "24px",
             boxShadow: "0 20px 40px rgba(0,0,0,0.5)",
             animation: "slideUp 0.4s ease-out forwards",
-            transformOrigin: "bottom left"
+            transformOrigin: "bottom right"
           }}
         >
           <style>{`
