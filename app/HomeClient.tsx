@@ -662,7 +662,7 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                 style={{
                   fontFamily: 'Syne',
-                  fontSize: 'clamp(28px, 5.5vw, 64px)',
+                  fontSize: 'clamp(24px, 4.5vw, 52px)',
                   fontWeight: 800,
                   fontStyle: 'italic',
                   lineHeight: 1.15,
