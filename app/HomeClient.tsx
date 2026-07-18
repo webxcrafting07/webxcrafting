@@ -652,7 +652,7 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
             </div>
           </motion.div>
 
-          <div style={{ height: 'clamp(80px, 16vw, 180px)', position: 'relative', marginBottom: 32, width: '100%' }}>
+          <div style={{ display: 'grid', marginBottom: 32, width: '100%', placeItems: 'center' }}>
             <AnimatePresence mode="wait">
               <motion.h1
                 key={currentSlogan}
@@ -667,10 +667,7 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
                   fontStyle: 'italic',
                   lineHeight: 1.05,
                   letterSpacing: '-1.5px',
-                  position: 'absolute',
-                  width: '100%',
-                  top: 0,
-                  left: 0,
+                  gridArea: '1/1',
                   margin: 0
                 }}
               >
@@ -681,7 +678,7 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
             </AnimatePresence>
           </div>
 
-          <div style={{ height: '80px', marginBottom: '48px', position: 'relative', maxWidth: 720, margin: '0 auto 48px' }}>
+          <div style={{ display: 'grid', marginBottom: 48, maxWidth: 720, margin: '0 auto 48px', placeItems: 'center' }}>
             <AnimatePresence mode="wait">
               <motion.p
                 key={currentSlogan}
@@ -693,10 +690,7 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
                   color: '#7b82a8',
                   fontSize: 'clamp(16px, 2vw, 20px)',
                   lineHeight: 1.7,
-                  position: 'absolute',
-                  width: '100%',
-                  top: 0,
-                  left: 0,
+                  gridArea: '1/1',
                   margin: 0
                 }}
               >
