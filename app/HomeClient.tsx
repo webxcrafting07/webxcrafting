@@ -492,6 +492,14 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
     "Your Vision, Our Code. Affordable Web Solutions Tailored to You.",
     "Elite Web Development Built for Your Budget. We Solve Problems."
   ];
+
+  const headings = [
+    { top: "Engineering", highlight: "Premium", bottom: "Digital Experiences" },
+    { top: "Your Trusted", highlight: "Freelance", bottom: "Tech Partner" },
+    { top: "High Quality,", highlight: "Budget", bottom: "Friendly Pricing" },
+    { top: "Building", highlight: "Trust", bottom: "Through Code" },
+    { top: "Big Agency Quality,", highlight: "Freelance", bottom: "Rates" }
+  ];
   const [currentSlogan, setCurrentSlogan] = useState(0);
 
   useEffect(() => {
@@ -644,24 +652,34 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
             </div>
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 32 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            style={{
-              fontFamily: 'Syne',
-              fontSize: 'clamp(32px, 7vw, 76px)',
-              fontWeight: 800,
-              fontStyle: 'italic',
-              lineHeight: 1.05,
-              marginBottom: 32,
-              letterSpacing: '-1.5px'
-            }}
-          >
-            Engineering <span className="shimmer-text">Premium</span>
-            <br />
-            Digital Experiences
-          </motion.h1>
+          <div style={{ height: 'clamp(80px, 16vw, 180px)', position: 'relative', marginBottom: 32, width: '100%' }}>
+            <AnimatePresence mode="wait">
+              <motion.h1
+                key={currentSlogan}
+                initial={{ opacity: 0, y: 32 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                style={{
+                  fontFamily: 'Syne',
+                  fontSize: 'clamp(32px, 7vw, 76px)',
+                  fontWeight: 800,
+                  fontStyle: 'italic',
+                  lineHeight: 1.05,
+                  letterSpacing: '-1.5px',
+                  position: 'absolute',
+                  width: '100%',
+                  top: 0,
+                  left: 0,
+                  margin: 0
+                }}
+              >
+                {headings[currentSlogan].top} <span className="shimmer-text">{headings[currentSlogan].highlight}</span>
+                <br />
+                {headings[currentSlogan].bottom}
+              </motion.h1>
+            </AnimatePresence>
+          </div>
 
           <div style={{ height: '80px', marginBottom: '48px', position: 'relative', maxWidth: 720, margin: '0 auto 48px' }}>
             <AnimatePresence mode="wait">
