@@ -23,7 +23,7 @@ export default function WhatsAppButton() {
       <span
         style={{
           position: 'absolute',
-          right: 70,
+          left: 70,
           background: 'rgba(10,14,28,0.9)',
           backdropFilter: 'blur(12px)',
           border: '1px solid rgba(37,211,102,0.3)',
@@ -35,7 +35,7 @@ export default function WhatsAppButton() {
           fontWeight: 500,
           whiteSpace: 'nowrap',
           opacity: hovered ? 1 : 0,
-          transform: hovered ? 'translateX(0)' : 'translateX(6px)',
+          transform: hovered ? 'translateX(0)' : 'translateX(-6px)',
           transition: 'all 0.2s ease',
           pointerEvents: 'none',
         }}
