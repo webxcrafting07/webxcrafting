@@ -79,5 +79,38 @@ export default async function LocationPage({ params }: PageProps) {
       name: CITIES_CONFIG[k].name
     }));
 
-  return <LocationClient cityKey={cityKey} cityInfo={cityInfo} nearbyCities={nearbyCities} />
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": `WebXCrafting - Web Development Company in ${cityInfo.name}`,
+    "image": "https://www.webxcrafting.in/icon.png",
+    "description": cityInfo.description,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": cityInfo.name,
+      "addressRegion": cityInfo.state,
+      "addressCountry": "IN"
+    },
+    "url": `https://www.webxcrafting.in/locations/web-development-company-in-${cityKey}`,
+    "telephone": "+91-9876543210", 
+    "priceRange": "$$",
+    "areaServed": cityInfo.name,
+    "serviceArea": {
+      "@type": "GeoCircle",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "description": cityInfo.name
+      }
+    }
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <LocationClient cityKey={cityKey} cityInfo={cityInfo} nearbyCities={nearbyCities} />
+    </>
+  )
 }
