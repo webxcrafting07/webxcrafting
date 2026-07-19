@@ -4405,4 +4405,1074 @@ export const CITIES_CONFIG: Record<string, CityConfig> = {
     description: 'Looking for a top web development company in Geyzing? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Geyzing, Sikkim.',
     keywords: 'web development company in geyzing, website design agency geyzing, web developers geyzing, ecommerce development geyzing, geyzing it companies'
   },
+,
+  'amaravati': {
+    name: 'Amaravati',
+    state: 'Andhra Pradesh',
+    description: 'Looking for a top web development company in Amaravati? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Amaravati, Andhra Pradesh.',
+    keywords: 'web development company in amaravati, website design agency amaravati, web developers amaravati, ecommerce development amaravati, amaravati it companies'
+  },
+  'ara': {
+    name: 'Ara',
+    state: 'Bihar',
+    description: 'Looking for a top web development company in Ara? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Ara, Bihar.',
+    keywords: 'web development company in ara, website design agency ara, web developers ara, ecommerce development ara, ara it companies'
+  },
+  'chapra': {
+    name: 'Chapra',
+    state: 'Bihar',
+    description: 'Looking for a top web development company in Chapra? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Chapra, Bihar.',
+    keywords: 'web development company in chapra, website design agency chapra, web developers chapra, ecommerce development chapra, chapra it companies'
+  },
+  'madhepura': {
+    name: 'Madhepura',
+    state: 'Bihar',
+    description: 'Looking for a top web development company in Madhepura? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Madhepura, Bihar.',
+    keywords: 'web development company in madhepura, website design agency madhepura, web developers madhepura, ecommerce development madhepura, madhepura it companies'
+  },
+  'anjar': {
+    name: 'Anjar',
+    state: 'Gujarat',
+    description: 'Looking for a top web development company in Anjar? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Anjar, Gujarat.',
+    keywords: 'web development company in anjar, website design agency anjar, web developers anjar, ecommerce development anjar, anjar it companies'
+  },
+  'himatnagar': {
+    name: 'Himatnagar',
+    state: 'Gujarat',
+    description: 'Looking for a top web development company in Himatnagar? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Himatnagar, Gujarat.',
+    keywords: 'web development company in himatnagar, website design agency himatnagar, web developers himatnagar, ecommerce development himatnagar, himatnagar it companies'
+  },
+  'jetpur': {
+    name: 'Jetpur',
+    state: 'Gujarat',
+    description: 'Looking for a top web development company in Jetpur? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Jetpur, Gujarat.',
+    keywords: 'web development company in jetpur, website design agency jetpur, web developers jetpur, ecommerce development jetpur, jetpur it companies'
+  },
+  'unjha': {
+    name: 'Unjha',
+    state: 'Gujarat',
+    description: 'Looking for a top web development company in Unjha? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Unjha, Gujarat.',
+    keywords: 'web development company in unjha, website design agency unjha, web developers unjha, ecommerce development unjha, unjha it companies'
+  },
+  'upeta': {
+    name: 'Upeta',
+    state: 'Gujarat',
+    description: 'Looking for a top web development company in Upeta? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Upeta, Gujarat.',
+    keywords: 'web development company in upeta, website design agency upeta, web developers upeta, ecommerce development upeta, upeta it companies'
+  },
+  'hansi': {
+    name: 'Hansi',
+    state: 'Haryana',
+    description: 'Looking for a top web development company in Hansi? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Hansi, Haryana.',
+    keywords: 'web development company in hansi, website design agency hansi, web developers hansi, ecommerce development hansi, hansi it companies'
+  },
+  'kurukshetra': {
+    name: 'Kurukshetra',
+    state: 'Haryana',
+    description: 'Looking for a top web development company in Kurukshetra? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Kurukshetra, Haryana.',
+    keywords: 'web development company in kurukshetra, website design agency kurukshetra, web developers kurukshetra, ecommerce development kurukshetra, kurukshetra it companies'
+  },
+  'adityapur': {
+    name: 'Adityapur',
+    state: 'Jharkhand',
+    description: 'Looking for a top web development company in Adityapur? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Adityapur, Jharkhand.',
+    keywords: 'web development company in adityapur, website design agency adityapur, web developers adityapur, ecommerce development adityapur, adityapur it companies'
+  },
+  'mango': {
+    name: 'Mango',
+    state: 'Jharkhand',
+    description: 'Looking for a top web development company in Mango? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Mango, Jharkhand.',
+    keywords: 'web development company in mango, website design agency mango, web developers mango, ecommerce development mango, mango it companies'
+  },
+  'saunda': {
+    name: 'Saunda',
+    state: 'Jharkhand',
+    description: 'Looking for a top web development company in Saunda? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Saunda, Jharkhand.',
+    keywords: 'web development company in saunda, website design agency saunda, web developers saunda, ecommerce development saunda, saunda it companies'
+  },
+  'arsikere': {
+    name: 'Arsikere',
+    state: 'Karnataka',
+    description: 'Looking for a top web development company in Arsikere? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Arsikere, Karnataka.',
+    keywords: 'web development company in arsikere, website design agency arsikere, web developers arsikere, ecommerce development arsikere, arsikere it companies'
+  },
+  'bhatkal': {
+    name: 'Bhatkal',
+    state: 'Karnataka',
+    description: 'Looking for a top web development company in Bhatkal? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Bhatkal, Karnataka.',
+    keywords: 'web development company in bhatkal, website design agency bhatkal, web developers bhatkal, ecommerce development bhatkal, bhatkal it companies'
+  },
+  'chamrajnagar': {
+    name: 'Chamrajnagar',
+    state: 'Karnataka',
+    description: 'Looking for a top web development company in Chamrajnagar? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Chamrajnagar, Karnataka.',
+    keywords: 'web development company in chamrajnagar, website design agency chamrajnagar, web developers chamrajnagar, ecommerce development chamrajnagar, chamrajnagar it companies'
+  },
+  'chikballapur': {
+    name: 'Chikballapur',
+    state: 'Karnataka',
+    description: 'Looking for a top web development company in Chikballapur? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Chikballapur, Karnataka.',
+    keywords: 'web development company in chikballapur, website design agency chikballapur, web developers chikballapur, ecommerce development chikballapur, chikballapur it companies'
+  },
+  'chintamani': {
+    name: 'Chintamani',
+    state: 'Karnataka',
+    description: 'Looking for a top web development company in Chintamani? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Chintamani, Karnataka.',
+    keywords: 'web development company in chintamani, website design agency chintamani, web developers chintamani, ecommerce development chintamani, chintamani it companies'
+  },
+  'harihar': {
+    name: 'Harihar',
+    state: 'Karnataka',
+    description: 'Looking for a top web development company in Harihar? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Harihar, Karnataka.',
+    keywords: 'web development company in harihar, website design agency harihar, web developers harihar, ecommerce development harihar, harihar it companies'
+  },
+  'jamkhandi': {
+    name: 'Jamkhandi',
+    state: 'Karnataka',
+    description: 'Looking for a top web development company in Jamkhandi? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Jamkhandi, Karnataka.',
+    keywords: 'web development company in jamkhandi, website design agency jamkhandi, web developers jamkhandi, ecommerce development jamkhandi, jamkhandi it companies'
+  },
+  'nippani': {
+    name: 'Nippani',
+    state: 'Karnataka',
+    description: 'Looking for a top web development company in Nippani? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Nippani, Karnataka.',
+    keywords: 'web development company in nippani, website design agency nippani, web developers nippani, ecommerce development nippani, nippani it companies'
+  },
+  'shikapur': {
+    name: 'Shikapur',
+    state: 'Karnataka',
+    description: 'Looking for a top web development company in Shikapur? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Shikapur, Karnataka.',
+    keywords: 'web development company in shikapur, website design agency shikapur, web developers shikapur, ecommerce development shikapur, shikapur it companies'
+  },
+  'attingal': {
+    name: 'Attingal',
+    state: 'Kerala',
+    description: 'Looking for a top web development company in Attingal? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Attingal, Kerala.',
+    keywords: 'web development company in attingal, website design agency attingal, web developers attingal, ecommerce development attingal, attingal it companies'
+  },
+  'changanassery': {
+    name: 'Changanassery',
+    state: 'Kerala',
+    description: 'Looking for a top web development company in Changanassery? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Changanassery, Kerala.',
+    keywords: 'web development company in changanassery, website design agency changanassery, web developers changanassery, ecommerce development changanassery, changanassery it companies'
+  },
+  'chengannur': {
+    name: 'Chengannur',
+    state: 'Kerala',
+    description: 'Looking for a top web development company in Chengannur? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Chengannur, Kerala.',
+    keywords: 'web development company in chengannur, website design agency chengannur, web developers chengannur, ecommerce development chengannur, chengannur it companies'
+  },
+  'cherthala': {
+    name: 'Cherthala',
+    state: 'Kerala',
+    description: 'Looking for a top web development company in Cherthala? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Cherthala, Kerala.',
+    keywords: 'web development company in cherthala, website design agency cherthala, web developers cherthala, ecommerce development cherthala, cherthala it companies'
+  },
+  'edathua': {
+    name: 'Edathua',
+    state: 'Kerala',
+    description: 'Looking for a top web development company in Edathua? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Edathua, Kerala.',
+    keywords: 'web development company in edathua, website design agency edathua, web developers edathua, ecommerce development edathua, edathua it companies'
+  },
+  'irinjalakuda': {
+    name: 'Irinjalakuda',
+    state: 'Kerala',
+    description: 'Looking for a top web development company in Irinjalakuda? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Irinjalakuda, Kerala.',
+    keywords: 'web development company in irinjalakuda, website design agency irinjalakuda, web developers irinjalakuda, ecommerce development irinjalakuda, irinjalakuda it companies'
+  },
+  'kasaragod': {
+    name: 'Kasaragod',
+    state: 'Kerala',
+    description: 'Looking for a top web development company in Kasaragod? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Kasaragod, Kerala.',
+    keywords: 'web development company in kasaragod, website design agency kasaragod, web developers kasaragod, ecommerce development kasaragod, kasaragod it companies'
+  },
+  'kodungallur': {
+    name: 'Kodungallur',
+    state: 'Kerala',
+    description: 'Looking for a top web development company in Kodungallur? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Kodungallur, Kerala.',
+    keywords: 'web development company in kodungallur, website design agency kodungallur, web developers kodungallur, ecommerce development kodungallur, kodungallur it companies'
+  },
+  'kunnamkulam': {
+    name: 'Kunnamkulam',
+    state: 'Kerala',
+    description: 'Looking for a top web development company in Kunnamkulam? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Kunnamkulam, Kerala.',
+    keywords: 'web development company in kunnamkulam, website design agency kunnamkulam, web developers kunnamkulam, ecommerce development kunnamkulam, kunnamkulam it companies'
+  },
+  'mavelikkara': {
+    name: 'Mavelikkara',
+    state: 'Kerala',
+    description: 'Looking for a top web development company in Mavelikkara? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Mavelikkara, Kerala.',
+    keywords: 'web development company in mavelikkara, website design agency mavelikkara, web developers mavelikkara, ecommerce development mavelikkara, mavelikkara it companies'
+  },
+  'nedumangad': {
+    name: 'Nedumangad',
+    state: 'Kerala',
+    description: 'Looking for a top web development company in Nedumangad? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Nedumangad, Kerala.',
+    keywords: 'web development company in nedumangad, website design agency nedumangad, web developers nedumangad, ecommerce development nedumangad, nedumangad it companies'
+  },
+  'punalur': {
+    name: 'Punalur',
+    state: 'Kerala',
+    description: 'Looking for a top web development company in Punalur? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Punalur, Kerala.',
+    keywords: 'web development company in punalur, website design agency punalur, web developers punalur, ecommerce development punalur, punalur it companies'
+  },
+  'quilandy': {
+    name: 'Quilandy',
+    state: 'Kerala',
+    description: 'Looking for a top web development company in Quilandy? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Quilandy, Kerala.',
+    keywords: 'web development company in quilandy, website design agency quilandy, web developers quilandy, ecommerce development quilandy, quilandy it companies'
+  },
+  'shoranur': {
+    name: 'Shoranur',
+    state: 'Kerala',
+    description: 'Looking for a top web development company in Shoranur? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Shoranur, Kerala.',
+    keywords: 'web development company in shoranur, website design agency shoranur, web developers shoranur, ecommerce development shoranur, shoranur it companies'
+  },
+  'thodupuzha': {
+    name: 'Thodupuzha',
+    state: 'Kerala',
+    description: 'Looking for a top web development company in Thodupuzha? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Thodupuzha, Kerala.',
+    keywords: 'web development company in thodupuzha, website design agency thodupuzha, web developers thodupuzha, ecommerce development thodupuzha, thodupuzha it companies'
+  },
+  'tiruvalla': {
+    name: 'Tiruvalla',
+    state: 'Kerala',
+    description: 'Looking for a top web development company in Tiruvalla? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Tiruvalla, Kerala.',
+    keywords: 'web development company in tiruvalla, website design agency tiruvalla, web developers tiruvalla, ecommerce development tiruvalla, tiruvalla it companies'
+  },
+  'vadakara': {
+    name: 'Vadakara',
+    state: 'Kerala',
+    description: 'Looking for a top web development company in Vadakara? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Vadakara, Kerala.',
+    keywords: 'web development company in vadakara, website design agency vadakara, web developers vadakara, ecommerce development vadakara, vadakara it companies'
+  },
+  'dabra': {
+    name: 'Dabra',
+    state: 'Madhya Pradesh',
+    description: 'Looking for a top web development company in Dabra? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Dabra, Madhya Pradesh.',
+    keywords: 'web development company in dabra, website design agency dabra, web developers dabra, ecommerce development dabra, dabra it companies'
+  },
+  'sarni': {
+    name: 'Sarni',
+    state: 'Madhya Pradesh',
+    description: 'Looking for a top web development company in Sarni? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Sarni, Madhya Pradesh.',
+    keywords: 'web development company in sarni, website design agency sarni, web developers sarni, ecommerce development sarni, sarni it companies'
+  },
+  'shahdol': {
+    name: 'Shahdol',
+    state: 'Madhya Pradesh',
+    description: 'Looking for a top web development company in Shahdol? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Shahdol, Madhya Pradesh.',
+    keywords: 'web development company in shahdol, website design agency shahdol, web developers shahdol, ecommerce development shahdol, shahdol it companies'
+  },
+  'balangir': {
+    name: 'Balangir',
+    state: 'Odisha',
+    description: 'Looking for a top web development company in Balangir? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Balangir, Odisha.',
+    keywords: 'web development company in balangir, website design agency balangir, web developers balangir, ecommerce development balangir, balangir it companies'
+  },
+  'baleshwar': {
+    name: 'Baleshwar',
+    state: 'Odisha',
+    description: 'Looking for a top web development company in Baleshwar? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Baleshwar, Odisha.',
+    keywords: 'web development company in baleshwar, website design agency baleshwar, web developers baleshwar, ecommerce development baleshwar, baleshwar it companies'
+  },
+  'barbil': {
+    name: 'Barbil',
+    state: 'Odisha',
+    description: 'Looking for a top web development company in Barbil? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Barbil, Odisha.',
+    keywords: 'web development company in barbil, website design agency barbil, web developers barbil, ecommerce development barbil, barbil it companies'
+  },
+  'bhawanipatna': {
+    name: 'Bhawanipatna',
+    state: 'Odisha',
+    description: 'Looking for a top web development company in Bhawanipatna? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Bhawanipatna, Odisha.',
+    keywords: 'web development company in bhawanipatna, website design agency bhawanipatna, web developers bhawanipatna, ecommerce development bhawanipatna, bhawanipatna it companies'
+  },
+  'brajrajnagar': {
+    name: 'Brajrajnagar',
+    state: 'Odisha',
+    description: 'Looking for a top web development company in Brajrajnagar? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Brajrajnagar, Odisha.',
+    keywords: 'web development company in brajrajnagar, website design agency brajrajnagar, web developers brajrajnagar, ecommerce development brajrajnagar, brajrajnagar it companies'
+  },
+  'jatani': {
+    name: 'Jatani',
+    state: 'Odisha',
+    description: 'Looking for a top web development company in Jatani? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Jatani, Odisha.',
+    keywords: 'web development company in jatani, website design agency jatani, web developers jatani, ecommerce development jatani, jatani it companies'
+  },
+  'kendrapara': {
+    name: 'Kendrapara',
+    state: 'Odisha',
+    description: 'Looking for a top web development company in Kendrapara? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Kendrapara, Odisha.',
+    keywords: 'web development company in kendrapara, website design agency kendrapara, web developers kendrapara, ecommerce development kendrapara, kendrapara it companies'
+  },
+  'paradeep': {
+    name: 'Paradeep',
+    state: 'Odisha',
+    description: 'Looking for a top web development company in Paradeep? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Paradeep, Odisha.',
+    keywords: 'web development company in paradeep, website design agency paradeep, web developers paradeep, ecommerce development paradeep, paradeep it companies'
+  },
+  'raurkela': {
+    name: 'Raurkela',
+    state: 'Odisha',
+    description: 'Looking for a top web development company in Raurkela? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Raurkela, Odisha.',
+    keywords: 'web development company in raurkela, website design agency raurkela, web developers raurkela, ecommerce development raurkela, raurkela it companies'
+  },
+  'sunabeda': {
+    name: 'Sunabeda',
+    state: 'Odisha',
+    description: 'Looking for a top web development company in Sunabeda? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Sunabeda, Odisha.',
+    keywords: 'web development company in sunabeda, website design agency sunabeda, web developers sunabeda, ecommerce development sunabeda, sunabeda it companies'
+  },
+  'jagraon': {
+    name: 'Jagraon',
+    state: 'Punjab',
+    description: 'Looking for a top web development company in Jagraon? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Jagraon, Punjab.',
+    keywords: 'web development company in jagraon, website design agency jagraon, web developers jagraon, ecommerce development jagraon, jagraon it companies'
+  },
+  'kot-kapura': {
+    name: 'Kot Kapura',
+    state: 'Punjab',
+    description: 'Looking for a top web development company in Kot Kapura? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Kot Kapura, Punjab.',
+    keywords: 'web development company in kot kapura, website design agency kot kapura, web developers kot kapura, ecommerce development kot kapura, kot kapura it companies'
+  },
+  'sirhind': {
+    name: 'Sirhind',
+    state: 'Punjab',
+    description: 'Looking for a top web development company in Sirhind? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Sirhind, Punjab.',
+    keywords: 'web development company in sirhind, website design agency sirhind, web developers sirhind, ecommerce development sirhind, sirhind it companies'
+  },
+  'bari': {
+    name: 'Bari',
+    state: 'Rajasthan',
+    description: 'Looking for a top web development company in Bari? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Bari, Rajasthan.',
+    keywords: 'web development company in bari, website design agency bari, web developers bari, ecommerce development bari, bari it companies'
+  },
+  'bhiwadi': {
+    name: 'Bhiwadi',
+    state: 'Rajasthan',
+    description: 'Looking for a top web development company in Bhiwadi? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Bhiwadi, Rajasthan.',
+    keywords: 'web development company in bhiwadi, website design agency bhiwadi, web developers bhiwadi, ecommerce development bhiwadi, bhiwadi it companies'
+  },
+  'dungarpur': {
+    name: 'Dungarpur',
+    state: 'Rajasthan',
+    description: 'Looking for a top web development company in Dungarpur? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Dungarpur, Rajasthan.',
+    keywords: 'web development company in dungarpur, website design agency dungarpur, web developers dungarpur, ecommerce development dungarpur, dungarpur it companies'
+  },
+  'ganganagar': {
+    name: 'Ganganagar',
+    state: 'Rajasthan',
+    description: 'Looking for a top web development company in Ganganagar? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Ganganagar, Rajasthan.',
+    keywords: 'web development company in ganganagar, website design agency ganganagar, web developers ganganagar, ecommerce development ganganagar, ganganagar it companies'
+  },
+  'gangapur': {
+    name: 'Gangapur',
+    state: 'Rajasthan',
+    description: 'Looking for a top web development company in Gangapur? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Gangapur, Rajasthan.',
+    keywords: 'web development company in gangapur, website design agency gangapur, web developers gangapur, ecommerce development gangapur, gangapur it companies'
+  },
+  'jalore': {
+    name: 'Jalore',
+    state: 'Rajasthan',
+    description: 'Looking for a top web development company in Jalore? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Jalore, Rajasthan.',
+    keywords: 'web development company in jalore, website design agency jalore, web developers jalore, ecommerce development jalore, jalore it companies'
+  },
+  'jhalawar': {
+    name: 'Jhalawar',
+    state: 'Rajasthan',
+    description: 'Looking for a top web development company in Jhalawar? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Jhalawar, Rajasthan.',
+    keywords: 'web development company in jhalawar, website design agency jhalawar, web developers jhalawar, ecommerce development jhalawar, jhalawar it companies'
+  },
+  'ladnu': {
+    name: 'Ladnu',
+    state: 'Rajasthan',
+    description: 'Looking for a top web development company in Ladnu? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Ladnu, Rajasthan.',
+    keywords: 'web development company in ladnu, website design agency ladnu, web developers ladnu, ecommerce development ladnu, ladnu it companies'
+  },
+  'nimbahera': {
+    name: 'Nimbahera',
+    state: 'Rajasthan',
+    description: 'Looking for a top web development company in Nimbahera? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Nimbahera, Rajasthan.',
+    keywords: 'web development company in nimbahera, website design agency nimbahera, web developers nimbahera, ecommerce development nimbahera, nimbahera it companies'
+  },
+  'nohar': {
+    name: 'Nohar',
+    state: 'Rajasthan',
+    description: 'Looking for a top web development company in Nohar? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Nohar, Rajasthan.',
+    keywords: 'web development company in nohar, website design agency nohar, web developers nohar, ecommerce development nohar, nohar it companies'
+  },
+  'nokha': {
+    name: 'Nokha',
+    state: 'Rajasthan',
+    description: 'Looking for a top web development company in Nokha? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Nokha, Rajasthan.',
+    keywords: 'web development company in nokha, website design agency nokha, web developers nokha, ecommerce development nokha, nokha it companies'
+  },
+  'ratangarh': {
+    name: 'Ratangarh',
+    state: 'Rajasthan',
+    description: 'Looking for a top web development company in Ratangarh? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Ratangarh, Rajasthan.',
+    keywords: 'web development company in ratangarh, website design agency ratangarh, web developers ratangarh, ecommerce development ratangarh, ratangarh it companies'
+  },
+  'sirohi': {
+    name: 'Sirohi',
+    state: 'Rajasthan',
+    description: 'Looking for a top web development company in Sirohi? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Sirohi, Rajasthan.',
+    keywords: 'web development company in sirohi, website design agency sirohi, web developers sirohi, ecommerce development sirohi, sirohi it companies'
+  },
+  'suratgarh': {
+    name: 'Suratgarh',
+    state: 'Rajasthan',
+    description: 'Looking for a top web development company in Suratgarh? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Suratgarh, Rajasthan.',
+    keywords: 'web development company in suratgarh, website design agency suratgarh, web developers suratgarh, ecommerce development suratgarh, suratgarh it companies'
+  },
+  'alandur': {
+    name: 'Alandur',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Alandur? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Alandur, Tamil Nadu.',
+    keywords: 'web development company in alandur, website design agency alandur, web developers alandur, ecommerce development alandur, alandur it companies'
+  },
+  'ambattur': {
+    name: 'Ambattur',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Ambattur? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Ambattur, Tamil Nadu.',
+    keywords: 'web development company in ambattur, website design agency ambattur, web developers ambattur, ecommerce development ambattur, ambattur it companies'
+  },
+  'aruppukkottai': {
+    name: 'Aruppukkottai',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Aruppukkottai? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Aruppukkottai, Tamil Nadu.',
+    keywords: 'web development company in aruppukkottai, website design agency aruppukkottai, web developers aruppukkottai, ecommerce development aruppukkottai, aruppukkottai it companies'
+  },
+  'avadi': {
+    name: 'Avadi',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Avadi? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Avadi, Tamil Nadu.',
+    keywords: 'web development company in avadi, website design agency avadi, web developers avadi, ecommerce development avadi, avadi it companies'
+  },
+  'bhavani': {
+    name: 'Bhavani',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Bhavani? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Bhavani, Tamil Nadu.',
+    keywords: 'web development company in bhavani, website design agency bhavani, web developers bhavani, ecommerce development bhavani, bhavani it companies'
+  },
+  'bodinaickanur': {
+    name: 'Bodinaickanur',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Bodinaickanur? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Bodinaickanur, Tamil Nadu.',
+    keywords: 'web development company in bodinaickanur, website design agency bodinaickanur, web developers bodinaickanur, ecommerce development bodinaickanur, bodinaickanur it companies'
+  },
+  'chengalpattu': {
+    name: 'Chengalpattu',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Chengalpattu? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Chengalpattu, Tamil Nadu.',
+    keywords: 'web development company in chengalpattu, website design agency chengalpattu, web developers chengalpattu, ecommerce development chengalpattu, chengalpattu it companies'
+  },
+  'chidambaram': {
+    name: 'Chidambaram',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Chidambaram? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Chidambaram, Tamil Nadu.',
+    keywords: 'web development company in chidambaram, website design agency chidambaram, web developers chidambaram, ecommerce development chidambaram, chidambaram it companies'
+  },
+  'coonoor': {
+    name: 'Coonoor',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Coonoor? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Coonoor, Tamil Nadu.',
+    keywords: 'web development company in coonoor, website design agency coonoor, web developers coonoor, ecommerce development coonoor, coonoor it companies'
+  },
+  'gopichettipalayam': {
+    name: 'Gopichettipalayam',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Gopichettipalayam? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Gopichettipalayam, Tamil Nadu.',
+    keywords: 'web development company in gopichettipalayam, website design agency gopichettipalayam, web developers gopichettipalayam, ecommerce development gopichettipalayam, gopichettipalayam it companies'
+  },
+  'gudiyatham': {
+    name: 'Gudiyatham',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Gudiyatham? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Gudiyatham, Tamil Nadu.',
+    keywords: 'web development company in gudiyatham, website design agency gudiyatham, web developers gudiyatham, ecommerce development gudiyatham, gudiyatham it companies'
+  },
+  'karaikudi': {
+    name: 'Karaikudi',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Karaikudi? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Karaikudi, Tamil Nadu.',
+    keywords: 'web development company in karaikudi, website design agency karaikudi, web developers karaikudi, ecommerce development karaikudi, karaikudi it companies'
+  },
+  'mannargudi': {
+    name: 'Mannargudi',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Mannargudi? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Mannargudi, Tamil Nadu.',
+    keywords: 'web development company in mannargudi, website design agency mannargudi, web developers mannargudi, ecommerce development mannargudi, mannargudi it companies'
+  },
+  'mayiladuthurai': {
+    name: 'Mayiladuthurai',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Mayiladuthurai? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Mayiladuthurai, Tamil Nadu.',
+    keywords: 'web development company in mayiladuthurai, website design agency mayiladuthurai, web developers mayiladuthurai, ecommerce development mayiladuthurai, mayiladuthurai it companies'
+  },
+  'mettupalayam': {
+    name: 'Mettupalayam',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Mettupalayam? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Mettupalayam, Tamil Nadu.',
+    keywords: 'web development company in mettupalayam, website design agency mettupalayam, web developers mettupalayam, ecommerce development mettupalayam, mettupalayam it companies'
+  },
+  'mettur': {
+    name: 'Mettur',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Mettur? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Mettur, Tamil Nadu.',
+    keywords: 'web development company in mettur, website design agency mettur, web developers mettur, ecommerce development mettur, mettur it companies'
+  },
+  'palani': {
+    name: 'Palani',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Palani? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Palani, Tamil Nadu.',
+    keywords: 'web development company in palani, website design agency palani, web developers palani, ecommerce development palani, palani it companies'
+  },
+  'pallavaram': {
+    name: 'Pallavaram',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Pallavaram? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Pallavaram, Tamil Nadu.',
+    keywords: 'web development company in pallavaram, website design agency pallavaram, web developers pallavaram, ecommerce development pallavaram, pallavaram it companies'
+  },
+  'panruti': {
+    name: 'Panruti',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Panruti? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Panruti, Tamil Nadu.',
+    keywords: 'web development company in panruti, website design agency panruti, web developers panruti, ecommerce development panruti, panruti it companies'
+  },
+  'pattukkottai': {
+    name: 'Pattukkottai',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Pattukkottai? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Pattukkottai, Tamil Nadu.',
+    keywords: 'web development company in pattukkottai, website design agency pattukkottai, web developers pattukkottai, ecommerce development pattukkottai, pattukkottai it companies'
+  },
+  'sankarankoil': {
+    name: 'Sankarankoil',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Sankarankoil? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Sankarankoil, Tamil Nadu.',
+    keywords: 'web development company in sankarankoil, website design agency sankarankoil, web developers sankarankoil, ecommerce development sankarankoil, sankarankoil it companies'
+  },
+  'srivilliputhur': {
+    name: 'Srivilliputhur',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Srivilliputhur? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Srivilliputhur, Tamil Nadu.',
+    keywords: 'web development company in srivilliputhur, website design agency srivilliputhur, web developers srivilliputhur, ecommerce development srivilliputhur, srivilliputhur it companies'
+  },
+  'tambaram': {
+    name: 'Tambaram',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Tambaram? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Tambaram, Tamil Nadu.',
+    keywords: 'web development company in tambaram, website design agency tambaram, web developers tambaram, ecommerce development tambaram, tambaram it companies'
+  },
+  'theni': {
+    name: 'Theni',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Theni? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Theni, Tamil Nadu.',
+    keywords: 'web development company in theni, website design agency theni, web developers theni, ecommerce development theni, theni it companies'
+  },
+  'thoothukudi': {
+    name: 'Thoothukudi',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Thoothukudi? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Thoothukudi, Tamil Nadu.',
+    keywords: 'web development company in thoothukudi, website design agency thoothukudi, web developers thoothukudi, ecommerce development thoothukudi, thoothukudi it companies'
+  },
+  'tindivanam': {
+    name: 'Tindivanam',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Tindivanam? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Tindivanam, Tamil Nadu.',
+    keywords: 'web development company in tindivanam, website design agency tindivanam, web developers tindivanam, ecommerce development tindivanam, tindivanam it companies'
+  },
+  'tiruchengode': {
+    name: 'Tiruchengode',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Tiruchengode? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Tiruchengode, Tamil Nadu.',
+    keywords: 'web development company in tiruchengode, website design agency tiruchengode, web developers tiruchengode, ecommerce development tiruchengode, tiruchengode it companies'
+  },
+  'tiruvallur': {
+    name: 'Tiruvallur',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Tiruvallur? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Tiruvallur, Tamil Nadu.',
+    keywords: 'web development company in tiruvallur, website design agency tiruvallur, web developers tiruvallur, ecommerce development tiruvallur, tiruvallur it companies'
+  },
+  'virudhachalam': {
+    name: 'Virudhachalam',
+    state: 'Tamil Nadu',
+    description: 'Looking for a top web development company in Virudhachalam? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Virudhachalam, Tamil Nadu.',
+    keywords: 'web development company in virudhachalam, website design agency virudhachalam, web developers virudhachalam, ecommerce development virudhachalam, virudhachalam it companies'
+  },
+  'mancherial': {
+    name: 'Mancherial',
+    state: 'Telangana',
+    description: 'Looking for a top web development company in Mancherial? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Mancherial, Telangana.',
+    keywords: 'web development company in mancherial, website design agency mancherial, web developers mancherial, ecommerce development mancherial, mancherial it companies'
+  },
+  'badaun': {
+    name: 'Badaun',
+    state: 'Uttar Pradesh',
+    description: 'Looking for a top web development company in Badaun? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Badaun, Uttar Pradesh.',
+    keywords: 'web development company in badaun, website design agency badaun, web developers badaun, ecommerce development badaun, badaun it companies'
+  },
+  'deoband': {
+    name: 'Deoband',
+    state: 'Uttar Pradesh',
+    description: 'Looking for a top web development company in Deoband? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Deoband, Uttar Pradesh.',
+    keywords: 'web development company in deoband, website design agency deoband, web developers deoband, ecommerce development deoband, deoband it companies'
+  },
+  'faizabad': {
+    name: 'Faizabad',
+    state: 'Uttar Pradesh',
+    description: 'Looking for a top web development company in Faizabad? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Faizabad, Uttar Pradesh.',
+    keywords: 'web development company in faizabad, website design agency faizabad, web developers faizabad, ecommerce development faizabad, faizabad it companies'
+  },
+  'mau': {
+    name: 'Mau',
+    state: 'Uttar Pradesh',
+    description: 'Looking for a top web development company in Mau? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Mau, Uttar Pradesh.',
+    keywords: 'web development company in mau, website design agency mau, web developers mau, ecommerce development mau, mau it companies'
+  },
+  'rae-bareli': {
+    name: 'Rae Bareli',
+    state: 'Uttar Pradesh',
+    description: 'Looking for a top web development company in Rae Bareli? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Rae Bareli, Uttar Pradesh.',
+    keywords: 'web development company in rae bareli, website design agency rae bareli, web developers rae bareli, ecommerce development rae bareli, rae bareli it companies'
+  },
+  'baidyabati': {
+    name: 'Baidyabati',
+    state: 'West Bengal',
+    description: 'Looking for a top web development company in Baidyabati? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Baidyabati, West Bengal.',
+    keywords: 'web development company in baidyabati, website design agency baidyabati, web developers baidyabati, ecommerce development baidyabati, baidyabati it companies'
+  },
+  'bansberia': {
+    name: 'Bansberia',
+    state: 'West Bengal',
+    description: 'Looking for a top web development company in Bansberia? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Bansberia, West Bengal.',
+    keywords: 'web development company in bansberia, website design agency bansberia, web developers bansberia, ecommerce development bansberia, bansberia it companies'
+  },
+  'baranagar': {
+    name: 'Baranagar',
+    state: 'West Bengal',
+    description: 'Looking for a top web development company in Baranagar? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Baranagar, West Bengal.',
+    keywords: 'web development company in baranagar, website design agency baranagar, web developers baranagar, ecommerce development baranagar, baranagar it companies'
+  },
+  'bhadreswar': {
+    name: 'Bhadreswar',
+    state: 'West Bengal',
+    description: 'Looking for a top web development company in Bhadreswar? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Bhadreswar, West Bengal.',
+    keywords: 'web development company in bhadreswar, website design agency bhadreswar, web developers bhadreswar, ecommerce development bhadreswar, bhadreswar it companies'
+  },
+  'dankuni': {
+    name: 'Dankuni',
+    state: 'West Bengal',
+    description: 'Looking for a top web development company in Dankuni? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Dankuni, West Bengal.',
+    keywords: 'web development company in dankuni, website design agency dankuni, web developers dankuni, ecommerce development dankuni, dankuni it companies'
+  },
+  'halisahar': {
+    name: 'Halisahar',
+    state: 'West Bengal',
+    description: 'Looking for a top web development company in Halisahar? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Halisahar, West Bengal.',
+    keywords: 'web development company in halisahar, website design agency halisahar, web developers halisahar, ecommerce development halisahar, halisahar it companies'
+  },
+  'kamarhati': {
+    name: 'Kamarhati',
+    state: 'West Bengal',
+    description: 'Looking for a top web development company in Kamarhati? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Kamarhati, West Bengal.',
+    keywords: 'web development company in kamarhati, website design agency kamarhati, web developers kamarhati, ecommerce development kamarhati, kamarhati it companies'
+  },
+  'kanchrapara': {
+    name: 'Kanchrapara',
+    state: 'West Bengal',
+    description: 'Looking for a top web development company in Kanchrapara? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Kanchrapara, West Bengal.',
+    keywords: 'web development company in kanchrapara, website design agency kanchrapara, web developers kanchrapara, ecommerce development kanchrapara, kanchrapara it companies'
+  },
+  'madhyamgram': {
+    name: 'Madhyamgram',
+    state: 'West Bengal',
+    description: 'Looking for a top web development company in Madhyamgram? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Madhyamgram, West Bengal.',
+    keywords: 'web development company in madhyamgram, website design agency madhyamgram, web developers madhyamgram, ecommerce development madhyamgram, madhyamgram it companies'
+  },
+  'nabadwip': {
+    name: 'Nabadwip',
+    state: 'West Bengal',
+    description: 'Looking for a top web development company in Nabadwip? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Nabadwip, West Bengal.',
+    keywords: 'web development company in nabadwip, website design agency nabadwip, web developers nabadwip, ecommerce development nabadwip, nabadwip it companies'
+  },
+  'north-dumdum': {
+    name: 'North Dumdum',
+    state: 'West Bengal',
+    description: 'Looking for a top web development company in North Dumdum? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in North Dumdum, West Bengal.',
+    keywords: 'web development company in north dumdum, website design agency north dumdum, web developers north dumdum, ecommerce development north dumdum, north dumdum it companies'
+  },
+  'panihati': {
+    name: 'Panihati',
+    state: 'West Bengal',
+    description: 'Looking for a top web development company in Panihati? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Panihati, West Bengal.',
+    keywords: 'web development company in panihati, website design agency panihati, web developers panihati, ecommerce development panihati, panihati it companies'
+  },
+  'rajpur-sonarpur': {
+    name: 'Rajpur Sonarpur',
+    state: 'West Bengal',
+    description: 'Looking for a top web development company in Rajpur Sonarpur? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Rajpur Sonarpur, West Bengal.',
+    keywords: 'web development company in rajpur sonarpur, website design agency rajpur sonarpur, web developers rajpur sonarpur, ecommerce development rajpur sonarpur, rajpur sonarpur it companies'
+  },
+  'rishra': {
+    name: 'Rishra',
+    state: 'West Bengal',
+    description: 'Looking for a top web development company in Rishra? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Rishra, West Bengal.',
+    keywords: 'web development company in rishra, website design agency rishra, web developers rishra, ecommerce development rishra, rishra it companies'
+  },
+  'santipur': {
+    name: 'Santipur',
+    state: 'West Bengal',
+    description: 'Looking for a top web development company in Santipur? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Santipur, West Bengal.',
+    keywords: 'web development company in santipur, website design agency santipur, web developers santipur, ecommerce development santipur, santipur it companies'
+  },
+  'south-dumdum': {
+    name: 'South Dumdum',
+    state: 'West Bengal',
+    description: 'Looking for a top web development company in South Dumdum? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in South Dumdum, West Bengal.',
+    keywords: 'web development company in south dumdum, website design agency south dumdum, web developers south dumdum, ecommerce development south dumdum, south dumdum it companies'
+  },
+  'titagarh': {
+    name: 'Titagarh',
+    state: 'West Bengal',
+    description: 'Looking for a top web development company in Titagarh? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Titagarh, West Bengal.',
+    keywords: 'web development company in titagarh, website design agency titagarh, web developers titagarh, ecommerce development titagarh, titagarh it companies'
+  }
+,
+  'amethi': {
+    name: 'Amethi',
+    state: 'Uttar Pradesh',
+    description: 'Looking for a top web development company in Amethi? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Amethi, Uttar Pradesh.',
+    keywords: 'web development company in amethi, website design agency amethi, web developers amethi, ecommerce development amethi, amethi it companies'
+  },
+  'baghpat': {
+    name: 'Baghpat',
+    state: 'Uttar Pradesh',
+    description: 'Looking for a top web development company in Baghpat? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Baghpat, Uttar Pradesh.',
+    keywords: 'web development company in baghpat, website design agency baghpat, web developers baghpat, ecommerce development baghpat, baghpat it companies'
+  },
+  'chandauli': {
+    name: 'Chandauli',
+    state: 'Uttar Pradesh',
+    description: 'Looking for a top web development company in Chandauli? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Chandauli, Uttar Pradesh.',
+    keywords: 'web development company in chandauli, website design agency chandauli, web developers chandauli, ecommerce development chandauli, chandauli it companies'
+  },
+  'chitrakoot': {
+    name: 'Chitrakoot',
+    state: 'Uttar Pradesh',
+    description: 'Looking for a top web development company in Chitrakoot? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Chitrakoot, Uttar Pradesh.',
+    keywords: 'web development company in chitrakoot, website design agency chitrakoot, web developers chitrakoot, ecommerce development chitrakoot, chitrakoot it companies'
+  },
+  'jalaun': {
+    name: 'Jalaun',
+    state: 'Uttar Pradesh',
+    description: 'Looking for a top web development company in Jalaun? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Jalaun, Uttar Pradesh.',
+    keywords: 'web development company in jalaun, website design agency jalaun, web developers jalaun, ecommerce development jalaun, jalaun it companies'
+  },
+  'kannauj': {
+    name: 'Kannauj',
+    state: 'Uttar Pradesh',
+    description: 'Looking for a top web development company in Kannauj? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Kannauj, Uttar Pradesh.',
+    keywords: 'web development company in kannauj, website design agency kannauj, web developers kannauj, ecommerce development kannauj, kannauj it companies'
+  },
+  'kasganj': {
+    name: 'Kasganj',
+    state: 'Uttar Pradesh',
+    description: 'Looking for a top web development company in Kasganj? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Kasganj, Uttar Pradesh.',
+    keywords: 'web development company in kasganj, website design agency kasganj, web developers kasganj, ecommerce development kasganj, kasganj it companies'
+  },
+  'kaushambi': {
+    name: 'Kaushambi',
+    state: 'Uttar Pradesh',
+    description: 'Looking for a top web development company in Kaushambi? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Kaushambi, Uttar Pradesh.',
+    keywords: 'web development company in kaushambi, website design agency kaushambi, web developers kaushambi, ecommerce development kaushambi, kaushambi it companies'
+  },
+  'kushinagar': {
+    name: 'Kushinagar',
+    state: 'Uttar Pradesh',
+    description: 'Looking for a top web development company in Kushinagar? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Kushinagar, Uttar Pradesh.',
+    keywords: 'web development company in kushinagar, website design agency kushinagar, web developers kushinagar, ecommerce development kushinagar, kushinagar it companies'
+  },
+  'maharajganj': {
+    name: 'Maharajganj',
+    state: 'Uttar Pradesh',
+    description: 'Looking for a top web development company in Maharajganj? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Maharajganj, Uttar Pradesh.',
+    keywords: 'web development company in maharajganj, website design agency maharajganj, web developers maharajganj, ecommerce development maharajganj, maharajganj it companies'
+  },
+  'mahoba': {
+    name: 'Mahoba',
+    state: 'Uttar Pradesh',
+    description: 'Looking for a top web development company in Mahoba? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Mahoba, Uttar Pradesh.',
+    keywords: 'web development company in mahoba, website design agency mahoba, web developers mahoba, ecommerce development mahoba, mahoba it companies'
+  },
+  'sant-kabir-nagar': {
+    name: 'Sant Kabir Nagar',
+    state: 'Uttar Pradesh',
+    description: 'Looking for a top web development company in Sant Kabir Nagar? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Sant Kabir Nagar, Uttar Pradesh.',
+    keywords: 'web development company in sant kabir nagar, website design agency sant kabir nagar, web developers sant kabir nagar, ecommerce development sant kabir nagar, sant kabir nagar it companies'
+  },
+  'shravasti': {
+    name: 'Shravasti',
+    state: 'Uttar Pradesh',
+    description: 'Looking for a top web development company in Shravasti? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Shravasti, Uttar Pradesh.',
+    keywords: 'web development company in shravasti, website design agency shravasti, web developers shravasti, ecommerce development shravasti, shravasti it companies'
+  },
+  'siddharthnagar': {
+    name: 'Siddharthnagar',
+    state: 'Uttar Pradesh',
+    description: 'Looking for a top web development company in Siddharthnagar? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Siddharthnagar, Uttar Pradesh.',
+    keywords: 'web development company in siddharthnagar, website design agency siddharthnagar, web developers siddharthnagar, ecommerce development siddharthnagar, siddharthnagar it companies'
+  },
+  'sonbhadra': {
+    name: 'Sonbhadra',
+    state: 'Uttar Pradesh',
+    description: 'Looking for a top web development company in Sonbhadra? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Sonbhadra, Uttar Pradesh.',
+    keywords: 'web development company in sonbhadra, website design agency sonbhadra, web developers sonbhadra, ecommerce development sonbhadra, sonbhadra it companies'
+  },
+  'dindori': {
+    name: 'Dindori',
+    state: 'Madhya Pradesh',
+    description: 'Looking for a top web development company in Dindori? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Dindori, Madhya Pradesh.',
+    keywords: 'web development company in dindori, website design agency dindori, web developers dindori, ecommerce development dindori, dindori it companies'
+  },
+  'jhabua': {
+    name: 'Jhabua',
+    state: 'Madhya Pradesh',
+    description: 'Looking for a top web development company in Jhabua? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Jhabua, Madhya Pradesh.',
+    keywords: 'web development company in jhabua, website design agency jhabua, web developers jhabua, ecommerce development jhabua, jhabua it companies'
+  },
+  'katni': {
+    name: 'Katni',
+    state: 'Madhya Pradesh',
+    description: 'Looking for a top web development company in Katni? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Katni, Madhya Pradesh.',
+    keywords: 'web development company in katni, website design agency katni, web developers katni, ecommerce development katni, katni it companies'
+  },
+  'raisen': {
+    name: 'Raisen',
+    state: 'Madhya Pradesh',
+    description: 'Looking for a top web development company in Raisen? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Raisen, Madhya Pradesh.',
+    keywords: 'web development company in raisen, website design agency raisen, web developers raisen, ecommerce development raisen, raisen it companies'
+  },
+  'rajgarh': {
+    name: 'Rajgarh',
+    state: 'Madhya Pradesh',
+    description: 'Looking for a top web development company in Rajgarh? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Rajgarh, Madhya Pradesh.',
+    keywords: 'web development company in rajgarh, website design agency rajgarh, web developers rajgarh, ecommerce development rajgarh, rajgarh it companies'
+  },
+  'sidhi': {
+    name: 'Sidhi',
+    state: 'Madhya Pradesh',
+    description: 'Looking for a top web development company in Sidhi? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Sidhi, Madhya Pradesh.',
+    keywords: 'web development company in sidhi, website design agency sidhi, web developers sidhi, ecommerce development sidhi, sidhi it companies'
+  },
+  'umaria': {
+    name: 'Umaria',
+    state: 'Madhya Pradesh',
+    description: 'Looking for a top web development company in Umaria? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Umaria, Madhya Pradesh.',
+    keywords: 'web development company in umaria, website design agency umaria, web developers umaria, ecommerce development umaria, umaria it companies'
+  },
+  'arwal': {
+    name: 'Arwal',
+    state: 'Bihar',
+    description: 'Looking for a top web development company in Arwal? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Arwal, Bihar.',
+    keywords: 'web development company in arwal, website design agency arwal, web developers arwal, ecommerce development arwal, arwal it companies'
+  },
+  'jamui': {
+    name: 'Jamui',
+    state: 'Bihar',
+    description: 'Looking for a top web development company in Jamui? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Jamui, Bihar.',
+    keywords: 'web development company in jamui, website design agency jamui, web developers jamui, ecommerce development jamui, jamui it companies'
+  },
+  'kaimur': {
+    name: 'Kaimur',
+    state: 'Bihar',
+    description: 'Looking for a top web development company in Kaimur? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Kaimur, Bihar.',
+    keywords: 'web development company in kaimur, website design agency kaimur, web developers kaimur, ecommerce development kaimur, kaimur it companies'
+  },
+  'khagaria': {
+    name: 'Khagaria',
+    state: 'Bihar',
+    description: 'Looking for a top web development company in Khagaria? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Khagaria, Bihar.',
+    keywords: 'web development company in khagaria, website design agency khagaria, web developers khagaria, ecommerce development khagaria, khagaria it companies'
+  },
+  'rohtas': {
+    name: 'Rohtas',
+    state: 'Bihar',
+    description: 'Looking for a top web development company in Rohtas? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Rohtas, Bihar.',
+    keywords: 'web development company in rohtas, website design agency rohtas, web developers rohtas, ecommerce development rohtas, rohtas it companies'
+  },
+  'saran': {
+    name: 'Saran',
+    state: 'Bihar',
+    description: 'Looking for a top web development company in Saran? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Saran, Bihar.',
+    keywords: 'web development company in saran, website design agency saran, web developers saran, ecommerce development saran, saran it companies'
+  },
+  'sheikhpura': {
+    name: 'Sheikhpura',
+    state: 'Bihar',
+    description: 'Looking for a top web development company in Sheikhpura? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Sheikhpura, Bihar.',
+    keywords: 'web development company in sheikhpura, website design agency sheikhpura, web developers sheikhpura, ecommerce development sheikhpura, sheikhpura it companies'
+  },
+  'vaishali': {
+    name: 'Vaishali',
+    state: 'Bihar',
+    description: 'Looking for a top web development company in Vaishali? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Vaishali, Bihar.',
+    keywords: 'web development company in vaishali, website design agency vaishali, web developers vaishali, ecommerce development vaishali, vaishali it companies'
+  },
+  'aravalli': {
+    name: 'Aravalli',
+    state: 'Gujarat',
+    description: 'Looking for a top web development company in Aravalli? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Aravalli, Gujarat.',
+    keywords: 'web development company in aravalli, website design agency aravalli, web developers aravalli, ecommerce development aravalli, aravalli it companies'
+  },
+  'banaskantha': {
+    name: 'Banaskantha',
+    state: 'Gujarat',
+    description: 'Looking for a top web development company in Banaskantha? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Banaskantha, Gujarat.',
+    keywords: 'web development company in banaskantha, website design agency banaskantha, web developers banaskantha, ecommerce development banaskantha, banaskantha it companies'
+  },
+  'chhota-udaipur': {
+    name: 'Chhota Udaipur',
+    state: 'Gujarat',
+    description: 'Looking for a top web development company in Chhota Udaipur? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Chhota Udaipur, Gujarat.',
+    keywords: 'web development company in chhota udaipur, website design agency chhota udaipur, web developers chhota udaipur, ecommerce development chhota udaipur, chhota udaipur it companies'
+  },
+  'dang': {
+    name: 'Dang',
+    state: 'Gujarat',
+    description: 'Looking for a top web development company in Dang? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Dang, Gujarat.',
+    keywords: 'web development company in dang, website design agency dang, web developers dang, ecommerce development dang, dang it companies'
+  },
+  'devbhoomi-dwarka': {
+    name: 'Devbhoomi Dwarka',
+    state: 'Gujarat',
+    description: 'Looking for a top web development company in Devbhoomi Dwarka? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Devbhoomi Dwarka, Gujarat.',
+    keywords: 'web development company in devbhoomi dwarka, website design agency devbhoomi dwarka, web developers devbhoomi dwarka, ecommerce development devbhoomi dwarka, devbhoomi dwarka it companies'
+  },
+  'gir-somnath': {
+    name: 'Gir Somnath',
+    state: 'Gujarat',
+    description: 'Looking for a top web development company in Gir Somnath? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Gir Somnath, Gujarat.',
+    keywords: 'web development company in gir somnath, website design agency gir somnath, web developers gir somnath, ecommerce development gir somnath, gir somnath it companies'
+  },
+  'kheda': {
+    name: 'Kheda',
+    state: 'Gujarat',
+    description: 'Looking for a top web development company in Kheda? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Kheda, Gujarat.',
+    keywords: 'web development company in kheda, website design agency kheda, web developers kheda, ecommerce development kheda, kheda it companies'
+  },
+  'kutch': {
+    name: 'Kutch',
+    state: 'Gujarat',
+    description: 'Looking for a top web development company in Kutch? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Kutch, Gujarat.',
+    keywords: 'web development company in kutch, website design agency kutch, web developers kutch, ecommerce development kutch, kutch it companies'
+  },
+  'mahisagar': {
+    name: 'Mahisagar',
+    state: 'Gujarat',
+    description: 'Looking for a top web development company in Mahisagar? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Mahisagar, Gujarat.',
+    keywords: 'web development company in mahisagar, website design agency mahisagar, web developers mahisagar, ecommerce development mahisagar, mahisagar it companies'
+  },
+  'narmada': {
+    name: 'Narmada',
+    state: 'Gujarat',
+    description: 'Looking for a top web development company in Narmada? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Narmada, Gujarat.',
+    keywords: 'web development company in narmada, website design agency narmada, web developers narmada, ecommerce development narmada, narmada it companies'
+  },
+  'panchmahal': {
+    name: 'Panchmahal',
+    state: 'Gujarat',
+    description: 'Looking for a top web development company in Panchmahal? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Panchmahal, Gujarat.',
+    keywords: 'web development company in panchmahal, website design agency panchmahal, web developers panchmahal, ecommerce development panchmahal, panchmahal it companies'
+  },
+  'sabarkantha': {
+    name: 'Sabarkantha',
+    state: 'Gujarat',
+    description: 'Looking for a top web development company in Sabarkantha? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Sabarkantha, Gujarat.',
+    keywords: 'web development company in sabarkantha, website design agency sabarkantha, web developers sabarkantha, ecommerce development sabarkantha, sabarkantha it companies'
+  },
+  'tapi': {
+    name: 'Tapi',
+    state: 'Gujarat',
+    description: 'Looking for a top web development company in Tapi? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Tapi, Gujarat.',
+    keywords: 'web development company in tapi, website design agency tapi, web developers tapi, ecommerce development tapi, tapi it companies'
+  },
+  'ballari': {
+    name: 'Ballari',
+    state: 'Karnataka',
+    description: 'Looking for a top web development company in Ballari? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Ballari, Karnataka.',
+    keywords: 'web development company in ballari, website design agency ballari, web developers ballari, ecommerce development ballari, ballari it companies'
+  },
+  'belagavi': {
+    name: 'Belagavi',
+    state: 'Karnataka',
+    description: 'Looking for a top web development company in Belagavi? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Belagavi, Karnataka.',
+    keywords: 'web development company in belagavi, website design agency belagavi, web developers belagavi, ecommerce development belagavi, belagavi it companies'
+  },
+  'bengaluru-rural': {
+    name: 'Bengaluru Rural',
+    state: 'Karnataka',
+    description: 'Looking for a top web development company in Bengaluru Rural? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Bengaluru Rural, Karnataka.',
+    keywords: 'web development company in bengaluru rural, website design agency bengaluru rural, web developers bengaluru rural, ecommerce development bengaluru rural, bengaluru rural it companies'
+  },
+  'chikkamagaluru': {
+    name: 'Chikkamagaluru',
+    state: 'Karnataka',
+    description: 'Looking for a top web development company in Chikkamagaluru? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Chikkamagaluru, Karnataka.',
+    keywords: 'web development company in chikkamagaluru, website design agency chikkamagaluru, web developers chikkamagaluru, ecommerce development chikkamagaluru, chikkamagaluru it companies'
+  },
+  'dakshina-kannada': {
+    name: 'Dakshina Kannada',
+    state: 'Karnataka',
+    description: 'Looking for a top web development company in Dakshina Kannada? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Dakshina Kannada, Karnataka.',
+    keywords: 'web development company in dakshina kannada, website design agency dakshina kannada, web developers dakshina kannada, ecommerce development dakshina kannada, dakshina kannada it companies'
+  },
+  'davanagere': {
+    name: 'Davanagere',
+    state: 'Karnataka',
+    description: 'Looking for a top web development company in Davanagere? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Davanagere, Karnataka.',
+    keywords: 'web development company in davanagere, website design agency davanagere, web developers davanagere, ecommerce development davanagere, davanagere it companies'
+  },
+  'kalaburagi': {
+    name: 'Kalaburagi',
+    state: 'Karnataka',
+    description: 'Looking for a top web development company in Kalaburagi? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Kalaburagi, Karnataka.',
+    keywords: 'web development company in kalaburagi, website design agency kalaburagi, web developers kalaburagi, ecommerce development kalaburagi, kalaburagi it companies'
+  },
+  'kodagu': {
+    name: 'Kodagu',
+    state: 'Karnataka',
+    description: 'Looking for a top web development company in Kodagu? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Kodagu, Karnataka.',
+    keywords: 'web development company in kodagu, website design agency kodagu, web developers kodagu, ecommerce development kodagu, kodagu it companies'
+  },
+  'mysuru': {
+    name: 'Mysuru',
+    state: 'Karnataka',
+    description: 'Looking for a top web development company in Mysuru? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Mysuru, Karnataka.',
+    keywords: 'web development company in mysuru, website design agency mysuru, web developers mysuru, ecommerce development mysuru, mysuru it companies'
+  },
+  'shivamogga': {
+    name: 'Shivamogga',
+    state: 'Karnataka',
+    description: 'Looking for a top web development company in Shivamogga? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Shivamogga, Karnataka.',
+    keywords: 'web development company in shivamogga, website design agency shivamogga, web developers shivamogga, ecommerce development shivamogga, shivamogga it companies'
+  },
+  'tumakuru': {
+    name: 'Tumakuru',
+    state: 'Karnataka',
+    description: 'Looking for a top web development company in Tumakuru? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Tumakuru, Karnataka.',
+    keywords: 'web development company in tumakuru, website design agency tumakuru, web developers tumakuru, ecommerce development tumakuru, tumakuru it companies'
+  },
+  'uttara-kannada': {
+    name: 'Uttara Kannada',
+    state: 'Karnataka',
+    description: 'Looking for a top web development company in Uttara Kannada? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Uttara Kannada, Karnataka.',
+    keywords: 'web development company in uttara kannada, website design agency uttara kannada, web developers uttara kannada, ecommerce development uttara kannada, uttara kannada it companies'
+  },
+  'vijayapura': {
+    name: 'Vijayapura',
+    state: 'Karnataka',
+    description: 'Looking for a top web development company in Vijayapura? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Vijayapura, Karnataka.',
+    keywords: 'web development company in vijayapura, website design agency vijayapura, web developers vijayapura, ecommerce development vijayapura, vijayapura it companies'
+  }
 };
