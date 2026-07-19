@@ -4405,7 +4405,6 @@ export const CITIES_CONFIG: Record<string, CityConfig> = {
     description: 'Looking for a top web development company in Geyzing? WebXCrafting builds high-performance, responsive business websites, e-commerce stores, and custom software for startups and enterprises in Geyzing, Sikkim.',
     keywords: 'web development company in geyzing, website design agency geyzing, web developers geyzing, ecommerce development geyzing, geyzing it companies'
   },
-,
   'amaravati': {
     name: 'Amaravati',
     state: 'Andhra Pradesh',
