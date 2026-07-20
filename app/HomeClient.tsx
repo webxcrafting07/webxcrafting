@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import DotBackground from '@/components/DotBackground'
@@ -1246,7 +1247,7 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
                       overflow: 'hidden'
                     }}>
                       {blog.coverImage ? (
-                        <img src={blog.coverImage} alt={blog.title} style={{ width: '100%', height: 'auto', display: 'block', aspectRatio: '1200/630' }} />
+                        <Image src={blog.coverImage} alt={blog.title || 'Blog Post'} width={400} height={210} style={{ width: '100%', height: 'auto', display: 'block', aspectRatio: '1200/630', objectFit: 'cover' }} />
                       ) : (
                         <div style={{ height: 220, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                           <div style={{ fontSize: 40, opacity: 0.3 }}>📝</div>
