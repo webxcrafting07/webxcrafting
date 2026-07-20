@@ -388,7 +388,25 @@ export default function CalculatorClient() {
         }
       });
 
-      const finalY = (doc as any).lastAutoTable.finalY + 8;
+      let finalY = (doc as any).lastAutoTable.finalY + 8;
+
+      // Check if there is enough space for the Grand Total Box and Negotiable Warning (requires ~70 units of height)
+      if (finalY > 200) {
+        // Draw footer for current page before adding a new one
+        doc.setFillColor(charcoal[0], charcoal[1], charcoal[2]);
+        doc.rect(8, 284, 202, 13, "F");
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(8);
+        doc.text("WebXCrafting   •   webxcrafting@gmail.com   •   +91 9102615343 | +91 7974579107   •   Page " + doc.internal.getNumberOfPages(), 36, 292);
+
+        doc.addPage();
+        
+        // Left accent bar for new page
+        doc.setFillColor(electricBlue[0], electricBlue[1], electricBlue[2]);
+        doc.rect(0, 0, 8, 297, "F");
+
+        finalY = 20; // reset finalY to the top of the new page
+      }
 
       // --- GRAND TOTAL ESTIMATE BOX ---
       doc.setFillColor(79, 111, 255);
@@ -435,12 +453,12 @@ export default function CalculatorClient() {
       doc.setTextColor(75, 85, 99);
       doc.text("Please note that this pricing is a preliminary dynamic estimate. We are highly flexible\nand open to customization and negotiations to fit your specific budget targets and technical\nmilestones. Let's connect to finalize a plan that fits your exact goals!", 25, negotiableY + 15);
 
-      // Footer Page 2
+      // Footer for current page
       doc.setFillColor(charcoal[0], charcoal[1], charcoal[2]);
       doc.rect(8, 284, 202, 13, "F");
       doc.setTextColor(255, 255, 255);
       doc.setFontSize(8);
-      doc.text("WebXCrafting   •   webxcrafting@gmail.com   •   +91 9102615343 | +91 7974579107   •   Page 2", 36, 292);
+      doc.text("WebXCrafting   •   webxcrafting@gmail.com   •   +91 9102615343 | +91 7974579107   •   Page " + doc.internal.getNumberOfPages(), 36, 292);
 
       // ==========================================
       // PAGE 3: TECHNICAL ROADMAP
@@ -578,12 +596,12 @@ export default function CalculatorClient() {
       doc.setTextColor(107, 114, 128);
       doc.text("WebXCrafting Operations Unit", sigX + 25, sealY + 19, { align: "center" });
 
-      // Footer Page 3
+      // Footer for final page
       doc.setFillColor(charcoal[0], charcoal[1], charcoal[2]);
       doc.rect(8, 284, 202, 13, "F");
       doc.setTextColor(255, 255, 255);
       doc.setFontSize(8);
-      doc.text("WebXCrafting   •   webxcrafting@gmail.com   •   +91 9102615343 | +91 7974579107   •   Page 3", 36, 292);
+      doc.text("WebXCrafting   •   webxcrafting@gmail.com   •   +91 9102615343 | +91 7974579107   •   Page " + doc.internal.getNumberOfPages(), 36, 292);
 
       doc.save(`WebXCrafting_Proposal_${clientName.replace(/\s+/g, "_")}.pdf`);
       toast.success("PDF Proposal downloaded successfully!");
