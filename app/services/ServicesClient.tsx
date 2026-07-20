@@ -238,20 +238,20 @@ export default function ServicesClient() {
             </p>
           </div>
         </FadeUp>
+      </div>
 
-        {/* STATS MARQUEE */}
-        <FadeUp delay={0.05}>
-          <div style={{ 
-            marginBottom: 100, 
-            overflow: "hidden", 
-            padding: "20px 0", 
-            background: "rgba(79,111,255,0.05)", 
-            borderTop: "1px solid rgba(79,111,255,0.1)", 
-            borderBottom: "1px solid rgba(79,111,255,0.1)", 
-            width: "100vw",
-            marginLeft: "calc(-50vw + 50%)",
-            position: "relative"
-          }}>
+      {/* STATS MARQUEE */}
+      <FadeUp delay={0.05}>
+        <div style={{ 
+          marginBottom: 100, 
+          overflow: "hidden", 
+          padding: "20px 0", 
+          background: "rgba(79,111,255,0.05)", 
+          borderTop: "1px solid rgba(79,111,255,0.1)", 
+          borderBottom: "1px solid rgba(79,111,255,0.1)", 
+          width: "100%",
+          position: "relative"
+        }}>
             <motion.div
               animate={{ x: [0, -1035] }}
               transition={{ repeat: Infinity, ease: "linear", duration: 20 }}
@@ -269,6 +269,18 @@ export default function ServicesClient() {
           </div>
         </FadeUp>
 
+      <div
+        className="mobile-p-6"
+        style={{
+          position: "relative",
+          zIndex: 10,
+          padding: "0 32px 80px",
+          maxWidth: 1200,
+          margin: "0 auto",
+          width: "100%",
+          overflow: "hidden"
+        }}
+      >
         {/* PROCESS SECTION */}
         <FadeUp delay={0.1}>
           <div style={{ marginBottom: 100 }}>
