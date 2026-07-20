@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 import TawkChat from "@/components/TawkChat";
 import OfferBar from "@/components/OfferBar";
 import SeoAuditWidget from "@/components/SeoAuditWidget";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.webxcrafting.in"),
@@ -193,6 +194,15 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-GBD5LEY1G5" strategy="afterInteractive" />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-GBD5LEY1G5');
+          `}
+        </Script>
         <div style={{ overflowX: "hidden", width: "100%", position: "relative", display: "flex", flexDirection: "column", minHeight: "100vh" }}>
           <OfferBar />
           <TawkChat />

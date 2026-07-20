@@ -261,7 +261,7 @@ async function seed() {
         content: content,
         category: b.category,
         tags: b.tags,
-        coverImage: "/images/blog-default.jpg", // Assuming default image
+        coverImage: `/api/og?title=${encodeURIComponent(b.title)}`, // Dynamic OG Image
         author: "WebXCrafting",
         status: "published",
         readTime: readTime,
