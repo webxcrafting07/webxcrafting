@@ -589,12 +589,12 @@ export default function CalculatorClient() {
       
       doc.setTextColor(17, 24, 39);
       doc.setFont("helvetica", "bold");
-      doc.setFontSize(9);
-      doc.text("Authorized Verification Signature", sigX + 25, sealY + 14, { align: "center" });
+      doc.setFontSize(10);
+      doc.text("Nitesh", sigX + 25, sealY + 14, { align: "center" });
       doc.setFont("helvetica", "normal");
       doc.setFontSize(8);
       doc.setTextColor(107, 114, 128);
-      doc.text("WebXCrafting Operations Unit", sigX + 25, sealY + 19, { align: "center" });
+      doc.text("WebXCrafting", sigX + 25, sealY + 19, { align: "center" });
 
       // Footer for final page
       doc.setFillColor(charcoal[0], charcoal[1], charcoal[2]);
