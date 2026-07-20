@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import DotBackground from '@/components/DotBackground'
@@ -212,7 +213,7 @@ function ProjectCard(project: any) {
             aspectRatio: "16/9",
             width: "100%",
             background: image 
-              ? `url("${image}") center/cover no-repeat` 
+              ? 'transparent' 
               : `linear-gradient(135deg,${catColors[category] || "#4f6fff"}22,${catColors[category] || "#a259ff"}44)`,
             position: "relative",
             display: "flex",
@@ -222,6 +223,15 @@ function ProjectCard(project: any) {
             color: catColors[category] || "#4f6fff",
           }}
         >
+          {image && (
+            <Image 
+              src={image} 
+              alt={`${title} - ${category} project`} 
+              fill 
+              style={{ objectFit: 'cover' }}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          )}
           {!image && getCatIcon(category)}
           
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, transparent 40%, rgba(3,5,10,0.95))" }} />
