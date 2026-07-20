@@ -390,8 +390,8 @@ export default function CalculatorClient() {
 
       let finalY = (doc as any).lastAutoTable.finalY + 8;
 
-      // Check if there is enough space for the Grand Total Box and Negotiable Warning (requires ~70 units of height)
-      if (finalY > 200) {
+      // Check if there is enough space for the Grand Total Box, Negotiable Warning, and Offer Box (requires ~90 units of height)
+      if (finalY > 180) {
         // Draw footer for current page before adding a new one
         doc.setFillColor(charcoal[0], charcoal[1], charcoal[2]);
         doc.rect(8, 284, 202, 13, "F");
@@ -452,6 +452,28 @@ export default function CalculatorClient() {
       doc.setFontSize(9);
       doc.setTextColor(75, 85, 99);
       doc.text("Please note that this pricing is a preliminary dynamic estimate. We are highly flexible\nand open to customization and negotiations to fit your specific budget targets and technical\nmilestones. Let's connect to finalize a plan that fits your exact goals!", 25, negotiableY + 15);
+
+      // --- SAME DAY BOOKING OFFER BOX ---
+      const offerY = negotiableY + 34;
+      
+      // Light green/teal background for the offer
+      doc.setFillColor(236, 253, 245); // Tailwind emerald-50
+      doc.rect(20, offerY, 175, 20, "F");
+      
+      // Solid emerald left border
+      doc.setDrawColor(16, 185, 129); // Tailwind emerald-500
+      doc.setLineWidth(0.8);
+      doc.line(20, offerY, 20, offerY + 20);
+
+      doc.setTextColor(4, 120, 87); // Tailwind emerald-700
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(11);
+      doc.text("EXCLUSIVE SAME-DAY BOOKING OFFER", 25, offerY + 7);
+      
+      doc.setTextColor(17, 24, 39);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(10);
+      doc.text("Lock the deal today and get a flat 15% to 20% DISCOUNT on the total estimate!", 25, offerY + 14);
 
       // Footer for current page
       doc.setFillColor(charcoal[0], charcoal[1], charcoal[2]);
