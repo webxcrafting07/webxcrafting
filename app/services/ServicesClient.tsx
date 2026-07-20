@@ -248,7 +248,8 @@ export default function ServicesClient() {
             background: "rgba(79,111,255,0.05)", 
             borderTop: "1px solid rgba(79,111,255,0.1)", 
             borderBottom: "1px solid rgba(79,111,255,0.1)", 
-            width: "100%",
+            width: "100vw",
+            marginLeft: "calc(-50vw + 50%)",
             position: "relative"
           }}>
             <motion.div
