@@ -446,7 +446,7 @@ export default function CalculatorClient() {
       doc.setTextColor(charcoal[0], charcoal[1], charcoal[2]);
       doc.setFont("helvetica", "bold");
       doc.setFontSize(11);
-      doc.text("💡 BUDGET & TIMELINE ARE 100% NEGOTIABLE", 25, negotiableY + 8);
+      doc.text("IMPORTANT: BUDGET & TIMELINE ARE 100% NEGOTIABLE", 25, negotiableY + 8);
 
       doc.setFont("helvetica", "normal");
       doc.setFontSize(9);
