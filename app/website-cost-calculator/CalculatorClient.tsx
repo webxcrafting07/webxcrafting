@@ -295,6 +295,14 @@ export default function CalculatorClient() {
       doc.setFontSize(8);
       doc.text(`© ${new Date().getFullYear()} WebXCrafting. All rights reserved. Confidential document.`, 105, 275, { align: "center" });
 
+      // Promotional Strip Cover Page
+      doc.setFillColor(250, 204, 21); // Yellow
+      doc.rect(10, 280, 200, 8, "F");
+      doc.setTextColor(17, 24, 39);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(8);
+      doc.text("SPECIAL OFFER: 15% TO 20% OFF - VALID FOR SAME DAY BOOKING ONLY", 110, 285.5, { align: "center" });
+
       // ==========================================
       // PAGE 2: SPECS AND FINANCIAL DETAILS
       // ==========================================
@@ -392,6 +400,14 @@ export default function CalculatorClient() {
 
       // Check if there is enough space for the Grand Total Box, Negotiable Warning, and Offer Box (requires ~90 units of height)
       if (finalY > 180) {
+        // Promotional Strip
+        doc.setFillColor(250, 204, 21);
+        doc.rect(8, 276, 202, 8, "F");
+        doc.setTextColor(17, 24, 39);
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(8);
+        doc.text("SPECIAL OFFER: 15% TO 20% OFF - VALID FOR SAME DAY BOOKING ONLY", 109, 281.5, { align: "center" });
+
         // Draw footer for current page before adding a new one
         doc.setFillColor(charcoal[0], charcoal[1], charcoal[2]);
         doc.rect(8, 284, 202, 13, "F");
@@ -474,6 +490,14 @@ export default function CalculatorClient() {
       doc.setFont("helvetica", "bold");
       doc.setFontSize(10);
       doc.text("Lock the deal today and get a flat 15% to 20% DISCOUNT on the total estimate!", 25, offerY + 14);
+
+      // Promotional Strip
+      doc.setFillColor(250, 204, 21);
+      doc.rect(8, 276, 202, 8, "F");
+      doc.setTextColor(17, 24, 39);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(8);
+      doc.text("SPECIAL OFFER: 15% TO 20% OFF - VALID FOR SAME DAY BOOKING ONLY", 109, 281.5, { align: "center" });
 
       // Footer for current page
       doc.setFillColor(charcoal[0], charcoal[1], charcoal[2]);
@@ -617,6 +641,14 @@ export default function CalculatorClient() {
       doc.setFontSize(8);
       doc.setTextColor(107, 114, 128);
       doc.text("WebXCrafting", sigX + 25, sealY + 19, { align: "center" });
+
+      // Promotional Strip
+      doc.setFillColor(250, 204, 21);
+      doc.rect(8, 276, 202, 8, "F");
+      doc.setTextColor(17, 24, 39);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(8);
+      doc.text("SPECIAL OFFER: 15% TO 20% OFF - VALID FOR SAME DAY BOOKING ONLY", 109, 281.5, { align: "center" });
 
       // Footer for final page
       doc.setFillColor(charcoal[0], charcoal[1], charcoal[2]);
