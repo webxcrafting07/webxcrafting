@@ -7,6 +7,7 @@ import Footer from '@/components/Footer'
 export const metadata: Metadata = {
   title: 'Our Service Locations | WebXCrafting',
   description: 'WebXCrafting provides premium web development, e-commerce, and custom software services in over 200 cities across India. Find a web development agency near you.',
+  keywords: 'web development company locations, web design agency india, local web developers, e-commerce development near me, custom software agency',
   alternates: {
     canonical: '/locations',
   }
@@ -28,8 +29,31 @@ export default function LocationsDirectoryPage() {
   // Sort states alphabetically
   const sortedStates = Object.keys(citiesByState).sort()
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.webxcrafting.in"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Locations",
+        "item": "https://www.webxcrafting.in/locations"
+      }
+    ]
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <Navbar />
       <main className="min-h-screen pt-32 pb-20 px-6">
         <div className="max-w-6xl mx-auto">
