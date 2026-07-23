@@ -771,18 +771,46 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
       {/* ─── TRUST / WHY CHOOSE US ─────────────────── */}
       <section style={{ padding: '0 20px 80px', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
         <FadeUp>
+          <div style={{ textAlign: 'center', marginBottom: 48 }}>
+            <div className="section-label" style={{ marginBottom: 16 }}>Why Clients Trust Us</div>
+            <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 800, fontStyle: 'italic', lineHeight: 1.1 }}>
+              We Don't Just Build Websites, <span className="shimmer-text">We Build Relationships</span>
+            </h2>
+          </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 24 }}>
             {[
-              { icon: '❤️', title: 'Client First Approach', desc: 'We value your satisfaction over money. We build long-term trust and relationships.' },
-              { icon: '💰', title: 'Low Budget Friendly', desc: 'Premium quality websites at highly affordable prices. Perfect for growing businesses.' },
-              { icon: '🤝', title: 'Friendly Behavior', desc: 'We hold your hand through the entire process. Always approachable and ready to help.' },
-              { icon: '🛡️', title: 'Total Ownership', desc: 'We treat every project as if it were our very own business. We care about your growth.' }
+              { icon: <FaCheck size={22} />, title: 'Client First Approach', desc: 'We value your satisfaction over money. We build long-term trust and relationships with every client.' },
+              { icon: <FaMoneyBillWave size={22} />, title: 'Low Budget Friendly', desc: 'Premium quality websites at highly affordable prices. Perfect for startups and growing businesses.' },
+              { icon: <FaInfoCircle size={22} />, title: 'Friendly & Transparent', desc: 'We hold your hand through the entire process. Always approachable, honest, and ready to help.' },
+              { icon: <FaRocket size={22} />, title: 'Total Ownership', desc: 'We treat every project as if it were our very own business. Your growth is our success story.' }
             ].map((item, i) => (
-              <div key={i} className="glass" style={{ padding: 24, borderRadius: 16, border: '1px solid rgba(99,120,255,0.15)', textAlign: 'center' }}>
-                <div style={{ fontSize: 40, marginBottom: 16 }}>{item.icon}</div>
-                <h3 style={{ fontFamily: 'Syne', fontSize: 20, fontWeight: 700, color: '#e8eaf6', marginBottom: 12 }}>{item.title}</h3>
-                <p style={{ color: '#7b82a8', fontSize: 15, lineHeight: 1.6 }}>{item.desc}</p>
-              </div>
+              <motion.div
+                key={i}
+                whileHover={{ y: -6, boxShadow: '0 20px 48px rgba(79,111,255,0.15)' }}
+                transition={{ type: 'spring', stiffness: 300 }}
+                style={{
+                  padding: 32,
+                  borderRadius: 20,
+                  background: 'rgba(10,14,28,0.65)',
+                  backdropFilter: 'blur(20px)',
+                  border: '1px solid rgba(99,120,255,0.15)',
+                  textAlign: 'center',
+                }}
+              >
+                <div style={{
+                  width: 56, height: 56, borderRadius: 14,
+                  background: 'linear-gradient(135deg, rgba(79,111,255,0.12), rgba(162,89,255,0.12))',
+                  border: '1px solid rgba(79,111,255,0.25)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  margin: '0 auto 20px',
+                  color: '#4f6fff',
+                  boxShadow: 'inset 0 0 16px rgba(79,111,255,0.1)'
+                }}>
+                  {item.icon}
+                </div>
+                <h3 style={{ fontFamily: 'Syne', fontSize: 20, fontWeight: 700, color: '#e8eaf6', marginBottom: 12, fontStyle: 'italic' }}>{item.title}</h3>
+                <p style={{ color: '#7b82a8', fontSize: 14, lineHeight: 1.7 }}>{item.desc}</p>
+              </motion.div>
             ))}
           </div>
         </FadeUp>

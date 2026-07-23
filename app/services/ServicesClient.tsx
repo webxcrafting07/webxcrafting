@@ -128,6 +128,11 @@ const defaultServices = [
     price: 12000,
     originalPrice: 18000,
     popular: true,
+    features: ["On-Page & Off-Page SEO", "Social Media Marketing", "Google & Meta Ads", "Content Strategy", "Monthly Performance Reports"],
+    paymentTerms: "Monthly Retainer",
+    additionalCharges: "Ad budgets (Google Ads, Meta Ads) are separate",
+    requirements: ["Website Access", "Google Analytics Access", "Social Media Accounts"],
+    detailedDescription: "Boost your online visibility and drive targeted traffic to your business. Our affordable digital marketing strategies cover everything from technical SEO and keyword optimization to engaging social media campaigns. We treat your marketing budget like our own — zero hidden fees, complete transparency, and monthly ROI reports.",
     customLink: "/services/digital-marketing"
   },
   {
@@ -172,6 +177,11 @@ const defaultServices = [
     price: 5000,
     originalPrice: 8000,
     popular: true,
+    features: ["15-30 Second Video Ad", "Professional Scriptwriting", "Engaging Subtitles & Captions", "Premium Stock Footage & Music", "2 Rounds of Revisions"],
+    paymentTerms: "100% Advance Payment",
+    additionalCharges: "None",
+    requirements: ["Brand Logo", "Product/Service Details", "Target Audience Info", "Reference Videos (optional)"],
+    detailedDescription: "Stop scrolling and start selling! We create scroll-stopping video ads optimized for Instagram Reels, Facebook Feed, and YouTube Shorts. Each video is professionally scripted, edited with premium effects, and designed to convert viewers into paying customers — all at the most affordable price in the industry.",
     customLink: "/services/video-ads"
   }
 ];
