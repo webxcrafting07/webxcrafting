@@ -128,11 +128,7 @@ const defaultServices = [
     price: 12000,
     originalPrice: 18000,
     popular: true,
-    features: ["On-Page SEO", "Off-Page SEO", "Social Media Marketing", "Content Strategy", "Monthly Reports"],
-    paymentTerms: "Monthly Retainer",
-    additionalCharges: "Ad budgets (Google Ads, Meta Ads) are separate",
-    requirements: ["Website Access", "Google Analytics Access", "Social Media Accounts"],
-    detailedDescription: "Boost your online visibility and drive targeted traffic to your business. Our digital marketing strategies cover everything from technical SEO and keyword optimization to engaging social media campaigns, ensuring maximum ROI."
+    customLink: "/services/digital-marketing"
   },
   {
     _id: "8",
@@ -167,6 +163,16 @@ const defaultServices = [
     originalPrice: 599,
     popular: false,
     customLink: "/services/web-hosting"
+  },
+  {
+    _id: "11",
+    icon: "FaVideo",
+    title: "Video Ads Creation",
+    description: "High-converting, affordable video ads for Instagram, Facebook, and YouTube.",
+    price: 5000,
+    originalPrice: 8000,
+    popular: true,
+    customLink: "/services/video-ads"
   }
 ];
 

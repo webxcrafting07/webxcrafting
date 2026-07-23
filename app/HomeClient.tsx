@@ -465,6 +465,24 @@ const defaultServices = [
     requirements: ['Product List', 'Category Data', 'Supplier Info', 'Tax Configuration'],
     detailedDescription: 'Take control of your shop\'s inventory with our premium POS solution. Track every sale, monitor stock levels in real-time, and generate daily/monthly sales reports to grow your business efficiently.'
   },
+  {
+    icon: 'FaSearch',
+    title: 'Digital Marketing & SEO',
+    description: 'End-to-end digital marketing and Search Engine Optimization to grow your traffic.',
+    price: 12000,
+    originalPrice: 18000,
+    popular: true,
+    customLink: '/services/digital-marketing'
+  },
+  {
+    icon: 'FaVideo',
+    title: 'Video Ads Creation',
+    description: 'High-converting, affordable video ads for Instagram, Facebook, and YouTube.',
+    price: 5000,
+    originalPrice: 8000,
+    popular: true,
+    customLink: '/services/video-ads'
+  },
 ]
 
 const defaultProjects = [
