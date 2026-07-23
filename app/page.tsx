@@ -3,9 +3,9 @@ import HomeClient from './HomeClient'
 import { connectDB } from '@/lib/db'
 
 export const metadata: Metadata = {
-  title: "Premium Web Development & Digital Solutions | WebXCrafting",
-  description: "WebXCrafting is a leading global web development agency. We deliver high-performance business websites, premium E-commerce stores, and custom software solutions worldwide.",
-  keywords: "web development company, top web design agency, ecommerce website developers, custom software development, react nextjs developers, affordable web design, digital marketing agency, shopify developers, UI/UX design agency, website maintenance, webx crafting",
+  title: "Affordable Web Development & Design Agency | WebXCrafting",
+  description: "100% Client satisfaction guaranteed. Get premium, high-performance websites at budget-friendly prices. We treat every business website like our own. Friendly support & trusted results.",
+  keywords: "affordable website development, low cost web design, web development company in bhopal, trusted website developer, webx crafting, friendly web designers, small business website maker, website price calculator india",
   alternates: {
     canonical: "/",
   },

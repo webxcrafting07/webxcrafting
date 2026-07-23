@@ -512,19 +512,19 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
   const [selectedService, setSelectedService] = useState<any>(null)
   
   const slogans = [
-    "Premium Quality. Freelance Agility. Budget Friendly.",
-    "Big Agency Results at Freelance Rates. We Understand Your Hustle.",
-    "Crafting Elite Digital Experiences, Without the Premium Price Tag.",
-    "Your Vision, Our Code. Affordable Web Solutions Tailored to You.",
-    "Elite Web Development Built for Your Budget. We Solve Problems."
+    "100% Client Satisfaction Guaranteed. We treat your website like our own business.",
+    "Affordable Web Development without compromising on quality or performance.",
+    "Your friendly tech partners. We focus on your success, not just your budget.",
+    "Low Budget? No Problem. We build stunning websites accessible for everyone.",
+    "Trust is our currency. We build long-term relationships through transparent work."
   ];
 
   const headings = [
-    { top: "Engineering", highlight: "Premium", bottom: "Digital Experiences" },
-    { top: "Your Trusted", highlight: "Freelance", bottom: "Tech Partner" },
-    { top: "High Quality,", highlight: "Budget", bottom: "Friendly Pricing" },
-    { top: "Building", highlight: "Trust", bottom: "Through Code" },
-    { top: "Big Agency Quality,", highlight: "Freelance", bottom: "Rates" }
+    { top: "Your Friendly &", highlight: "Trusted", bottom: "Web Partners" },
+    { top: "High Quality,", highlight: "Low Budget", bottom: "Web Development" },
+    { top: "Client Satisfaction", highlight: "First,", bottom: "Money Second" },
+    { top: "We Treat Your", highlight: "Website", bottom: "Like Our Own" },
+    { top: "Affordable Pricing,", highlight: "Premium", bottom: "Results" }
   ];
   const [currentSlogan, setCurrentSlogan] = useState(0);
 
@@ -674,7 +674,7 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
               <div style={{ display: 'flex' }}>
                 {[1,2,3,4,5].map(i => <div key={i} style={{ color: '#f59e0b', fontSize: 12 }}>★</div>)}
               </div>
-              Trusted by 50+ Modern Businesses
+              100% Client Satisfaction & Friendly Support
             </div>
           </motion.div>
 
@@ -748,6 +748,26 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
             <StatCard number="<1s" label="Load Speed" />
           </motion.div>
         </div>
+      </section>
+
+      {/* ─── TRUST / WHY CHOOSE US ─────────────────── */}
+      <section style={{ padding: '0 20px 80px', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
+        <FadeUp>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 24 }}>
+            {[
+              { icon: '❤️', title: 'Client First Approach', desc: 'We value your satisfaction over money. We build long-term trust and relationships.' },
+              { icon: '💰', title: 'Low Budget Friendly', desc: 'Premium quality websites at highly affordable prices. Perfect for growing businesses.' },
+              { icon: '🤝', title: 'Friendly Behavior', desc: 'We hold your hand through the entire process. Always approachable and ready to help.' },
+              { icon: '🛡️', title: 'Total Ownership', desc: 'We treat every project as if it were our very own business. We care about your growth.' }
+            ].map((item, i) => (
+              <div key={i} className="glass" style={{ padding: 24, borderRadius: 16, border: '1px solid rgba(99,120,255,0.15)', textAlign: 'center' }}>
+                <div style={{ fontSize: 40, marginBottom: 16 }}>{item.icon}</div>
+                <h3 style={{ fontFamily: 'Syne', fontSize: 20, fontWeight: 700, color: '#e8eaf6', marginBottom: 12 }}>{item.title}</h3>
+                <p style={{ color: '#7b82a8', fontSize: 15, lineHeight: 1.6 }}>{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </FadeUp>
       </section>
 
       {/* ─── TECH STACK MARQUEE ──────────────────── */}

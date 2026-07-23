@@ -9,11 +9,11 @@ import Script from "next/script";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.webxcrafting.in"),
   title: {
-    default: "WebXCrafting — Global Web Development & Digital Solutions Agency",
+    default: "WebXCrafting — Affordable & Trusted Web Development Agency",
     template: "%s | WebXCrafting",
   },
   description:
-    "WebXCrafting is a premier global web development agency. We craft high-performance business websites, E-commerce stores, Job Portals, and Custom Web Applications with cutting-edge tech and SEO excellence.",
+    "We build your digital dreams at prices you can afford. Experience friendly support, low-budget solutions, and a team that treats your website like their own.",
   keywords: [
     "global web development agency",
     "best website design company",
@@ -46,9 +46,9 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://www.webxcrafting.in",
-    title: "WebXCrafting — Premium Global Web Development Agency",
+    title: "WebXCrafting — Affordable & Trusted Web Development Agency",
     description:
-      "Expert web development solutions to scale your business globally. We build stunning, high-performance websites that rank and convert.",
+      "We build your digital dreams at prices you can afford. Friendly support and a team that treats your website like their own.",
     siteName: "WebXCrafting",
     images: [
       {
