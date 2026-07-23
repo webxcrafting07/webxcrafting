@@ -74,9 +74,9 @@ export default function CalculatorPage() {
         {/* SEO Rich Text Section */}
         <section style={{ padding: '80px 20px', maxWidth: '1000px', margin: '0 auto', position: 'relative', zIndex: 5, color: '#8892b0' }}>
           <div style={{ background: 'rgba(10,14,28,0.7)', borderRadius: '24px', padding: 'clamp(24px, 5vw, 48px)', border: '1px solid rgba(99,120,255,0.1)', backdropFilter: 'blur(20px)' }}>
-            <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(24px, 4vw, 36px)', color: '#fff', marginBottom: '24px', fontStyle: 'italic', fontWeight: 800 }}>
-              How Much Does a <span style={{ color: '#4f6fff' }}>Website Cost</span> in 2026?
-            </h2>
+            <h1 style={{ fontFamily: 'Syne', fontSize: 'clamp(24px, 4vw, 36px)', color: '#fff', marginBottom: '24px', fontStyle: 'italic', fontWeight: 800 }}>
+              <span style={{ color: '#4f6fff' }}>Website Cost Calculator India</span> (2026)
+            </h1>
             <p style={{ fontSize: '16px', lineHeight: 1.8, marginBottom: '20px' }}>
               Building a professional website is an investment in your business's future. However, pricing in the web development industry can often feel confusing. Our <strong>Website Cost Calculator</strong> is designed to give you a transparent, real-time estimate based on current market standards in India and globally.
             </p>

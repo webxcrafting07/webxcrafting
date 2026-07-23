@@ -148,6 +148,26 @@ const defaultServices = [
     requirements: ["Business Details", "Logo & Photos", "Verification OTP/Video"],
     detailedDescription: "Dominate local search results. We will create, verify, and fully optimize your Google My Business profile so local customers can easily find you on Google Search and Maps when they need your services."
   },
+  {
+    _id: "9",
+    icon: "FaLaptopCode",
+    title: "Mobile App Development",
+    description: "Custom iOS and Android apps built with React Native and Flutter.",
+    price: 30000,
+    originalPrice: 45000,
+    popular: true,
+    customLink: "/services/mobile-app-development"
+  },
+  {
+    _id: "10",
+    icon: "FaDatabase",
+    title: "Premium Web Hosting",
+    description: "Blazing fast, secure, and scalable cloud hosting solutions.",
+    price: 299,
+    originalPrice: 599,
+    popular: false,
+    customLink: "/services/web-hosting"
+  }
 ];
 
 export default function ServicesClient() {
@@ -380,7 +400,13 @@ export default function ServicesClient() {
           {services.map((s: any, i) => (
             <FadeUp key={s._id || i} delay={i * 0.09}>
               <motion.div
-                onClick={() => setSelectedService(s)}
+                onClick={() => {
+                  if (s.customLink) {
+                    window.location.href = s.customLink;
+                  } else {
+                    setSelectedService(s);
+                  }
+                }}
                 whileHover={{ y: -8, boxShadow: "0 24px 64px rgba(0,0,0,0.5)" }}
                 transition={{ type: "spring", stiffness: 300 }}
                 style={{
@@ -523,13 +549,12 @@ export default function ServicesClient() {
                   </div>
                 </div>
 
-                <Link
-                  href="/contact"
+                <div
                   className={s.popular ? "btn-primary" : "btn-outline"}
-                  style={{ width: "100%", display: "flex" }}
+                  style={{ width: "100%", display: "flex", justifyContent: "center", padding: "14px 20px" }}
                 >
-                  Get Started →
-                </Link>
+                  {s.customLink ? "View Details →" : "Get Started →"}
+                </div>
               </motion.div>
             </FadeUp>
           ))}
