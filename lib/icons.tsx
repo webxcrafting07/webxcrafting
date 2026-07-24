@@ -14,7 +14,11 @@ import {
   FaPalette,
   FaServer,
   FaShieldAlt,
-  FaSync
+  FaSync,
+  FaVideo,
+  FaLaptopCode,
+  FaStore,
+  FaUserTie
 } from 'react-icons/fa'
 
 export const SERVICE_ICONS: Record<string, any> = {
@@ -33,7 +37,11 @@ export const SERVICE_ICONS: Record<string, any> = {
   FaPalette,
   FaServer,
   FaShieldAlt,
-  FaSync
+  FaSync,
+  FaVideo,
+  FaLaptopCode,
+  FaStore,
+  FaUserTie
 }
 
 export const getServiceIcon = (iconName: string, size: number = 24) => {
