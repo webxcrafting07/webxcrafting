@@ -3,8 +3,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaServer, FaShieldAlt, FaTachometerAlt, FaHeadset, FaCloud, FaLock, FaDatabase, FaCheckCircle } from 'react-icons/fa';
 import Link from 'next/link';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import DotBackground from '@/components/DotBackground';
 import WhatsAppButton from '@/components/WhatsAppButton';
 
@@ -23,7 +21,6 @@ const FadeUp = ({ children, delay = 0, className = "" }: any) => (
 export default function WebHostingClient() {
   return (
     <div style={{ color: 'var(--text)', overflow: 'hidden' }}>
-      <Navbar />
       <DotBackground />
       <WhatsAppButton />
 
@@ -197,7 +194,6 @@ export default function WebHostingClient() {
         </FadeUp>
       </section>
 
-      <Footer />
     </div>
   );
 }

@@ -3,8 +3,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaVideo, FaChartLine, FaPlay, FaPalette, FaCheckCircle, FaInstagram, FaFacebook, FaYoutube } from 'react-icons/fa';
 import Link from 'next/link';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import DotBackground from '@/components/DotBackground';
 import WhatsAppButton from '@/components/WhatsAppButton';
 
@@ -23,7 +21,6 @@ const FadeUp = ({ children, delay = 0, className = "" }: any) => (
 export default function VideoAdsClient() {
   return (
     <div style={{ color: 'var(--text)', overflow: 'hidden' }}>
-      <Navbar />
       <DotBackground />
       <WhatsAppButton />
 
@@ -180,7 +177,6 @@ export default function VideoAdsClient() {
         </FadeUp>
       </section>
 
-      <Footer />
     </div>
   );
 }
