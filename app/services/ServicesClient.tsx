@@ -35,7 +35,7 @@ const FadeUp = ({ children, delay = 0 }: any) => (
   </motion.div>
 );
 
-const defaultServices = [
+export const defaultServices = [
   {
     _id: "1",
     icon: "FaLaptopCode",

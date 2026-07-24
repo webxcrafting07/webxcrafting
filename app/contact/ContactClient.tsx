@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import DotBackground from "@/components/DotBackground";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { FaEnvelope, FaPhone, FaClock, FaGlobe } from "react-icons/fa";
+import { defaultServices } from "@/app/services/ServicesClient";
 
 const WA_NUM = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919102615343";
 const WA_MSG =
@@ -45,11 +46,20 @@ export default function ContactClient() {
     fetch("/api/services")
       .then(res => res.json())
       .then(data => {
-        if (data.success && data.data) {
-          setServices(data.data);
+        let loadedServices = defaultServices;
+        if (data.success && data.data && data.data.length > 0) {
+          const apiServices = data.data;
+          const customLinkServices = defaultServices.filter(
+            (ds: any) => ds.customLink && !apiServices.some((api: any) => api.title === ds.title)
+          );
+          loadedServices = [...apiServices, ...customLinkServices];
         }
+        setServices(loadedServices);
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err);
+        setServices(defaultServices);
+      });
   }, []);
 
   const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
