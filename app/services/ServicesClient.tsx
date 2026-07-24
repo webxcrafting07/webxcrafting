@@ -202,7 +202,15 @@ export default function ServicesClient() {
     fetch("/api/services")
       .then((r) => r.json())
       .then((d) => {
-        const loadedServices = (d.success && d.data.length) ? d.data : defaultServices;
+        let loadedServices = defaultServices;
+        if (d.success && d.data.length) {
+          const apiServices = d.data;
+          // Append any defaultServices with customLink that aren't already in API data
+          const customLinkServices = defaultServices.filter(
+            (ds: any) => ds.customLink && !apiServices.some((api: any) => api.title === ds.title)
+          );
+          loadedServices = [...apiServices, ...customLinkServices];
+        }
         setServices(loadedServices);
 
         if (typeof window !== "undefined") {

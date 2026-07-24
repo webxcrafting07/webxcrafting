@@ -624,7 +624,16 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
     // Fetch live data from MongoDB
     fetch('/api/services')
       .then((r) => r.json())
-      .then((d) => { if (d.success && d.data.length) setServices(d.data) })
+      .then((d) => {
+        if (d.success && d.data.length) {
+          const apiServices = d.data;
+          // Append any defaultServices with customLink that aren't already in API data
+          const customLinkServices = defaultServices.filter(
+            (ds: any) => ds.customLink && !apiServices.some((api: any) => api.title === ds.title)
+          );
+          setServices([...apiServices, ...customLinkServices]);
+        }
+      })
       .catch(() => { })
 
     fetch('/api/projects')
