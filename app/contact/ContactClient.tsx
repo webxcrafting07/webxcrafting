@@ -514,6 +514,7 @@ export default function ContactClient() {
                     onChange={(e) => set("budget", e.target.value)}
                   >
                     <option value="">Select your budget</option>
+                    <option>Rs. 1,000 to Rs. 5,000</option>
                     <option>Rs. 5,000 to Rs. 15,000</option>
                     <option>Rs. 15,000 to Rs. 40,000</option>
                     <option>Rs. 40,000 to Rs. 1,00,000</option>
