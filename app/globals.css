@@ -383,6 +383,15 @@ h6 {
   color: #7b82a8;
 }
 
+select.form-input, select.form-input option {
+  font-size: 14px;
+}
+select.form-input option {
+  background: #03050a;
+  color: #e8eaf6;
+  padding: 8px;
+}
+
 /* ─── Animations ─────────────────────────────────── */
 .animate-slide-up {
   animation: slideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
