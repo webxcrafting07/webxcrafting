@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
@@ -39,6 +39,18 @@ export default function ContactClient() {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [userName, setUserName] = useState("");
+  const [services, setServices] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetch("/api/services")
+      .then(res => res.json())
+      .then(data => {
+        if (data.success && data.data) {
+          setServices(data.data);
+        }
+      })
+      .catch(err => console.error(err));
+  }, []);
 
   const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
 
@@ -466,13 +478,9 @@ export default function ContactClient() {
                       onChange={(e) => set("service", e.target.value)}
                     >
                       <option value="">Select a service</option>
-                      <option>Web Development</option>
-                      <option>Digital Marketing</option>
-                      <option>Google My Business (GMB) Creation</option>
-                      <option>Local SEO</option>
-                      <option>E-commerce Solution</option>
-                      <option>UI/UX Design</option>
-                      <option>Mobile App Development</option>
+                      {services.map((s: any, i: number) => (
+                        <option key={i} value={s.title}>{s.title}</option>
+                      ))}
                       <option>Other / Not Sure</option>
                     </select>
                   </div>
