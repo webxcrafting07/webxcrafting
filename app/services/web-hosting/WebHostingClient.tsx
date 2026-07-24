@@ -31,19 +31,19 @@ export default function WebHostingClient() {
       <section style={{ position: 'relative', padding: 'clamp(100px, 15vw, 160px) 20px clamp(60px, 10vw, 100px)', maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 500px), 1fr))', gap: '60px', alignItems: 'center' }}>
         <FadeUp>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', padding: '8px 20px', background: 'rgba(79,111,255,0.1)', border: '1px solid rgba(79,111,255,0.2)', borderRadius: '100px', color: '#4f6fff', fontWeight: 700, fontSize: '13px', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '32px' }}>
-            <FaServer /> Premium Cloud Hosting
+            <FaServer /> Managed Website Hosting
           </div>
           <h1 style={{ fontFamily: 'Syne', fontSize: 'clamp(40px, 6vw, 72px)', fontWeight: 800, lineHeight: 1.1, fontStyle: 'italic', marginBottom: '24px', letterSpacing: '-1px' }}>
-            Blazing Fast. <br /><span className="grad-text">Rock-Solid.</span>
+            Focus on Business. <br /><span className="grad-text">We Handle Servers.</span>
           </h1>
           <p style={{ fontSize: 'clamp(16px, 2vw, 20px)', color: '#7b82a8', lineHeight: 1.6, marginBottom: '40px', maxWidth: '500px' }}>
-            Experience 99.9% uptime, enterprise-grade security, and lightning-fast loading speeds for your business or e-commerce website at unbeatable prices.
+            We don't just sell servers. We provide fully managed, lightning-fast, and secure hosting specifically designed for the websites we build for our clients.
           </p>
           <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
             <Link href="#pricing" className="btn-primary" style={{ padding: '16px 40px', fontSize: '16px' }}>
-              View Hosting Plans →
+              View Hosting Plan →
             </Link>
-            <a href="https://wa.me/919102615343?text=Hi,%20I'm%20interested%20in%20your%20Web%20Hosting%20services" target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ padding: '16px 40px', fontSize: '16px', borderColor: 'rgba(37,211,102,.4)', color: '#25d366' }}>
+            <a href="https://wa.me/919102615343?text=Hi,%20I'm%20interested%20in%20your%20Managed%20Hosting%20services" target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ padding: '16px 40px', fontSize: '16px', borderColor: 'rgba(37,211,102,.4)', color: '#25d366' }}>
               WhatsApp Us
             </a>
           </div>
@@ -90,19 +90,19 @@ export default function WebHostingClient() {
               Why Choose Our <span className="grad-text">Hosting?</span>
             </h2>
             <p style={{ color: '#7b82a8', fontSize: '18px', maxWidth: '600px', margin: '0 auto' }}>
-              We provide the best environment for your website to thrive, combining speed, security, and reliability.
+              We handle the complex server setup, security, and maintenance so you can focus entirely on growing your business.
             </p>
           </div>
         </FadeUp>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
           {[
-            { icon: FaTachometerAlt, title: "Lightning Fast NVMe", desc: "Our servers use latest NVMe SSDs and LiteSpeed caching for instant load times." },
-            { icon: FaShieldAlt, title: "Enterprise Security", desc: "Built-in DDoS protection, malware scanning, and automated daily backups." },
-            { icon: FaLock, title: "Free SSL Certificates", desc: "Secure your visitors' data with free Let's Encrypt SSL certificates automatically installed." },
-            { icon: FaCloud, title: "99.9% Uptime Guarantee", desc: "Redundant cloud infrastructure ensures your website never goes offline." },
-            { icon: FaDatabase, title: "Unlimited Bandwidth", desc: "No limits on traffic. Handle traffic spikes without worrying about overage charges." },
-            { icon: FaHeadset, title: "24/7 Expert Support", desc: "Our technical team is available around the clock to assist you via WhatsApp & Call." }
+            { icon: FaTachometerAlt, title: "Optimized Performance", desc: "Servers configured perfectly for the websites we build to ensure lightning-fast loading." },
+            { icon: FaShieldAlt, title: "Fully Managed", desc: "We take care of all technical maintenance, backend updates, and server optimization." },
+            { icon: FaLock, title: "Free SSL & Security", desc: "DDoS protection, malware scanning, and free SSL certificates automatically installed." },
+            { icon: FaCloud, title: "99.9% Uptime", desc: "Reliable cloud infrastructure ensures your website is always online and accessible." },
+            { icon: FaDatabase, title: "Automated Backups", desc: "Daily and weekly automated backups to ensure your business data is never lost." },
+            { icon: FaHeadset, title: "Priority Support", desc: "Direct WhatsApp and call support for any website issues, updates, or maintenance." }
           ].map((feat, i) => (
             <FadeUp key={i} delay={i * 0.1}>
               <div className="glass card-hover" style={{ padding: '40px 30px', height: '100%' }}>
@@ -129,9 +129,9 @@ export default function WebHostingClient() {
               SPECIAL OFFER
             </div>
             <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 800, fontStyle: 'italic', marginBottom: '16px' }}>
-              Affordable <span className="grad-text">Pricing</span>
+              Managed <span className="grad-text">Hosting Plan</span>
             </h2>
-            <p style={{ color: '#7b82a8', fontSize: '18px' }}>Premium cloud hosting without the premium price tag.</p>
+            <p style={{ color: '#7b82a8', fontSize: '18px' }}>Simple, affordable, and fully managed by our experts.</p>
           </div>
         </FadeUp>
 
@@ -144,8 +144,8 @@ export default function WebHostingClient() {
                 BEST VALUE
               </div>
 
-              <h3 style={{ fontFamily: 'Syne', fontSize: '28px', fontWeight: 700, marginBottom: '8px' }}>Starter Cloud Plan</h3>
-              <p style={{ color: '#7b82a8', marginBottom: '32px' }}>Perfect for new businesses and personal sites.</p>
+              <h3 style={{ fontFamily: 'Syne', fontSize: '28px', fontWeight: 700, marginBottom: '8px' }}>Managed Website Hosting</h3>
+              <p style={{ color: '#7b82a8', marginBottom: '32px' }}>Exclusively for our web design clients.</p>
               
               <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '40px' }}>
                 <span style={{ fontSize: '48px', fontWeight: 800, color: '#fff', lineHeight: 1 }}>₹499</span>
@@ -156,13 +156,13 @@ export default function WebHostingClient() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '40px' }}>
                 {[
                   "Host 1 Website",
-                  "10 GB NVMe SSD Storage",
-                  "Unlimited Bandwidth",
+                  "Fully Managed by Our Team",
+                  "Technical Maintenance Included",
                   "Free SSL Certificate",
-                  "5 Business Email Accounts",
-                  "LiteSpeed Web Server",
-                  "Weekly Automated Backups",
-                  "99.9% Uptime Guarantee"
+                  "Business Email Accounts",
+                  "Automated Regular Backups",
+                  "99.9% Uptime Guarantee",
+                  "Priority WhatsApp Support"
                 ].map((feat, i) => (
                   <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                     <FaCheckCircle color="#00e676" size={20} />
@@ -184,13 +184,13 @@ export default function WebHostingClient() {
         <FadeUp>
           <div className="glass-strong" style={{ maxWidth: '1000px', margin: '0 auto', padding: '60px 40px', borderRadius: '32px', textAlign: 'center', background: 'linear-gradient(135deg, rgba(79,111,255,0.1) 0%, rgba(10,14,28,0.8) 100%)', border: '1px solid rgba(79,111,255,0.3)' }}>
             <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(28px, 4vw, 40px)', fontWeight: 800, marginBottom: '24px' }}>
-              Ready to migrate your website?
+              Need a website with reliable hosting?
             </h2>
             <p style={{ color: '#b0b8d8', fontSize: '18px', maxWidth: '600px', margin: '0 auto 40px' }}>
-              We offer free website migration from your old host to our premium servers with zero downtime.
+              We build your website and manage the hosting so you don't have to worry about the technical details. Let's start your project today.
             </p>
             <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', flexWrap: 'wrap' }}>
-              <a href="https://wa.me/919102615343?text=Hi,%20I%20want%20to%20migrate%20my%20website%20to%20your%20hosting" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '16px 40px' }}>
+              <a href="https://wa.me/919102615343?text=Hi,%20I%20want%20a%20website%20with%20managed%20hosting" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '16px 40px' }}>
                 Chat on WhatsApp
               </a>
             </div>
