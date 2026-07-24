@@ -28,29 +28,29 @@ export default function MobileAppClient() {
       <WhatsAppButton />
 
       {/* ── HERO SECTION ── */}
-      <section style={{ position: 'relative', padding: 'clamp(100px, 15vw, 160px) 20px clamp(60px, 10vw, 100px)', maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 500px), 1fr))', gap: '60px', alignItems: 'center' }}>
+      <section style={{ position: 'relative', padding: 'clamp(80px, 12vw, 100px) 20px clamp(40px, 8vw, 60px)', maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 500px), 1fr))', gap: '40px', alignItems: 'center' }}>
         <FadeUp>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', padding: '8px 20px', background: 'rgba(79,111,255,0.1)', border: '1px solid rgba(79,111,255,0.2)', borderRadius: '100px', color: '#4f6fff', fontWeight: 700, fontSize: '13px', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '32px' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 16px', background: 'rgba(79,111,255,0.1)', border: '1px solid rgba(79,111,255,0.2)', borderRadius: '100px', color: '#4f6fff', fontWeight: 700, fontSize: '12px', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '24px' }}>
             <FaMobileAlt /> Native & Cross-Platform
           </div>
-          <h1 style={{ fontFamily: 'Syne', fontSize: 'clamp(40px, 6vw, 72px)', fontWeight: 800, lineHeight: 1.1, fontStyle: 'italic', marginBottom: '24px', letterSpacing: '-1px' }}>
+          <h1 style={{ fontFamily: 'Syne', fontSize: 'clamp(32px, 5vw, 56px)', fontWeight: 800, lineHeight: 1.1, fontStyle: 'italic', marginBottom: '20px', letterSpacing: '-1px' }}>
             Your Vision. <br /><span className="grad-text">In Every Pocket.</span>
           </h1>
-          <p style={{ fontSize: 'clamp(16px, 2vw, 20px)', color: '#7b82a8', lineHeight: 1.6, marginBottom: '40px', maxWidth: '500px' }}>
+          <p style={{ fontSize: 'clamp(15px, 2vw, 18px)', color: '#7b82a8', lineHeight: 1.6, marginBottom: '32px', maxWidth: '500px' }}>
             We design and develop high-performance iOS and Android applications that deliver exceptional user experiences and drive business growth.
           </p>
-          <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-            <Link href="#pricing" className="btn-primary" style={{ padding: '16px 40px', fontSize: '16px' }}>
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+            <Link href="#pricing" className="btn-primary" style={{ padding: '14px 32px', fontSize: '15px' }}>
               View Pricing →
             </Link>
-            <a href="https://wa.me/919102615343?text=Hi,%20I%20have%20an%20idea%20for%20a%20Mobile%20App" target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ padding: '16px 40px', fontSize: '16px', borderColor: 'rgba(37,211,102,.4)', color: '#25d366' }}>
+            <a href="https://wa.me/919102615343?text=Hi,%20I%20have%20an%20idea%20for%20a%20Mobile%20App" target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ padding: '14px 32px', fontSize: '15px', borderColor: 'rgba(37,211,102,.4)', color: '#25d366' }}>
               Discuss Your Idea
             </a>
           </div>
         </FadeUp>
         
         <FadeUp delay={0.2} style={{ display: 'flex', justifyContent: 'center' }}>
-          <div style={{ position: 'relative', width: '100%', maxWidth: '400px', aspectRatio: '9/16', borderRadius: '40px', background: 'linear-gradient(135deg, rgba(79,111,255,0.1), rgba(162,89,255,0.05))', border: '8px solid rgba(10,14,28,0.9)', boxShadow: '0 40px 80px rgba(0,0,0,0.6), 0 0 0 2px rgba(99,120,255,0.3)', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+          <div style={{ position: 'relative', width: '100%', maxWidth: '350px', aspectRatio: '9/16', borderRadius: '40px', background: 'linear-gradient(135deg, rgba(79,111,255,0.1), rgba(162,89,255,0.05))', border: '8px solid rgba(10,14,28,0.9)', boxShadow: '0 40px 80px rgba(0,0,0,0.6), 0 0 0 2px rgba(99,120,255,0.3)', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
              
              {/* Notch */}
              <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: '120px', height: '24px', background: 'rgba(10,14,28,0.9)', borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px', zIndex: 20 }} />
@@ -88,19 +88,19 @@ export default function MobileAppClient() {
       </section>
 
       {/* ── FEATURES GRID ── */}
-      <section style={{ padding: '60px 20px', maxWidth: '1200px', margin: '0 auto', position: 'relative' }}>
+      <section style={{ padding: '40px 20px', maxWidth: '1200px', margin: '0 auto', position: 'relative' }}>
         <FadeUp>
-          <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-            <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 800, fontStyle: 'italic', marginBottom: '16px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+            <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(28px, 4vw, 40px)', fontWeight: 800, fontStyle: 'italic', marginBottom: '16px' }}>
               Built For <span className="grad-text">Performance</span>
             </h2>
-            <p style={{ color: '#7b82a8', fontSize: '18px', maxWidth: '600px', margin: '0 auto' }}>
+            <p style={{ color: '#7b82a8', fontSize: '16px', maxWidth: '600px', margin: '0 auto' }}>
               We leverage modern frameworks and best practices to deliver mobile applications that users love.
             </p>
           </div>
         </FadeUp>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
           {[
             { icon: FaApple, title: "iOS Native Apps", desc: "Sleek, high-performance applications built specifically for the Apple ecosystem using Swift." },
             { icon: FaAndroid, title: "Android Native Apps", desc: "Scalable and robust apps tailored for the vast Android market using Kotlin and Java." },
@@ -110,14 +110,14 @@ export default function MobileAppClient() {
             { icon: FaStore, title: "E-commerce Apps", desc: "Powerful mobile commerce applications integrated with secure payment gateways." }
           ].map((feat, i) => (
             <FadeUp key={i} delay={i * 0.1}>
-              <div className="glass card-hover" style={{ padding: '40px 30px', height: '100%' }}>
-                <div style={{ width: '60px', height: '60px', borderRadius: '16px', background: 'rgba(79,111,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px', color: '#4f6fff', fontSize: '28px' }}>
+              <div className="glass card-hover" style={{ padding: '30px 24px', height: '100%' }}>
+                <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(79,111,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '20px', color: '#4f6fff', fontSize: '24px' }}>
                   <feat.icon />
                 </div>
-                <h3 style={{ fontFamily: 'Syne', fontSize: '22px', fontWeight: 700, marginBottom: '12px', color: '#e8eaf6' }}>
+                <h3 style={{ fontFamily: 'Syne', fontSize: '20px', fontWeight: 700, marginBottom: '10px', color: '#e8eaf6' }}>
                   {feat.title}
                 </h3>
-                <p style={{ color: '#7b82a8', lineHeight: 1.6 }}>
+                <p style={{ color: '#7b82a8', lineHeight: 1.5, fontSize: '15px' }}>
                   {feat.desc}
                 </p>
               </div>
@@ -127,34 +127,34 @@ export default function MobileAppClient() {
       </section>
 
       {/* ── PRICING SECTION ── */}
-      <section id="pricing" style={{ padding: '80px 20px 120px', maxWidth: '1200px', margin: '0 auto' }}>
+      <section id="pricing" style={{ padding: '60px 20px 80px', maxWidth: '1200px', margin: '0 auto' }}>
         <FadeUp>
-          <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-            <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 800, fontStyle: 'italic', marginBottom: '16px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+            <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(28px, 4vw, 40px)', fontWeight: 800, fontStyle: 'italic', marginBottom: '16px' }}>
               Transparent <span className="grad-text">Pricing</span>
             </h2>
-            <p style={{ color: '#7b82a8', fontSize: '18px' }}>Premium mobile app development at competitive rates.</p>
+            <p style={{ color: '#7b82a8', fontSize: '16px' }}>Premium mobile app development at competitive rates.</p>
           </div>
         </FadeUp>
 
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <FadeUp delay={0.2} style={{ width: '100%', maxWidth: '500px' }}>
-            <div className="glass" style={{ position: 'relative', padding: '50px 40px', borderRadius: '32px', border: '1px solid rgba(162, 89, 255, 0.4)', background: 'linear-gradient(180deg, rgba(10,14,28,0.9) 0%, rgba(162, 89, 255, 0.05) 100%)', boxShadow: '0 20px 80px rgba(162, 89, 255, 0.15)', overflow: 'hidden' }}>
+          <FadeUp delay={0.2} style={{ width: '100%', maxWidth: '450px' }}>
+            <div className="glass" style={{ position: 'relative', padding: '40px 30px', borderRadius: '24px', border: '1px solid rgba(162, 89, 255, 0.4)', background: 'linear-gradient(180deg, rgba(10,14,28,0.9) 0%, rgba(162, 89, 255, 0.05) 100%)', boxShadow: '0 20px 80px rgba(162, 89, 255, 0.15)', overflow: 'hidden' }}>
               
               {/* Popular Badge */}
-              <div style={{ position: 'absolute', top: '24px', right: '-32px', background: 'linear-gradient(90deg, #4f6fff, #a259ff)', padding: '6px 40px', transform: 'rotate(45deg)', fontSize: '12px', fontWeight: 800, letterSpacing: '1px' }}>
+              <div style={{ position: 'absolute', top: '24px', right: '-32px', background: 'linear-gradient(90deg, #4f6fff, #a259ff)', padding: '6px 40px', transform: 'rotate(45deg)', fontSize: '11px', fontWeight: 800, letterSpacing: '1px' }}>
                 MOST POPULAR
               </div>
 
-              <h3 style={{ fontFamily: 'Syne', fontSize: '28px', fontWeight: 700, marginBottom: '8px' }}>Cross-Platform App</h3>
-              <p style={{ color: '#7b82a8', marginBottom: '32px' }}>Fully functional app for both iOS & Android.</p>
+              <h3 style={{ fontFamily: 'Syne', fontSize: '24px', fontWeight: 700, marginBottom: '8px' }}>Cross-Platform App</h3>
+              <p style={{ color: '#7b82a8', marginBottom: '24px', fontSize: '15px' }}>Fully functional app for both iOS & Android.</p>
               
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '40px' }}>
-                <span style={{ fontSize: '48px', fontWeight: 800, color: '#fff', lineHeight: 1 }}>₹30,000</span>
-                <span style={{ textDecoration: 'line-through', color: '#ff5252', marginLeft: '12px', fontSize: '18px' }}>₹45,000</span>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '32px' }}>
+                <span style={{ fontSize: '40px', fontWeight: 800, color: '#fff', lineHeight: 1 }}>₹30,000</span>
+                <span style={{ textDecoration: 'line-through', color: '#ff5252', marginLeft: '12px', fontSize: '16px' }}>₹45,000</span>
               </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '40px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '32px' }}>
                 {[
                   "iOS & Android App (React Native/Flutter)",
                   "Custom UI/UX Design",
@@ -165,14 +165,14 @@ export default function MobileAppClient() {
                   "3 Months Free Support",
                   "Source Code Handover"
                 ].map((feat, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <FaCheckCircle color="#00e676" size={20} />
-                    <span style={{ color: '#e8eaf6', fontSize: '16px' }}>{feat}</span>
+                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <FaCheckCircle color="#00e676" size={18} />
+                    <span style={{ color: '#e8eaf6', fontSize: '15px' }}>{feat}</span>
                   </div>
                 ))}
               </div>
 
-              <Link href="/contact" className="btn-primary" style={{ width: '100%', padding: '18px', fontSize: '18px' }}>
+              <Link href="/contact" className="btn-primary" style={{ width: '100%', padding: '14px', fontSize: '16px' }}>
                 Start Your Project
               </Link>
             </div>
@@ -181,17 +181,17 @@ export default function MobileAppClient() {
       </section>
 
       {/* ── CTA SECTION ── */}
-      <section style={{ padding: '0 20px 100px' }}>
+      <section style={{ padding: '0 20px 80px' }}>
         <FadeUp>
-          <div className="glass-strong" style={{ maxWidth: '1000px', margin: '0 auto', padding: '60px 40px', borderRadius: '32px', textAlign: 'center', background: 'linear-gradient(135deg, rgba(79,111,255,0.1) 0%, rgba(10,14,28,0.8) 100%)', border: '1px solid rgba(79,111,255,0.3)' }}>
-            <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(28px, 4vw, 40px)', fontWeight: 800, marginBottom: '24px' }}>
+          <div className="glass-strong" style={{ maxWidth: '900px', margin: '0 auto', padding: '40px 30px', borderRadius: '24px', textAlign: 'center', background: 'linear-gradient(135deg, rgba(79,111,255,0.1) 0%, rgba(10,14,28,0.8) 100%)', border: '1px solid rgba(79,111,255,0.3)' }}>
+            <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(24px, 4vw, 32px)', fontWeight: 800, marginBottom: '16px' }}>
               Have a custom app requirement?
             </h2>
-            <p style={{ color: '#b0b8d8', fontSize: '18px', maxWidth: '600px', margin: '0 auto 40px' }}>
+            <p style={{ color: '#b0b8d8', fontSize: '16px', maxWidth: '600px', margin: '0 auto 30px' }}>
               From simple utility apps to complex enterprise solutions, our experts can bring your unique ideas to life. Let's discuss your specific needs.
             </p>
             <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', flexWrap: 'wrap' }}>
-              <a href="https://wa.me/919102615343?text=Hi,%20I%20have%20a%20custom%20Mobile%20App%20requirement" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '16px 40px' }}>
+              <a href="https://wa.me/919102615343?text=Hi,%20I%20have%20a%20custom%20Mobile%20App%20requirement" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '14px 32px', fontSize: '15px' }}>
                 Consult Our Experts
               </a>
             </div>
