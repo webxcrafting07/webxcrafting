@@ -157,6 +157,7 @@ const defaultServices = [
     price: 30000,
     originalPrice: 45000,
     popular: true,
+    features: ["Custom iOS & Android Apps", "React Native / Flutter", "UI/UX Design", "API Integration", "App Store Deployment"],
     customLink: "/services/mobile-app-development"
   },
   {
@@ -164,9 +165,10 @@ const defaultServices = [
     icon: "FaDatabase",
     title: "Premium Web Hosting",
     description: "Blazing fast, secure, and scalable cloud hosting solutions.",
-    price: 299,
-    originalPrice: 599,
+    price: 499,
+    originalPrice: 999,
     popular: false,
+    features: ["99.9% Uptime Guarantee", "Free SSL Certificate", "Daily Backups", "NVMe SSD Storage", "24/7 Support"],
     customLink: "/services/web-hosting"
   },
   {
