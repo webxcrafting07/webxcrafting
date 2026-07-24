@@ -2,6 +2,9 @@ import type { Metadata } from 'next'
 import HomeClient from './HomeClient'
 import { connectDB } from '@/lib/db'
 
+export const revalidate = 3600; // Cache for 1 hour to save Vercel CPU
+
+
 export const metadata: Metadata = {
   title: "Affordable Web Development & Design Agency | WebXCrafting",
   description: "100% Client satisfaction guaranteed. Get premium, high-performance websites at budget-friendly prices. We treat every business website like our own. Friendly support & trusted results.",

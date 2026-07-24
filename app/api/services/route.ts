@@ -3,6 +3,8 @@ import { connectDB } from '@/lib/db'
 import Service from '@/models/Service'
 import { isAdminAuthenticated } from '@/lib/auth'
 
+export const revalidate = 3600; // Cache for 1 hour to save Vercel CPU
+
 // GET /api/services — public
 export async function GET() {
   try {
