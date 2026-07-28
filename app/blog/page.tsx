@@ -3,6 +3,8 @@ import BlogClient from './BlogClient'
 import { connectDB } from '@/lib/db'
 import Blog from '@/models/Blog'
 
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: 'Blog — Web Development Tips & Insights',
   description: 'Read our latest articles on web development, SEO, e-commerce, and business growth tips. Expert insights from the WebXCrafting team.',

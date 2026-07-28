@@ -79,30 +79,65 @@ export default async function LocationPage({ params }: PageProps) {
       name: CITIES_CONFIG[k].name
     }));
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": `WebXCrafting - Web Development Company in ${cityInfo.name}`,
-    "image": "https://www.webxcrafting.in/icon.png",
-    "description": cityInfo.description,
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": cityInfo.name,
-      "addressRegion": cityInfo.state,
-      "addressCountry": "IN"
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": `WebXCrafting - Web Development Company in ${cityInfo.name}`,
+      "image": "https://www.webxcrafting.in/icon.png",
+      "description": cityInfo.description,
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": cityInfo.name,
+        "addressRegion": cityInfo.state,
+        "addressCountry": "IN"
+      },
+      "url": `https://www.webxcrafting.in/locations/web-development-company-in-${cityKey}`,
+      "telephone": "+91-9876543210", 
+      "priceRange": "$$",
+      "areaServed": cityInfo.name,
+      "serviceArea": {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "description": cityInfo.name
+        }
+      }
     },
-    "url": `https://www.webxcrafting.in/locations/web-development-company-in-${cityKey}`,
-    "telephone": "+91-9876543210", 
-    "priceRange": "$$",
-    "areaServed": cityInfo.name,
-    "serviceArea": {
-      "@type": "GeoCircle",
-      "geoMidpoint": {
-        "@type": "GeoCoordinates",
-        "description": cityInfo.name
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Web Development",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "WebXCrafting"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": cityInfo.name
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": `Web Development Services in ${cityInfo.name}`,
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": `Business Website Development in ${cityInfo.name}`
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": `E-commerce Development in ${cityInfo.name}`
+            }
+          }
+        ]
       }
     }
-  };
+  ];
 
   return (
     <>

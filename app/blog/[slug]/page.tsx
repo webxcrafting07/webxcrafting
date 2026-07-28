@@ -7,6 +7,20 @@ interface PageProps {
   params: Promise<{ slug: string }>
 }
 
+export const revalidate = 3600; // Cache for 1 hour
+
+export async function generateStaticParams() {
+  try {
+    await connectDB();
+    const blogs = await Blog.find({ status: 'published' }).select('slug').lean();
+    return blogs.map((blog: any) => ({
+      slug: blog.slug,
+    }));
+  } catch (error) {
+    console.error('Error generating static params for blogs:', error);
+    return [];
+  }
+}
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params
 

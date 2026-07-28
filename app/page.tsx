@@ -6,9 +6,9 @@ export const revalidate = 3600; // Cache for 1 hour to save Vercel CPU
 
 
 export const metadata: Metadata = {
-  title: "Affordable Web Development & Design Agency | WebXCrafting",
-  description: "100% Client satisfaction guaranteed. Get premium, high-performance websites at budget-friendly prices. We treat every business website like our own. Friendly support & trusted results.",
-  keywords: "affordable website development, low cost web design, web development company in bhopal, trusted website developer, webx crafting, friendly web designers, small business website maker, website price calculator india",
+  title: "Web & Mobile App Development Company | 100+ Projects Delivered",
+  description: "Top web development and mobile app development company. We build custom websites & native apps with fast delivery. Get a free quote in 24 hours!",
+  keywords: "web development, mobile app development, mobile development company, website maker, web hosting, web development company india, custom web apps",
   alternates: {
     canonical: "/",
   },
@@ -157,11 +157,24 @@ export default async function HomePage() {
     }
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.webxcrafting.in/"
+      }
+    ]
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([localBusinessSchema, faqSchema, serviceSchema]) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([localBusinessSchema, faqSchema, serviceSchema, breadcrumbSchema]) }}
       />
       <HomeClient initialBlogs={initialBlogs} />
     </>

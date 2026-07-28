@@ -96,12 +96,20 @@ const blogs = [
     keyword: "UI/UX design for conversion optimization"
   },
   {
-    title: "Progressive Web Apps (PWAs): Bridging the Gap Between Web and Native App",
+    title: "Outsource Web Development India | Premium Offshore Quality",
+    slug: "outsourcing-web-development-india-guide",
+    excerpt: "The complete guide to successfully outsourcing your web and mobile app development to India. Avoid the common pitfalls and hire top-tier talent.",
+    category: "Business",
+    tags: ["outsource", "india", "web development", "offshore"],
+    keyword: "outsource web development india"
+  },
+  {
+    title: "Progressive Web App Development | Build High-Speed PWAs",
     slug: "progressive-web-apps-pwa-guide",
     excerpt: "Why spend $50,000 on an iOS app when a PWA can offer push notifications, offline mode, and app-store-like experiences for a fraction of the cost?",
     category: "Technology",
     tags: ["pwa", "progressive web app", "mobile", "app development"],
-    keyword: "Progressive Web App development"
+    keyword: "progressive web apps development"
   },
   {
     title: "The Benefits of API-First Architecture for Modern Startups",
@@ -265,8 +273,8 @@ async function seed() {
         author: "WebXCrafting",
         status: "published",
         readTime: readTime,
-        metaTitle: b.title.substring(0, 60),
-        metaDescription: b.excerpt.substring(0, 150),
+        metaTitle: (b as any).metaTitle || b.title.substring(0, 60),
+        metaDescription: (b as any).metaDescription || b.excerpt.substring(0, 150),
         featured: false,
         publishDate: new Date()
       });

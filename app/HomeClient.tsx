@@ -884,7 +884,10 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
                 <li style={{ display: 'flex', alignItems: 'center', gap: 12, color: '#e8eaf6', fontWeight: 600 }}><div style={{ color: '#00e676' }}><FaCheck /></div> Next-Gen Image Optimization</li>
                 <li style={{ display: 'flex', alignItems: 'center', gap: 12, color: '#e8eaf6', fontWeight: 600 }}><div style={{ color: '#00e676' }}><FaCheck /></div> Zero Cumulative Layout Shift (CLS)</li>
               </ul>
-              <Link href="/services" className="btn-primary">Explore Our Tech →</Link>
+              <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+                <Link href="/services" className="btn-primary">Explore Our Tech →</Link>
+                <Link href="/website-cost-calculator" className="btn-outline">Calculate Website Cost</Link>
+              </div>
             </FadeUp>
           </div>
           <FadeUp delay={0.2} style={{ display: 'flex', justifyContent: 'center' }}>
