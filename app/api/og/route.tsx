@@ -2,7 +2,8 @@ import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
 import { logoBase64 } from './logo';
 
-export const runtime = 'edge';
+
+
 
 export async function GET(req: NextRequest) {
   try {
