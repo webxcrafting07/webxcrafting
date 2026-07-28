@@ -24,8 +24,27 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: 'Not Found' }
   }
 
-  const title = `Top Web Development & App Design Company in ${cityInfo.name} | WebXCrafting`
-  const description = `${cityInfo.description} We offer premium e-commerce solutions, custom web applications, digital marketing, and local SEO services tailored for businesses in ${cityInfo.name}.`
+  // Deterministic hashing for programmatic SEO spinning (Metadata)
+  const hash = cityInfo.name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  const titleIndex = hash % 4;
+  const descIndex = (hash * 3) % 4;
+
+  const titleVariations = [
+    `Top Web Development & App Design Company in ${cityInfo.name} | WebXCrafting`,
+    `Premium Web Development Services in ${cityInfo.name} - Hire Expert Developers`,
+    `${cityInfo.name}'s Leading Web & E-commerce Development Agency`,
+    `Custom Software & Web Development Company in ${cityInfo.name}`
+  ];
+
+  const descVariations = [
+    `${cityInfo.description} We offer premium e-commerce solutions, custom web applications, digital marketing, and local SEO services tailored for businesses in ${cityInfo.name}.`,
+    `Looking for the best web developers in ${cityInfo.name}? WebXCrafting engineers high-performance websites and digital solutions to skyrocket your local business growth.`,
+    `Scale your brand with top-tier web design and mobile app development in ${cityInfo.name}. ${cityInfo.description} Request a free quote today!`,
+    `WebXCrafting is the premier choice for web development in ${cityInfo.name}. From stunning landing pages to complex SaaS platforms, we deliver perfect digital experiences.`
+  ];
+
+  const title = titleVariations[titleIndex];
+  const description = descVariations[descIndex];
 
   // Generate extended LSI keywords based on the city
   const baseKeywords = cityInfo.keywords.split(',').map(k => k.trim())
