@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 import Link from 'next/link'
 import { jsPDF } from 'jspdf'
 import autoTable from 'jspdf-autotable'
-import { FaChartBar, FaFolder, FaEnvelope, FaCog, FaFileInvoice, FaCheckCircle, FaFire, FaPen, FaTrash, FaComments, FaFileAlt, FaSignOutAlt, FaBars, FaEye, FaEyeSlash, FaCheck, FaGlobe, FaHourglass, FaNewspaper, FaImage, FaCloudUploadAlt, FaLink, FaSync, FaPaperPlane } from 'react-icons/fa'
+import { FaChartBar, FaFolder, FaEnvelope, FaCog, FaFileInvoice, FaCheckCircle, FaFire, FaPen, FaTrash, FaComments, FaFileAlt, FaSignOutAlt, FaBars, FaEye, FaEyeSlash, FaCheck, FaGlobe, FaHourglass, FaNewspaper, FaImage, FaCloudUploadAlt, FaLink, FaSync, FaPaperPlane, FaBook } from 'react-icons/fa'
 import { SERVICE_ICONS, getServiceIcon } from '@/lib/icons'
 
 /* ── helpers ── */
@@ -37,6 +37,7 @@ const sidebarTabs = [
   { key: 'services', label: 'Services', icon: FaCog },
   { key: 'invoices', label: 'Invoices', icon: FaFileInvoice },
   { key: 'blog', label: 'Blog', icon: FaNewspaper },
+  { key: 'diary', label: 'Diary', icon: FaBook, href: '/admin/diary' },
 ]
 
 /* ─────────────────────────── MAIN ─────────────────────────── */
@@ -646,10 +647,13 @@ export default function DashboardClient() {
         </Link>
 
         <div style={{ fontSize: 11, color: '#7b82a8', fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', padding: '0 10px', marginBottom: 10 }}>Menu</div>
-        {sidebarTabs.map((t) => {
+        {sidebarTabs.map((t: any) => {
           const Icon = t.icon
           return (
-            <button key={t.key} onClick={() => { setTab(t.key); setIsSidebarOpen(false) }} style={{
+            <button key={t.key} onClick={() => { 
+              if (t.href) { router.push(t.href); return; }
+              setTab(t.key); setIsSidebarOpen(false) 
+            }} style={{
               display: 'flex', alignItems: 'center', gap: 12, width: '100%', padding: '11px 14px', borderRadius: 10, marginBottom: 4, cursor: 'pointer',
               background: tab === t.key ? 'linear-gradient(135deg,rgba(79,111,255,.2),rgba(162,89,255,.15))' : 'transparent',
               border: tab === t.key ? '1px solid rgba(79,111,255,.3)' : '1px solid transparent',
