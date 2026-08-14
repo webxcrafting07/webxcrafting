@@ -26,6 +26,32 @@ export default function AdminDiaryPage() {
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
   const [sourceOrPerson, setSourceOrPerson] = useState('');
   const [description, setDescription] = useState('');
+  const [filterDate, setFilterDate] = useState('');
+
+  const downloadCSV = (data: Entry[], filename = 'diary-export.csv') => {
+    if (data.length === 0) {
+      alert("No data to download.");
+      return;
+    }
+    const headers = ['ID', 'Type', 'Date', 'Amount (INR)', 'Source/Person', 'Description'];
+    const rows = data.map(e => [
+      e.id,
+      e.type,
+      e.date,
+      e.amount,
+      `"${e.sourceOrPerson.replace(/"/g, '""')}"`,
+      `"${(e.description || '').replace(/"/g, '""')}"`
+    ]);
+    const csvContent = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', filename);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   useEffect(() => {
     const saved = localStorage.getItem('adminDiaryEntries');
@@ -72,15 +98,11 @@ export default function AdminDiaryPage() {
     setIsModalOpen(false);
   };
 
-  const handleDelete = (id: string) => {
-    if (confirm('Are you sure you want to delete this entry?')) {
-      setEntries(prev => prev.filter(entry => entry.id !== id));
-    }
-  };
+  const displayedEntries = filterDate ? entries.filter(e => e.date === filterDate) : entries;
 
   // Calculations
-  const totalIncome = entries.filter(e => e.type === 'income').reduce((acc, curr) => acc + curr.amount, 0);
-  const totalExpense = entries.filter(e => e.type === 'expense').reduce((acc, curr) => acc + curr.amount, 0);
+  const totalIncome = displayedEntries.filter(e => e.type === 'income').reduce((acc, curr) => acc + curr.amount, 0);
+  const totalExpense = displayedEntries.filter(e => e.type === 'expense').reduce((acc, curr) => acc + curr.amount, 0);
   const balance = totalIncome - totalExpense;
 
   if (!isLoaded) return null;
@@ -97,7 +119,27 @@ export default function AdminDiaryPage() {
             </h1>
             <p className="text-gray-400 mt-1">Track your income and expenses effortlessly.</p>
           </div>
-          <div className="flex gap-3">
+          <div className="flex gap-3 flex-wrap items-center">
+            <div className="flex items-center gap-2 mr-2">
+              <input 
+                type="date" 
+                value={filterDate} 
+                onChange={(e) => setFilterDate(e.target.value)}
+                className="bg-[#11111f] border border-white/10 rounded-xl px-3 py-2 text-sm text-gray-300 focus:outline-none focus:border-blue-500/50 [color-scheme:dark]"
+              />
+              {filterDate && (
+                <button onClick={() => setFilterDate('')} className="text-gray-400 hover:text-white text-sm">Clear</button>
+              )}
+            </div>
+            <button 
+              onClick={() => downloadCSV(displayedEntries, filterDate ? `diary-${filterDate}.csv` : 'diary-all.csv')}
+              className="flex items-center gap-2 bg-blue-500/10 text-blue-400 border border-blue-500/20 px-4 py-2.5 rounded-xl hover:bg-blue-500/20 transition-all font-medium text-sm"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              Download CSV
+            </button>
             <button 
               onClick={() => openModal('income')}
               className="flex items-center gap-2 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-5 py-2.5 rounded-xl hover:bg-emerald-500/20 transition-all font-medium"
@@ -168,16 +210,16 @@ export default function AdminDiaryPage() {
           </div>
           
           <div className="divide-y divide-white/5">
-            {entries.length === 0 ? (
+            {displayedEntries.length === 0 ? (
               <div className="p-12 text-center text-gray-500">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto mb-4 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
-                <p>No entries found. Start by adding your first income or expense.</p>
+                <p>No entries found for this view.</p>
               </div>
             ) : (
               <AnimatePresence>
-                {entries.map((entry) => (
+                {displayedEntries.map((entry) => (
                   <motion.div 
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -227,12 +269,12 @@ export default function AdminDiaryPage() {
                         {entry.type === 'income' ? '+' : '-'}₹{entry.amount.toLocaleString('en-IN')}
                       </div>
                       <button 
-                        onClick={() => handleDelete(entry.id)}
-                        className="p-2 text-gray-500 hover:text-rose-500 hover:bg-rose-500/10 rounded-lg transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100"
-                        title="Delete entry"
+                        onClick={() => downloadCSV([entry], `diary-entry-${entry.id}.csv`)}
+                        className="p-2 text-gray-500 hover:text-blue-400 hover:bg-blue-500/10 rounded-lg transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100"
+                        title="Download entry details"
                       >
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                         </svg>
                       </button>
                     </div>
