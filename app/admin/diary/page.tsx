@@ -157,190 +157,217 @@ export default function AdminDiaryPage() {
   if (!isLoaded) return null;
 
   return (
-    <div className="min-h-screen bg-[#0a0a14] text-white p-6 font-sans selection:bg-indigo-500/30">
-      <div className="max-w-6xl mx-auto space-y-8">
+    <div className="min-h-screen bg-gradient-to-br from-[#05050a] via-[#0a0a14] to-[#05050a] text-white p-4 sm:p-8 font-sans selection:bg-indigo-500/30 relative overflow-hidden">
+      {/* Ambient background glows */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 blur-[120px] rounded-full pointer-events-none" />
+
+      <div className="max-w-6xl mx-auto space-y-10 relative z-10">
         
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-          <div>
-            <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
-              Admin Balance Diary
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6">
+          <div className="space-y-2">
+            <h1 className="text-4xl lg:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500">
+              Balance Diary
             </h1>
-            <p className="text-gray-400 mt-1">Track your income and expenses effortlessly.</p>
+            <p className="text-gray-400 text-lg">Track your income and expenses with clarity.</p>
           </div>
-          <div className="flex gap-3 flex-wrap items-center">
-            <div className="flex items-center gap-2 mr-2 bg-[#11111f] border border-white/10 rounded-xl px-3 py-1.5">
-              <span className="text-xs text-gray-500 font-medium uppercase tracking-wider">From</span>
-              <input 
-                type="date" 
-                value={fromDate} 
-                onChange={(e) => setFromDate(e.target.value)}
-                className="bg-transparent text-sm text-gray-300 focus:outline-none [color-scheme:dark]"
-              />
-              <div className="w-px h-4 bg-white/10 mx-1"></div>
-              <span className="text-xs text-gray-500 font-medium uppercase tracking-wider">To</span>
-              <input 
-                type="date" 
-                value={toDate} 
-                onChange={(e) => setToDate(e.target.value)}
-                className="bg-transparent text-sm text-gray-300 focus:outline-none [color-scheme:dark]"
-              />
+          <div className="flex flex-col sm:flex-row gap-3 flex-wrap items-start sm:items-center w-full lg:w-auto">
+            {/* Filter */}
+            <div className="flex items-center gap-3 bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl px-4 py-2 shadow-xl w-full sm:w-auto justify-between sm:justify-start">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-gray-500 font-bold uppercase tracking-widest">From</span>
+                <input 
+                  type="date" 
+                  value={fromDate} 
+                  onChange={(e) => setFromDate(e.target.value)}
+                  className="bg-transparent text-sm text-gray-200 font-medium focus:outline-none [color-scheme:dark]"
+                />
+              </div>
+              <div className="w-px h-5 bg-white/10 mx-1"></div>
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-gray-500 font-bold uppercase tracking-widest">To</span>
+                <input 
+                  type="date" 
+                  value={toDate} 
+                  onChange={(e) => setToDate(e.target.value)}
+                  className="bg-transparent text-sm text-gray-200 font-medium focus:outline-none [color-scheme:dark]"
+                />
+              </div>
               {(fromDate || toDate) && (
-                <button onClick={() => { setFromDate(''); setToDate(''); }} className="ml-2 text-gray-400 hover:text-rose-400 text-sm">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                <button onClick={() => { setFromDate(''); setToDate(''); }} className="ml-2 p-1 bg-white/5 rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" /></svg>
                 </button>
               )}
             </div>
-            <button 
-              onClick={() => {
-                let fname = 'diary-report.pdf';
-                if (fromDate && toDate) fname = `diary-${fromDate}-to-${toDate}.pdf`;
-                else if (fromDate) fname = `diary-from-${fromDate}.pdf`;
-                else if (toDate) fname = `diary-upto-${toDate}.pdf`;
-                downloadPDF(displayedEntries, fname);
-              }}
-              className="flex items-center gap-2 bg-blue-500/10 text-blue-400 border border-blue-500/20 px-4 py-2.5 rounded-xl hover:bg-blue-500/20 transition-all font-medium text-sm"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-              </svg>
-              Download PDF
-            </button>
-            <button 
-              onClick={() => openModal('income')}
-              className="flex items-center gap-2 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-5 py-2.5 rounded-xl hover:bg-emerald-500/20 transition-all font-medium"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
-              </svg>
-              Add Income
-            </button>
-            <button 
-              onClick={() => openModal('expense')}
-              className="flex items-center gap-2 bg-rose-500/10 text-rose-400 border border-rose-500/20 px-5 py-2.5 rounded-xl hover:bg-rose-500/20 transition-all font-medium"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
-              </svg>
-              Add Expense
-            </button>
+
+            <div className="flex items-center gap-3 w-full sm:w-auto">
+              <button 
+                onClick={() => {
+                  let fname = 'diary-report.pdf';
+                  if (fromDate && toDate) fname = `diary-${fromDate}-to-${toDate}.pdf`;
+                  else if (fromDate) fname = `diary-from-${fromDate}.pdf`;
+                  else if (toDate) fname = `diary-upto-${toDate}.pdf`;
+                  downloadPDF(displayedEntries, fname);
+                }}
+                className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-blue-500/10 text-blue-400 border border-blue-500/20 px-5 py-3 rounded-2xl hover:bg-blue-500/20 transition-all font-semibold shadow-[0_0_20px_rgba(59,130,246,0.15)] hover:shadow-[0_0_25px_rgba(59,130,246,0.25)]"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                PDF
+              </button>
+              <button 
+                onClick={() => openModal('income')}
+                className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white border border-emerald-400/30 px-5 py-3 rounded-2xl hover:from-emerald-400 hover:to-emerald-500 transition-all font-semibold shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)]"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
+                </svg>
+                Income
+              </button>
+              <button 
+                onClick={() => openModal('expense')}
+                className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-gradient-to-r from-rose-500 to-rose-600 text-white border border-rose-400/30 px-5 py-3 rounded-2xl hover:from-rose-400 hover:to-rose-500 transition-all font-semibold shadow-[0_0_20px_rgba(244,63,94,0.3)] hover:shadow-[0_0_30px_rgba(244,63,94,0.5)]"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+                </svg>
+                Expense
+              </button>
+            </div>
           </div>
         </div>
 
         {/* Dashboard Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Balance Card */}
-          <div className="bg-[#11111f] rounded-2xl p-6 border border-white/5 relative overflow-hidden group hover:border-blue-500/30 transition-all shadow-lg">
-            <div className="absolute top-0 right-0 p-4 opacity-10 transform group-hover:scale-110 transition-transform">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-20 w-20 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <motion.div whileHover={{ y: -4 }} className="bg-white/[0.02] backdrop-blur-2xl rounded-3xl p-8 border border-white/10 relative overflow-hidden group shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+            <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="absolute top-0 right-0 p-6 opacity-[0.03] transform group-hover:scale-110 group-hover:opacity-10 transition-all duration-500">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-32 w-32 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
               </svg>
             </div>
-            <p className="text-gray-400 font-medium mb-1">Total Balance</p>
-            <h2 className={`text-4xl font-bold ${balance >= 0 ? 'text-blue-400' : 'text-rose-400'}`}>
-              ₹{balance.toLocaleString('en-IN')}
-            </h2>
-          </div>
+            <div className="relative z-10">
+              <p className="text-gray-400 font-medium tracking-wide uppercase text-sm mb-3">Total Balance</p>
+              <h2 className={`text-5xl lg:text-6xl font-extrabold tracking-tighter ${balance >= 0 ? 'text-white' : 'text-rose-400'}`}>
+                ₹{balance.toLocaleString('en-IN')}
+              </h2>
+            </div>
+          </motion.div>
 
           {/* Income Card */}
-          <div className="bg-[#11111f] rounded-2xl p-6 border border-white/5 relative overflow-hidden group hover:border-emerald-500/30 transition-all shadow-lg">
-            <div className="absolute top-0 right-0 p-4 opacity-10 transform group-hover:scale-110 transition-transform">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-20 w-20 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <motion.div whileHover={{ y: -4 }} className="bg-white/[0.02] backdrop-blur-2xl rounded-3xl p-8 border border-white/10 relative overflow-hidden group shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+            <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="absolute top-0 right-0 p-6 opacity-[0.03] transform group-hover:scale-110 group-hover:opacity-10 transition-all duration-500">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-32 w-32 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
               </svg>
             </div>
-            <p className="text-gray-400 font-medium mb-1">Total Income</p>
-            <h2 className="text-4xl font-bold text-emerald-400">
-              +₹{totalIncome.toLocaleString('en-IN')}
-            </h2>
-          </div>
+            <div className="relative z-10">
+              <p className="text-gray-400 font-medium tracking-wide uppercase text-sm mb-3">Total Income</p>
+              <h2 className="text-4xl lg:text-5xl font-extrabold tracking-tighter text-emerald-400">
+                +₹{totalIncome.toLocaleString('en-IN')}
+              </h2>
+            </div>
+          </motion.div>
 
           {/* Expense Card */}
-          <div className="bg-[#11111f] rounded-2xl p-6 border border-white/5 relative overflow-hidden group hover:border-rose-500/30 transition-all shadow-lg">
-            <div className="absolute top-0 right-0 p-4 opacity-10 transform group-hover:scale-110 transition-transform">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-20 w-20 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <motion.div whileHover={{ y: -4 }} className="bg-white/[0.02] backdrop-blur-2xl rounded-3xl p-8 border border-white/10 relative overflow-hidden group shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+            <div className="absolute -inset-1 bg-gradient-to-r from-rose-500/20 to-pink-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="absolute top-0 right-0 p-6 opacity-[0.03] transform group-hover:scale-110 group-hover:opacity-10 transition-all duration-500">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-32 w-32 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
               </svg>
             </div>
-            <p className="text-gray-400 font-medium mb-1">Total Expense</p>
-            <h2 className="text-4xl font-bold text-rose-400">
-              -₹{totalExpense.toLocaleString('en-IN')}
-            </h2>
-          </div>
+            <div className="relative z-10">
+              <p className="text-gray-400 font-medium tracking-wide uppercase text-sm mb-3">Total Expense</p>
+              <h2 className="text-4xl lg:text-5xl font-extrabold tracking-tighter text-rose-400">
+                -₹{totalExpense.toLocaleString('en-IN')}
+              </h2>
+            </div>
+          </motion.div>
         </div>
 
         {/* Transactions List */}
-        <div className="bg-[#11111f] rounded-2xl border border-white/5 overflow-hidden shadow-lg">
-          <div className="p-6 border-b border-white/5">
-            <h3 className="text-xl font-semibold">Recent Transactions</h3>
+        <div className="bg-white/[0.02] backdrop-blur-2xl rounded-3xl border border-white/10 overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+          <div className="p-8 border-b border-white/5 flex items-center justify-between">
+            <h3 className="text-2xl font-bold tracking-tight text-white/90">Recent Transactions</h3>
+            <div className="px-3 py-1 bg-white/5 rounded-full text-xs font-semibold tracking-wider text-gray-400">
+              {displayedEntries.length} ENTRIES
+            </div>
           </div>
           
           <div className="divide-y divide-white/5">
             {displayedEntries.length === 0 ? (
-              <div className="p-12 text-center text-gray-500">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto mb-4 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                <p>No entries found for this view.</p>
+              <div className="p-16 text-center text-gray-500 flex flex-col items-center">
+                <div className="w-24 h-24 mb-6 rounded-full bg-white/5 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </div>
+                <p className="text-lg font-medium text-gray-400">No entries found for this view.</p>
+                <p className="text-sm mt-2 opacity-60">Adjust your date filters or add a new transaction.</p>
               </div>
             ) : (
               <AnimatePresence>
                 {displayedEntries.map((entry) => (
                   <motion.div 
-                    initial={{ opacity: 0, y: 10 }}
+                    initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, x: -10 }}
+                    exit={{ opacity: 0, x: -20 }}
                     key={entry.id} 
-                    className="p-4 sm:p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:bg-white/[0.02] transition-colors group"
+                    className="p-6 sm:p-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:bg-white/[0.04] transition-all duration-300 group relative"
                   >
-                    <div className="flex items-center gap-4">
-                      <div className={`p-3 rounded-xl flex-shrink-0 ${
+                    <div className="flex items-center gap-5">
+                      <div className={`p-4 rounded-2xl flex-shrink-0 shadow-inner ${
                         entry.type === 'income' 
-                          ? 'bg-emerald-500/10 text-emerald-500' 
-                          : 'bg-rose-500/10 text-rose-500'
+                          ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-emerald-500/10' 
+                          : 'bg-rose-500/10 text-rose-400 border border-rose-500/20 shadow-rose-500/10'
                       }`}>
                         {entry.type === 'income' ? (
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 11l5-5m0 0l5 5m-5-5v12" />
                           </svg>
                         ) : (
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 13l-5 5m0 0l-5-5m5 5V6" />
                           </svg>
                         )}
                       </div>
                       <div>
-                        <h4 className="font-semibold text-lg">{entry.sourceOrPerson}</h4>
-                        <div className="flex items-center gap-2 text-sm text-gray-400 mt-1">
-                          <span className="flex items-center gap-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <h4 className="font-bold text-xl tracking-tight text-gray-100">{entry.sourceOrPerson}</h4>
+                        <div className="flex items-center gap-3 text-sm text-gray-400 mt-1.5 font-medium">
+                          <span className="flex items-center gap-1.5">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
-                            {new Date(entry.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
+                            {new Date(entry.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}
                           </span>
                           {entry.description && (
                             <>
-                              <span className="w-1 h-1 rounded-full bg-gray-600"></span>
-                              <span className="truncate max-w-[200px]">{entry.description}</span>
+                              <span className="w-1.5 h-1.5 rounded-full bg-gray-600"></span>
+                              <span className="truncate max-w-[250px] opacity-80">{entry.description}</span>
                             </>
                           )}
                         </div>
                       </div>
                     </div>
                     
-                    <div className="flex items-center justify-between w-full sm:w-auto gap-4">
-                      <div className={`text-xl font-bold ${
+                    <div className="flex items-center justify-between w-full sm:w-auto gap-6">
+                      <div className={`text-2xl font-bold tracking-tight ${
                         entry.type === 'income' ? 'text-emerald-400' : 'text-rose-400'
                       }`}>
                         {entry.type === 'income' ? '+' : '-'}₹{entry.amount.toLocaleString('en-IN')}
                       </div>
                       <button 
                         onClick={() => downloadPDF([entry], `diary-entry-${entry.id}.pdf`)}
-                        className="p-2 text-gray-500 hover:text-blue-400 hover:bg-blue-500/10 rounded-lg transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100"
+                        className="p-3 text-gray-500 hover:text-blue-400 hover:bg-blue-500/10 rounded-xl transition-all opacity-0 group-hover:opacity-100 focus:opacity-100 transform group-hover:scale-110"
                         title="Download entry details"
                       >
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                         </svg>
                       </button>
                     </div>
@@ -355,27 +382,30 @@ export default function AdminDiaryPage() {
       {/* Modal Overlay */}
       <AnimatePresence>
         {isModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
             <motion.div 
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              initial={{ opacity: 0, scale: 0.9, y: 30 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-[#11111f] border border-white/10 rounded-2xl w-full max-w-md shadow-2xl overflow-hidden"
+              exit={{ opacity: 0, scale: 0.9, y: 30 }}
+              transition={{ type: "spring", bounce: 0.4, duration: 0.5 }}
+              className="bg-[#0f0f16] border border-white/10 rounded-[2rem] w-full max-w-md shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-hidden relative"
             >
-              <div className={`p-6 border-b ${
-                modalType === 'income' ? 'border-emerald-500/20' : 'border-rose-500/20'
-              }`}>
+              {/* Subtle top glow in modal */}
+              <div className={`absolute top-0 left-0 right-0 h-1 ${modalType === 'income' ? 'bg-gradient-to-r from-emerald-400 to-teal-500' : 'bg-gradient-to-r from-rose-400 to-pink-500'}`}></div>
+
+              <div className="p-8 border-b border-white/5 relative">
                 <div className="flex justify-between items-center">
-                  <h3 className={`text-xl font-bold flex items-center gap-2 ${
+                  <h3 className={`text-2xl font-extrabold tracking-tight flex items-center gap-3 ${
                     modalType === 'income' ? 'text-emerald-400' : 'text-rose-400'
                   }`}>
                     {modalType === 'income' ? (
-                      <><svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg> Add Income</>
+                      <div className="p-2.5 bg-emerald-500/10 rounded-xl"><svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg></div>
                     ) : (
-                      <><svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 12H6" /></svg> Add Expense</>
+                      <div className="p-2.5 bg-rose-500/10 rounded-xl"><svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M18 12H6" /></svg></div>
                     )}
+                    New {modalType === 'income' ? 'Income' : 'Expense'}
                   </h3>
-                  <button onClick={() => setIsModalOpen(false)} className="text-gray-400 hover:text-white transition-colors">
+                  <button onClick={() => setIsModalOpen(false)} className="p-2 rounded-full text-gray-500 hover:bg-white/5 hover:text-white transition-all transform hover:rotate-90">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -383,14 +413,14 @@ export default function AdminDiaryPage() {
                 </div>
               </div>
               
-              <form onSubmit={handleAddEntry} className="p-6 space-y-5">
+              <form onSubmit={handleAddEntry} className="p-8 space-y-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-1">
+                  <label className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">
                     Amount (₹) <span className="text-rose-500">*</span>
                   </label>
                   <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <span className="text-gray-500 sm:text-sm">₹</span>
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                      <span className="text-gray-400 font-medium">₹</span>
                     </div>
                     <input
                       type="number"
@@ -398,14 +428,14 @@ export default function AdminDiaryPage() {
                       min="1"
                       value={amount}
                       onChange={(e) => setAmount(e.target.value)}
-                      className="block w-full pl-8 pr-3 py-2.5 bg-black/50 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all"
-                      placeholder="0.00"
+                      className={`block w-full pl-10 pr-4 py-3.5 bg-black/40 border border-white/5 rounded-2xl text-xl font-semibold text-white placeholder-gray-600 focus:outline-none focus:ring-2 transition-all shadow-inner ${modalType === 'income' ? 'focus:ring-emerald-500/50 focus:border-emerald-500/50' : 'focus:ring-rose-500/50 focus:border-rose-500/50'}`}
+                      placeholder="0"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-1">
+                  <label className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">
                     Date <span className="text-rose-500">*</span>
                   </label>
                   <input
@@ -413,12 +443,12 @@ export default function AdminDiaryPage() {
                     required
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
-                    className="block w-full px-3 py-2.5 bg-black/50 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all [color-scheme:dark]"
+                    className={`block w-full px-4 py-3.5 bg-black/40 border border-white/5 rounded-2xl text-white font-medium focus:outline-none focus:ring-2 transition-all shadow-inner [color-scheme:dark] ${modalType === 'income' ? 'focus:ring-emerald-500/50' : 'focus:ring-rose-500/50'}`}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-1">
+                  <label className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">
                     {modalType === 'income' ? 'Source' : 'Given To'} <span className="text-rose-500">*</span>
                   </label>
                   <input
@@ -426,31 +456,31 @@ export default function AdminDiaryPage() {
                     required
                     value={sourceOrPerson}
                     onChange={(e) => setSourceOrPerson(e.target.value)}
-                    className="block w-full px-3 py-2.5 bg-black/50 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all"
-                    placeholder={modalType === 'income' ? 'e.g. Client Payment, Salary' : 'e.g. Rahul, Office Rent'}
+                    className={`block w-full px-4 py-3.5 bg-black/40 border border-white/5 rounded-2xl text-white font-medium placeholder-gray-600 focus:outline-none focus:ring-2 transition-all shadow-inner ${modalType === 'income' ? 'focus:ring-emerald-500/50' : 'focus:ring-rose-500/50'}`}
+                    placeholder={modalType === 'income' ? 'e.g. Client Payment' : 'e.g. Office Rent'}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-1">
-                    Description (Optional)
+                  <label className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">
+                    Description <span className="text-gray-600 font-normal normal-case tracking-normal">(Optional)</span>
                   </label>
                   <input
                     type="text"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    className="block w-full px-3 py-2.5 bg-black/50 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all"
-                    placeholder="Add a note..."
+                    className={`block w-full px-4 py-3.5 bg-black/40 border border-white/5 rounded-2xl text-white font-medium placeholder-gray-600 focus:outline-none focus:ring-2 transition-all shadow-inner ${modalType === 'income' ? 'focus:ring-emerald-500/50' : 'focus:ring-rose-500/50'}`}
+                    placeholder="Add a quick note..."
                   />
                 </div>
 
-                <div className="pt-2">
+                <div className="pt-4">
                   <button
                     type="submit"
-                    className={`w-full py-3 px-4 rounded-xl font-semibold text-white transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 ${
+                    className={`w-full py-4 px-6 rounded-2xl font-bold text-white text-lg transition-all shadow-[0_8px_20px_rgba(0,0,0,0.3)] hover:shadow-[0_8px_25px_rgba(0,0,0,0.5)] hover:-translate-y-1 ${
                       modalType === 'income' 
-                        ? 'bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 shadow-emerald-500/25' 
-                        : 'bg-gradient-to-r from-rose-600 to-rose-500 hover:from-rose-500 hover:to-rose-400 shadow-rose-500/25'
+                        ? 'bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 shadow-emerald-500/20' 
+                        : 'bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-400 hover:to-pink-400 shadow-rose-500/20'
                     }`}
                   >
                     Save {modalType === 'income' ? 'Income' : 'Expense'}
