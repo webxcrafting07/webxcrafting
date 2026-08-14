@@ -28,7 +28,8 @@ export default function AdminDiaryPage() {
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
   const [sourceOrPerson, setSourceOrPerson] = useState('');
   const [description, setDescription] = useState('');
-  const [filterDate, setFilterDate] = useState('');
+  const [fromDate, setFromDate] = useState('');
+  const [toDate, setToDate] = useState('');
 
   const downloadPDF = (data: Entry[], filename = 'diary-report.pdf') => {
     if (data.length === 0) {
@@ -141,7 +142,12 @@ export default function AdminDiaryPage() {
     setIsModalOpen(false);
   };
 
-  const displayedEntries = filterDate ? entries.filter(e => e.date === filterDate) : entries;
+  const displayedEntries = entries.filter(e => {
+    let show = true;
+    if (fromDate && e.date < fromDate) show = false;
+    if (toDate && e.date > toDate) show = false;
+    return show;
+  });
 
   // Calculations
   const totalIncome = displayedEntries.filter(e => e.type === 'income').reduce((acc, curr) => acc + curr.amount, 0);
@@ -163,19 +169,36 @@ export default function AdminDiaryPage() {
             <p className="text-gray-400 mt-1">Track your income and expenses effortlessly.</p>
           </div>
           <div className="flex gap-3 flex-wrap items-center">
-            <div className="flex items-center gap-2 mr-2">
+            <div className="flex items-center gap-2 mr-2 bg-[#11111f] border border-white/10 rounded-xl px-3 py-1.5">
+              <span className="text-xs text-gray-500 font-medium uppercase tracking-wider">From</span>
               <input 
                 type="date" 
-                value={filterDate} 
-                onChange={(e) => setFilterDate(e.target.value)}
-                className="bg-[#11111f] border border-white/10 rounded-xl px-3 py-2 text-sm text-gray-300 focus:outline-none focus:border-blue-500/50 [color-scheme:dark]"
+                value={fromDate} 
+                onChange={(e) => setFromDate(e.target.value)}
+                className="bg-transparent text-sm text-gray-300 focus:outline-none [color-scheme:dark]"
               />
-              {filterDate && (
-                <button onClick={() => setFilterDate('')} className="text-gray-400 hover:text-white text-sm">Clear</button>
+              <div className="w-px h-4 bg-white/10 mx-1"></div>
+              <span className="text-xs text-gray-500 font-medium uppercase tracking-wider">To</span>
+              <input 
+                type="date" 
+                value={toDate} 
+                onChange={(e) => setToDate(e.target.value)}
+                className="bg-transparent text-sm text-gray-300 focus:outline-none [color-scheme:dark]"
+              />
+              {(fromDate || toDate) && (
+                <button onClick={() => { setFromDate(''); setToDate(''); }} className="ml-2 text-gray-400 hover:text-rose-400 text-sm">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
               )}
             </div>
             <button 
-              onClick={() => downloadPDF(displayedEntries, filterDate ? `diary-${filterDate}.pdf` : 'diary-report.pdf')}
+              onClick={() => {
+                let fname = 'diary-report.pdf';
+                if (fromDate && toDate) fname = `diary-${fromDate}-to-${toDate}.pdf`;
+                else if (fromDate) fname = `diary-from-${fromDate}.pdf`;
+                else if (toDate) fname = `diary-upto-${toDate}.pdf`;
+                downloadPDF(displayedEntries, fname);
+              }}
               className="flex items-center gap-2 bg-blue-500/10 text-blue-400 border border-blue-500/20 px-4 py-2.5 rounded-xl hover:bg-blue-500/20 transition-all font-medium text-sm"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
