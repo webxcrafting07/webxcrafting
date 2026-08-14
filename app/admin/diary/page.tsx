@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { jsPDF } from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 // Types
 type EntryType = 'income' | 'expense';
@@ -28,29 +30,70 @@ export default function AdminDiaryPage() {
   const [description, setDescription] = useState('');
   const [filterDate, setFilterDate] = useState('');
 
-  const downloadCSV = (data: Entry[], filename = 'diary-export.csv') => {
+  const downloadPDF = (data: Entry[], filename = 'diary-report.pdf') => {
     if (data.length === 0) {
       alert("No data to download.");
       return;
     }
-    const headers = ['ID', 'Type', 'Date', 'Amount (INR)', 'Source/Person', 'Description'];
-    const rows = data.map(e => [
-      e.id,
-      e.type,
-      e.date,
-      e.amount,
-      `"${e.sourceOrPerson.replace(/"/g, '""')}"`,
-      `"${(e.description || '').replace(/"/g, '""')}"`
+    const doc = new jsPDF();
+    
+    // Header
+    doc.setFontSize(22);
+    doc.setTextColor(30, 30, 40);
+    doc.text("Balance Diary Report", 14, 22);
+    
+    doc.setFontSize(11);
+    doc.setTextColor(100, 100, 100);
+    doc.text(`Generated on: ${new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}`, 14, 30);
+    
+    // Summary calculations
+    const totalInc = data.filter(e => e.type === 'income').reduce((s, e) => s + e.amount, 0);
+    const totalExp = data.filter(e => e.type === 'expense').reduce((s, e) => s + e.amount, 0);
+    const net = totalInc - totalExp;
+    
+    doc.setFontSize(12);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(46, 204, 113); // Green
+    doc.text(`Total Income: + INR ${totalInc.toLocaleString('en-IN')}`, 14, 42);
+    
+    doc.setTextColor(231, 76, 60); // Red
+    doc.text(`Total Expense: - INR ${totalExp.toLocaleString('en-IN')}`, 14, 48);
+    
+    doc.setTextColor(52, 152, 219); // Blue
+    doc.text(`Net Balance: INR ${net.toLocaleString('en-IN')}`, 14, 54);
+
+    const tableData = data.map(e => [
+      new Date(e.date).toLocaleDateString('en-IN'),
+      e.type === 'income' ? 'Income' : 'Expense',
+      e.sourceOrPerson,
+      e.description || '-',
+      `${e.type === 'income' ? '+' : '-'} INR ${e.amount.toLocaleString('en-IN')}`
     ]);
-    const csvContent = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.setAttribute('download', filename);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+
+    autoTable(doc, {
+      startY: 62,
+      head: [['Date', 'Type', 'Source/Person', 'Description', 'Amount']],
+      body: tableData,
+      theme: 'grid',
+      headStyles: { fillColor: [41, 128, 185], textColor: [255, 255, 255], fontStyle: 'bold' },
+      columnStyles: {
+        0: { cellWidth: 30 },
+        1: { cellWidth: 25 },
+        2: { cellWidth: 45 },
+        3: { cellWidth: 'auto' },
+        4: { cellWidth: 35, halign: 'right', fontStyle: 'bold' }
+      },
+      didParseCell: function(data: any) {
+        if (data.section === 'body') {
+          if (data.column.index === 1 || data.column.index === 4) {
+            const isInc = data.row.raw[1] === 'Income';
+            data.cell.styles.textColor = isInc ? [46, 204, 113] : [231, 76, 60];
+          }
+        }
+      }
+    });
+
+    doc.save(filename);
   };
 
   useEffect(() => {
@@ -132,13 +175,13 @@ export default function AdminDiaryPage() {
               )}
             </div>
             <button 
-              onClick={() => downloadCSV(displayedEntries, filterDate ? `diary-${filterDate}.csv` : 'diary-all.csv')}
+              onClick={() => downloadPDF(displayedEntries, filterDate ? `diary-${filterDate}.pdf` : 'diary-report.pdf')}
               className="flex items-center gap-2 bg-blue-500/10 text-blue-400 border border-blue-500/20 px-4 py-2.5 rounded-xl hover:bg-blue-500/20 transition-all font-medium text-sm"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
               </svg>
-              Download CSV
+              Download PDF
             </button>
             <button 
               onClick={() => openModal('income')}
@@ -269,7 +312,7 @@ export default function AdminDiaryPage() {
                         {entry.type === 'income' ? '+' : '-'}₹{entry.amount.toLocaleString('en-IN')}
                       </div>
                       <button 
-                        onClick={() => downloadCSV([entry], `diary-entry-${entry.id}.csv`)}
+                        onClick={() => downloadPDF([entry], `diary-entry-${entry.id}.pdf`)}
                         className="p-2 text-gray-500 hover:text-blue-400 hover:bg-blue-500/10 rounded-lg transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100"
                         title="Download entry details"
                       >
