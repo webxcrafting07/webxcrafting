@@ -57,34 +57,27 @@ export default function RefundPolicy() {
               </h2>
 
               <h3 className="text-xl font-semibold text-white mt-6 mb-3">
-                2.1 Within 7 Days of Project Start (Grace Period)
+                2.1 Post-Confirmation Cancellation
               </h3>
               <p>
-                If a client requests cancellation within 7 days of project
-                commencement:
+                If a client requests cancellation after project confirmation (via mail, message, or any written confirmation):
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4 mt-4">
                 <li>
-                  <strong>Refund Amount:</strong> 90% of the deposit or advance
-                  payment
+                  <strong>Cancellation Fee:</strong> A mandatory 75% cancellation fee will be charged (only 25% of the total amount is refundable).
                 </li>
                 <li>
-                  <strong>Condition:</strong> Minimal work must have been
-                  initiated
+                  <strong>Reasoning:</strong> Once a project is confirmed, we allocate dedicated resources, developers, and time which cannot be recovered.
                 </li>
                 <li>
-                  <strong>Processing Time:</strong> Refund processed within 10
-                  business days
+                  <strong>Processing Time:</strong> Any eligible refunds (the remaining 25%) are processed within 10 business days.
                 </li>
                 <li>
-                  <strong>Requirement:</strong> Client must provide written
-                  cancellation request
+                  <strong>Requirement:</strong> Client must provide a written cancellation request.
                 </li>
               </ul>
               <p className="mt-4">
-                <strong>Exception:</strong> If 40% or more of work has been
-                completed, the grace period does not apply and regular
-                cancellation terms apply.
+                <strong>Important:</strong> This 75% charge applies immediately after any formal confirmation or initial payment is made, regardless of how much work has been completed.
               </p>
 
               <h3 className="text-xl font-semibold text-white mt-6 mb-3">
@@ -551,10 +544,10 @@ export default function RefundPolicy() {
                   </thead>
                   <tbody>
                     <tr className="border-b border-gray-700">
-                      <td className="p-3">Within 7 Days</td>
-                      <td className="p-3">90%</td>
-                      <td className="p-3">None</td>
-                      <td className="p-3">Minimal work started</td>
+                      <td className="p-3">Post-Confirmation</td>
+                      <td className="p-3">25%</td>
+                      <td className="p-3">75% of total</td>
+                      <td className="p-3">After any mail/confirmation</td>
                     </tr>
                     <tr className="border-b border-gray-700">
                       <td className="p-3">8-80% Complete</td>
