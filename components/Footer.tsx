@@ -10,6 +10,7 @@ import {
   FaMapMarkerAlt,
   FaGoogle,
 } from "react-icons/fa";
+import GoogleReviewBadge from "./GoogleReviewBadge";
 
 const services = [
   "Business Website Development",
@@ -68,7 +69,7 @@ const socials = [
   },
   {
     icon: FaGoogle,
-    href: "https://share.google/VzYfELZuWlsGAhFX0",
+    href: "https://share.google/3PHsoNPOUsACUGdHH",
     label: "Google Profile",
   },
 ];
@@ -179,6 +180,9 @@ export default function Footer() {
             >
               Building premium, high-performance websites at affordable prices. Proudly serving clients globally.
             </p>
+            <div style={{ marginBottom: 24 }}>
+              <GoogleReviewBadge />
+            </div>
             <div style={{ display: "flex", gap: 12 }}>
               {socials.map(({ icon: Icon, href, label }) => (
                 <a
