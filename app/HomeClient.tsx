@@ -524,8 +524,9 @@ const testimonials = [
 ]
 
 export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[] }) {
-  const [services, setServices] = useState(defaultServices)
-  const [projects, setProjects] = useState(defaultProjects)
+  const [services, setServices] = useState<any[]>([])
+  const [projects, setProjects] = useState<any[]>([])
+  const [isLoading, setIsLoading] = useState(true)
   const [blogs, setBlogs] = useState<any[]>(initialBlogs)
   const [selectedService, setSelectedService] = useState<any>(null)
   
@@ -622,28 +623,30 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
 
   useEffect(() => {
     // Fetch live data from MongoDB
-    fetch('/api/services')
-      .then((r) => r.json())
-      .then((d) => {
-        if (d.success && d.data.length) {
-          const apiServices = d.data;
-          // Append any defaultServices with customLink that aren't already in API data
-          const customLinkServices = defaultServices.filter(
-            (ds: any) => ds.customLink && !apiServices.some((api: any) => api.title === ds.title)
-          );
-          setServices([...apiServices, ...customLinkServices]);
-        }
-      })
-      .catch(() => { })
+    Promise.all([
+      fetch('/api/services').then(r => r.json()).catch(() => ({ success: false })),
+      fetch('/api/projects').then(r => r.json()).catch(() => ({ success: false }))
+    ]).then(([servicesData, projectsData]) => {
+      // Handle Services
+      if (servicesData.success && servicesData.data.length) {
+        const apiServices = servicesData.data;
+        const customLinkServices = defaultServices.filter(
+          (ds: any) => ds.customLink && !apiServices.some((api: any) => api.title === ds.title)
+        );
+        setServices([...apiServices, ...customLinkServices]);
+      } else {
+        setServices(defaultServices);
+      }
 
-    fetch('/api/projects')
-      .then((r) => r.json())
-      .then((d) => {
-        if (d.success && d.data.length > 0) {
-          setProjects(d.data.slice(0, 3));
-        }
-      })
-      .catch(() => { })
+      // Handle Projects
+      if (projectsData.success && projectsData.data.length > 0) {
+        setProjects(projectsData.data.slice(0, 3));
+      } else {
+        setProjects(defaultProjects);
+      }
+    }).finally(() => {
+      setIsLoading(false);
+    });
 
     if (initialBlogs.length === 0) {
       fetch('/api/blogs?limit=8')
@@ -1291,11 +1294,19 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
         </FadeUp>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: 30 }}>
-          {projects.map((p: any, i) => (
-            <FadeUp key={i} delay={i * 0.1} style={{ height: '100%' }}>
-              <ProjectCard {...p} />
-            </FadeUp>
-          ))}
+          {isLoading ? (
+            [1, 2, 3].map((i) => (
+              <div key={i} className="glass-panel" style={{ height: 400, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div className="spinner" />
+              </div>
+            ))
+          ) : (
+            projects.map((p: any, i) => (
+              <FadeUp key={i} delay={i * 0.1} style={{ height: '100%' }}>
+                <ProjectCard {...p} />
+              </FadeUp>
+            ))
+          )}
         </div>
         <FadeUp delay={0.3}>
           <div style={{ textAlign: 'center', marginTop: 40 }}>
