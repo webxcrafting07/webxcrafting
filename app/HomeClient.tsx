@@ -163,6 +163,22 @@ function ServiceCard({ icon, title, description, price, originalPrice, popular, 
           ₹{Number(price).toLocaleString('en-IN')}
         </div>
       </div>
+      
+      <div style={{
+        marginTop: 24,
+        paddingTop: 16,
+        borderTop: '1px solid rgba(255,255,255,0.05)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        fontSize: 13,
+        fontWeight: 600,
+        color: '#4f6fff',
+        letterSpacing: 0.5,
+      }}>
+        <span>Click to View Details</span>
+        <span style={{ fontSize: 16 }}>→</span>
+      </div>
     </motion.div>
   )
 }
@@ -1057,9 +1073,13 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
       <section style={{ padding: 'clamp(40px, 8vw, 80px) clamp(16px, 5vw, 32px)', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
         <FadeUp style={{ textAlign: 'center', marginBottom: 56 }}>
           <div className="section-label" style={{ margin: '0 auto 20px' }}>Premium Solutions</div>
-          <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(28px,4vw,48px)', fontWeight: 800, fontStyle: 'italic' }}>
+          <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(28px,4vw,48px)', fontWeight: 800, fontStyle: 'italic', marginBottom: 16 }}>
             Professional <span className="grad-text">Web Services</span> for Modern Businesses
           </h2>
+          <p style={{ color: '#7b82a8', fontSize: 15, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            Auto-scrolling. Hover to pause, click to view details.
+          </p>
         </FadeUp>
       </section>
 
