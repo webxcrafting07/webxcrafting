@@ -81,33 +81,26 @@ export default function RefundPolicy() {
               </p>
 
               <h3 className="text-xl font-semibold text-white mt-6 mb-3">
-                2.2 During Active Development (8 Days - 80% Completion)
+                2.2 During Active Development (Up to 80% Completion)
               </h3>
               <p>
-                Once active development has commenced beyond the grace period:
+                Once active development has commenced:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4 mt-4">
                 <li>
-                  <strong>Non-Refundable Portion:</strong> All payments made are
-                  non-refundable once development has commenced
+                  <strong>Cancellation Fee:</strong> The minimum cancellation fee remains at 75% of the total project cost. If the work completed exceeds 75% of the total value, the client must pay for all completed work.
                 </li>
                 <li>
                   <strong>Partial Deliverables:</strong> Client receives all
-                  work completed to date in its current state
+                  work completed to date in its current state.
                 </li>
                 <li>
                   <strong>Remaining Balance:</strong> Must be paid in full for
-                  completed work
-                </li>
-                <li>
-                  <strong>Cancellation Fee:</strong> 15% of remaining project
-                  cost (to cover planning, resources allocated)
+                  completed work up to the cancellation date.
                 </li>
               </ul>
               <p className="mt-4">
-                <strong>Example:</strong> If a 10,000 project is 50% complete
-                when cancelled, the client pays 5,000 for completed work +750
-                cancellation fee = 5,750 total.
+                <strong>Example:</strong> If a ₹10,000 project is cancelled when 50% complete, the client pays the minimum cancellation fee of ₹7,500. If cancelled at 78% complete, the client pays ₹7,800.
               </p>
 
               <h3 className="text-xl font-semibold text-white mt-6 mb-3">
@@ -550,9 +543,9 @@ export default function RefundPolicy() {
                       <td className="p-3">After any mail/confirmation</td>
                     </tr>
                     <tr className="border-b border-gray-700">
-                      <td className="p-3">8-80% Complete</td>
+                      <td className="p-3">Up to 80% Complete</td>
                       <td className="p-3">0%</td>
-                      <td className="p-3">15% of remaining</td>
+                      <td className="p-3">Min 75% or completed work</td>
                       <td className="p-3">Pay for completed work</td>
                     </tr>
                     <tr className="border-b border-gray-700">

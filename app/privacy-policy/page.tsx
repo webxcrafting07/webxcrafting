@@ -340,23 +340,7 @@ export default function PrivacyPolicy() {
             {/* Section 11 */}
             <section>
               <h2 className="text-2xl font-bold text-white mb-4">
-                11. Service Cancellation Policy
-              </h2>
-              <p>
-                Please note that once a project or service is confirmed via email, message, or any written communication, our team immediately allocates time and resources. 
-              </p>
-              <p className="mt-4 font-semibold text-red-400">
-                If you choose to cancel the project after confirmation, a mandatory 75% cancellation fee will be charged. Only a maximum of 25% of the project amount will be refundable. This policy applies strictly to all our services to cover the upfront resource allocation and development efforts.
-              </p>
-              <p className="mt-4">
-                For detailed information, please refer to our full <Link href="/refund-policy" className="text-blue-400 hover:text-blue-300">Refund & Cancellation Policy</Link>.
-              </p>
-            </section>
-
-            {/* Section 12 */}
-            <section>
-              <h2 className="text-2xl font-bold text-white mb-4">
-                12. Children's Privacy
+                11. Children's Privacy
               </h2>
               <p>
                 Our services are not directed to children under 13 years of age.
@@ -367,10 +351,10 @@ export default function PrivacyPolicy() {
               </p>
             </section>
 
-            {/* Section 13 */}
+            {/* Section 12 */}
             <section>
               <h2 className="text-2xl font-bold text-white mb-4">
-                13. Third-Party Links
+                12. Third-Party Links
               </h2>
               <p>
                 Our website may contain links to third-party websites. We are
@@ -379,10 +363,10 @@ export default function PrivacyPolicy() {
               </p>
             </section>
 
-            {/* Section 14 */}
+            {/* Section 13 */}
             <section>
               <h2 className="text-2xl font-bold text-white mb-4">
-                14. Policy Updates
+                13. Policy Updates
               </h2>
               <p>
                 We may update this Privacy Policy periodically. Changes will be
@@ -391,10 +375,10 @@ export default function PrivacyPolicy() {
               </p>
             </section>
 
-            {/* Section 15 */}
+            {/* Section 14 */}
             <section>
               <h2 className="text-2xl font-bold text-white mb-4">
-                15. Contact Us
+                14. Contact Us
               </h2>
               <p>
                 If you have questions about this Privacy Policy or our data
