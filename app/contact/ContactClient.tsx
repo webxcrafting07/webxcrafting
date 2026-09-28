@@ -39,6 +39,7 @@ export default function ContactClient() {
   });
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [consent, setConsent] = useState(false);
   const [userName, setUserName] = useState("");
   const [services, setServices] = useState<any[]>([]);
 
@@ -69,6 +70,10 @@ export default function ContactClient() {
       toast.error("Please fill in all required fields.");
       return;
     }
+    if (!consent) {
+      toast.error("Please agree to the Privacy Policy to submit.");
+      return;
+    }
     if (!/\S+@\S+\.\S+/.test(form.email)) {
       toast.error("Please enter a valid email address.");
       return;
@@ -85,6 +90,7 @@ export default function ContactClient() {
         setUserName(form.name);
         setSubmitted(true);
         setForm({ name: "", email: "", phone: "", company: "", url: "", service: "", budget: "", message: "" });
+        setConsent(false);
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         toast.error(data.message || "Something went wrong. Please try again.");
@@ -543,6 +549,19 @@ export default function ContactClient() {
                     onChange={(e) => set("message", e.target.value)}
                     style={{ resize: "vertical" }}
                   />
+                </div>
+
+                <div style={{ marginBottom: 32, display: "flex", alignItems: "flex-start", gap: 12 }}>
+                  <input
+                    type="checkbox"
+                    id="consent"
+                    checked={consent}
+                    onChange={(e) => setConsent(e.target.checked)}
+                    style={{ marginTop: 4, width: 16, height: 16, accentColor: "#4f6fff" }}
+                  />
+                  <label htmlFor="consent" style={{ fontSize: 13, color: "#7b82a8", lineHeight: 1.5 }}>
+                    I agree to the processing of my personal data according to the <Link href="/privacy-policy" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2">Privacy Policy</Link> (DPDP Act Compliance). *
+                  </label>
                 </div>
 
                 <motion.button
