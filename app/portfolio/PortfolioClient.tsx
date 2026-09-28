@@ -110,9 +110,9 @@ const defaultProjects = [
 ];
 
 export default function PortfolioClient() {
-  const [projects, setProjects] = useState(defaultProjects);
+  const [projects, setProjects] = useState<any[]>([]);
   const [filter, setFilter] = useState("All");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [selectedProject, setSelectedProject] = useState<any | null>(null);
 
   useEffect(() => {
@@ -121,9 +121,11 @@ export default function PortfolioClient() {
       .then((d) => {
         if (d.success && d.data.length > 0) {
           setProjects(d.data);
+        } else {
+          setProjects(defaultProjects);
         }
       })
-      .catch(() => {})
+      .catch(() => { setProjects(defaultProjects); })
       .finally(() => setLoading(false));
   }, []);
 

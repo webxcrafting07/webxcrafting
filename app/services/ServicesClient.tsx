@@ -189,9 +189,10 @@ export const defaultServices = [
 ];
 
 export default function ServicesClient() {
-  const [services, setServices] = useState(defaultServices);
+  const [services, setServices] = useState<any[]>([]);
   const [selectedService, setSelectedService] = useState<any>(null);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const [loading, setLoading] = useState(true);
 
   const faqs = [
     { q: "How long does it take to build a website?", a: "A standard business website takes 7-14 days. Complex e-commerce or SaaS apps can take 4-8 weeks depending on requirements." },
@@ -224,7 +225,8 @@ export default function ServicesClient() {
           }
         }
       })
-      .catch(() => { });
+      .catch(() => { setServices(defaultServices); })
+      .finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
@@ -422,10 +424,16 @@ export default function ServicesClient() {
             }
           }
         `}</style>
-        <div className="services-cards-grid">
-          {services.map((s: any, i) => (
-            <FadeUp key={s._id || i} delay={i * 0.09}>
-              <motion.div
+        {loading ? (
+          <div style={{ textAlign: "center", padding: 80, color: "#7b82a8" }}>
+            <div className="spinner" style={{ margin: "0 auto 16px" }} />
+            Loading premium services...
+          </div>
+        ) : (
+          <div className="services-cards-grid">
+            {services.map((s: any, i) => (
+              <FadeUp key={s._id || i} delay={i * 0.09}>
+                <motion.div
                 onClick={() => {
                   if (s.customLink) {
                     window.location.href = s.customLink;
@@ -585,6 +593,7 @@ export default function ServicesClient() {
             </FadeUp>
           ))}
         </div>
+        )}
 
         {selectedService && (
           <div
