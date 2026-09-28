@@ -11,8 +11,11 @@ export default function GoogleReviewBadge() {
       style={{
         display: "inline-flex",
         alignItems: "center",
-        gap: 16,
-        padding: "16px 24px",
+        gap: 12,
+        padding: "12px 16px",
+        width: "100%",
+        maxWidth: "280px",
+        boxSizing: "border-box",
         background: "rgba(255, 255, 255, 0.03)",
         border: "1px solid rgba(255, 255, 255, 0.08)",
         borderRadius: 20,
@@ -48,11 +51,11 @@ export default function GoogleReviewBadge() {
       >
         <FaGoogle size={24} color="#4285F4" />
       </div>
-      <div>
-        <div style={{ color: "#fff", fontSize: 16, fontWeight: 700, fontFamily: "Syne, sans-serif", marginBottom: 4 }}>
+      <div style={{ minWidth: 0 }}>
+        <div style={{ color: "#fff", fontSize: 15, fontWeight: 700, fontFamily: "Syne, sans-serif", marginBottom: 4, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
           Review us on Google
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 6, color: "#a0a8cc", fontSize: 13 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 6, color: "#a0a8cc", fontSize: 12, flexWrap: "wrap" }}>
           <div style={{ display: "flex", gap: 2, color: "#FFB900" }}>
             {[1, 2, 3, 4, 5].map((i) => (
               <FaStar key={i} size={14} />
