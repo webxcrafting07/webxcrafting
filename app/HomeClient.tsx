@@ -1061,7 +1061,9 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
             Professional <span className="grad-text">Web Services</span> for Modern Businesses
           </h2>
         </FadeUp>
-        <div style={{ overflow: "hidden", display: "flex", width: "100vw", position: "relative", margin: "20px 0", marginLeft: "calc(-50vw + 50%)" }}>
+      </section>
+
+      <div style={{ overflow: "hidden", display: "flex", width: "100%", position: "relative", marginBottom: "80px" }}>
           <style>{`
             @keyframes marquee-scroll {
               0% { transform: translateX(0%); }
@@ -1283,12 +1285,13 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
             </motion.div>
           </div>
         )}
-        <FadeUp delay={0.3}>
-          <div style={{ textAlign: 'center', marginTop: 40 }}>
-            <Link href="/services" className="btn-outline">View All Services →</Link>
-          </div>
-        </FadeUp>
-      </section>
+        <section style={{ padding: 'clamp(10px, 8vw, 40px) clamp(16px, 5vw, 32px)', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
+          <FadeUp delay={0.3}>
+            <div style={{ textAlign: 'center' }}>
+              <Link href="/services" className="btn-outline">View All Services →</Link>
+            </div>
+          </FadeUp>
+        </section>
 
       {/* ─── PORTFOLIO ───────────────────────────── */}
       <section style={{ padding: 'clamp(40px, 8vw, 80px) clamp(16px, 5vw, 32px)', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 10 }}>
