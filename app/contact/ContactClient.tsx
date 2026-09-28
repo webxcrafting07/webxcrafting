@@ -560,7 +560,7 @@ export default function ContactClient() {
                     style={{ marginTop: 4, width: 16, height: 16, accentColor: "#4f6fff" }}
                   />
                   <label htmlFor="consent" style={{ fontSize: 13, color: "#7b82a8", lineHeight: 1.5 }}>
-                    I agree to the processing of my personal data according to the <Link href="/privacy-policy" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2">Privacy Policy</Link> (DPDP Act Compliance). *
+                    I agree to the processing of my personal data according to the <Link href="/privacy-policy" target="_blank" onClick={(e) => e.stopPropagation()} className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2">Privacy Policy</Link> (DPDP Act Compliance). *
                   </label>
                 </div>
 
