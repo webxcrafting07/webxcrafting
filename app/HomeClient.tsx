@@ -1061,7 +1061,7 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
             Professional <span className="grad-text">Web Services</span> for Modern Businesses
           </h2>
         </FadeUp>
-        <div style={{ overflow: "hidden", display: "flex", width: "100%", position: "relative", margin: "20px 0" }}>
+        <div style={{ overflow: "hidden", display: "flex", width: "100vw", position: "relative", margin: "20px 0", marginLeft: "calc(-50vw + 50%)" }}>
           <style>{`
             @keyframes marquee-scroll {
               0% { transform: translateX(0%); }
