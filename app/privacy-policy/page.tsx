@@ -320,7 +320,27 @@ export default function PrivacyPolicy() {
             {/* Section 10 */}
             <section>
               <h2 className="text-2xl font-bold text-white mb-4">
-                10. Children's Privacy
+                10. DPDP Act (India) Compliance
+              </h2>
+              <p>
+                In accordance with the Digital Personal Data Protection (DPDP) Act, 2023 of India, we respect your rights regarding your personal data. We ensure that:
+              </p>
+              <ul className="list-disc list-inside space-y-2 ml-4 mt-4">
+                <li>Your consent is freely given, specific, and informed before we process your personal data.</li>
+                <li>You have the right to access information about your personal data being processed.</li>
+                <li>You have the right to correction, completion, updating, and erasure of your personal data.</li>
+                <li>You can withdraw your consent at any time.</li>
+                <li>We implement appropriate technical and organizational measures to protect your data.</li>
+              </ul>
+              <p className="mt-4">
+                To exercise any of these rights under the DPDP Act, please contact our Data Protection Officer / Grievance Officer using the contact details provided below.
+              </p>
+            </section>
+
+            {/* Section 11 */}
+            <section>
+              <h2 className="text-2xl font-bold text-white mb-4">
+                11. Children's Privacy
               </h2>
               <p>
                 Our services are not directed to children under 13 years of age.
@@ -331,10 +351,10 @@ export default function PrivacyPolicy() {
               </p>
             </section>
 
-            {/* Section 11 */}
+            {/* Section 12 */}
             <section>
               <h2 className="text-2xl font-bold text-white mb-4">
-                11. Third-Party Links
+                12. Third-Party Links
               </h2>
               <p>
                 Our website may contain links to third-party websites. We are
@@ -343,10 +363,10 @@ export default function PrivacyPolicy() {
               </p>
             </section>
 
-            {/* Section 12 */}
+            {/* Section 13 */}
             <section>
               <h2 className="text-2xl font-bold text-white mb-4">
-                12. Policy Updates
+                13. Policy Updates
               </h2>
               <p>
                 We may update this Privacy Policy periodically. Changes will be
@@ -355,10 +375,10 @@ export default function PrivacyPolicy() {
               </p>
             </section>
 
-            {/* Section 13 */}
+            {/* Section 14 */}
             <section>
               <h2 className="text-2xl font-bold text-white mb-4">
-                13. Contact Us
+                14. Contact Us
               </h2>
               <p>
                 If you have questions about this Privacy Policy or our data

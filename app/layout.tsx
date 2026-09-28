@@ -5,6 +5,7 @@ import TawkChat from "@/components/TawkChat";
 import OfferBar from "@/components/OfferBar";
 import SeoAuditWidget from "@/components/SeoAuditWidget";
 import Script from "next/script";
+import CookieConsent from "@/components/CookieConsent";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.webxcrafting.in"),
@@ -237,6 +238,7 @@ export default function RootLayout({
           }}
         />
         <SeoAuditWidget />
+        <CookieConsent />
       </body>
     </html>
   );
