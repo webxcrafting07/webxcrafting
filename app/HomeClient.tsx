@@ -1078,10 +1078,6 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
               animation-play-state: paused;
             }
           `}</style>
-          {/* Edge gradients for smooth fading effect */}
-          <div style={{ position: "absolute", top: 0, bottom: 0, left: 0, width: "10%", background: "linear-gradient(to right, rgba(3,5,10,1), transparent)", zIndex: 2, pointerEvents: "none" }} />
-          <div style={{ position: "absolute", top: 0, bottom: 0, right: 0, width: "10%", background: "linear-gradient(to left, rgba(3,5,10,1), transparent)", zIndex: 2, pointerEvents: "none" }} />
-
           <div className="marquee-track">
             {/* Duplicate array to create a seamless infinite loop */}
             {[...services, ...services].map((s: any, i: number) => (
