@@ -12,12 +12,72 @@ const DESC_TEMPLATES = [
   "From stunning corporate websites to complex e-commerce portals, WebXCrafting provides elite web development services in {city}. Join top businesses in {state} who trust our tech expertise."
 ];
 
-const KEYWORDS_TEMPLATES = [
-  "web development company in {city}, best website provider in {city}, website design agency {city}, ecommerce development {city}, best google my business gmb setup {city}",
-  "best web design in {city}, best website provider {city}, software developers {city}, {city} {country} web agency, best google my business gmb setup {city}",
-  "hire web developers {city} {state}, top digital agency {city}, best website provider {city}, best google my business gmb setup {city}",
-  "affordable website design {city}, {city} e-commerce experts, local web developers in {city}, best google my business gmb setup {city}"
+// Pool of 50+ highly targeted keywords
+const KEYWORD_POOL = [
+  "web development company in {city}",
+  "best website provider in {city}",
+  "website design agency {city}",
+  "ecommerce development {city}",
+  "best google my business gmb setup {city}",
+  "software developers {city}",
+  "hire web developers {city}",
+  "top digital agency {city}",
+  "affordable website design {city}",
+  "SaaS developers {city}",
+  "custom software development {city}",
+  "best seo services {city}",
+  "top it companies in {city}",
+  "react js development {city}",
+  "next.js experts {city}",
+  "shopify store design {city}",
+  "wordpress development {city}",
+  "web application development {city}",
+  "mobile app development company {city}",
+  "ui ux design agency {city}",
+  "landing page designers {city}",
+  "b2b website design {city}",
+  "b2c ecommerce solutions {city}",
+  "local seo services {city}",
+  "google ranking expert {city}",
+  "corporate website development {city}",
+  "real estate website design {city}",
+  "healthcare web developers {city}",
+  "restaurant website designers {city}",
+  "education portal development {city}",
+  "fintech software developers {city}",
+  "custom web portal development {city}",
+  "API integration services {city}",
+  "web hosting and maintenance {city}",
+  "website redesign agency {city}",
+  "fast loading website design {city}",
+  "responsive web design {city}",
+  "custom cms development {city}",
+  "website audit services {city}",
+  "digital marketing agency {city}",
+  "lead generation website design {city}",
+  "startup web development {city}",
+  "enterprise software development {city}",
+  "best freelance web developer {city}",
+  "top rated website designers {city}",
+  "professional web design {city}",
+  "cheap website development {city}",
+  "premium web design {city}",
+  "gmb ranking expert {city}",
+  "google reviews optimization {city}",
+  "seo optimized website {city}",
+  "google ads management {city}",
+  "facebook ads expert {city}"
 ];
+
+// Helper to get random keywords (returns all 50+ shuffled to avoid exact duplicate strings)
+function getRandomKeywords(city: string, state: string, country: string) {
+  const shuffled = [...KEYWORD_POOL].sort(() => 0.5 - Math.random());
+  return shuffled.map(kw => 
+    kw.replace(/{city}/g, city)
+      .replace(/{state}/g, state)
+      .replace(/{country}/g, country)
+  ).join(', ');
+}
 
 function generateMasterDatabase() {
   console.log("Fetching global cities...");
@@ -69,17 +129,14 @@ function generateMasterDatabase() {
 
     const hash = slug.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
     const descTemplate = DESC_TEMPLATES[hash % DESC_TEMPLATES.length];
-    const kwTemplate = KEYWORDS_TEMPLATES[hash % KEYWORDS_TEMPLATES.length];
 
     const description = descTemplate
       .replace(/{city}/g, city.name)
       .replace(/{state}/g, city.state)
       .replace(/{country}/g, city.country);
 
-    const keywords = kwTemplate
-      .replace(/{city}/g, city.name)
-      .replace(/{state}/g, city.state)
-      .replace(/{country}/g, city.country);
+    // Give each city all 50+ highly relevant shuffled keywords
+    const keywords = getRandomKeywords(city.name, city.state, city.country);
 
     selectedCities[slug] = {
       name: city.name,
