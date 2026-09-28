@@ -123,16 +123,17 @@ export default function Footer() {
       <div style={{ maxWidth: 1350, margin: "0 auto" }}>
         <div
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-            gap: 40,
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "60px",
             marginBottom: 60,
+            justifyContent: "space-between"
           }}
         >
-          {/* Brand */}
+          {/* Left Column: Brand & Contact */}
           <div
             className="mobile-center"
-            style={{ display: "flex", flexDirection: "column" }}
+            style={{ display: "flex", flexDirection: "column", flex: "1 1 320px", maxWidth: "450px" }}
           >
             <Link
               href="/"
@@ -175,15 +176,53 @@ export default function Footer() {
                 fontSize: 14,
                 lineHeight: 1.8,
                 marginBottom: 24,
-                maxWidth: 260,
+                maxWidth: 280,
               }}
             >
               Building premium, high-performance websites at affordable prices. Proudly serving clients globally.
             </p>
+            
+            {/* Contact Info Integrated on Left */}
+            <div style={{ marginBottom: 28, display: "flex", flexDirection: "column", gap: 12 }}>
+              {[
+                { icon: FaEnvelope, text: "webxcrafting@gmail.com", href: "mailto:webxcrafting@gmail.com" },
+                { icon: FaPhone, text: "+91 9102615343\n+91 7974579107", href: "tel:+919102615343" },
+                { icon: FaMapMarkerAlt, text: "India (Remote Worldwide)" },
+              ].map(({ icon: Icon, text, href }) => {
+                const Tag = href ? "a" : "div";
+                return (
+                  <Tag
+                    key={href || text}
+                    href={href}
+                    className="mobile-center"
+                    style={{
+                      display: "flex",
+                      gap: 12,
+                      alignItems: "flex-start",
+                      textDecoration: "none",
+                      cursor: href ? "pointer" : "default",
+                      transition: "all 0.3s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      if (href) e.currentTarget.style.transform = "translateX(5px)";
+                    }}
+                    onMouseLeave={(e) => {
+                      if (href) e.currentTarget.style.transform = "translateX(0)";
+                    }}
+                  >
+                    <span style={{ fontSize: 14, minWidth: 20, color: "#6378ff", marginTop: 2 }}>
+                      <Icon size={14} />
+                    </span>
+                    <span style={{ color: "#8892b0", fontSize: 14, whiteSpace: "pre-line", textAlign: "left", lineHeight: 1.5 }}>{text}</span>
+                  </Tag>
+                );
+              })}
+            </div>
+
             <div style={{ marginBottom: 24 }}>
               <GoogleReviewBadge />
             </div>
-            <div style={{ display: "flex", gap: 12 }}>
+            <div style={{ display: "flex", gap: 12 }} className="mobile-center-flex">
               {socials.map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
@@ -223,136 +262,106 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="mobile-center">
-            <h4 style={headerStyle}>Quick Links</h4>
-            {quickLinks.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                style={linkStyle}
-                onMouseEnter={linkHover}
-                onMouseLeave={linkLeave}
-              >
-                {l.label}
-              </Link>
-            ))}
-          </div>
-
-          {/* Services */}
-          <div className="mobile-center">
-            <h4 style={headerStyle}>Services</h4>
-            {services.map((s) => (
-              <Link
-                key={s}
-                href="/services"
-                style={linkStyle}
-                onMouseEnter={linkHover}
-                onMouseLeave={linkLeave}
-              >
-                {s}
-              </Link>
-            ))}
-          </div>
-
-          {/* Top Cities */}
-          <div className="mobile-center">
-            <h4 style={headerStyle}>Top Cities</h4>
-            {topCities.map((city) => (
-              <Link
-                key={city.label}
-                href={city.href}
-                style={linkStyle}
-                onMouseEnter={linkHover}
-                onMouseLeave={linkLeave}
-              >
-                {city.label}
-              </Link>
-            ))}
-            <Link
-              href="/locations"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 6,
-                color: "#6378ff",
-                textDecoration: "none",
-                fontSize: 13,
-                fontWeight: 600,
-                marginTop: 10,
-                padding: "8px 16px",
-                borderRadius: 20,
-                background: "rgba(99,120,255,0.1)",
-                border: "1px solid rgba(99,120,255,0.2)",
-                transition: "all 0.3s ease",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "rgba(99,120,255,0.2)";
-                e.currentTarget.style.transform = "translateY(-2px)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "rgba(99,120,255,0.1)";
-                e.currentTarget.style.transform = "translateY(0)";
-              }}
-            >
-              View All 700+ Locations →
-            </Link>
-          </div>
-
-          {/* Contact */}
-          <div className="mobile-center">
-            <h4 style={headerStyle}>Contact</h4>
-            {[
-              { icon: FaEnvelope, text: "webxcrafting@gmail.com", href: "mailto:webxcrafting@gmail.com" },
-              { icon: FaPhone, text: "+91 9102615343\n+91 7974579107", href: "tel:+919102615343" },
-              { icon: FaClock, text: "Mon–Sat, 9AM–7PM IST" },
-              { icon: FaMapMarkerAlt, text: "India (Remote Worldwide)" },
-            ].map(({ icon: Icon, text, href }) => {
-              const Tag = href ? "a" : "div";
-              return (
-                <Tag
-                  key={href || text}
-                  href={href}
-                  className="mobile-center"
-                  style={{
-                    display: "flex",
-                    gap: 12,
-                    marginBottom: 16,
-                    alignItems: "flex-start",
-                    textDecoration: "none",
-                    cursor: href ? "pointer" : "default",
-                    transition: "all 0.3s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    if (href) e.currentTarget.style.transform = "translateX(5px)";
-                  }}
-                  onMouseLeave={(e) => {
-                    if (href) e.currentTarget.style.transform = "translateX(0)";
-                  }}
+          {/* Right Column: Links Grid */}
+          <div
+            style={{
+              flex: "2 1 600px",
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+              gap: "40px",
+            }}
+          >
+            {/* Quick Links */}
+            <div className="mobile-center">
+              <h4 style={headerStyle}>Quick Links</h4>
+              {quickLinks.map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  style={linkStyle}
+                  onMouseEnter={linkHover}
+                  onMouseLeave={linkLeave}
                 >
-                  <span style={{ fontSize: 14, minWidth: 20, color: "#6378ff", marginTop: 2 }}>
-                    <Icon size={14} />
-                  </span>
-                  <span style={{ color: "#8892b0", fontSize: 14, whiteSpace: "pre-line", textAlign: "left", lineHeight: 1.5 }}>{text}</span>
-                </Tag>
-              );
-            })}
-          </div>
+                  {l.label}
+                </Link>
+              ))}
+            </div>
 
-          {/* Legal */}
-          <div className="mobile-center">
-            <h4 style={headerStyle}>Legal</h4>
-            {legalLinks.map((l) => (
+            {/* Services */}
+            <div className="mobile-center">
+              <h4 style={headerStyle}>Services</h4>
+              {services.map((s) => (
+                <Link
+                  key={s}
+                  href="/services"
+                  style={linkStyle}
+                  onMouseEnter={linkHover}
+                  onMouseLeave={linkLeave}
+                >
+                  {s}
+                </Link>
+              ))}
+            </div>
+
+            {/* Top Cities */}
+            <div className="mobile-center">
+              <h4 style={headerStyle}>Top Cities</h4>
+              {topCities.map((city) => (
+                <Link
+                  key={city.label}
+                  href={city.href}
+                  style={linkStyle}
+                  onMouseEnter={linkHover}
+                  onMouseLeave={linkLeave}
+                >
+                  {city.label}
+                </Link>
+              ))}
               <Link
-                key={l.href}
-                href={l.href}
-                style={linkStyle}
-                onMouseEnter={linkHover}
-                onMouseLeave={linkLeave}
+                href="/locations"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 6,
+                  color: "#6378ff",
+                  textDecoration: "none",
+                  fontSize: 13,
+                  fontWeight: 600,
+                  marginTop: 10,
+                  padding: "8px 16px",
+                  borderRadius: 20,
+                  background: "rgba(99,120,255,0.1)",
+                  border: "1px solid rgba(99,120,255,0.2)",
+                  transition: "all 0.3s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "rgba(99,120,255,0.2)";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "rgba(99,120,255,0.1)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
               >
-                {l.label}
+                View All Locations →
               </Link>
-            ))}
+            </div>
+
+            {/* Legal */}
+            <div className="mobile-center">
+              <h4 style={headerStyle}>Legal</h4>
+              {legalLinks.map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  style={linkStyle}
+                  onMouseEnter={linkHover}
+                  onMouseLeave={linkLeave}
+                >
+                  {l.label}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
 
