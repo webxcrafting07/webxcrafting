@@ -13,10 +13,10 @@ const DESC_TEMPLATES = [
 ];
 
 const KEYWORDS_TEMPLATES = [
-  "web development company in {city}, website design agency {city}, web developers {city}, ecommerce development {city}, {city} it companies",
-  "best web design in {city}, software developers {city}, {city} {country} web agency, custom web apps {city}",
-  "hire web developers {city} {state}, top digital agency {city}, next.js developers {city}, react js development {city}",
-  "affordable website design {city}, {city} e-commerce experts, local web developers in {city}, SaaS developers {city}"
+  "web development company in {city}, best website provider in {city}, website design agency {city}, ecommerce development {city}, best google my business gmb setup {city}",
+  "best web design in {city}, best website provider {city}, software developers {city}, {city} {country} web agency, best google my business gmb setup {city}",
+  "hire web developers {city} {state}, top digital agency {city}, best website provider {city}, best google my business gmb setup {city}",
+  "affordable website design {city}, {city} e-commerce experts, local web developers in {city}, best google my business gmb setup {city}"
 ];
 
 function generateMasterDatabase() {
@@ -45,6 +45,20 @@ function generateMasterDatabase() {
   
   const selectedCities: Record<string, any> = {};
   const seenSlugs = new Set();
+  
+  // Hardcode priority cities to ensure they are always first
+  const priorityCities = [
+    { name: 'Virar', state: 'Maharashtra', country: 'India' },
+    { name: 'Bhopal', state: 'Madhya Pradesh', country: 'India' },
+    { name: 'Kanpur', state: 'Uttar Pradesh', country: 'India' },
+    { name: 'Indore', state: 'Madhya Pradesh', country: 'India' },
+    { name: 'Jaipur', state: 'Rajasthan', country: 'India' },
+    { name: 'Bangalore', state: 'Karnataka', country: 'India' },
+    { name: 'Mumbai', state: 'Maharashtra', country: 'India' },
+  ];
+
+  allCities = [...priorityCities, ...allCities];
+
   let count = 0;
 
   for (const city of allCities) {
