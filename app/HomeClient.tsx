@@ -1062,22 +1062,34 @@ export default function HomeClient({ initialBlogs = [] }: { initialBlogs?: any[]
           </h2>
         </FadeUp>
         <div style={{ overflow: "hidden", display: "flex", width: "100%", position: "relative", margin: "20px 0" }}>
+          <style>{`
+            @keyframes marquee-scroll {
+              0% { transform: translateX(0%); }
+              100% { transform: translateX(-50%); }
+            }
+            .marquee-track {
+              display: flex;
+              gap: 24px;
+              width: max-content;
+              padding: 10px 0;
+              animation: marquee-scroll 35s linear infinite;
+            }
+            .marquee-track:hover {
+              animation-play-state: paused;
+            }
+          `}</style>
           {/* Edge gradients for smooth fading effect */}
           <div style={{ position: "absolute", top: 0, bottom: 0, left: 0, width: "10%", background: "linear-gradient(to right, rgba(3,5,10,1), transparent)", zIndex: 2, pointerEvents: "none" }} />
           <div style={{ position: "absolute", top: 0, bottom: 0, right: 0, width: "10%", background: "linear-gradient(to left, rgba(3,5,10,1), transparent)", zIndex: 2, pointerEvents: "none" }} />
 
-          <motion.div
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ ease: "linear", duration: 35, repeat: Infinity }}
-            style={{ display: "flex", gap: "24px", width: "max-content", padding: "10px 0" }}
-          >
+          <div className="marquee-track">
             {/* Duplicate array to create a seamless infinite loop */}
             {[...services, ...services].map((s: any, i: number) => (
               <div key={i} style={{ width: "clamp(320px, 80vw, 380px)", flexShrink: 0 }}>
                 <ServiceCard {...s} onClick={() => setSelectedService(s)} />
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
 
         {selectedService && (
